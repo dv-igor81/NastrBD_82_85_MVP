@@ -74,7 +74,6 @@ private:	// User declarations
     ActionEvent<> ev_button_AddrBd_DecClick;
     ActionEvent<> ev_button_AddrBd_IncClick;
     ActionEvent<> ev_button_StartStopClick;
-    ActionEvent<const char*> ev_textBox_AddrBdChange;
     ActionEvent<Protokol> ev_comboBox_ProtocolChange;
     ActionEvent<> ev_windowShow;
     ActionEvent<> ev_windowClose;

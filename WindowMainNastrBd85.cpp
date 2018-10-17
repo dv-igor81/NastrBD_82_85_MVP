@@ -36,7 +36,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
             &ev_textBox_TCP_PortChange, // Текст tcp-порта изменился из ГИП
             &ev_button_UpdateNumberOfComPortSClick, // Просьба обновить список доступных ком-портов
             &ev_button_StartStopClick, // Запустить/Остановить обмен данными с БД
-            &addrBdHelper)//,
+            &addrBdHelper)
 {
     InitComponrnts();
 }
@@ -117,19 +117,6 @@ void TWindowMainBd85::SetEndPoint(
     textBox_IP_Addr->Text = textIpAddr;
     textBox_TCP_Port->Text = textTcpPort;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::button_StartStopClick(TObject *Sender)
@@ -149,7 +136,7 @@ void __fastcall TWindowMainBd85::button_AddrBd_IncClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::textBox_AddrBdChange(TObject *Sender)
 {
-    ev_textBox_AddrBdChange(textBox_AddrBd->Text.c_str());
+    ev_textBox_AddrBd_Change( textBox_AddrBd->Text.c_str() );
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::FormShow(TObject *Sender)

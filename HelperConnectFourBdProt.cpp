@@ -87,3 +87,8 @@ ActionEvent<>* HelperConnectFourBdProt::GetEventStartStopClick()
 {
     return _ev_button_StartStopClick;
 }
+//---------------------------------------------------------------------------
+HelperNumberTextBtn* HelperConnectFourBdProt::GetHelperNumberAddrBd()
+{
+    return _addrBd;
+}

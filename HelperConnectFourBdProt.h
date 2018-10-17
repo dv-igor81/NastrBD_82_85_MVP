@@ -40,17 +40,21 @@ private:
 
     HelperNumberTextBtn* _addrBd;
 public:
-    ActionEvent<Protokol>* GetEventProtocolChange();
+
     ActionSelf<bool>* GetSelfComPortOrTcpIp();
     ActionSelf<const char*>* GetSelfLabelHintSetText();
     ActionSelf<const char*, const char*>* GetSelfAddComPortName();
-    ActionEvent<>* GetEventWindowShow();
     ActionSelf<Protokol>* GetSelfSetProtokolName();
     ActionSelf<const char*, const char*>* GetSelfSetEndPoint();
+
+    ActionEvent<Protokol>* GetEventProtocolChange();
+    ActionEvent<>* GetEventWindowShow();
     ActionEvent<const char*>* GetEventIpAddrChange(); // Текст ip-адреса изменился из ГИП
     ActionEvent<const char*>* GetEventTcpPortChange(); // Текст tcp-порта изменился из ГИП
     ActionEvent<>* GetEventUpdateNumberOfComPorts(); // Обновите список ком-портов
     ActionEvent<>* GetEventStartStopClick(); // Запустить/Остановить обмен данными с БД
+
+    HelperNumberTextBtn* GetHelperNumberAddrBd();
 };
 //---------------------------------------------------------------------------
 #endif

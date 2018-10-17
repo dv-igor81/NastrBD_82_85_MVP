@@ -61,7 +61,6 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
         flagError = true; // Îøèáêà!!!
         break;
     }
-
     ev_comPortOrTcpIp(isComPortProt);
     ev_labelHint(hintText);
     if (fromPresenter && !flagError)
@@ -90,5 +89,7 @@ void ConnectBdProt::UpdateNumberOfComPorts()
 //---------------------------------------------------------------------------
 void ConnectBdProt::StartStopClick()
 {
+    HelperNumberTextBtn* addrBd = _bdProt->GetHelperNumberAddrBd();
+    addrBd->SetNumber();
 }
 //---------------------------------------------------------------------------

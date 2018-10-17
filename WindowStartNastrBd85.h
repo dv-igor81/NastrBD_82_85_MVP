@@ -15,7 +15,7 @@ __published:	// IDE-managed Components
         TButton *Button_Start;
         void __fastcall Button_StartClick(TObject *Sender);
 private:	// User declarations
-WindowLoader viewLoader;
+    WindowLoader viewLoader;
 public:		// User declarations
         __fastcall TWindowStart(TComponent* Owner);
 };
