@@ -1,0 +1,11 @@
+# $ cat .gitignore
+*.jpg
+*.bmp
+*.exe
+*~
+*.~*
+*.obj
+*.tds
+*.ddp
+*.res
+

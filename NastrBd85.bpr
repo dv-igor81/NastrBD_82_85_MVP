@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="NastrBd85.exe"/>
+    <OBJFILES value="NastrBd85.obj WindowStartNastrBd85.obj WindowMainNastrBd85.obj 
+      Protokol_t.obj WindowLoader.obj IWindowMainBd85.obj 
+      PresenterWindowMainBd85.obj ConnectBdProt.obj HelperConnectFourBdProt.obj 
+      HelperNumberTextBtn.obj ..\Library\smartevents\ActionAllBase.obj 
+      ..\Library\smartevents\ActionDebugSettings.obj 
+      ..\Library\smartevents\ActionEventBase.obj 
+      ..\Library\smartevents\ActionObjectBase.obj 
+      ..\Library\smartevents\ActionSelfBase.obj"/>
+    <RESFILES value="NastrBd85.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) WindowStartNastrBd85.dfm WindowMainNastrBd85.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="vcl.lib rtl.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
+      vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
+      teedb.bpi tee.bpi dss.bpi teeqr.bpi visualclx.bpi visualdbclx.bpi 
+      dsnapcrba.bpi dsnapcon.bpi bcbsmp.bpi vclie.bpi xmlrtl.bpi inet.bpi 
+      inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
+      bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
+      indy.bpi bcb2kaxserver.bpi Iocomp65.bpi"/>
+    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="NastrBd85.cpp"/>
+    <INCLUDEPATH value="..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\Library\smartevents -ILibrary\smartevents 
+      -I&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot; 
+      -ID:\ProjectS\BUILDER6\034_NastrBD_85_MVP -I$(BCB)\include 
+      -I$(BCB)\include\vcl -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tW -tWM"/>
+    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="NastrBd85.res" FORMNAME="" UNITNAME="NastrBd85.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NastrBd85.cpp" FORMNAME="" UNITNAME="NastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="WindowStartNastrBd85.cpp" FORMNAME="WindowStart" UNITNAME="WindowStartNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="WindowMainNastrBd85.cpp" FORMNAME="WindowMainBd85" UNITNAME="WindowMainNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Protokol_t.cpp" FORMNAME="" UNITNAME="Protokol_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="WindowLoader.cpp" FORMNAME="" UNITNAME="WindowLoader" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="IWindowMainBd85.cpp" FORMNAME="" UNITNAME="IWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="PresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="PresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="HelperNumberTextBtn.cpp" FORMNAME="" UNITNAME="HelperNumberTextBtn.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionAllBase.cpp" FORMNAME="" UNITNAME="ActionAllBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionDebugSettings.cpp" FORMNAME="" UNITNAME="ActionDebugSettings.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionEventBase.cpp" FORMNAME="" UNITNAME="ActionEventBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionObjectBase.cpp" FORMNAME="" UNITNAME="ActionObjectBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionSelfBase.cpp" FORMNAME="" UNITNAME="ActionSelfBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=3
+Item0=Library\smartevents;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item1=D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item2=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=1
+Item0=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_DEBUG
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>
