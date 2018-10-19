@@ -4,11 +4,17 @@
 //---------------------------------------------------------------------------
 #include "IWindowMainBd85.h"
 #include "ConnectBdProt.h"
+#include "IAllProtokolS.h"
+#include "ITask.h"
 //---------------------------------------------------------------------------
 class PresenterWindowMainBd85
 {
 public:
-    PresenterWindowMainBd85(IWindowMainBd85 * view);
+    PresenterWindowMainBd85(
+        IWindowMainBd85 * view,
+        IAllProtokolS * allProtokol,
+        ITask * task);
+
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
 private:
@@ -20,6 +26,9 @@ private:
 
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
+
+    IAllProtokolS * _allProtokol;
+    ITask * _task;
 };
 //---------------------------------------------------------------------------
 #endif

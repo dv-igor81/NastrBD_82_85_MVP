@@ -10,6 +10,7 @@ using namespace smartevents;
 class IWindowMainBd85
 {
 public:
+    virtual void Destroy() = 0;
     virtual ActionSelf<>* GetSelfShow() = 0;
     virtual ActionEvent<>* GetEventFormShow() = 0;
     virtual ActionEvent<>* GetEventFormClose() = 0;

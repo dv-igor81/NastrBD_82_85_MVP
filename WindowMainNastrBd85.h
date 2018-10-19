@@ -86,6 +86,9 @@ private:	// User declarations
 
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
+
+    void Destroy();
+            
     ActionSelf<>* GetSelfShow();
     ActionEvent<>* GetEventFormShow();
     ActionEvent<>* GetEventFormClose();

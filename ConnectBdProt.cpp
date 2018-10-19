@@ -4,15 +4,22 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-ConnectBdProt::ConnectBdProt(HelperConnectFourBdProt* bdProt)  :
-    as_protocolChanged(this, &ConnectBdProt::ProtocolChanged)
-    , as_windowShow(this, &ConnectBdProt::WindowShow)
-    , as_changeIpAddr(this, &ConnectBdProt::ChangeIpAddr)
-    , as_changeTcpPort(this, &ConnectBdProt::ChangeTcpPort)
-    , as_updateNumberOfComPorts(this, &ConnectBdProt::UpdateNumberOfComPorts)
-    , as_startStopClick(this, &ConnectBdProt::StartStopClick)
+ConnectBdProt::ConnectBdProt(
+    HelperConnectFourBdProt * bdProt,
+    IAllProtokolS * allProtokol,
+    ITask * task)  :
+        as_protocolChanged(this, &ConnectBdProt::ProtocolChanged)
+        , as_windowShow(this, &ConnectBdProt::WindowShow)
+        , as_changeIpAddr(this, &ConnectBdProt::ChangeIpAddr)
+        , as_changeTcpPort(this, &ConnectBdProt::ChangeTcpPort)
+        , as_updateNumberOfComPorts(this, &ConnectBdProt::UpdateNumberOfComPorts)
+        , as_startStopClick(this, &ConnectBdProt::StartStopClick)
+        , as_UpdateComPotrsAsynk(this, &ConnectBdProt::UpdateComPotrsAsynk)
 {
     _bdProt = bdProt;
+    _allProtokol = allProtokol;
+    _task = task;
+    
     *_bdProt->GetEventProtocolChange() += as_protocolChanged;
     ev_comPortOrTcpIp += _bdProt->GetSelfComPortOrTcpIp();
     ev_labelHint += _bdProt->GetSelfLabelHintSetText();
@@ -71,9 +78,24 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
 //---------------------------------------------------------------------------
 void ConnectBdProt::WindowShow()
 {
-    SettingsChengeProtokol(Protokol_t::NineBit, true);
-    ev_addComPortName("COM1", "1");
+    UpdateNumberOfComPortS();
+    // Task.RunAsynk(UpdateComPotrsAsynk, "UpdateComPotrsAsynk");
+    //SettingsChengeProtokol(Protokol_t::NineBit, true);
+    //ev_addComPortName("COM1", "1");
 }
+//---------------------------------------------------------------------------
+void ConnectBdProt::UpdateNumberOfComPortS()
+{
+    _task->RunAsynk( as_UpdateComPotrsAsynk );
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::UpdateComPotrsAsynk()
+{
+    //string[] comPortS = null; // массив строк
+    //_allProtokolS.UpdateComPotrs(ref comPortS);
+    //_form.BeginInvokeEx(UpdateComPortSInfo, comPortS);
+}
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 void ConnectBdProt::ChangeIpAddr(const char* textIpAddr)
 {

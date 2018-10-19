@@ -41,6 +41,11 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
     InitComponrnts();
 }
 //---------------------------------------------------------------------------
+void TWindowMainBd85::Destroy()
+{
+    delete this;
+}
+//---------------------------------------------------------------------------
 void TWindowMainBd85::InitComponrnts()
 {
     comboBox_Protocol->Style = csDropDownList; // Недоступно для редактирования

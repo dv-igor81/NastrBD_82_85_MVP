@@ -1,6 +1,6 @@
 object WindowMainBd85: TWindowMainBd85
-  Left = 391
-  Top = 184
+  Left = 641
+  Top = 287
   Width = 796
   Height = 669
   Caption = 'WindowMainBd85'

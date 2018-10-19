@@ -4,10 +4,15 @@
 //---------------------------------------------------------------------------
 #include "HelperConnectFourBdProt.h"
 #include "Protokol_t.h"
+#include "IAllProtokolS.h"
+#include "ITask.h"
 //---------------------------------------------------------------------------
 class ConnectBdProt{
 public:
-    ConnectBdProt(HelperConnectFourBdProt* bdProt);
+    ConnectBdProt(
+        HelperConnectFourBdProt* bdProt,
+        IAllProtokolS * allProtokol,
+        ITask * task);
 private:
     enum { ipAddrSize = 16, tcpPortSize = 6 };
     // ModBus TCP
@@ -43,6 +48,14 @@ private:
     ActionEvent<const char*, const char*> ev_addComPortName;
 
     void SettingsChengeProtokol(Protokol protokolName, bool fromPresenter);
+
+    IAllProtokolS * _allProtokol;
+    ITask * _task;
+
+    void UpdateNumberOfComPortS();
+
+    ActionSelf<> as_UpdateComPotrsAsynk;
+    void UpdateComPotrsAsynk();
 };
 //---------------------------------------------------------------------------
 #endif
