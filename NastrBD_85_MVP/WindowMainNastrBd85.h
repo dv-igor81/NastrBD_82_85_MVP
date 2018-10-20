@@ -61,6 +61,12 @@ private:	// User declarations
     ActionSelf<const char*> as_label_HintSetText;
     void HintSetText(const char* text);
 
+    ActionSelf<> as_clearAllComPortName;
+    void ClearAllComPortName();
+
+    ActionSelf<bool> as_setEnabledUpdateComPorts;
+    void SetEnabledUpdateComPorts(bool enabled);
+
     ActionSelf<const char*, const char*> as_addComPortName;
     void AddComPortName(const char* comPortName, const char* comPortCount);
 

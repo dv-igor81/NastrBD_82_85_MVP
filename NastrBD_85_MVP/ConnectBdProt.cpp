@@ -2,6 +2,8 @@
 #pragma hdrstop
 #include "ConnectBdProt.h"
 //---------------------------------------------------------------------------
+#include <dstring.h>
+//---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 ConnectBdProt::ConnectBdProt(
@@ -15,6 +17,7 @@ ConnectBdProt::ConnectBdProt(
         , as_updateNumberOfComPorts(this, &ConnectBdProt::UpdateNumberOfComPorts)
         , as_startStopClick(this, &ConnectBdProt::StartStopClick)
         , as_UpdateComPotrsAsynk(this, &ConnectBdProt::UpdateComPotrsAsynk)
+        , as_UpdateComPortsInfo(this, &ConnectBdProt::UpdateComPortsInfo)
 {
     _bdProt = bdProt;
     _allProtokol = allProtokol;
@@ -23,6 +26,10 @@ ConnectBdProt::ConnectBdProt(
     *_bdProt->GetEventProtocolChange() += as_protocolChanged;
     ev_comPortOrTcpIp += _bdProt->GetSelfComPortOrTcpIp();
     ev_labelHint += _bdProt->GetSelfLabelHintSetText();
+
+    ev_clearAllComPortName += _bdProt->GetSelfClearAllComPortName();
+    ev_setEnabledUpdateComPorts += _bdProt->GetSelfSetEnabledUpdateComPorts();
+
     *_bdProt->GetEventWindowShow() += as_windowShow;
     ev_setProtokolName += _bdProt->GetSelfSetProtokolName();
     ev_setEndPoint += _bdProt->GetSelfSetEndPoint();
@@ -78,34 +85,43 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
 //---------------------------------------------------------------------------
 void ConnectBdProt::WindowShow()
 {
-    UpdateNumberOfComPortS();
-    // Task.RunAsynk(UpdateComPotrsAsynk, "UpdateComPotrsAsynk");
-    //SettingsChengeProtokol(Protokol_t::NineBit, true);
-    //ev_addComPortName("COM1", "1");
+    SettingsChengeProtokol(Protokol_t::NineBit, true);
+    UpdateNumberOfComPorts();
 }
 //---------------------------------------------------------------------------
-void ConnectBdProt::UpdateNumberOfComPortS()
+void ConnectBdProt::UpdateNumberOfComPorts()
 {
-    _task->RunAsynk( as_UpdateComPotrsAsynk );
+    ev_clearAllComPortName(); // Очистить список ком портов
+    ev_setEnabledUpdateComPorts(false); // Сделать на форме недоступной кнопку обновления ком-порта
+    _task->RunAsynk( & as_UpdateComPotrsAsynk );
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::UpdateComPotrsAsynk()
 {
-    //string[] comPortS = null; // массив строк
-    //_allProtokolS.UpdateComPotrs(ref comPortS);
-    //_form.BeginInvokeEx(UpdateComPortSInfo, comPortS);
+    _allProtokol->UpdateComPotrs();
+    _task->BeginInvoke( & as_UpdateComPortsInfo );
 }
 //---------------------------------------------------------------------------
+void ConnectBdProt::UpdateComPortsInfo()
+{
+    int comPortIndex;
+    int comPortCount = 0;
+    AnsiString comPortName;
+    while ( _allProtokol->NextComPortIndex( & comPortIndex ) )
+    {
+        comPortName = "COM" + IntToStr( comPortIndex );
+        comPortCount++;
+        AnsiString count = IntToStr( comPortCount );
+        ev_addComPortName( comPortName.c_str(), count.c_str() );
+    }
+    ev_setEnabledUpdateComPorts(true); // Сделать на форме доступной кнопку обновления ком-порта
+}
 //---------------------------------------------------------------------------
 void ConnectBdProt::ChangeIpAddr(const char* textIpAddr)
 {
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::ChangeTcpPort(const char* textTcpPort)
-{
-}
-//---------------------------------------------------------------------------
-void ConnectBdProt::UpdateNumberOfComPorts()
 {
 }
 //---------------------------------------------------------------------------

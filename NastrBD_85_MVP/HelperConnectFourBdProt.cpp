@@ -9,6 +9,8 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     ActionEvent<Protokol>* ev_protocolChange, // Протокол меняется из ГИП
     ActionSelf<bool>* as_comPortOrTcpIp, // Меняется вид программно: ком-порт или TCP/IP
     ActionSelf<const char*>* as_labelHint, // Текст подсказки
+    ActionSelf<>* as_clearAllComPortName,  // Очистить список найденых ком-портов
+    ActionSelf<bool>* as_setEnabledUpdateComPorts, // Установить доступность обновления ком-портов
     ActionSelf<const char*, const char*>* as_addComPortName, // Добавить имя ком-порта
     ActionEvent<>* ev_windowShow, // Событие показать окно
     ActionSelf<Protokol>* as_setProtokolName, // Установить имя протокола
@@ -22,6 +24,10 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     _ev_protocolChange = ev_protocolChange; // Протокол меняется из ГИП
     _as_comPortOrTcpIp = as_comPortOrTcpIp; // Изменяю вид программно: ком-порт или TCP/IP
     _as_labelHint = as_labelHint;
+
+    _as_clearAllComPortName = as_clearAllComPortName;
+    _as_setEnabledUpdateComPorts = as_setEnabledUpdateComPorts;
+
     _as_addComPortName = as_addComPortName;
     _ev_windowShow = ev_windowShow;
     _as_setProtokolName = as_setProtokolName;
@@ -92,3 +98,20 @@ HelperNumberTextBtn* HelperConnectFourBdProt::GetHelperNumberAddrBd()
 {
     return _addrBd;
 }
+//---------------------------------------------------------------------------
+ActionSelf<>* HelperConnectFourBdProt::GetSelfClearAllComPortName()
+{
+    return _as_clearAllComPortName;
+}
+//---------------------------------------------------------------------------
+ActionSelf<bool>* HelperConnectFourBdProt::GetSelfSetEnabledUpdateComPorts()
+{
+    return _as_setEnabledUpdateComPorts;
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------

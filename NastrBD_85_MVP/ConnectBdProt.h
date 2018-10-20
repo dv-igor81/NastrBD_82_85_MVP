@@ -22,6 +22,7 @@ private:
     char strIpAddr_RTU_IP[ipAddrSize];
     char strTcpPort_RTU_IP[tcpPortSize];
 
+
     HelperConnectFourBdProt* _bdProt;
     ActionSelf<Protokol> as_protocolChanged;
     void ProtocolChanged(Protokol protocolName);
@@ -43,6 +44,10 @@ private:
 
     ActionEvent<bool> ev_comPortOrTcpIp;
     ActionEvent<const char*> ev_labelHint;
+
+    ActionEvent<> ev_clearAllComPortName;
+    ActionEvent<bool> ev_setEnabledUpdateComPorts;
+
     ActionEvent<Protokol> ev_setProtokolName;
     ActionEvent<const char*, const char*> ev_setEndPoint;
     ActionEvent<const char*, const char*> ev_addComPortName;
@@ -52,7 +57,8 @@ private:
     IAllProtokolS * _allProtokol;
     ITask * _task;
 
-    void UpdateNumberOfComPortS();
+    ActionSelf<> as_UpdateComPortsInfo;
+    void UpdateComPortsInfo();
 
     ActionSelf<> as_UpdateComPotrsAsynk;
     void UpdateComPotrsAsynk();
