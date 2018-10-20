@@ -19,17 +19,12 @@ WindowLoader::WindowLoader(TComponent* Owner) :
 //---------------------------------------------------------------------------
 WindowLoader::~WindowLoader()
 {
-    Destroy(_presenter);
-    Destroy(_allProtokol);
-    Destroy(_task);
-}
-//---------------------------------------------------------------------------
-void WindowLoader::Destroy(void * ptr)
-{
-    if (ptr != 0)
+    if ( _presenter != 0 )
     {
-        delete ptr;
+        delete _presenter;
     }
+    delete _allProtokol;
+    delete _task;
 }
 //---------------------------------------------------------------------------
 void WindowLoader::LoadWindowMain()

@@ -17,7 +17,7 @@
       ..\Library\Task\ITask.obj ..\Library\AllProtokolS\modbus.obj 
       ..\Library\AllProtokolS\modbus-data.obj 
       ..\Library\AllProtokolS\modbus-tcp.obj 
-      ..\Library\AllProtokolS\RSProtokol.obj"/>
+      ..\Library\AllProtokolS\RSProtokol.obj ..\Library\Task\SuperThread.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -33,7 +33,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi Iocomp65.bpi"/>
-    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Task;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS"/>
+    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Task;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -93,6 +93,7 @@
       <FILE FILENAME="..\Library\AllProtokolS\modbus-data.cpp" FORMNAME="" UNITNAME="modbus-data.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\modbus-tcp.cpp" FORMNAME="" UNITNAME="modbus-tcp.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\Task\SuperThread.cpp" FORMNAME="" UNITNAME="SuperThread" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

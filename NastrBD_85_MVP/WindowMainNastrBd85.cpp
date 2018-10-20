@@ -13,10 +13,8 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         , as_textBox_AddrBd_SetText(this, &TWindowMainBd85::TextBox_AddrBd_SetText)
         , as_setComPortProtEnabled(this, &TWindowMainBd85::SetComPortProtEnabled)
         , as_label_HintSetText(this, &TWindowMainBd85::HintSetText)
-
         , as_clearAllComPortName(this, &TWindowMainBd85::ClearAllComPortName)
         , as_setEnabledUpdateComPorts(this, &TWindowMainBd85::SetEnabledUpdateComPorts)
-
         , as_addComPortName(this, &TWindowMainBd85::AddComPortName)
         , as_setProtokolName(this, &TWindowMainBd85::SetProtokolName)
         , as_setEndPoint(this, &TWindowMainBd85::SetEndPoint)
@@ -32,10 +30,8 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
             &ev_comboBox_ProtocolChange, // Протокол меняется из ГИП
             &as_setComPortProtEnabled, // Меняется вид программно: ком-порт или TCP/IP
             &as_label_HintSetText, // Текст подсказки установить
-
             &as_clearAllComPortName, // Очистить список найденых ком-портов
             &as_setEnabledUpdateComPorts, // Установить доступность обновления ком-портов
-
             &as_addComPortName, // Добавить имя ком-порта в список доступных ком-портов
             &ev_windowShow, // Событие показать окно
             &as_setProtokolName, // Установить имя протокола
@@ -120,6 +116,7 @@ void TWindowMainBd85::SetEnabledUpdateComPorts(bool enabled)
     button_UpdateNumberOfComPortS->Enabled = enabled;
     comboBox_ComPorts->Enabled = enabled;
     button_StartStop->Enabled = enabled;
+    comboBox_Protocol->Enabled = enabled;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::AddComPortName(

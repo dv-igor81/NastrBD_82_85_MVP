@@ -8,6 +8,7 @@ using namespace smartevents;
 class ITask
 {
 public:
+    virtual ~ITask(){};
     virtual void RunAsynk(ActionSelf<>* action) = 0;
     virtual void BeginInvoke(ActionSelf<>* action) = 0;
 };

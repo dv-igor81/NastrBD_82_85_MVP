@@ -15,7 +15,6 @@ public:
     ~WindowLoader();
     void LoadWindowMain();
 private:
-    void Destroy(void * ptr);
     TComponent * _owner;
     PresenterWindowMainBd85 * _presenter;
     IAllProtokolS * _allProtokol;
