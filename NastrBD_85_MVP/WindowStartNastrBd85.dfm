@@ -1,8 +1,8 @@
 object WindowStart: TWindowStart
   Left = 246
-  Top = 514
-  Width = 381
-  Height = 168
+  Top = 130
+  Width = 309
+  Height = 107
   Caption = 'WindowStartBd85'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET

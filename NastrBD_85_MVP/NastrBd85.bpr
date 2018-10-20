@@ -24,7 +24,7 @@
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) WindowStartNastrBd85.dfm WindowMainNastrBd85.dfm"/>
     <LIBFILES value=""/>
-    <LIBRARIES value=""/>
+    <LIBRARIES value="inet.lib rtl.lib vcl.lib"/>
     <SPARELIBS value="vcl.lib rtl.lib inet.lib"/>
     <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
       vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
@@ -41,7 +41,7 @@
     <RELEASELIBPATH value="$(BCB)\lib\release"/>
     <LINKER value="ilink32"/>
     <USERDEFINES value="_DEBUG"/>
-    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="NastrBd85.cpp"/>
     <INCLUDEPATH value="..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl"/>
     <LIBPATH value="..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
@@ -63,9 +63,9 @@
     <OTHERFILES value=""/>
   </OPTIONS>
   <LINKER>
-    <ALLOBJ value="c0w32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLOBJ value="c0w32.obj sysinit.obj $(OBJFILES)"/>
     <ALLRES value="$(RESFILES)"/>
-    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
     <OTHERFILES value=""/>
   </LINKER>
   <FILELIST>
@@ -127,16 +127,18 @@ ProductVersion=1.0.0.0
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=4
-Item0=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item1=Library\smartevents;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item2=D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item3=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Count=5
+Item0=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item2=Library\smartevents;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item3=D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item4=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
-Count=2
-Item0=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item1=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Count=3
+Item0=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item2=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
