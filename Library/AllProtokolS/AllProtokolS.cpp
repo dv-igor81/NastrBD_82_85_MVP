@@ -78,6 +78,10 @@ void AllProtokolS::SetComPortName(const char* cpName)
     TextHelper::CopyText(comPortName, cpName, comPortNameSize);
 }
 //---------------------------------------------------------------------------
+void AllProtokolS::SetIpAddr(const char* ipAddr)
+{
+    TextHelper::CopyText(protokol->Data.IP_Addr, ipAddr, ipAddrSize);
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

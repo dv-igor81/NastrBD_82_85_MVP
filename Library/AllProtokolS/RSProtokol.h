@@ -418,21 +418,21 @@ public:
   int data_bit;
   int stop_bit;
 
-  unsigned long Edit_3_01;
-  unsigned long Edit_3_02;
-  unsigned long Edit_3_03;
-  unsigned long Edit_3_04;
-  unsigned long Edit_3_05;
-  unsigned long Edit_3_06;
-  unsigned long Edit_3_07;
-  unsigned long Edit_3_08;
-  unsigned long Edit_3_09;
-  unsigned long Edit_3_10;
-  unsigned long Edit_3_11;
-  unsigned long Edit_3_12;
-  unsigned long Edit_3_13;
-  unsigned long Edit_3_14;
-  unsigned long Edit_3_15;  
+  //unsigned long Edit_3_01;
+  //unsigned long Edit_3_02;
+  //unsigned long Edit_3_03;
+  //unsigned long Edit_3_04;
+  //unsigned long Edit_3_05;
+  //unsigned long Edit_3_06;
+  //unsigned long Edit_3_07;
+  //unsigned long Edit_3_08;
+  //unsigned long Edit_3_09;
+  //unsigned long Edit_3_10;
+  //unsigned long Edit_3_11;
+  //unsigned long Edit_3_12;
+  //unsigned long Edit_3_13;
+  //unsigned long Edit_3_14;
+  //unsigned long Edit_3_15;
 
   unsigned long * ptr_Edit_3_01__14[15];
   unsigned short AddrRegModBus_BD82[15];

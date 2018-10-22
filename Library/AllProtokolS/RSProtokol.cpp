@@ -81,52 +81,52 @@ RSProtokol_t::RSProtokol_t() :
   WriteTimeout = 100;
   ClearBDSpectr();
 
-  ptr_Edit_3_01__14[0] = & Edit_3_01;
-  ptr_Edit_3_01__14[1] = & Edit_3_02;
-  ptr_Edit_3_01__14[2] = & Edit_3_03;
-  ptr_Edit_3_01__14[3] = & Edit_3_04;
-  ptr_Edit_3_01__14[4] = & Edit_3_05;
-  ptr_Edit_3_01__14[5] = & Edit_3_06;
-  ptr_Edit_3_01__14[6] = & Edit_3_07;
-  ptr_Edit_3_01__14[7] = & Edit_3_08;
-  ptr_Edit_3_01__14[8] = & Edit_3_09;
-  ptr_Edit_3_01__14[9] = & Edit_3_10;
-  ptr_Edit_3_01__14[10] = & Edit_3_11;
-  ptr_Edit_3_01__14[11] = & Edit_3_12;
-  ptr_Edit_3_01__14[12] = & Edit_3_13;
-  ptr_Edit_3_01__14[13] = & Edit_3_14;
-  ptr_Edit_3_01__14[14] = & Edit_3_15;
+  //ptr_Edit_3_01__14[0] = & Edit_3_01;
+  //ptr_Edit_3_01__14[1] = & Edit_3_02;
+  //ptr_Edit_3_01__14[2] = & Edit_3_03;
+  //ptr_Edit_3_01__14[3] = & Edit_3_04;
+  //ptr_Edit_3_01__14[4] = & Edit_3_05;
+  //ptr_Edit_3_01__14[5] = & Edit_3_06;
+  //ptr_Edit_3_01__14[6] = & Edit_3_07;
+  //ptr_Edit_3_01__14[7] = & Edit_3_08;
+  //ptr_Edit_3_01__14[8] = & Edit_3_09;
+  //ptr_Edit_3_01__14[9] = & Edit_3_10;
+  //ptr_Edit_3_01__14[10] = & Edit_3_11;
+  //ptr_Edit_3_01__14[11] = & Edit_3_12;
+  //ptr_Edit_3_01__14[12] = & Edit_3_13;
+  //ptr_Edit_3_01__14[13] = & Edit_3_14;
+  //ptr_Edit_3_01__14[14] = & Edit_3_15;
   //----------------------------------
-  AddrRegModBus_BD82[0] = 10; // Номер блока
-  AddrRegModBus_BD82[1] = 0x300+2; // Экспозиция
-  AddrRegModBus_BD82[2] = 0x300+3; // Минимальный счёт
-  AddrRegModBus_BD82[3] = 0x300+4; // Максимальный счёт
-  AddrRegModBus_BD82[4] = 0x300+5; // Уровень перегрузки
-  AddrRegModBus_BD82[5] = 0x300+6; // Кол-во интервалов
-  AddrRegModBus_BD82[6] = 0x300+7; // Кол-во взгляда после
-  AddrRegModBus_BD82[7] = 0x300+8; // Уровень тревоги 1
-  AddrRegModBus_BD82[8] = 0x300+9; // Уровень тревоги 2
-  AddrRegModBus_BD82[9] = 0x300+10; // Уровень тревоги 3
-  AddrRegModBus_BD82[10] = 0x300+11; // Фон, мс
-  AddrRegModBus_BD82[11] = 8; // Длит. подинтервала фона, [мс]
-  AddrRegModBus_BD82[12] = 0x300 + 12; // Длит. сигнала тревоги, с
-  AddrRegModBus_BD82[13] = 0x300 + 13; // Длит. сигнала видео, с
-  AddrRegModBus_BD82[14] = 19; // Абсолютный фон, имп. / с  
+  //AddrRegModBus_BD82[0] = 10; // Номер блока
+  //AddrRegModBus_BD82[1] = 0x300+2; // Экспозиция
+  //AddrRegModBus_BD82[2] = 0x300+3; // Минимальный счёт
+  //AddrRegModBus_BD82[3] = 0x300+4; // Максимальный счёт
+  //AddrRegModBus_BD82[4] = 0x300+5; // Уровень перегрузки
+  //AddrRegModBus_BD82[5] = 0x300+6; // Кол-во интервалов
+  //AddrRegModBus_BD82[6] = 0x300+7; // Кол-во взгляда после
+  //AddrRegModBus_BD82[7] = 0x300+8; // Уровень тревоги 1
+  //AddrRegModBus_BD82[8] = 0x300+9; // Уровень тревоги 2
+  //AddrRegModBus_BD82[9] = 0x300+10; // Уровень тревоги 3
+  //AddrRegModBus_BD82[10] = 0x300+11; // Фон, мс
+  //AddrRegModBus_BD82[11] = 8; // Длит. подинтервала фона, [мс]
+  //AddrRegModBus_BD82[12] = 0x300 + 12; // Длит. сигнала тревоги, с
+  //AddrRegModBus_BD82[13] = 0x300 + 13; // Длит. сигнала видео, с
+  //AddrRegModBus_BD82[14] = 19; // Абсолютный фон, имп. / с
   //----------------------------------
-  AddrRegModBus_BD85_New[0] = 10; // Номер блока
-  AddrRegModBus_BD85_New[1] = 0x300+2; // Экспозиция
-  AddrRegModBus_BD85_New[2] = 0x300+3; // Минимальный счёт
-  AddrRegModBus_BD85_New[3] = 0x300+4; // Максимальный счёт
-  AddrRegModBus_BD85_New[4] = 0x300+5; // Уровень перегрузки
-  AddrRegModBus_BD85_New[5] = 0x300+6; // Кол-во интервалов
-  AddrRegModBus_BD85_New[6] = 0x300+7; // Кол-во взгляда после
-  AddrRegModBus_BD85_New[7] = 0x300+8; // Уровень тревоги 1
-  AddrRegModBus_BD85_New[8] = 0x300+9; // Уровень тревоги 2
-  AddrRegModBus_BD85_New[9] = 0x300+10; // Уровень тревоги 3
-  AddrRegModBus_BD85_New[10] = 0x300+11; // Фон, мс
-  AddrRegModBus_BD85_New[11] = 18; // Длит. подинтервала фона, [мс]
-  AddrRegModBus_BD85_New[12] = 0x300 + 12; // Длит. сигнала тревоги, с
-  AddrRegModBus_BD85_New[13] = 0x300 + 13; // Длит. сигнала видео, с
+  //AddrRegModBus_BD85_New[0] = 10; // Номер блока
+  //AddrRegModBus_BD85_New[1] = 0x300+2; // Экспозиция
+  //AddrRegModBus_BD85_New[2] = 0x300+3; // Минимальный счёт
+  //AddrRegModBus_BD85_New[3] = 0x300+4; // Максимальный счёт
+  //AddrRegModBus_BD85_New[4] = 0x300+5; // Уровень перегрузки
+  //AddrRegModBus_BD85_New[5] = 0x300+6; // Кол-во интервалов
+  //AddrRegModBus_BD85_New[6] = 0x300+7; // Кол-во взгляда после
+  //AddrRegModBus_BD85_New[7] = 0x300+8; // Уровень тревоги 1
+  //AddrRegModBus_BD85_New[8] = 0x300+9; // Уровень тревоги 2
+  //AddrRegModBus_BD85_New[9] = 0x300+10; // Уровень тревоги 3
+  //AddrRegModBus_BD85_New[10] = 0x300+11; // Фон, мс
+  //AddrRegModBus_BD85_New[11] = 18; // Длит. подинтервала фона, [мс]
+  //AddrRegModBus_BD85_New[12] = 0x300 + 12; // Длит. сигнала тревоги, с
+  //AddrRegModBus_BD85_New[13] = 0x300 + 13; // Длит. сигнала видео, с
   //----------------------------------
   //==\\this->Data.FlagReadKolTikSpektr = false;
   this->Data.FlagWriteKolTikSpektr = false;
@@ -1154,7 +1154,7 @@ int RSProtokol_t::GetIndAdr(unsigned char * Adr)
 }
 //---------------------------------------------------------------------------
 // Считать групповой адрес БД
-int RSProtokol_t::GetGrpAdr(unsigned char * Adr/*, RSProtokol_t * Prot*/)
+int RSProtokol_t::GetGrpAdr(unsigned char * Adr)
 {
   this->buf_write[0] = 0x16;
   this->CodeRet = CommandExec(0, 1);
@@ -1520,14 +1520,6 @@ int RSProtokol_t::GetTimeSpectr(unsigned char * TimeInt)
   return this->CodeRet;
 }
 //---------------------------------------------------------------------------
-//void RSProtokol_t::FlagAvtoSnyatDiskr()
-//{
-///  Form_82_Start->CheckBox_DAuto_Standart->Checked = false;
-//  Form_82_Start->CheckBox_DAuto_Shirokie->Checked = false;
-//  Form_82_Start->CheckBox_DAuto_Rengen->Checked = false;
-//  Form_82_Start->CheckBox_DAuto->Checked = false;
-//}
-//---------------------------------------------------------------------------
 // стремимся выполнить это --> (U0 + Un == Uhi)
 // или это --> (U0 * 0,81 + Un == Uhi)
 void RSProtokol_t::AvtoPodborUhiIter() // Автоподбот Uhi
@@ -1806,17 +1798,6 @@ void RSProtokol_t::AvtoPodborUhiIter() // Автоподбот Uhi
     } // end if ( Sekunda == 0 )
   } //
 }
-//---------------------------------------------------------------------------
-/// Можно сбрасывать флажки для автоподбора дискриминаторов
-//bool RSProtokol_t::IsPidSResetted()
-//{
-//  bool flag = true;
-//  flag &= (I_State0 == 0);
-//  flag &= (I_State1 == 0);
-//  flag &= (I_Error0 == 0);
-//  /flag &= (I_Error1 == 0);
-//  return flag;
-//}
 //---------------------------------------------------------------------------
 int RSProtokol_t::DiaGetTime(void) // Текущее время в милисекундах
 {

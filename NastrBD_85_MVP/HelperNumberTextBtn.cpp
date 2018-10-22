@@ -61,8 +61,6 @@ void HelperNumberTextBtn::NumberIncrement()
         _curVal = _minVal;
     }
     SetNumber();
-    //AnsiString str = IntToStr(_curVal);
-    //TbxNum_SetText( str.c_str() );
 }
 //---------------------------------------------------------------------------
 void HelperNumberTextBtn::NubmerDecrement()
@@ -76,8 +74,6 @@ void HelperNumberTextBtn::NubmerDecrement()
         _curVal = _maxVal;
     }
     SetNumber();
-    //AnsiString str = IntToStr(_curVal);
-    //TbxNum_SetText( str.c_str() );
 }
 //---------------------------------------------------------------------------
 void HelperNumberTextBtn::NumberValueChanged(const char* text)

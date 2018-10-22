@@ -59,6 +59,7 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
     bool isComPortProt;
     bool flagError = false;
     char * hintText;
+    _protokolName = protokolName;
     switch (protokolName)
     {
     case Protokol_t::NineBit: // 9-òè áèòíûé
@@ -71,12 +72,12 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
         break;
     case Protokol_t::ModBus_TCP: // ModBus TCP
         isComPortProt = false;
-        ev_setEndPoint("192.168.3.4", "502");
+        ev_setEndPoint(strIpAddr_TCP, strTcpPort_TCP);
         hintText = "ÀÐÌ ÌÅÒÐÎ";
         break;
     case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         isComPortProt = false;
-        ev_setEndPoint("192.168.127.254", "4001");
+        ev_setEndPoint(strIpAddr_RTU_IP, strTcpPort_RTU_IP);
         hintText = "ÀÐÌ ÂÍÈÈÀ";
         break;
     case Protokol_t::NeVybran:
@@ -86,16 +87,18 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
     }
     ev_comPortOrTcpIp(isComPortProt);
     ev_labelHint(hintText);
-    _protokolName = Protokol_t::NeVybran; // Ïðîòîêîë íå âûáðàí
     if (fromPresenter && !flagError)
     {
         ev_setProtokolName(protokolName);
-        _protokolName = protokolName;
     }
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::WindowShow()
 {
+    TextHelper::CopyText(strIpAddr_TCP, "192.168.3.4", ipAddrSize);
+    TextHelper::CopyText(strIpAddr_RTU_IP, "192.168.127.254", ipAddrSize);
+    TextHelper::CopyText(strTcpPort_TCP, "502", tcpPortSize);
+    TextHelper::CopyText(strTcpPort_RTU_IP, "4001", tcpPortSize);
     SettingsChengeProtokol(Protokol_t::NineBit, true);
     UpdateNumberOfComPorts();
 }
@@ -130,10 +133,28 @@ void ConnectBdProt::UpdateComPortsInfo()
 //---------------------------------------------------------------------------
 void ConnectBdProt::ChangeIpAddr(const char* textIpAddr)
 {
+    switch (_protokolName)
+    {
+    case Protokol_t::ModBus_TCP: // ModBus TCP
+        TextHelper::CopyText(strIpAddr_TCP, textIpAddr, ipAddrSize);
+        break;
+    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        TextHelper::CopyText(strIpAddr_RTU_IP, textIpAddr, ipAddrSize);
+        break;
+    }
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::ChangeTcpPort(const char* textTcpPort)
 {
+    switch (_protokolName)
+    {
+    case Protokol_t::ModBus_TCP: // ModBus TCP
+        TextHelper::CopyText(strTcpPort_TCP, textTcpPort, tcpPortSize);
+        break;
+    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        TextHelper::CopyText(strTcpPort_RTU_IP, textTcpPort, tcpPortSize);
+        break;
+    }
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::StartStopClick()
@@ -154,7 +175,10 @@ void ConnectBdProt::Connect()
         _allProtokol->SetComPortName( comPortName );
         break;
     case Protokol_t::ModBus_TCP: // ModBus TCP
+        _allProtokol->SetIpAddr( strIpAddr_TCP );
+        break;
     case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        _allProtokol->SetIpAddr( strIpAddr_RTU_IP );
         break;
     case Protokol_t::NeVybran:
         break;
