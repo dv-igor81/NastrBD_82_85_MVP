@@ -13,6 +13,7 @@ class HelperConnectFourBdProt
 public:
     HelperConnectFourBdProt(
         ActionEvent<Protokol>* ev_protocolChange, // Протокол меняется из ГИП
+        ActionEvent<const char*>* ev_comboBox_ComPortsChange, // Меняется номер ком-порта из ГИП
         ActionSelf<bool>* as_comPortOrTcpIp, // Изменяю вид программно: ком-порт или TCP/IP
         ActionSelf<const char*>* as_labelHint, // Текст подсказки
         ActionSelf<>* as_clearAllComPortName,  // Очистить список найденых ком-портов
@@ -39,6 +40,7 @@ private:
 
     ActionEvent<>* _ev_windowShow;
     ActionEvent<Protokol>* _ev_protocolChange; // Протокол меняется из ГИП
+    ActionEvent<const char*>* _ev_comboBox_ComPortsChange; // Меняется номер ком-порта из ГИП
     ActionEvent<const char*>* _ev_textBox_IP_AddrChange;  // Текст ip-адреса изменился из ГИП
     ActionEvent<const char*>* _ev_textBox_TCP_PortChange; // Текст tcp-порта изменился из ГИП
     ActionEvent<>* _ev_button_UpdateNumberOfComPortSClick; // Обновите список ком-портов
@@ -58,6 +60,7 @@ public:
     ActionSelf<const char*, const char*>* GetSelfSetEndPoint();
 
     ActionEvent<Protokol>* GetEventProtocolChange();
+    ActionEvent<const char*>* GetEventComPortsChange();
     ActionEvent<>* GetEventWindowShow();
     ActionEvent<const char*>* GetEventIpAddrChange(); // Текст ip-адреса изменился из ГИП
     ActionEvent<const char*>* GetEventTcpPortChange(); // Текст tcp-порта изменился из ГИП

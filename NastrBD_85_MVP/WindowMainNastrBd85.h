@@ -185,6 +185,7 @@ __published:	// IDE-managed Components
         void __fastcall textBox_TCP_PortChange(TObject *Sender);
         void __fastcall button_UpdateNumberOfComPortSClick(
           TObject *Sender);
+        void __fastcall comboBox_ComPortsChange(TObject *Sender);
 private:	// User declarations
     void InitComponrnts();
      
@@ -220,6 +221,7 @@ private:	// User declarations
     ActionEvent<> ev_button_AddrBd_IncClick;
     ActionEvent<> ev_button_StartStopClick;
     ActionEvent<Protokol> ev_comboBox_ProtocolChange;
+    ActionEvent<const char*> ev_comboBox_ComPortsChange;
     ActionEvent<> ev_windowShow;
     ActionEvent<> ev_windowClose;
     ActionEvent<const char*> ev_textBox_IP_AddrChange;

@@ -14,18 +14,23 @@ public:
         IAllProtokolS * allProtokol,
         ITask * task);
 private:
-    enum { ipAddrSize = 16, tcpPortSize = 6 };
+    enum { ipAddrSize = 16, tcpPortSize = 6, comPortNameSize = 7 };   //enum { comPortCount = 100, comPortNameSize = 7 };
     // ModBus TCP
     char strIpAddr_TCP[ipAddrSize];
     char strTcpPort_TCP[tcpPortSize];
     // ModBus RTU (TCP/IP)
     char strIpAddr_RTU_IP[ipAddrSize];
     char strTcpPort_RTU_IP[tcpPortSize];
-
+    // Com-Port Name
+    char comPortName[comPortNameSize];
 
     HelperConnectFourBdProt* _bdProt;
+
     ActionSelf<Protokol> as_protocolChanged;
     void ProtocolChanged(Protokol protocolName);
+
+    ActionSelf<const char*> as_comPortsChange;
+    void ComPortsChange(const char* comPortName);
 
     ActionSelf<> as_windowShow;
     void WindowShow();
@@ -62,6 +67,9 @@ private:
 
     ActionSelf<> as_UpdateComPotrsAsynk;
     void UpdateComPotrsAsynk();
+
+    Protokol _protokolName;
+    void Connect();
 };
 //---------------------------------------------------------------------------
 #endif

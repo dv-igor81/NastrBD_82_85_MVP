@@ -3,6 +3,7 @@
 #include "ConnectBdProt.h"
 //---------------------------------------------------------------------------
 #include <dstring.h>
+#include "TextHelper.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -11,6 +12,7 @@ ConnectBdProt::ConnectBdProt(
     IAllProtokolS * allProtokol,
     ITask * task)  :
         as_protocolChanged(this, &ConnectBdProt::ProtocolChanged)
+        , as_comPortsChange(this, &ConnectBdProt::ComPortsChange)
         , as_windowShow(this, &ConnectBdProt::WindowShow)
         , as_changeIpAddr(this, &ConnectBdProt::ChangeIpAddr)
         , as_changeTcpPort(this, &ConnectBdProt::ChangeTcpPort)
@@ -24,6 +26,8 @@ ConnectBdProt::ConnectBdProt(
     _task = task;
     
     *_bdProt->GetEventProtocolChange() += as_protocolChanged;
+    *_bdProt->GetEventComPortsChange() += as_comPortsChange;
+
     ev_comPortOrTcpIp += _bdProt->GetSelfComPortOrTcpIp();
     ev_labelHint += _bdProt->GetSelfLabelHintSetText();
 
@@ -43,6 +47,11 @@ ConnectBdProt::ConnectBdProt(
 void ConnectBdProt::ProtocolChanged(Protokol protocolName)
 {
     SettingsChengeProtokol(protocolName, false); // false - не из ini-файла
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::ComPortsChange(const char* cpName)
+{
+    TextHelper::CopyText(comPortName, cpName, comPortNameSize);
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPresenter)
@@ -77,9 +86,11 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
     }
     ev_comPortOrTcpIp(isComPortProt);
     ev_labelHint(hintText);
+    _protokolName = Protokol_t::NeVybran; // Протокол не выбран
     if (fromPresenter && !flagError)
     {
-      ev_setProtokolName(protokolName);
+        ev_setProtokolName(protokolName);
+        _protokolName = protokolName;
     }
 }
 //---------------------------------------------------------------------------
@@ -127,7 +138,26 @@ void ConnectBdProt::ChangeTcpPort(const char* textTcpPort)
 //---------------------------------------------------------------------------
 void ConnectBdProt::StartStopClick()
 {
-    HelperNumberTextBtn* addrBd = _bdProt->GetHelperNumberAddrBd();
-    addrBd->SetNumber();
+    Connect();
 }
 //---------------------------------------------------------------------------
+void ConnectBdProt::Connect()
+{
+    HelperNumberTextBtn* addrBdHelper = _bdProt->GetHelperNumberAddrBd();
+    addrBdHelper->SetNumber(); // Отобразить номер на форме
+    int addrBd = addrBdHelper->GetNumber(); // Получить номер
+    _allProtokol->SetProtokol( _protokolName );  //_protokolName
+    switch ( _protokolName )
+    {
+    case Protokol_t::NineBit: // 9-ти битный
+    case Protokol_t::ModBus_RTU: // ModBus RTU
+        _allProtokol->SetComPortName( comPortName );
+        break;
+    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        break;
+    case Protokol_t::NeVybran:
+        break;
+    }
+
+}

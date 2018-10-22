@@ -28,6 +28,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
 
         ,bdProtHelper(
             &ev_comboBox_ProtocolChange, // Протокол меняется из ГИП
+            &ev_comboBox_ComPortsChange, // Меняется номер ком-порта из ГИП
             &as_setComPortProtEnabled, // Меняется вид программно: ком-порт или TCP/IP
             &as_label_HintSetText, // Текст подсказки установить
             &as_clearAllComPortName, // Очистить список найденых ком-портов
@@ -126,6 +127,7 @@ void TWindowMainBd85::AddComPortName(
     comboBox_ComPorts->Items->Add(comPortName);
     label_ComPortsCount->Text = comPortCount;
     comboBox_ComPorts->ItemIndex = 0;
+    ev_comboBox_ComPortsChange( comboBox_ComPorts->Text.c_str() );
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::SetProtokolName(Protokol protokolName)
@@ -192,6 +194,11 @@ void __fastcall TWindowMainBd85::button_UpdateNumberOfComPortSClick(
       TObject *Sender)
 {
     ev_button_UpdateNumberOfComPortSClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::comboBox_ComPortsChange(TObject *Sender)
+{
+    ev_comboBox_ComPortsChange( comboBox_ComPorts->Text.c_str() );
 }
 //---------------------------------------------------------------------------
 

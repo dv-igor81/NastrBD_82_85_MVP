@@ -7,6 +7,7 @@
 //---------------------------------------------------------------------------
 HelperConnectFourBdProt::HelperConnectFourBdProt(
     ActionEvent<Protokol>* ev_protocolChange, // Протокол меняется из ГИП
+    ActionEvent<const char*>* ev_comboBox_ComPortsChange, // Меняется номер ком-порта из ГИП
     ActionSelf<bool>* as_comPortOrTcpIp, // Меняется вид программно: ком-порт или TCP/IP
     ActionSelf<const char*>* as_labelHint, // Текст подсказки
     ActionSelf<>* as_clearAllComPortName,  // Очистить список найденых ком-портов
@@ -22,6 +23,7 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     HelperNumberTextBtn* addrBd)
 {
     _ev_protocolChange = ev_protocolChange; // Протокол меняется из ГИП
+    _ev_comboBox_ComPortsChange = ev_comboBox_ComPortsChange; // Меняется номер ком-порта из ГИП
     _as_comPortOrTcpIp = as_comPortOrTcpIp; // Изменяю вид программно: ком-порт или TCP/IP
     _as_labelHint = as_labelHint;
 
@@ -42,6 +44,11 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
 ActionEvent<Protokol>* HelperConnectFourBdProt::GetEventProtocolChange()
 {
     return _ev_protocolChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>* HelperConnectFourBdProt::GetEventComPortsChange()
+{
+    return _ev_comboBox_ComPortsChange;
 }
 //---------------------------------------------------------------------------
 ActionSelf<bool>* HelperConnectFourBdProt::GetSelfComPortOrTcpIp()
