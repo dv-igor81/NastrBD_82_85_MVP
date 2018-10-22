@@ -17,16 +17,14 @@ Task::~Task()
 //---------------------------------------------------------------------------
 void Task::RunAsynk(ActionSelf<>* action)
 {
-    _thread->SetFlagNotSynchro();
-    _thread->GetEventStartNotSynhro( action );
+    _thread->StartNotSynhro( action );
     _thread->Resume();
     //(*action)();
 }
 //---------------------------------------------------------------------------
 void Task::BeginInvoke(ActionSelf<>* action)
 {
-    _thread->SetFlagSynchro();
-    _thread->GetEventStartSynhro( action );
+    _thread->StartSynhro( action );
     //(*action)();
 }
 //---------------------------------------------------------------------------

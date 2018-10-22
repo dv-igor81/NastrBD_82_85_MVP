@@ -51,6 +51,7 @@ object WindowMainBd85: TWindowMainBd85
           Height = 21
           ItemHeight = 13
           TabOrder = 0
+          OnChange = comboBox_ProtocolChange
         end
         object panel_helperNumTxtBtn: TPanel
           Left = 8
@@ -81,6 +82,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 0
             Text = '1'
+            OnChange = textBox_AddrBdChange
           end
           object button_AddrBd_Dec: TButton
             Left = 48
@@ -95,6 +97,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = []
             ParentFont = False
             TabOrder = 1
+            OnClick = button_AddrBd_DecClick
           end
           object button_AddrBd_Inc: TButton
             Left = 82
@@ -109,6 +112,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = []
             ParentFont = False
             TabOrder = 2
+            OnClick = button_AddrBd_IncClick
           end
         end
         object panel_comPort_TcpIp: TPanel
@@ -148,6 +152,7 @@ object WindowMainBd85: TWindowMainBd85
               Height = 25
               Caption = #1054#1073#1085#1086#1074#1080#1090#1100
               TabOrder = 1
+              OnClick = button_UpdateNumberOfComPortSClick
             end
             object label_ComPortsCount: TEdit
               Left = 132
@@ -204,6 +209,7 @@ object WindowMainBd85: TWindowMainBd85
               ParentFont = False
               TabOrder = 0
               Text = '192.168.3.4'
+              OnChange = textBox_IP_AddrChange
             end
             object textBox_TCP_Port: TEdit
               Left = 8
@@ -220,6 +226,7 @@ object WindowMainBd85: TWindowMainBd85
               ParentFont = False
               TabOrder = 1
               Text = '502'
+              OnChange = textBox_TCP_PortChange
             end
           end
         end
@@ -230,6 +237,7 @@ object WindowMainBd85: TWindowMainBd85
           Height = 25
           Caption = #1053#1072#1095#1072#1090#1100
           TabOrder = 3
+          OnClick = button_StartStopClick
         end
         object label_Hint: TPanel
           Left = 8

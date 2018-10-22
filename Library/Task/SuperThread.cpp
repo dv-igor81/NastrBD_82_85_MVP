@@ -8,28 +8,15 @@
 __fastcall SuperThread::SuperThread(bool CreateSuspended)
         : TThread(CreateSuspended)
 {
-  work = false;
-  change = true;
-  flagNotSynchro = false;
-  flagSynchro = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall SuperThread::Execute()
 {
-  while ( Terminated == false )
-  {
-    if (flagNotSynchro)
+    while ( Terminated == false )
     {
-      flagNotSynchro = false;
-      start_not_synhro();
+        start_not_synhro();
+        Suspend(); // Приостановить поток
     }
-    if (flagSynchro)
-    {
-      flagSynchro = false;
-      Synchronize( & start_synhro );
-    }
-    Suspend(); // Приостановить поток
-  }
 }
 //---------------------------------------------------------------------------
 void __fastcall SuperThread::start_not_synhro()
@@ -50,24 +37,15 @@ void __fastcall SuperThread::start_synhro()
     }
 }
 //---------------------------------------------------------------------------
-void SuperThread::GetEventStartNotSynhro(ActionSelf<>* action)
+void SuperThread::StartNotSynhro(ActionSelf<>* action)
 {
     as_startNotSynhro = action;
 }
 //---------------------------------------------------------------------------
-void SuperThread::GetEventStartSynhro(ActionSelf<>* action)
+void SuperThread::StartSynhro(ActionSelf<>* action)
 {
     as_startSynhro = action;
-}
-//---------------------------------------------------------------------------
-void SuperThread::SetFlagNotSynchro()
-{
-    flagNotSynchro = true;
-}
-//---------------------------------------------------------------------------
-void SuperThread::SetFlagSynchro()
-{
-    flagSynchro = true;
+    Synchronize( & start_synhro );
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
