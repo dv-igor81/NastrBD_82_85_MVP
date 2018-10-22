@@ -16,13 +16,16 @@ public:
     void SetProtokol(Protokol protokolName);
     void SetComPortName(const char* cpName);
     void SetIpAddr(const char* ipAddr);
+    void SetTcpPort(int tcpPort);
+    void SetBdAddr(int addrBd);
 private:
     enum { comPortCount = 100, ipAddrSize = 16, comPortNameSize = 7 };
     bool findComPorts[comPortCount];
     char comPortName[comPortNameSize];
     RSProtokol_t * protokol;
     int comPortPtr;
-
+    bool _flagError;
+    Protokol _protokolName;
 
 };
 //---------------------------------------------------------------------------

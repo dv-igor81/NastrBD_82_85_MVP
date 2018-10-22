@@ -70,6 +70,7 @@ private:
 
     Protokol _protokolName;
     void Connect();
+    void SetTcpPort(const char* textTcpPort, int defTcpPort);
 };
 //---------------------------------------------------------------------------
 #endif

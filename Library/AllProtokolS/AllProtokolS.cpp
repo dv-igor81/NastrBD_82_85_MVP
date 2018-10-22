@@ -9,6 +9,7 @@ AllProtokolS::AllProtokolS()
 {
     protokol = new RSProtokol_t();
     comPortPtr = comPortCount;
+    _flagError = false;
 }
 //---------------------------------------------------------------------------
 AllProtokolS::~AllProtokolS()
@@ -53,6 +54,7 @@ bool AllProtokolS::NextComPortIndex(int * comPortIndex)
 //---------------------------------------------------------------------------
 void AllProtokolS::SetProtokol(Protokol protokolName)
 {
+    _protokolName = protokolName;
     switch ( protokolName )
     {
     case Protokol_t::NineBit: // 9-ти битный
@@ -69,7 +71,7 @@ void AllProtokolS::SetProtokol(Protokol protokolName)
         break;
     case Protokol_t::NeVybran:
         protokol->flagModbusProtokol = -1;
-        break;    
+        break;
     }
 }
 //---------------------------------------------------------------------------
@@ -83,7 +85,28 @@ void AllProtokolS::SetIpAddr(const char* ipAddr)
     TextHelper::CopyText(protokol->Data.IP_Addr, ipAddr, ipAddrSize);
 }
 //---------------------------------------------------------------------------
+void AllProtokolS::SetTcpPort(int tcpPort)
+{
+    protokol->Data.IP_Port = tcpPort;
+}
 //---------------------------------------------------------------------------
+void AllProtokolS::SetBdAddr(int addrBd)
+{
+    switch ( _protokolName )
+    {
+    case Protokol_t::NineBit: // 9-ти битный
+    case Protokol_t::ModBus_RTU: // ModBus RTU
+        protokol->AddrBD = addrBd;
+        break;
+    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        protokol->Data.Addr_BD_TCP = addrBd;
+        break;
+    case Protokol_t::NeVybran:
+        _flagError = true;
+        break;
+    }
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

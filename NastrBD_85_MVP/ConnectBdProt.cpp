@@ -176,12 +176,34 @@ void ConnectBdProt::Connect()
         break;
     case Protokol_t::ModBus_TCP: // ModBus TCP
         _allProtokol->SetIpAddr( strIpAddr_TCP );
+        SetTcpPort( strTcpPort_TCP, 502 );
         break;
     case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         _allProtokol->SetIpAddr( strIpAddr_RTU_IP );
+        SetTcpPort( strTcpPort_RTU_IP, 4001 );
         break;
     case Protokol_t::NeVybran:
         break;
     }
-
+    //SetResponseTimeout(_timeOut); // Ждать ответа timeOut мс
+    //SetDelayTimeout(3);
+    //SetKolVoPopytok(1); // Количество попыток обмена, прежде чем выдать ошибку
+    _allProtokol->SetBdAddr( addrBd );
 }
+//---------------------------------------------------------------------------
+void ConnectBdProt::SetTcpPort(const char* textTcpPort, int defTcpPort)
+{
+    int tcpPort;
+    try
+    {
+        tcpPort = StrToInt( textTcpPort );
+    }
+    catch ( ... )
+    {
+        tcpPort = defTcpPort;
+    }
+    _allProtokol->SetTcpPort( tcpPort );
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
