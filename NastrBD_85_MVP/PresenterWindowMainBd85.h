@@ -27,11 +27,31 @@ private:
     ActionSelf<> as_ConnectIsGood;
     void ConnectIsGood(); // Соединение (по ком порту или TCP/IP) прошло удачно
 
+    ActionSelf<> as_OprosStar;
+    void OprosStar();
+
+    ActionSelf<> as_OprosStarInvoke;
+    void OprosStarInvoke();
+
+    ActionSelf<> as_OprosIter;
+    void OprosIter();
+
+    ActionSelf<> as_OprosIterInvoke;
+    void OprosIterInvoke();
+
+    ActionSelf<> as_OprosEnd;
+    void OprosEnd();
+
+    ActionSelf<> as_OprosEndInvoke;
+    void OprosEndInvoke();
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
     IAllProtokolS * _allProtokol;
     ITask * _task;
+
+
 };
 //---------------------------------------------------------------------------
 #endif

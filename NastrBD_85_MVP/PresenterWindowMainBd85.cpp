@@ -10,6 +10,12 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ITask * task) :
         as_FormClose(this, &PresenterWindowMainBd85::FormClose)
         , as_ConnectIsGood(this, &PresenterWindowMainBd85::ConnectIsGood)
+        , as_OprosStar(this, &PresenterWindowMainBd85::OprosStar)
+        , as_OprosStarInvoke(this, &PresenterWindowMainBd85::OprosStarInvoke)
+        , as_OprosIter(this, &PresenterWindowMainBd85::OprosIter)
+        , as_OprosIterInvoke(this, &PresenterWindowMainBd85::OprosIterInvoke)
+        , as_OprosEnd(this, &PresenterWindowMainBd85::OprosEnd)
+        , as_OprosEndInvoke(this, &PresenterWindowMainBd85::OprosEndInvoke)
 {
     _isViewLoaded = true;
     _view = view;
@@ -41,7 +47,41 @@ bool PresenterWindowMainBd85::IsViewLoaded()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ConnectIsGood() // Соединение (по ком порту или TCP/IP) прошло удачно
 {
+    _connectBdProt->SetActionOprosStart( & as_OprosStar );
+    _connectBdProt->SetActionOprosIter( & as_OprosIter );
+    _connectBdProt->SetActionOprosEnd( & as_OprosEnd );
 }
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::OprosStar()
+{
+    Sleep(10);
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::OprosStarInvoke()
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::OprosIter()
+{
+    Sleep(10);
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::OprosIterInvoke()
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::OprosEnd()
+{
+    Sleep(10);
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::OprosEndInvoke()
+{
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
