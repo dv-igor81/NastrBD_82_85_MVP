@@ -1758,7 +1758,7 @@ object WindowMainBd85: TWindowMainBd85
           TabOrder = 0
           Kind = bkNo
         end
-        object Edit7: TEdit
+        object Edit_VerPo0: TEdit
           Left = 138
           Top = 65
           Width = 28
@@ -1774,7 +1774,7 @@ object WindowMainBd85: TWindowMainBd85
           ReadOnly = True
           TabOrder = 1
         end
-        object Edit11: TEdit
+        object Edit_VerPo1: TEdit
           Left = 168
           Top = 65
           Width = 28
@@ -1790,7 +1790,7 @@ object WindowMainBd85: TWindowMainBd85
           ReadOnly = True
           TabOrder = 2
         end
-        object Edit12: TEdit
+        object Edit_VerPo2: TEdit
           Left = 198
           Top = 65
           Width = 28
@@ -1806,7 +1806,7 @@ object WindowMainBd85: TWindowMainBd85
           ReadOnly = True
           TabOrder = 3
         end
-        object Edit13: TEdit
+        object Edit_VerPo3: TEdit
           Left = 228
           Top = 65
           Width = 28

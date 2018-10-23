@@ -51,7 +51,9 @@ private:
     IAllProtokolS * _allProtokol;
     ITask * _task;
 
+    ActionEvent<StartDataNewBd85*> ev_DisplayStartData;
 
+    StartDataNewBd85* _data;
 };
 //---------------------------------------------------------------------------
 #endif

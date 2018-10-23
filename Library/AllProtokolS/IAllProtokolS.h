@@ -18,6 +18,7 @@ public:
     virtual void SetBdAddr(int addrBd) = 0;
     virtual bool Open() = 0;
     virtual void Close() = 0;
+    virtual int GetVersia(char * versia) = 0;
 };
 //---------------------------------------------------------------------------
 #endif

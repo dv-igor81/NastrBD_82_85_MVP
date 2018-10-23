@@ -131,10 +131,10 @@ __published:	// IDE-managed Components
         TLabel *Label6;
         TLabel *Label4;
         TBitBtn *ARCH_Con;
-        TEdit *Edit7;
-        TEdit *Edit11;
-        TEdit *Edit12;
-        TEdit *Edit13;
+        TEdit *Edit_VerPo0;
+        TEdit *Edit_VerPo1;
+        TEdit *Edit_VerPo2;
+        TEdit *Edit_VerPo3;
         TButton *Button5;
         TButton *btnPwmAuto;
         TGroupBox *GroupBox_SettingsForModbus;
@@ -221,6 +221,10 @@ private:	// User declarations
     void SetConnectionState(ConnectionStateInfo state);
     void ControlsAvailability(bool isEnabled);
 
+
+    ActionSelf<StartDataNewBd85*> as_DisplayStartData;
+    void DisplayStartData( StartDataNewBd85* data );
+
     ActionEvent<const char*> ev_textBox_AddrBd_Change;
     ActionEvent<> ev_button_AddrBd_DecClick;
     ActionEvent<> ev_button_AddrBd_IncClick;
@@ -244,6 +248,7 @@ public:		// User declarations
     ActionSelf<>* GetSelfShow();
     ActionEvent<>* GetEventFormShow();
     ActionEvent<>* GetEventFormClose();
+    ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData();
 
     HelperConnectFourBdProt* GetConnectFourBdProt();
 };
