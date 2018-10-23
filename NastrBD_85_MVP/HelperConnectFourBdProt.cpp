@@ -1,7 +1,6 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 #include "HelperConnectFourBdProt.h"
-#include "Protokol_t.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -20,6 +19,7 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     ActionEvent<const char*>*  ev_textBox_TCP_PortChange, // Текст tcp-порта изменился из ГИП
     ActionEvent<>* ev_button_UpdateNumberOfComPortSClick, // Обновите список ком-портов
     ActionEvent<>* ev_button_StartStopClick, // Запустить/Остановить обмен данными с БД
+    ActionSelf<ConnectionStateInfo>* as_SetConnectionState, // Отобразить изменения о состоянии соединения в ГИП
     HelperNumberTextBtn* addrBd)
 {
     _ev_protocolChange = ev_protocolChange; // Протокол меняется из ГИП
@@ -38,6 +38,7 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     _ev_textBox_TCP_PortChange = ev_textBox_TCP_PortChange;
     _ev_button_UpdateNumberOfComPortSClick = ev_button_UpdateNumberOfComPortSClick;
     _ev_button_StartStopClick = ev_button_StartStopClick;
+    _as_SetConnectionState = as_SetConnectionState;
     _addrBd = addrBd;
 }
 //---------------------------------------------------------------------------
@@ -116,6 +117,10 @@ ActionSelf<bool>* HelperConnectFourBdProt::GetSelfSetEnabledUpdateComPorts()
     return _as_setEnabledUpdateComPorts;
 }
 //---------------------------------------------------------------------------
+ActionSelf<ConnectionStateInfo>* HelperConnectFourBdProt::GetSelfSetConnectionState()
+{
+    return _as_SetConnectionState;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

@@ -75,7 +75,7 @@ RSProtokol_t::RSProtokol_t() :
 
   flagARCH = 0;
   flagUchSv = 0;
-  flagTCP = false;
+  //flagTCP = false;
   auto_State_Flag = 0; // Для авто-подбора напряжения измеренного
   ReadTimeout = 100;
   WriteTimeout = 100;
@@ -573,7 +573,9 @@ int RSProtokol_t::RSConnect(const char * COMNum, int baud, int parity, int data_
 //---------------------------------------------------------------------------
 int RSProtokol_t::RSDisConnect(void)
 {
-  if ( flagTCP == true )
+  //if ( flagTCP == true )
+  if ( flagModbusProtokol == 2 || // ModBus TCP
+       flagModbusProtokol == 3 )  // ModBus RTU (TCP/IP)
   {
     if ( Data.bFlag_TCP_Connect == true )
     {

@@ -272,7 +272,7 @@ public:
   // Отменил flagFirstAddr 23.10.2014
   bool flagFirstAddr; // true - при первом обращении к БД или при сбое передачи
   bool flagSpeed; // Флаг скорости опроса, для протокола "Старый" (true - выше скорость опроса)
-  bool flagTCP;
+  //bool flagTCP;
 
   int testErr;
   unsigned char AddrBD;

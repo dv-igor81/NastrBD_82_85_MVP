@@ -108,7 +108,25 @@ void AllProtokolS::SetBdAddr(int addrBd)
     }
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::Open()
+{
+    if (_flagError == true)
+    {
+        _flagError = false;
+        return false;
+    }
+    int errorCode = protokol->RSConnect( comPortName );
+    if ( errorCode != 0 )
+    {
+        return false;
+    }
+    return true;
+}
 //---------------------------------------------------------------------------
+void AllProtokolS::Close()
+{
+    protokol->RSDisConnect();
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

@@ -16,6 +16,8 @@ public:
     virtual void SetIpAddr(const char* ipAddr) = 0;
     virtual void SetTcpPort(int tcpPort) = 0;
     virtual void SetBdAddr(int addrBd) = 0;
+    virtual bool Open() = 0;
+    virtual void Close() = 0;
 };
 //---------------------------------------------------------------------------
 #endif

@@ -7,6 +7,7 @@ using namespace smartevents;
 //---------------------------------------------------------------------------
 #include "HelperNumberTextBtn.h"
 #include "Protokol_t.h"
+#include "ConnectionStateInfo_t.h"
 //---------------------------------------------------------------------------
 class HelperConnectFourBdProt
 {
@@ -26,6 +27,7 @@ public:
         ActionEvent<const char*>* ev_textBox_TCP_PortChange, // Текст tcp-порта изменился из ГИП
         ActionEvent<>* ev_button_UpdateNumberOfComPortSClick, // Обновите список ком-портов
         ActionEvent<>* ev_button_StartStopClick, // Запустить/Остановить обмен данными с БД
+        ActionSelf<ConnectionStateInfo>* as_SetConnectionState, // Отобразить изменения о состоянии соединения в ГИП
         HelperNumberTextBtn* addrBd);
 private:
     ActionSelf<bool>* _as_comPortOrTcpIp; // Изменяю вид программно: ком-порт или TCP/IP
@@ -45,7 +47,7 @@ private:
     ActionEvent<const char*>* _ev_textBox_TCP_PortChange; // Текст tcp-порта изменился из ГИП
     ActionEvent<>* _ev_button_UpdateNumberOfComPortSClick; // Обновите список ком-портов
     ActionEvent<>* _ev_button_StartStopClick; // Запустить/Остановить обмен данными с БД
-
+    ActionSelf<ConnectionStateInfo>* _as_SetConnectionState; // Отобразить изменения в ГИП
     HelperNumberTextBtn* _addrBd;
 public:
 
@@ -58,6 +60,7 @@ public:
     ActionSelf<const char*, const char*>* GetSelfAddComPortName();
     ActionSelf<Protokol>* GetSelfSetProtokolName();
     ActionSelf<const char*, const char*>* GetSelfSetEndPoint();
+    ActionSelf<ConnectionStateInfo>* GetSelfSetConnectionState(); // Отобразить изменения о состоянии соединения в ГИП
 
     ActionEvent<Protokol>* GetEventProtocolChange();
     ActionEvent<const char*>* GetEventComPortsChange();
@@ -66,7 +69,6 @@ public:
     ActionEvent<const char*>* GetEventTcpPortChange(); // Текст tcp-порта изменился из ГИП
     ActionEvent<>* GetEventUpdateNumberOfComPorts(); // Обновите список ком-портов
     ActionEvent<>* GetEventStartStopClick(); // Запустить/Остановить обмен данными с БД
-
     HelperNumberTextBtn* GetHelperNumberAddrBd();
 };
 //---------------------------------------------------------------------------

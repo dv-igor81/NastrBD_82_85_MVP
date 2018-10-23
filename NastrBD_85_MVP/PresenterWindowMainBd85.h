@@ -24,6 +24,9 @@ private:
     ActionSelf<> as_FormClose;
     void FormClose();
 
+    ActionSelf<> as_ConnectIsGood;
+    void ConnectIsGood(); // Соединение (по ком порту или TCP/IP) прошло удачно
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 

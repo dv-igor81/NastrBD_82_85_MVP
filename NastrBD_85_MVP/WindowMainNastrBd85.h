@@ -9,6 +9,7 @@
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 #include "Protokol_t.h"
+#include "ConnectionStateInfo_t.h"
 #include "IWindowMainBd85.h"
 #include <ComCtrls.hpp>
 #include <Mask.hpp>
@@ -215,6 +216,10 @@ private:	// User declarations
 
     ActionSelf<const char*, const char*> as_setEndPoint;
     void SetEndPoint(const char* textIpAddr, const char* textTcpPort);
+
+    ActionSelf<ConnectionStateInfo> as_SetConnectionState; // Отобразить изменения о состоянии соединения в ГИП
+    void SetConnectionState(ConnectionStateInfo state);
+    void ControlsAvailability(bool isEnabled);
 
     ActionEvent<const char*> ev_textBox_AddrBd_Change;
     ActionEvent<> ev_button_AddrBd_DecClick;

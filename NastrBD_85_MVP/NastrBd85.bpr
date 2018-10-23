@@ -18,7 +18,7 @@
       ..\Library\AllProtokolS\modbus-data.obj 
       ..\Library\AllProtokolS\modbus-tcp.obj 
       ..\Library\AllProtokolS\RSProtokol.obj ..\Library\Task\SuperThread.obj 
-      ..\Library\Utilites\TextHelper.obj"/>
+      ..\Library\Utilites\TextHelper.obj ConnectionStateInfo_t.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -96,6 +96,7 @@
       <FILE FILENAME="..\Library\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Task\SuperThread.cpp" FORMNAME="" UNITNAME="SuperThread" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Utilites\TextHelper.cpp" FORMNAME="" UNITNAME="TextHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

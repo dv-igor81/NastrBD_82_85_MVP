@@ -18,6 +18,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         , as_addComPortName(this, &TWindowMainBd85::AddComPortName)
         , as_setProtokolName(this, &TWindowMainBd85::SetProtokolName)
         , as_setEndPoint(this, &TWindowMainBd85::SetEndPoint)
+        , as_SetConnectionState(this, &TWindowMainBd85::SetConnectionState)
 
         ,addrBdHelper(
             &as_textBox_AddrBd_SetText, // Изменяю текст программно
@@ -41,6 +42,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
             &ev_textBox_TCP_PortChange, // Текст tcp-порта изменился из ГИП
             &ev_button_UpdateNumberOfComPortSClick, // Просьба обновить список доступных ком-портов
             &ev_button_StartStopClick, // Запустить/Остановить обмен данными с БД
+            &as_SetConnectionState,
             &addrBdHelper)
 {
     InitComponrnts();
@@ -141,6 +143,45 @@ void TWindowMainBd85::SetEndPoint(
 {
     textBox_IP_Addr->Text = textIpAddr;
     textBox_TCP_Port->Text = textTcpPort;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetConnectionState(ConnectionStateInfo state)
+{
+    switch (state)
+    {
+    case ConnectionStateInfo_t::WaitConnect:
+        button_StartStop->Caption = "Стартую";
+        button_StartStop->Enabled = false;
+        ControlsAvailability(false);
+        break;
+    case ConnectionStateInfo_t::IsConnected:
+        button_StartStop->Caption = "Прервать";
+        button_StartStop->Enabled = true;
+        ControlsAvailability(false);
+        break;
+    case ConnectionStateInfo_t::WaitLoopExit:
+        button_StartStop->Caption = "Завершаю";    
+        button_StartStop->Enabled = false;
+        ControlsAvailability(false);
+        break;
+    case ConnectionStateInfo_t::IsDisconnect:
+        button_StartStop->Caption = "Начать";
+        button_StartStop->Enabled = true;        
+        ControlsAvailability(true);
+        break;
+    }
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::ControlsAvailability(bool isEnabled)
+{
+    comboBox_Protocol->Enabled = isEnabled;
+    comboBox_ComPorts->Enabled = isEnabled;
+    button_UpdateNumberOfComPortS->Enabled = isEnabled;
+    textBox_IP_Addr->Enabled = isEnabled;
+    textBox_TCP_Port->Enabled = isEnabled;
+    textBox_AddrBd->Enabled = isEnabled;
+    button_AddrBd_Dec->Enabled = isEnabled;
+    button_AddrBd_Inc->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

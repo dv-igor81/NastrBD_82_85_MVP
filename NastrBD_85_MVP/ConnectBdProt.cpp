@@ -20,10 +20,17 @@ ConnectBdProt::ConnectBdProt(
         , as_startStopClick(this, &ConnectBdProt::StartStopClick)
         , as_UpdateComPotrsAsynk(this, &ConnectBdProt::UpdateComPotrsAsynk)
         , as_UpdateComPortsInfo(this, &ConnectBdProt::UpdateComPortsInfo)
+        , as_ConnectionAsynk(this, &ConnectBdProt::ConnectionAsynk)
+        , as_SetControlStateInvoke(this, &ConnectBdProt::SetControlStateInvoke)
 {
     _bdProt = bdProt;
     _allProtokol = allProtokol;
     _task = task;
+    _isConnected = false;
+    _bfOprosInLoop = false;
+    as_OprosStart = 0;
+    as_OprosIter = 0;
+    as_OprosEnd = 0;
     
     *_bdProt->GetEventProtocolChange() += as_protocolChanged;
     *_bdProt->GetEventComPortsChange() += as_comPortsChange;
@@ -42,6 +49,7 @@ ConnectBdProt::ConnectBdProt(
     ev_addComPortName += _bdProt->GetSelfAddComPortName();
     *_bdProt->GetEventUpdateNumberOfComPorts() += as_updateNumberOfComPorts;
     *_bdProt->GetEventStartStopClick() += as_startStopClick;
+    ev_SetConnectionState += _bdProt->GetSelfSetConnectionState();
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::ProtocolChanged(Protokol protocolName)
@@ -159,14 +167,28 @@ void ConnectBdProt::ChangeTcpPort(const char* textTcpPort)
 //---------------------------------------------------------------------------
 void ConnectBdProt::StartStopClick()
 {
+    if ( _isConnected == false )
+    {
+        // Заблокировать элементы управления, и ожидать соединения
+        SetControlFromConnectionState(ConnectionStateInfo_t::WaitConnect);
+        HelperNumberTextBtn* addrBdHelper = _bdProt->GetHelperNumberAddrBd();
+        addrBdHelper->SetNumber(); // Отобразить номер на форме
+        _addrBd = addrBdHelper->GetNumber(); // Получить номер
+        _task->RunAsynk( & as_ConnectionAsynk );
+    }
+    else
+    {
+        Disconnect();
+    }
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::ConnectionAsynk()
+{
     Connect();
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::Connect()
 {
-    HelperNumberTextBtn* addrBdHelper = _bdProt->GetHelperNumberAddrBd();
-    addrBdHelper->SetNumber(); // Отобразить номер на форме
-    int addrBd = addrBdHelper->GetNumber(); // Получить номер
     _allProtokol->SetProtokol( _protokolName );  //_protokolName
     switch ( _protokolName )
     {
@@ -188,7 +210,48 @@ void ConnectBdProt::Connect()
     //SetResponseTimeout(_timeOut); // Ждать ответа timeOut мс
     //SetDelayTimeout(3);
     //SetKolVoPopytok(1); // Количество попыток обмена, прежде чем выдать ошибку
-    _allProtokol->SetBdAddr( addrBd );
+    _allProtokol->SetBdAddr( _addrBd );
+    _isConnected = _allProtokol->Open();
+    Sleep( 500 );
+    if ( _isConnected )
+    {
+        _bfOprosInLoop = true;
+        _state = ConnectionStateInfo_t::IsConnected;
+        ev_ConnectIsGood();
+        _task->BeginInvoke( & as_SetControlStateInvoke );
+        WorkInLoop();
+        _allProtokol->Close();
+        _isConnected = false;
+    }
+    _state = ConnectionStateInfo_t::IsDisconnect;
+    _task->BeginInvoke( & as_SetControlStateInvoke );
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::Disconnect()
+{
+    _bfOprosInLoop = false;
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::WorkInLoop()
+{
+    if ( as_OprosStart != 0 )
+    {
+        (*as_OprosStart)();
+        //as_OprosStart = 0;
+    }
+    while ( _bfOprosInLoop && (as_OprosIter != 0) )
+    {
+        (*as_OprosIter)();
+    }
+    //as_OprosIter = 0;
+    if ( as_OprosEnd != 0 )
+    {
+        (*as_OprosEnd)();
+        //as_OprosEnd = 0;
+    }
+    _state = ConnectionStateInfo_t::WaitLoopExit;
+    _task->BeginInvoke( & as_SetControlStateInvoke ); // Ждать выход из петли
+    Sleep( 500 );
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::SetTcpPort(const char* textTcpPort, int defTcpPort)
@@ -204,6 +267,40 @@ void ConnectBdProt::SetTcpPort(const char* textTcpPort, int defTcpPort)
     }
     _allProtokol->SetTcpPort( tcpPort );
 }
+//---------------------------------------------------------------------------
+void ConnectBdProt::SetControlFromConnectionState(ConnectionStateInfo state)
+{
+    ev_SetConnectionState(state);
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::SetControlStateInvoke()
+{
+    SetControlFromConnectionState( _state );
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::SetActionOprosStart( ActionSelf<>* action )
+{
+    as_OprosStart = action;
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::SetActionOprosIter( ActionSelf<>* action )
+{
+    as_OprosIter = action;
+}
+//---------------------------------------------------------------------------
+void ConnectBdProt::SetActionOprosEnd( ActionSelf<>* action )
+{
+    as_OprosEnd = action;
+}
+//---------------------------------------------------------------------------
+ActionEvent<>* ConnectBdProt::GetEventConnectIsGood()
+{
+    return & ev_ConnectIsGood;
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

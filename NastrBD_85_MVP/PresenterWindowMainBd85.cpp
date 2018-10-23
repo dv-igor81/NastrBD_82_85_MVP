@@ -9,6 +9,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     IAllProtokolS * allProtokol,
     ITask * task) :
         as_FormClose(this, &PresenterWindowMainBd85::FormClose)
+        , as_ConnectIsGood(this, &PresenterWindowMainBd85::ConnectIsGood)
 {
     _isViewLoaded = true;
     _view = view;
@@ -20,6 +21,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     _connectBdProt = new ConnectBdProt(
         _view->GetConnectFourBdProt(), _allProtokol, _task );
     ev_Show(); // Прказать форму
+    *_connectBdProt->GetEventConnectIsGood() += as_ConnectIsGood;
 }
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
@@ -36,3 +38,14 @@ bool PresenterWindowMainBd85::IsViewLoaded()
 {
     return _isViewLoaded;
 }
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ConnectIsGood() // Соединение (по ком порту или TCP/IP) прошло удачно
+{
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------

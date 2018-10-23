@@ -18,6 +18,8 @@ public:
     void SetIpAddr(const char* ipAddr);
     void SetTcpPort(int tcpPort);
     void SetBdAddr(int addrBd);
+    bool Open();
+    void Close();
 private:
     enum { comPortCount = 100, ipAddrSize = 16, comPortNameSize = 7 };
     bool findComPorts[comPortCount];

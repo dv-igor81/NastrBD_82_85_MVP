@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 #include "HelperConnectFourBdProt.h"
 #include "Protokol_t.h"
+#include "ConnectionStateInfo_t.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"
 //---------------------------------------------------------------------------
@@ -13,6 +14,10 @@ public:
         HelperConnectFourBdProt* bdProt,
         IAllProtokolS * allProtokol,
         ITask * task);
+    void SetActionOprosStart( ActionSelf<>* action );
+    void SetActionOprosIter( ActionSelf<>* action );
+    void SetActionOprosEnd( ActionSelf<>* action );
+    ActionEvent<>* GetEventConnectIsGood();     
 private:
     enum { ipAddrSize = 16, tcpPortSize = 6, comPortNameSize = 7 };   //enum { comPortCount = 100, comPortNameSize = 7 };
     // ModBus TCP
@@ -47,6 +52,18 @@ private:
     ActionSelf<> as_startStopClick;
     void StartStopClick();
 
+    ActionSelf<> as_UpdateComPortsInfo;
+    void UpdateComPortsInfo();
+
+    ActionSelf<> as_UpdateComPotrsAsynk;
+    void UpdateComPotrsAsynk();
+
+    ActionSelf<> as_ConnectionAsynk;
+    void ConnectionAsynk();
+
+    ActionSelf<> as_SetControlStateInvoke;
+    void SetControlStateInvoke();
+
     ActionEvent<bool> ev_comPortOrTcpIp;
     ActionEvent<const char*> ev_labelHint;
 
@@ -56,21 +73,30 @@ private:
     ActionEvent<Protokol> ev_setProtokolName;
     ActionEvent<const char*, const char*> ev_setEndPoint;
     ActionEvent<const char*, const char*> ev_addComPortName;
+    ActionEvent<ConnectionStateInfo> ev_SetConnectionState;
+
+    ActionEvent<> ev_ConnectIsGood;
+
+    ActionSelf<>* as_OprosStart;
+    ActionSelf<>* as_OprosIter;
+    ActionSelf<>* as_OprosEnd;
 
     void SettingsChengeProtokol(Protokol protokolName, bool fromPresenter);
 
     IAllProtokolS * _allProtokol;
     ITask * _task;
+    int _addrBd;
 
-    ActionSelf<> as_UpdateComPortsInfo;
-    void UpdateComPortsInfo();
-
-    ActionSelf<> as_UpdateComPotrsAsynk;
-    void UpdateComPotrsAsynk();
+    void WorkInLoop();
 
     Protokol _protokolName;
     void Connect();
+    void Disconnect();
     void SetTcpPort(const char* textTcpPort, int defTcpPort);
+    void SetControlFromConnectionState(ConnectionStateInfo state);
+    bool _isConnected;
+    bool _bfOprosInLoop;
+    ConnectionStateInfo _state;
 };
 //---------------------------------------------------------------------------
 #endif
