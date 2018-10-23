@@ -41,6 +41,7 @@ int HelperNumberTextBtn::GetNumber()
 void HelperNumberTextBtn::SetNumber(int number)
 {
     _curVal = number;
+    ev_tbxNum_SetNumber( _curVal );
     AnsiString str = IntToStr(_curVal);
     TbxNum_SetText( str.c_str() );
 }
@@ -155,3 +156,13 @@ void HelperNumberTextBtn::TbxNum_SetText(const char* text)
     ev_tbxNum_SetText( text );
     _flagIgnor = false; // <<=== ѕредотвратить "бесконечную" рекурсию
 }
+//---------------------------------------------------------------------------
+ActionEvent<int>* HelperNumberTextBtn::GetEventSetNumber()
+{
+    return & ev_tbxNum_SetNumber;
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------

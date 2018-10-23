@@ -81,6 +81,9 @@ private:
     ActionSelf<>* as_OprosIter;
     ActionSelf<>* as_OprosEnd;
 
+    ActionSelf<int> as_SetAddrBdNumber;
+    void SetAddrBdNumber(int addrBd);
+
     void SettingsChengeProtokol(Protokol protokolName, bool fromPresenter);
 
     IAllProtokolS * _allProtokol;
@@ -97,6 +100,14 @@ private:
     bool _isConnected;
     bool _bfOprosInLoop;
     ConnectionStateInfo _state;
+
+    HelperNumberTextBtn* _addrBdHelper;
+
+    int* _addrBdPtr;
+    int _addrBd_NineBit;
+    int _addrBd_ModBus_RTU;
+    int _addrBd_ModBus_TCP;
+    int _addrBd_ModBus_RTU_IP;
 };
 //---------------------------------------------------------------------------
 #endif

@@ -20,6 +20,7 @@ public:
     int GetNumber();
     void SetNumber(int number);
     void SetNumber();
+    ActionEvent<int>* GetEventSetNumber();
 private:
     ActionSelf<const char*>* _as_tbxNum_SetText;
     ActionEvent<const char*>* _ev_tbxNum_TextChanged;
@@ -27,6 +28,8 @@ private:
     ActionEvent<>* _ev_btnInc_Click;
     //==============================================
     ActionEvent<const char*> ev_tbxNum_SetText;
+    ActionEvent<int> ev_tbxNum_SetNumber;
+    //==============================================
     ActionSelf<const char*> as_tbxNum_TextChanged;
     void TbxNumTextChanged(const char*);
     ActionSelf<> as_btnDec_Click;
