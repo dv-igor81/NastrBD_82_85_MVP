@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 #include "PresenterWindowMainBd85.h"
+#include <stdio.h>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -18,7 +19,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_SetConnectionState(this, &PresenterWindowMainBd85::SetConnectionState)
 {
     _isConnected = false; // Не подключились к БД (через ком-порт либо по TCP/IP)
-    _isViewLoaded = true;
+    _isViewLoaded = true; // основное окно (вид) загружено
     _view = view;
     _allProtokol = allProtokol;
     _task = task;
@@ -41,6 +42,7 @@ PresenterWindowMainBd85::~PresenterWindowMainBd85()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::FormClose()
 {
+    _connectBdProt->Disconnect();
     _isViewLoaded = false;
 }
 //---------------------------------------------------------------------------
@@ -63,20 +65,19 @@ void PresenterWindowMainBd85::OprosStar()
 
     while ( _isConnected )
     {
-        if ( InitMkInBd() ) // Инициализация МК в БД
+        if ( InitMkInBd() ) // Инициализация МК в БД (интервал набота счета, задать колтик = 8)
         {
             break;
         }
     }
-
-    char verPo[6];
-    if ( _allProtokol->GetVersia( verPo ) ) // Проверка связи
+    _readParamIndex = 0;
+    while ( _isConnected )
     {
-
+        if ( ReadEEProm() )
+        {
+            break; // Считать значения из памяти МК в БД
+        }
     }
-    _data = new StartDataNewBd85(
-        verPo);
-    _task->BeginInvoke( & as_OprosStarInvoke );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosStarInvoke()
@@ -146,6 +147,34 @@ void PresenterWindowMainBd85::SetConnectionState( ConnectionStateInfo state )
     }
 }
 //---------------------------------------------------------------------------
+bool PresenterWindowMainBd85::ReadEEProm()
+{
+    if ( _readParamIndex == 0 )
+    {
+        if ( _allProtokol->GetVersia( _verPo ) == false ) // Проверка связи
+        {
+            return false;
+        }
+        _readParamIndex++;
+    }
+    if ( _readParamIndex == 1 )
+    {
+        unsigned char indAddrZ;
+        if ( _allProtokol->GetIndAdrZ( & indAddrZ ) == false )
+        {
+            return false;
+        }
+        _readParamIndex++;
+        sprintf(_indAddrZad, "%d", indAddrZ );
+    }
+
+    _data = new StartDataNewBd85(
+        _verPo // Версия прошивки
+        , _indAddrZad // Индивидуальный адрес заданный
+        );
+    _task->BeginInvoke( & as_OprosStarInvoke );
+    return true;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

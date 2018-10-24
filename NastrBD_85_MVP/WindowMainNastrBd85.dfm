@@ -308,7 +308,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 1
         end
-        object ParamColPanel: TPanel
+        object Panel_rate_Description: TPanel
           Left = 8
           Top = 16
           Width = 241
@@ -345,7 +345,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 3
         end
-        object CodeColPanel: TPanel
+        object Panel_rate_Code: TPanel
           Left = 249
           Top = 16
           Width = 68
@@ -488,7 +488,7 @@ object WindowMainBd85: TWindowMainBd85
           ReadOnly = True
           TabOrder = 11
         end
-        object ValueCodePanel: TPanel
+        object Panel_rate_Value: TPanel
           Left = 317
           Top = 16
           Width = 76
@@ -523,7 +523,7 @@ object WindowMainBd85: TWindowMainBd85
           ReadOnly = True
           TabOrder = 13
         end
-        object UnitPanel: TPanel
+        object Panel_rate_Unit: TPanel
           Left = 393
           Top = 16
           Width = 44
@@ -1174,7 +1174,7 @@ object WindowMainBd85: TWindowMainBd85
           ReadOnly = True
           TabOrder = 0
         end
-        object SetIndAdrPanel: TPanel
+        object Panel_IndAddrZad_0: TPanel
           Left = 8
           Top = 38
           Width = 241
@@ -1240,7 +1240,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 4
         end
-        object SetParamColPanel: TPanel
+        object Panel_EEPROM_Description: TPanel
           Left = 8
           Top = 16
           Width = 241
@@ -1255,7 +1255,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 5
         end
-        object SetCodeColPanel: TPanel
+        object Panel_EEPROM_Code: TPanel
           Left = 250
           Top = 16
           Width = 67
@@ -1270,7 +1270,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 6
         end
-        object SetValueColPanel: TPanel
+        object Panel_EEPROM_Value: TPanel
           Left = 318
           Top = 16
           Width = 75
@@ -1285,7 +1285,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 7
         end
-        object SetIndAdrEdit: TEdit
+        object Edit_IndAddrZad: TEdit
           Left = 318
           Top = 38
           Width = 75
@@ -1351,7 +1351,7 @@ object WindowMainBd85: TWindowMainBd85
           ReadOnly = True
           TabOrder = 15
         end
-        object EmptyPanel09: TPanel
+        object Panel_IndAddrZad_1: TPanel
           Left = 250
           Top = 38
           Width = 67
@@ -1365,7 +1365,7 @@ object WindowMainBd85: TWindowMainBd85
           Height = 20
           TabOrder = 16
         end
-        object Panel3: TPanel
+        object Panel_EEPROM_Unit: TPanel
           Left = 394
           Top = 16
           Width = 44
@@ -1382,7 +1382,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 17
         end
-        object Panel4: TPanel
+        object Panel_indAddrZad_3: TPanel
           Left = 394
           Top = 38
           Width = 43

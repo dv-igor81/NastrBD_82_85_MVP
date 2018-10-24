@@ -24,6 +24,7 @@ public:
     bool GetSsp(unsigned char * ssp);
     bool GetTimeInterval(unsigned char * timeInt);
     bool SetTimeInterval(unsigned char timeInt);
+    bool GetIndAdrZ(unsigned char * indAdrZ);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
 

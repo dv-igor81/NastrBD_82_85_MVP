@@ -59,6 +59,13 @@ private:
 
     bool InitMkInBd();
     bool _isConnected;
+    bool ReadEEProm();
+
+    int _readParamIndex;
+    //===>> Данные, считанные из EEPROM МК в БД
+    char _verPo[5];
+    char _indAddrZad[4];
+    //<<=== Данные, считанные из EEPROM МК в БД
 };
 //---------------------------------------------------------------------------
 #endif

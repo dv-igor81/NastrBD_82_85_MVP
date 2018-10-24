@@ -6,14 +6,18 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85(
-    const char* verPo)
+    const char* verPo
+    , const char* indAddrZad
+    )
 {
     TextHelper::CopyText(_verPo, verPo, verPoSize);
+    TextHelper::CopyText(_indAddrZad, indAddrZad, indAddrZadSize);
 }
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85()
 {
     TextHelper::SpaseText(_verPo, verPoSize);  // Заполнить все символы строки пробелами
+    TextHelper::SpaseText(_indAddrZad, indAddrZadSize);
 }
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetVerPo()
@@ -21,6 +25,10 @@ const char* StartDataNewBd85::GetVerPo()
     return _verPo;
 }
 //---------------------------------------------------------------------------
+const char* StartDataNewBd85::GetIndAddrZad()
+{
+    return _indAddrZad;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

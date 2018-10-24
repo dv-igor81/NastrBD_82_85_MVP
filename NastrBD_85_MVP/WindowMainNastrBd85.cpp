@@ -188,19 +188,12 @@ void TWindowMainBd85::ControlsAvailability(bool isEnabled)
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
 {
-    /*if ( data == 0 )
-    {
-        Edit_VerPo0->Text = "";
-        Edit_VerPo1->Text = "";
-        Edit_VerPo2->Text = "";
-        Edit_VerPo3->Text = "";
-        return;
-    }*/
     const char * verPo = data->GetVerPo();
     Edit_VerPo0->Text = verPo[0];
     Edit_VerPo1->Text = verPo[1];
     Edit_VerPo2->Text = verPo[2];
     Edit_VerPo3->Text = verPo[3];
+    Edit_IndAddrZad->Text = data->GetIndAddrZad();
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)

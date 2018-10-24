@@ -165,6 +165,26 @@ bool AllProtokolS::SetTimeInterval(unsigned char timeInt)
     return ErrorChecked( protokol->SetTimeInterval( timeInt ) );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetIndAdrZ(unsigned char * indAdrZ)
+{
+    int result = -1;
+    unsigned long data;
+    switch ( _protokolName )
+    {
+    case Protokol_t::NineBit: // 9-ти битный
+        result = protokol->ReadFlashInvert( 0x04, & data );
+        break;
+    case Protokol_t::ModBus_RTU: // ModBus RTU
+    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        result = protokol->ReadFlash2( 0x300+1, & data );
+        break;
+    case Protokol_t::NeVybran:
+        break;
+    }
+    *indAdrZ = (data & 0xFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

@@ -18,6 +18,7 @@ public:
     void SetActionOprosIter( ActionSelf<>* action );
     void SetActionOprosEnd( ActionSelf<>* action );
     ActionEvent<ConnectionStateInfo>* GetEventSetConnectionState();
+    void Disconnect(); // Публичный, чтобы дать возможность презентеру разорвать соединение
 private:
     enum { ipAddrSize = 16, tcpPortSize = 6, comPortNameSize = 7 };   //enum { comPortCount = 100, comPortNameSize = 7 };
     // ModBus TCP
@@ -92,7 +93,6 @@ private:
 
     Protokol _protokolName;
     void Connect();
-    void Disconnect();
     void SetTcpPort(const char* textTcpPort, int defTcpPort);
     void SetControlFromConnectionState(ConnectionStateInfo state);
     bool _isConnected;
