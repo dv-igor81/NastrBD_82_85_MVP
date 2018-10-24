@@ -20,6 +20,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         , as_setEndPoint(this, &TWindowMainBd85::SetEndPoint)
         , as_SetConnectionState(this, &TWindowMainBd85::SetConnectionState)
         , as_DisplayStartData(this, &TWindowMainBd85::DisplayStartData)
+        , as_DisplayCountConnectError(this, &TWindowMainBd85::DisplayCountConnectError)
 
         ,addrBdHelper(
             &as_textBox_AddrBd_SetText, // Изменяю текст программно
@@ -161,13 +162,13 @@ void TWindowMainBd85::SetConnectionState(ConnectionStateInfo state)
         ControlsAvailability(false);
         break;
     case ConnectionStateInfo_t::WaitLoopExit:
-        button_StartStop->Caption = "Завершаю";    
+        button_StartStop->Caption = "Завершаю";
         button_StartStop->Enabled = false;
         ControlsAvailability(false);
         break;
     case ConnectionStateInfo_t::IsDisconnect:
         button_StartStop->Caption = "Начать";
-        button_StartStop->Enabled = true;        
+        button_StartStop->Enabled = true;
         ControlsAvailability(true);
         break;
     }
@@ -187,14 +188,14 @@ void TWindowMainBd85::ControlsAvailability(bool isEnabled)
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
 {
-    if ( data == 0 )
+    /*if ( data == 0 )
     {
         Edit_VerPo0->Text = "";
         Edit_VerPo1->Text = "";
         Edit_VerPo2->Text = "";
         Edit_VerPo3->Text = "";
         return;
-    }
+    }*/
     const char * verPo = data->GetVerPo();
     Edit_VerPo0->Text = verPo[0];
     Edit_VerPo1->Text = verPo[1];
@@ -202,9 +203,19 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_VerPo3->Text = verPo[3];
 }
 //---------------------------------------------------------------------------
+void TWindowMainBd85::DisplayCountConnectError(const char* text)
+{
+    Edit_ErrorConnectCount->Text = text;
+}
+//---------------------------------------------------------------------------
 ActionSelf<StartDataNewBd85*>* TWindowMainBd85::GetSelfDisplayStartData()
 {
     return & as_DisplayStartData; // Отобразить данные считанные при старте опроса
+}
+//---------------------------------------------------------------------------
+ActionSelf<const char*>* TWindowMainBd85::GetSelfDisplayErrors()
+{
+    return & as_DisplayCountConnectError; 
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

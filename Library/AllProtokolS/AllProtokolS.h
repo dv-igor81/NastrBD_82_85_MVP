@@ -20,7 +20,13 @@ public:
     void SetBdAddr(int addrBd);
     bool Open();
     void Close();
-    int GetVersia(char * versia);
+    bool GetVersia(char * versia);
+    bool GetSsp(unsigned char * ssp);
+    bool GetTimeInterval(unsigned char * timeInt);
+    bool SetTimeInterval(unsigned char timeInt);
+
+    ActionEvent<const char*>* GetEventErrorCountIncrement();
+
 private:
     enum { comPortCount = 100, ipAddrSize = 16, comPortNameSize = 7 };
     bool findComPorts[comPortCount];
@@ -30,6 +36,9 @@ private:
     bool _flagError;
     Protokol _protokolName;
 
+    bool ErrorChecked(int nullValue);
+    int ErrorCount;
+    ActionEvent<const char*> ev_ErrorCountIncrement;
 };
 //---------------------------------------------------------------------------
 #endif

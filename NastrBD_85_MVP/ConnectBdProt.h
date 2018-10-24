@@ -17,7 +17,7 @@ public:
     void SetActionOprosStart( ActionSelf<>* action );
     void SetActionOprosIter( ActionSelf<>* action );
     void SetActionOprosEnd( ActionSelf<>* action );
-    ActionEvent<>* GetEventConnectIsGood();     
+    ActionEvent<ConnectionStateInfo>* GetEventSetConnectionState();
 private:
     enum { ipAddrSize = 16, tcpPortSize = 6, comPortNameSize = 7 };   //enum { comPortCount = 100, comPortNameSize = 7 };
     // ModBus TCP
@@ -74,8 +74,6 @@ private:
     ActionEvent<const char*, const char*> ev_setEndPoint;
     ActionEvent<const char*, const char*> ev_addComPortName;
     ActionEvent<ConnectionStateInfo> ev_SetConnectionState;
-
-    ActionEvent<> ev_ConnectIsGood;
 
     ActionSelf<>* as_OprosStart;
     ActionSelf<>* as_OprosIter;

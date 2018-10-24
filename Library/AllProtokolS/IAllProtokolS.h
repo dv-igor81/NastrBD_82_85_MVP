@@ -4,10 +4,16 @@
 //---------------------------------------------------------------------------
 #include "Protokol_t.h"
 //---------------------------------------------------------------------------
+#include "ActionEvent.h"
+using namespace smartevents;
+//---------------------------------------------------------------------------
 class IAllProtokolS
 {
 public:
     virtual ~IAllProtokolS(){};
+
+    virtual ActionEvent<const char*>* GetEventErrorCountIncrement() = 0;
+
     virtual void UpdateComPotrs() = 0;
     virtual bool NextComPortIndex(int * comPortIndex) = 0;
 
@@ -18,7 +24,10 @@ public:
     virtual void SetBdAddr(int addrBd) = 0;
     virtual bool Open() = 0;
     virtual void Close() = 0;
-    virtual int GetVersia(char * versia) = 0;
+    virtual bool GetVersia(char * versia) = 0; // Считать версию программы БД
+    virtual bool GetSsp(unsigned char * ssp) = 0; // Считать слово состояния программы БД
+    virtual bool GetTimeInterval(unsigned char * timeInt) = 0; // Получить константу, которая определяет интервал набора счёта
+    virtual bool SetTimeInterval(unsigned char timeInt) = 0; // Установить константу, которая определяет интервал набора счёта
 };
 //---------------------------------------------------------------------------
 #endif

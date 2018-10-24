@@ -18,6 +18,7 @@ public:
     virtual ActionEvent<>* GetEventFormClose() = 0;
 
     virtual ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData() = 0;
+    virtual ActionSelf<const char*>* GetSelfDisplayErrors() = 0;
 
     virtual HelperConnectFourBdProt* GetConnectFourBdProt() = 0;
 };

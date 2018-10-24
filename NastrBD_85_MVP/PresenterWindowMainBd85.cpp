@@ -9,14 +9,15 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     IAllProtokolS * allProtokol,
     ITask * task) :
         as_FormClose(this, &PresenterWindowMainBd85::FormClose)
-        , as_ConnectIsGood(this, &PresenterWindowMainBd85::ConnectIsGood)
         , as_OprosStar(this, &PresenterWindowMainBd85::OprosStar)
         , as_OprosStarInvoke(this, &PresenterWindowMainBd85::OprosStarInvoke)
         , as_OprosIter(this, &PresenterWindowMainBd85::OprosIter)
         , as_OprosIterInvoke(this, &PresenterWindowMainBd85::OprosIterInvoke)
         , as_OprosEnd(this, &PresenterWindowMainBd85::OprosEnd)
         , as_OprosEndInvoke(this, &PresenterWindowMainBd85::OprosEndInvoke)
+        , as_SetConnectionState(this, &PresenterWindowMainBd85::SetConnectionState)
 {
+    _isConnected = false; // Не подключились к БД (через ком-порт либо по TCP/IP)
     _isViewLoaded = true;
     _view = view;
     _allProtokol = allProtokol;
@@ -27,9 +28,10 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     _connectBdProt = new ConnectBdProt(
         _view->GetConnectFourBdProt(), _allProtokol, _task );
     ev_Show(); // Прказать форму
-    *_connectBdProt->GetEventConnectIsGood() += as_ConnectIsGood;
+    *_connectBdProt->GetEventSetConnectionState() += as_SetConnectionState;
 
-    ev_DisplayStartData += _view->GetSelfDisplayStartData(); 
+    ev_DisplayStartData += _view->GetSelfDisplayStartData();
+    *_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
 }
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
@@ -56,12 +58,22 @@ void PresenterWindowMainBd85::ConnectIsGood() // Соединение (по ком порту или TC
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosStar()
 {
-    ev_DisplayStartData( 0 );
-    Sleep(10);
+    _data = new StartDataNewBd85();
+    ev_DisplayStartData( _data );
+
+    while ( _isConnected )
+    {
+        if ( InitMkInBd() ) // Инициализация МК в БД
+        {
+            break;
+        }
+    }
 
     char verPo[6];
-    _allProtokol->GetVersia( verPo );
+    if ( _allProtokol->GetVersia( verPo ) ) // Проверка связи
+    {
 
+    }
     _data = new StartDataNewBd85(
         verPo);
     _task->BeginInvoke( & as_OprosStarInvoke );
@@ -90,7 +102,49 @@ void PresenterWindowMainBd85::OprosEndInvoke()
 {
 }
 //---------------------------------------------------------------------------
+bool PresenterWindowMainBd85::InitMkInBd()
+{
+    unsigned char timeInterval = 0;
+    const unsigned char defaultTimeInterval = 8;
+    if ( _allProtokol->GetTimeInterval( & timeInterval ) == false )
+    {
+        return false;
+    }
+    if ( timeInterval != defaultTimeInterval )
+    {
+        if ( _allProtokol->SetTimeInterval( defaultTimeInterval ) == false )
+        {
+            return false;
+        }
+        if ( _allProtokol->GetTimeInterval( & timeInterval ) == false )
+        {
+            return false;
+        }
+        if ( timeInterval != defaultTimeInterval )
+        {
+            return false;
+        }
+    }
+    return true;
+}
 //---------------------------------------------------------------------------
+void PresenterWindowMainBd85::SetConnectionState( ConnectionStateInfo state )
+{
+    switch (state)
+    {
+    case ConnectionStateInfo_t::WaitConnect:
+        break;
+    case ConnectionStateInfo_t::IsConnected:
+        ConnectIsGood();
+        _isConnected = true;
+        break;
+    case ConnectionStateInfo_t::WaitLoopExit:
+        _isConnected = false;    
+        break;
+    case ConnectionStateInfo_t::IsDisconnect:
+        break;
+    }
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

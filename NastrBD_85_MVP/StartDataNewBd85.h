@@ -7,6 +7,7 @@ class StartDataNewBd85
 public:
     StartDataNewBd85(
         const char* verPo);
+    StartDataNewBd85();        
     const char* GetVerPo();
 private:
     enum { verPoSize = 5 };

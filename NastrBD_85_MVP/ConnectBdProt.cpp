@@ -189,10 +189,7 @@ void ConnectBdProt::StartStopClick()
         // Заблокировать элементы управления, и ожидать соединения
         SetControlFromConnectionState(ConnectionStateInfo_t::WaitConnect);
         _addrBdHelper->SetNumber(); // Отобразить адрес БД на форме
-
         _addrBd = _addrBdHelper->GetNumber(); // Получить номер
-        //_addrBd = *_addrBdPtr
-
         _task->RunAsynk( & as_ConnectionAsynk );
     }
     else
@@ -236,7 +233,7 @@ void ConnectBdProt::Connect()
     {
         _bfOprosInLoop = true;
         _state = ConnectionStateInfo_t::IsConnected;
-        ev_ConnectIsGood();
+        //ev_ConnectIsGood();
         _task->BeginInvoke( & as_SetControlStateInvoke );
         WorkInLoop();
         _allProtokol->Close();
@@ -249,6 +246,8 @@ void ConnectBdProt::Connect()
 void ConnectBdProt::Disconnect()
 {
     _bfOprosInLoop = false;
+    _state = ConnectionStateInfo_t::WaitLoopExit;
+    _task->BeginInvoke( & as_SetControlStateInvoke ); // Ждать выход из петли    
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::WorkInLoop()
@@ -268,8 +267,8 @@ void ConnectBdProt::WorkInLoop()
         (*as_OprosEnd)();
         //as_OprosEnd = 0;
     }
-    _state = ConnectionStateInfo_t::WaitLoopExit;
-    _task->BeginInvoke( & as_SetControlStateInvoke ); // Ждать выход из петли
+    //_state = ConnectionStateInfo_t::WaitLoopExit;
+    //_task->BeginInvoke( & as_SetControlStateInvoke ); // Ждать выход из петли
     Sleep( 500 );
 }
 //---------------------------------------------------------------------------
@@ -312,11 +311,6 @@ void ConnectBdProt::SetActionOprosEnd( ActionSelf<>* action )
     as_OprosEnd = action;
 }
 //---------------------------------------------------------------------------
-ActionEvent<>* ConnectBdProt::GetEventConnectIsGood()
-{
-    return & ev_ConnectIsGood;
-}
-//---------------------------------------------------------------------------
 void ConnectBdProt::SetAddrBdNumber(int addrBd)
 {
     if ( _addrBdPtr != 0 )
@@ -325,8 +319,8 @@ void ConnectBdProt::SetAddrBdNumber(int addrBd)
     }
 }
 //---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
+ActionEvent<ConnectionStateInfo>* ConnectBdProt::GetEventSetConnectionState()
+{
+    return & ev_SetConnectionState;
+}
 //---------------------------------------------------------------------------

@@ -11,6 +11,11 @@ StartDataNewBd85::StartDataNewBd85(
     TextHelper::CopyText(_verPo, verPo, verPoSize);
 }
 //---------------------------------------------------------------------------
+StartDataNewBd85::StartDataNewBd85()
+{
+    TextHelper::SpaseText(_verPo, verPoSize);  // Заполнить все символы строки пробелами
+}
+//---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetVerPo()
 {
     return _verPo;

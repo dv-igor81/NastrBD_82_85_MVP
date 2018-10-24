@@ -24,7 +24,6 @@ private:
     ActionSelf<> as_FormClose;
     void FormClose();
 
-    ActionSelf<> as_ConnectIsGood;
     void ConnectIsGood(); // Соединение (по ком порту или TCP/IP) прошло удачно
 
     ActionSelf<> as_OprosStar;
@@ -45,6 +44,9 @@ private:
     ActionSelf<> as_OprosEndInvoke;
     void OprosEndInvoke();
 
+    ActionSelf<ConnectionStateInfo> as_SetConnectionState;
+    void SetConnectionState( ConnectionStateInfo state );
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
@@ -54,6 +56,9 @@ private:
     ActionEvent<StartDataNewBd85*> ev_DisplayStartData;
 
     StartDataNewBd85* _data;
+
+    bool InitMkInBd();
+    bool _isConnected;
 };
 //---------------------------------------------------------------------------
 #endif

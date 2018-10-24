@@ -33,6 +33,18 @@ int TextHelper::AddText(
     return lenSum;
 }
 //---------------------------------------------------------------------------
+void TextHelper::SpaseText(
+    char * ptrText,
+    int maxLength)
+{
+    maxLength--;
+    for (int i = 0; i < maxLength; i++)
+    {
+        ptrText[i] = ' ';
+    }
+    ptrText[maxLength] = 0;
+}
+//---------------------------------------------------------------------------
 int TextHelper::GetLengText(
     const char * ptrText,
     int maxLength)

@@ -175,6 +175,8 @@ __published:	// IDE-managed Components
         TEdit *Edit20;
         TEdit *Edit21;
         TEdit *Edit22;
+        TPanel *Panel_ErrorConnectCount;
+        TEdit *Edit_ErrorConnectCount;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
@@ -225,6 +227,9 @@ private:	// User declarations
     ActionSelf<StartDataNewBd85*> as_DisplayStartData;
     void DisplayStartData( StartDataNewBd85* data );
 
+    ActionSelf<const char*> as_DisplayCountConnectError;
+    void DisplayCountConnectError(const char* text);
+
     ActionEvent<const char*> ev_textBox_AddrBd_Change;
     ActionEvent<> ev_button_AddrBd_DecClick;
     ActionEvent<> ev_button_AddrBd_IncClick;
@@ -249,6 +254,7 @@ public:		// User declarations
     ActionEvent<>* GetEventFormShow();
     ActionEvent<>* GetEventFormClose();
     ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData();
+    ActionSelf<const char*>* GetSelfDisplayErrors();
 
     HelperConnectFourBdProt* GetConnectFourBdProt();
 };
