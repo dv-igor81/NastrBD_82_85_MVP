@@ -165,18 +165,44 @@ bool PresenterWindowMainBd85::ReadEEProm()
             return false;
         }
         _readParamIndex++;
-        sprintf(_indAddrZad, "%d", indAddrZ );
+        sprintf(_indAddrZad, "%d", indAddrZ);
+    }
+    if ( _readParamIndex == 2 )
+    {
+        unsigned short dnuZ;
+        float dnuVZ;
+        if ( _allProtokol->GetDnuZ( & dnuZ ) == false )
+        {
+            return false;
+        }
+        _readParamIndex++;
+        dnuVZ = CodeToValue(dnuZ);
+        sprintf(_dnuZad, "%d", dnuZ);
+        sprintf(_dnuValueZad, "%5.3f", dnuVZ);
     }
 
     _data = new StartDataNewBd85(
         _verPo // Версия прошивки
         , _indAddrZad // Индивидуальный адрес заданный
+        , _dnuZad // ДНУ заданное КОД
+        , _dnuValueZad // ДНУ заданное ЗНАЧЕНИЕ
         );
     _task->BeginInvoke( & as_OprosStarInvoke );
     return true;
 }
 //---------------------------------------------------------------------------
+double PresenterWindowMainBd85::CodeToValue(unsigned short code)
+{
+    double retVal = code;
+    retVal *= 2.5;
+    retVal /= 4095;
+    return retVal;
+}
 //---------------------------------------------------------------------------
+unsigned short PresenterWindowMainBd85::ValueToCode(double value)
+{
+    return 0; // stub
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

@@ -7,17 +7,23 @@
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85(
     const char* verPo
-    , const char* indAddrZad
+        , const char* indAddrZad
+        , const char* dnuZad
+        , const char* dnuValueZad
     )
 {
     TextHelper::CopyText(_verPo, verPo, verPoSize);
     TextHelper::CopyText(_indAddrZad, indAddrZad, indAddrZadSize);
+    TextHelper::CopyText(_dnuZad, dnuZad, uShortTextSize);
+    TextHelper::CopyText(_dnuValueZad, dnuValueZad, floatTextSize);
 }
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85()
 {
     TextHelper::SpaseText(_verPo, verPoSize);  // Заполнить все символы строки пробелами
     TextHelper::SpaseText(_indAddrZad, indAddrZadSize);
+    TextHelper::SpaseText(_dnuZad, uShortTextSize);
+    TextHelper::SpaseText(_dnuValueZad, floatTextSize);
 }
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetVerPo()
@@ -30,7 +36,15 @@ const char* StartDataNewBd85::GetIndAddrZad()
     return _indAddrZad;
 }
 //---------------------------------------------------------------------------
+const char* StartDataNewBd85::GetDnuZad()
+{
+    return _dnuZad;
+}
 //---------------------------------------------------------------------------
+const char* StartDataNewBd85::GetDnuValueZad()
+{
+    return _dnuValueZad;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

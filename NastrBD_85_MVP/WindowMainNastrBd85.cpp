@@ -184,6 +184,7 @@ void TWindowMainBd85::ControlsAvailability(bool isEnabled)
     textBox_AddrBd->Enabled = isEnabled;
     button_AddrBd_Dec->Enabled = isEnabled;
     button_AddrBd_Inc->Enabled = isEnabled;
+    button_WriteToEeprom->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
@@ -194,6 +195,8 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_VerPo2->Text = verPo[2];
     Edit_VerPo3->Text = verPo[3];
     Edit_IndAddrZad->Text = data->GetIndAddrZad();
+    Edit_DnuZad_Code->Text = data->GetDnuZad();
+    Edit_DnuZad_Value->Text = data->GetDnuValueZad();
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)
@@ -267,6 +270,11 @@ void __fastcall TWindowMainBd85::button_UpdateNumberOfComPortSClick(
 void __fastcall TWindowMainBd85::comboBox_ComPortsChange(TObject *Sender)
 {
     ev_comboBox_ComPortsChange( comboBox_ComPorts->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::button_WriteToEepromClick(TObject *Sender)
+{
+    ev_button_WriteToEepromClick();
 }
 //---------------------------------------------------------------------------
 

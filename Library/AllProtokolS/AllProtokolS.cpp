@@ -186,7 +186,14 @@ bool AllProtokolS::GetIndAdrZ(unsigned char * indAdrZ)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
-//---------------------------------------------------------------------------
+bool AllProtokolS::GetDnuZ(unsigned short * dnuZ)
+{
+    int result;
+    unsigned long data;
+    result = protokol->ReadFlashInvert( 0, & data ); // !!!
+    *dnuZ = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

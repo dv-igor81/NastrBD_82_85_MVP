@@ -60,11 +60,20 @@ private:
     bool InitMkInBd();
     bool _isConnected;
     bool ReadEEProm();
+    double CodeToValue(unsigned short code);
+    unsigned short ValueToCode(double value);
 
     int _readParamIndex;
+        enum { verPoSize = 5
+        , indAddrZadSize = 4
+        , uShortTextSize = 6 // 5 цифр и завершающий ноль
+        , floatTextSize = 10
+    };
     //===>> Данные, считанные из EEPROM МК в БД
-    char _verPo[5];
-    char _indAddrZad[4];
+    char _verPo[verPoSize];
+    char _indAddrZad[indAddrZadSize];
+    char _dnuZad[uShortTextSize];
+    char _dnuValueZad[floatTextSize];
     //<<=== Данные, считанные из EEPROM МК в БД
 };
 //---------------------------------------------------------------------------

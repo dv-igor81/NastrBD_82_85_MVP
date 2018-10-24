@@ -257,7 +257,7 @@ object WindowMainBd85: TWindowMainBd85
           TabOrder = 4
         end
       end
-      object DataFromDetGroupBox: TGroupBox
+      object GroupBox_Rate: TGroupBox
         Left = -1
         Top = 2
         Width = 446
@@ -1143,7 +1143,7 @@ object WindowMainBd85: TWindowMainBd85
           TabOrder = 15
         end
       end
-      object DataForDetBox: TGroupBox
+      object GroupBox_EEPROM: TGroupBox
         Left = -1
         Top = 376
         Width = 446
@@ -1156,7 +1156,7 @@ object WindowMainBd85: TWindowMainBd85
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 3
-        object SetDNUEdit: TMaskEdit
+        object Edit_DnuZad_Value: TMaskEdit
           Left = 318
           Top = 82
           Width = 75
@@ -1208,11 +1208,11 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 2
         end
-        object SetDNUPanel: TPanel
+        object Panel_DnuZad_0: TPanel
           Left = 8
           Top = 82
           Width = 241
-          Height = 22
+          Height = 20
           Alignment = taLeftJustify
           BorderWidth = 1
           Caption = ' '#1047#1085#1072#1095#1077#1085#1080#1077' '#1044#1053#1059' '#1079#1072#1076#1072#1085#1085#1086#1077' '
@@ -1317,7 +1317,7 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 9
         end
-        object SetDNUCodeEdit: TEdit
+        object Edit_DnuZad_Code: TEdit
           Left = 250
           Top = 82
           Width = 67
@@ -1396,7 +1396,7 @@ object WindowMainBd85: TWindowMainBd85
           Height = 20
           TabOrder = 19
         end
-        object Edit1: TEdit
+        object Edit_DnuZad_3: TEdit
           Left = 394
           Top = 82
           Width = 43
@@ -1552,9 +1552,9 @@ object WindowMainBd85: TWindowMainBd85
         end
         object GroupBox_ReverseLink: TGroupBox
           Left = 8
-          Top = 192
-          Width = 168
-          Height = 57
+          Top = 196
+          Width = 153
+          Height = 54
           Caption = ' '#1054#1073#1088#1072#1090#1085#1072#1103' '#1089#1074#1103#1079#1100' '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -1653,9 +1653,9 @@ object WindowMainBd85: TWindowMainBd85
           Text = ' '#1077#1076'.'
         end
         object btnDefaults: TButton
-          Left = 317
-          Top = 200
-          Width = 120
+          Left = 168
+          Top = 224
+          Width = 152
           Height = 25
           Caption = #1048#1079' '#1092#1072#1081#1083#1072
           Font.Charset = DEFAULT_CHARSET
@@ -1701,6 +1701,21 @@ object WindowMainBd85: TWindowMainBd85
             '1280'
             '1290'
             '1300')
+        end
+        object button_WriteToEeprom: TButton
+          Left = 168
+          Top = 196
+          Width = 152
+          Height = 25
+          Caption = #1047#1072#1087#1080#1089#1100' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 34
+          OnClick = button_WriteToEepromClick
         end
       end
       object GroupBox_VerPo: TGroupBox

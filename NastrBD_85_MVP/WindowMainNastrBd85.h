@@ -42,7 +42,7 @@ __published:	// IDE-managed Components
         TEdit *textBox_TCP_Port;
         TButton *button_StartStop;
         TPanel *label_Hint;
-        TGroupBox *DataFromDetGroupBox;
+        TGroupBox *GroupBox_Rate;
         TEdit *IndAdrEdit;
         TPanel *IndAdrPanel;
         TPanel *Panel_rate_Description;
@@ -90,25 +90,25 @@ __published:	// IDE-managed Components
         TEdit *Count1Edit;
         TEdit *Count1UnitEdit;
         TButton *btnSaveParam;
-        TGroupBox *DataForDetBox;
-        TMaskEdit *SetDNUEdit;
+        TGroupBox *GroupBox_EEPROM;
+        TMaskEdit *Edit_DnuZad_Value;
         TPanel *Panel_IndAddrZad_0;
         TPanel *SetGrpAdrPanel;
-        TPanel *SetDNUPanel;
+        TPanel *Panel_DnuZad_0;
         TPanel *SetUhiPanel;
         TPanel *Panel_EEPROM_Description;
         TPanel *Panel_EEPROM_Code;
         TPanel *Panel_EEPROM_Value;
         TEdit *Edit_IndAddrZad;
         TEdit *SetGrpAdrEdit;
-        TEdit *SetDNUCodeEdit;
+        TEdit *Edit_DnuZad_Code;
         TEdit *SetUhiCodeEdit;
         TPanel *Panel_IndAddrZad_1;
         TPanel *EmptyPanel10;
         TPanel *Panel_EEPROM_Unit;
         TPanel *Panel_indAddrZad_3;
         TPanel *Panel5;
-        TEdit *Edit1;
+        TEdit *Edit_DnuZad_3;
         TEdit *Edit3;
         TPanel *Panel12;
         TPanel *Panel28;
@@ -177,6 +177,7 @@ __published:	// IDE-managed Components
         TEdit *Edit22;
         TPanel *Panel_ErrorConnectCount;
         TEdit *Edit_ErrorConnectCount;
+        TButton *button_WriteToEeprom;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
@@ -189,6 +190,7 @@ __published:	// IDE-managed Components
         void __fastcall button_UpdateNumberOfComPortSClick(
           TObject *Sender);
         void __fastcall comboBox_ComPortsChange(TObject *Sender);
+        void __fastcall button_WriteToEepromClick(TObject *Sender);
 private:	// User declarations
     void InitComponrnts();
      
@@ -241,6 +243,7 @@ private:	// User declarations
     ActionEvent<const char*> ev_textBox_IP_AddrChange;
     ActionEvent<const char*> ev_textBox_TCP_PortChange;
     ActionEvent<> ev_button_UpdateNumberOfComPortSClick;
+    ActionEvent<> ev_button_WriteToEepromClick;
 
     HelperNumberTextBtn addrBdHelper;
     HelperConnectFourBdProt bdProtHelper;
