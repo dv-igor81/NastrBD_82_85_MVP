@@ -224,6 +224,7 @@ private:	// User declarations
     ActionSelf<ConnectionStateInfo> as_SetConnectionState; // Отобразить изменения о состоянии соединения в ГИП
     void SetConnectionState(ConnectionStateInfo state);
     void ControlsAvailability(bool isEnabled);
+    void ControlsAvailabilityInvert(bool isEnabled);
 
 
     ActionSelf<StartDataNewBd85*> as_DisplayStartData;

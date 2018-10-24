@@ -137,6 +137,21 @@ void TWindowMainBd85::AddComPortName(
 void TWindowMainBd85::SetProtokolName(Protokol protokolName)
 {
     comboBox_Protocol->ItemIndex = (int)protokolName;
+    switch (protokolName)
+    {
+    case Protokol_t::NineBit: // 9-ти битный
+        TabSheet_ModBusParam->TabVisible = false;
+        break;
+    case Protokol_t::ModBus_RTU: // ModBus RTU
+        TabSheet_ModBusParam->TabVisible = true;
+        break;
+    case Protokol_t::ModBus_TCP: // ModBus TCP
+        TabSheet_ModBusParam->TabVisible = true;
+        break;
+    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        TabSheet_ModBusParam->TabVisible = true;
+        break;
+    }
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::SetEndPoint(
@@ -155,21 +170,25 @@ void TWindowMainBd85::SetConnectionState(ConnectionStateInfo state)
         button_StartStop->Caption = "Стартую";
         button_StartStop->Enabled = false;
         ControlsAvailability(false);
+        ControlsAvailabilityInvert(false);
         break;
     case ConnectionStateInfo_t::IsConnected:
         button_StartStop->Caption = "Прервать";
         button_StartStop->Enabled = true;
         ControlsAvailability(false);
+        ControlsAvailabilityInvert(true);
         break;
     case ConnectionStateInfo_t::WaitLoopExit:
         button_StartStop->Caption = "Завершаю";
         button_StartStop->Enabled = false;
         ControlsAvailability(false);
+        ControlsAvailabilityInvert(false);
         break;
     case ConnectionStateInfo_t::IsDisconnect:
         button_StartStop->Caption = "Начать";
         button_StartStop->Enabled = true;
         ControlsAvailability(true);
+        ControlsAvailabilityInvert(false);
         break;
     }
 }
@@ -184,6 +203,10 @@ void TWindowMainBd85::ControlsAvailability(bool isEnabled)
     textBox_AddrBd->Enabled = isEnabled;
     button_AddrBd_Dec->Enabled = isEnabled;
     button_AddrBd_Inc->Enabled = isEnabled;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
+{
     button_WriteToEeprom->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------

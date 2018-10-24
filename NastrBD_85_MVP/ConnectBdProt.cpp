@@ -112,7 +112,7 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
     ev_comPortOrTcpIp(isComPortProt);
     ev_labelHint(hintText);
     _addrBdHelper->SetNumber( *_addrBdPtr ); // Отобразить адрес БД на форме
-    if (fromPresenter && !flagError)
+    if (/*fromPresenter &&*/ !flagError)
     {
         ev_setProtokolName(protokolName);
     }
@@ -125,6 +125,7 @@ void ConnectBdProt::WindowShow()
     TextHelper::CopyText(strTcpPort_TCP, "502", tcpPortSize);
     TextHelper::CopyText(strTcpPort_RTU_IP, "4001", tcpPortSize);
     SettingsChengeProtokol(Protokol_t::NineBit, true);
+    SetControlFromConnectionState(ConnectionStateInfo_t::IsDisconnect);
     UpdateNumberOfComPorts();
 }
 //---------------------------------------------------------------------------
@@ -255,20 +256,15 @@ void ConnectBdProt::WorkInLoop()
     if ( as_OprosStart != 0 )
     {
         (*as_OprosStart)();
-        //as_OprosStart = 0;
     }
     while ( _bfOprosInLoop && (as_OprosIter != 0) )
     {
         (*as_OprosIter)();
     }
-    //as_OprosIter = 0;
     if ( as_OprosEnd != 0 )
     {
         (*as_OprosEnd)();
-        //as_OprosEnd = 0;
     }
-    //_state = ConnectionStateInfo_t::WaitLoopExit;
-    //_task->BeginInvoke( & as_SetControlStateInvoke ); // Ждать выход из петли
     Sleep( 500 );
 }
 //---------------------------------------------------------------------------
