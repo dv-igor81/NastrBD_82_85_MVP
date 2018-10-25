@@ -15,6 +15,7 @@ StartDataNewBd85::StartDataNewBd85(
         , unsigned short voltageHiZad
         , unsigned short widthPwmZad // Длительность ШИМ заданная
         , unsigned short offsetPwmZ // Смешение ШИМ заданное
+        , unsigned short periodPwmZ // Период ШИМ заданный
     )
 {
     TextHelper::CopyText(_verPo, verPo, verPoSize);
@@ -29,11 +30,13 @@ StartDataNewBd85::StartDataNewBd85(
     sprintf(_voltageHiValueZad, "%0.2f", voltageValueZad);
     sprintf(_widthPwmZad, "%d", widthPwmZad);
     sprintf(_offsetPwmZ, "%d", offsetPwmZ);
+    sprintf(_periodPwmZ, "%d", periodPwmZ);
 }
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85()
 {
-    TextHelper::SetCharInText(_verPo, 0, verPoSize);  // Заполнить все символы строки пробелами
+    // Заполнить все символы строки нулями
+    TextHelper::SetCharInText(_verPo, 0, verPoSize);
     TextHelper::SetCharInText(_indAddrZad, 0, indAddrZadSize);
     TextHelper::SetCharInText(_groupAddrZad, 0, indAddrZadSize);
     TextHelper::SetCharInText(_dnuZad, 0, uShortTextSize);
@@ -42,6 +45,7 @@ StartDataNewBd85::StartDataNewBd85()
     TextHelper::SetCharInText(_voltageHiValueZad, 0, floatTextSize);
     TextHelper::SetCharInText(_widthPwmZad, 0, uShortTextSize);
     TextHelper::SetCharInText(_offsetPwmZ, 0, uShortTextSize);
+    TextHelper::SetCharInText(_periodPwmZ, 0, uShortTextSize);
 }
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetVerPo()
@@ -89,6 +93,10 @@ const char* StartDataNewBd85::GetOffsetPwmZad()
     return _offsetPwmZ;
 }
 //---------------------------------------------------------------------------
+const char* StartDataNewBd85::GetPeriodPwmZad()
+{
+    return _periodPwmZ;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

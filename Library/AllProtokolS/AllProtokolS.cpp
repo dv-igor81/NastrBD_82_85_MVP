@@ -232,7 +232,19 @@ bool AllProtokolS::GetOffsetPwmZ_Bd85(unsigned short * offsetPwmZ)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetPeriodPwmZ_Bd85(unsigned short * periodPwmZ)
+{
+    int result;
+    unsigned long data;
+    result = protokol->ReadFlashInvert( 0x07, & data );
+    *periodPwmZ = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetIndAdr(unsigned char * indAdr)
+{
+    return ErrorChecked( protokol->GetIndAdr( indAdr ) );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

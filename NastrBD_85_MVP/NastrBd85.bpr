@@ -19,7 +19,8 @@
       ..\Library\AllProtokolS\modbus-tcp.obj 
       ..\Library\AllProtokolS\RSProtokol.obj ..\Library\Task\SuperThread.obj 
       ..\Library\Utilites\TextHelper.obj ConnectionStateInfo_t.obj 
-      StartDataNewBd85.obj ..\Library\Utilites\ConvertHelper.obj"/>
+      StartDataNewBd85.obj ..\Library\Utilites\ConvertHelper.obj 
+      IterDataNewBd85.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -100,6 +101,7 @@
       <FILE FILENAME="ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="StartDataNewBd85.cpp" FORMNAME="" UNITNAME="StartDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Utilites\ConvertHelper.cpp" FORMNAME="" UNITNAME="ConvertHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="IterDataNewBd85.cpp" FORMNAME="" UNITNAME="IterDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

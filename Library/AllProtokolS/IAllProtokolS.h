@@ -34,6 +34,9 @@ public:
     virtual bool GetVoltageHiZ_Bd85(unsigned short * voltageHiZ) = 0; // Считать напряжение высокое заданное
     virtual bool GetWidthPwmZ_Bd85(unsigned short * widthPwmZ) = 0; // Считать длительность ШИМ заданная
     virtual bool GetOffsetPwmZ_Bd85(unsigned short * offsetPwmZ) = 0; // Считать смешение ШИМ заданное
+    virtual bool GetPeriodPwmZ_Bd85(unsigned short * periodPwmZ) = 0; // Считать период ШИМ заданный
+
+    virtual bool GetIndAdr(unsigned char * indAdr) = 0; // Считать индивидуальный адрес БД
 };
 //---------------------------------------------------------------------------
 #endif

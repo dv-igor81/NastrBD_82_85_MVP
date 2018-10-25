@@ -809,7 +809,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 3
           end
-          object IndAdrPanel: TPanel
+          object Panel_IndAddr_0: TPanel
             Left = 8
             Top = 38
             Width = 241
@@ -827,14 +827,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 4
           end
-          object EmptyPanel01: TPanel
+          object Panel_IndAddr_1: TPanel
             Left = 250
             Top = 38
             Width = 67
             Height = 20
             TabOrder = 5
           end
-          object IndAdrEdit: TEdit
+          object Edit_IndAddr: TEdit
             Left = 318
             Top = 38
             Width = 75
@@ -852,7 +852,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 6
           end
-          object EmptyPanel07: TPanel
+          object Panel_IndAddr_3: TPanel
             Left = 394
             Top = 38
             Width = 43

@@ -90,10 +90,10 @@ __published:	// IDE-managed Components
         TPanel *Panel_rate_Code;
         TPanel *Panel_rate_Value;
         TPanel *Panel_rate_Unit;
-        TPanel *IndAdrPanel;
-        TPanel *EmptyPanel01;
-        TEdit *IndAdrEdit;
-        TPanel *EmptyPanel07;
+        TPanel *Panel_IndAddr_0;
+        TPanel *Panel_IndAddr_1;
+        TEdit *Edit_IndAddr;
+        TPanel *Panel_IndAddr_3;
         TPanel *GrpAdrPanel;
         TPanel *EmptyPanel02;
         TEdit *GrpAdrEdit;
@@ -230,6 +230,9 @@ private:	// User declarations
     ActionSelf<StartDataNewBd85*> as_DisplayStartData;
     void DisplayStartData( StartDataNewBd85* data );
 
+    ActionSelf<IterDataNewBd85*> as_DisplayIterData;
+    void DisplayIterData( IterDataNewBd85* data );
+
     ActionSelf<const char*> as_DisplayCountConnectError;
     void DisplayCountConnectError(const char* text);
 
@@ -259,6 +262,8 @@ public:		// User declarations
     ActionEvent<>* GetEventFormClose();
     ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData();
     ActionSelf<const char*>* GetSelfDisplayErrors();
+
+    ActionSelf<IterDataNewBd85*>& GetSelfDisplayIterData();
 
     HelperConnectFourBdProt* GetConnectFourBdProt();
 };

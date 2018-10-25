@@ -33,6 +33,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
 
     ev_DisplayStartData += _view->GetSelfDisplayStartData();
     *_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
+    ev_DisplayIterData += _view->GetSelfDisplayIterData();
 }
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
@@ -60,8 +61,12 @@ void PresenterWindowMainBd85::ConnectIsGood() // Соединение (по ком порту или TC
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosStar()
 {
-    _data = new StartDataNewBd85();
-    ev_DisplayStartData( _data );
+    _startData = new StartDataNewBd85();
+    ev_DisplayStartData( _startData );
+
+    _iterData = new IterDataNewBd85();
+
+    ev_DisplayIterData( _iterData );
 
     while ( _isConnected )
     {
@@ -82,16 +87,34 @@ void PresenterWindowMainBd85::OprosStar()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosStarInvoke()
 {
-    ev_DisplayStartData( _data );
+    ev_DisplayStartData( _startData );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosIter()
 {
-    Sleep(10);
+    if ( _allProtokol->GetSsp( & _ssp ) == false )
+    {
+        Sleep(10);
+        return;
+    }
+    if ( (_ssp & 0x01) != 0x01 ) // Флаг готовности счёта НЕ получен
+    {
+        return;
+    }
+
+    if ( _allProtokol->GetIndAdr( & _indAddr ) == false )
+    {
+        return;
+    }
+    _iterData = new IterDataNewBd85(
+        _indAddr // Индивидуальный адрес
+    );
+    _task->BeginInvoke( & as_OprosIterInvoke );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosIterInvoke()
 {
+    ev_DisplayIterData( _iterData );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosEnd()
@@ -229,8 +252,16 @@ bool PresenterWindowMainBd85::ReadEEProm()
     {
         return false;
     }
+    if ( _readParamIndex == 7 )
+    {
+        if ( _allProtokol->GetPeriodPwmZ_Bd85( & _periodPwmZ ) == false )
+        {
+            return false;
+        }
+        _readParamIndex++;
+    }
 
-    _data = new StartDataNewBd85(
+    _startData = new StartDataNewBd85(
         _verPo // Версия прошивки
         , _indAddrZad // Индивидуальный адрес заданный
         , _groupAddrZad // Групповой адрес заданный
@@ -238,6 +269,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
         , _voltageHiZad // Напряжение высокое заданное КОД
         , _widthPwmZad // Длительность ШИМ заданная
         , _offsetPwmZ //  Смешение ШИМ заданное
+        , _periodPwmZ // Период ШИМ заданный
         );
     _task->BeginInvoke( & as_OprosStarInvoke );
     return true;

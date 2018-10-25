@@ -30,6 +30,9 @@ public:
     bool GetVoltageHiZ_Bd85(unsigned short * voltageHiZ);
     bool GetWidthPwmZ_Bd85(unsigned short * widthPwmZ);
     bool GetOffsetPwmZ_Bd85(unsigned short * offsetPwmZ);
+    bool GetPeriodPwmZ_Bd85(unsigned short * periodPwmZ);
+    //===
+    bool GetIndAdr(unsigned char * indAdr);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
 

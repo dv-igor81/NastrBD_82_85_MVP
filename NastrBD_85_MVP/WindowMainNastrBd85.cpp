@@ -21,6 +21,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         , as_SetConnectionState(this, &TWindowMainBd85::SetConnectionState)
         , as_DisplayStartData(this, &TWindowMainBd85::DisplayStartData)
         , as_DisplayCountConnectError(this, &TWindowMainBd85::DisplayCountConnectError)
+        , as_DisplayIterData(this, &TWindowMainBd85::DisplayIterData)
 
         ,addrBdHelper(
             &as_textBox_AddrBd_SetText, // »змен€ю текст программно
@@ -225,7 +226,16 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     comboBox_VoltageHiZad_Value->Text = data->GetVoltageHiValueZad();
     Edit_WidthPwmZad->Text = data->GetWidthPwmZad();
     Edit_OffsetPwmZad->Text = data->GetOffsetPwmZad();
+    Edit_PeriodPwmZad->Text = data->GetPeriodPwmZad();
 
+    delete data; // ќсвободить пам€ть
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
+{
+    this->Edit_IndAddr->Text = data->GetIndAddr();
+
+    
     delete data; // ќсвободить пам€ть
 }
 //---------------------------------------------------------------------------
@@ -237,6 +247,11 @@ void TWindowMainBd85::DisplayCountConnectError(const char* text)
 ActionSelf<StartDataNewBd85*>* TWindowMainBd85::GetSelfDisplayStartData()
 {
     return & as_DisplayStartData; // ќтобразить данные считанные при старте опроса
+}
+//---------------------------------------------------------------------------
+ActionSelf<IterDataNewBd85*>& TWindowMainBd85::GetSelfDisplayIterData()
+{
+    return as_DisplayIterData;
 }
 //---------------------------------------------------------------------------
 ActionSelf<const char*>* TWindowMainBd85::GetSelfDisplayErrors()

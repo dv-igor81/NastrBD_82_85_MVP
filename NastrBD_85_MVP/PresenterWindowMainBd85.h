@@ -53,8 +53,10 @@ private:
     ITask * _task;
 
     ActionEvent<StartDataNewBd85*> ev_DisplayStartData;
+    StartDataNewBd85* _startData;
 
-    StartDataNewBd85* _data;
+    ActionEvent<IterDataNewBd85*> ev_DisplayIterData;
+    IterDataNewBd85* _iterData;
 
     bool InitMkInBd();
     bool _isConnected;
@@ -70,7 +72,11 @@ private:
     unsigned short _voltageHiZad;
     unsigned short _widthPwmZad;
     unsigned short _offsetPwmZ;
+    unsigned short _periodPwmZ;
     //<<=== Данные, считанные из EEPROM МК в БД
+
+    unsigned char _ssp;
+    unsigned char _indAddr;
 };
 //---------------------------------------------------------------------------
 #endif
