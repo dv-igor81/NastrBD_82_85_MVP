@@ -1398,7 +1398,7 @@ object WindowMainBd85: TWindowMainBd85
             Height = 20
             TabOrder = 7
           end
-          object SetGrpAdrPanel: TPanel
+          object Panel_GroupAdrZad_0: TPanel
             Left = 8
             Top = 60
             Width = 241
@@ -1414,14 +1414,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 8
           end
-          object EmptyPanel10: TPanel
+          object Panel_GroupAdrZad_1: TPanel
             Left = 250
             Top = 60
             Width = 67
             Height = 20
             TabOrder = 9
           end
-          object SetGrpAdrEdit: TEdit
+          object Edit_GroupAdrZad: TEdit
             Left = 318
             Top = 60
             Width = 75
@@ -1437,7 +1437,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 10
           end
-          object Panel5: TPanel
+          object Panel_GroupAdrZad_3: TPanel
             Left = 394
             Top = 60
             Width = 43
@@ -1602,7 +1602,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 19
             Text = '   '#1042
           end
-          object Panel12: TPanel
+          object Panel_WidthPwm_0: TPanel
             Left = 8
             Top = 126
             Width = 241
@@ -1618,7 +1618,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 20
           end
-          object Edit6: TEdit
+          object Edit_WidthPwm: TEdit
             Left = 250
             Top = 126
             Width = 67
@@ -1634,14 +1634,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 21
           end
-          object Panel14: TPanel
+          object Panel_WidthPwm_2: TPanel
             Left = 318
             Top = 126
             Width = 75
             Height = 20
             TabOrder = 22
           end
-          object Edit8: TEdit
+          object Edit_WidthPwm_3: TEdit
             Left = 394
             Top = 126
             Width = 43

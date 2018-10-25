@@ -33,14 +33,15 @@ int TextHelper::AddText(
     return lenSum;
 }
 //---------------------------------------------------------------------------
-void TextHelper::SpaseText(
+void TextHelper::SetCharInText(
     char * ptrText,
+    char simbol,
     int maxLength)
 {
     maxLength--;
     for (int i = 0; i < maxLength; i++)
     {
-        ptrText[i] = ' ';
+        ptrText[i] = simbol;
     }
     ptrText[maxLength] = 0;
 }

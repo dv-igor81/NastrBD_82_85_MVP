@@ -220,10 +220,14 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_VerPo2->Text = verPo[2];
     Edit_VerPo3->Text = verPo[3];
     Edit_IndAddrZad->Text = data->GetIndAddrZad();
+    Edit_GroupAdrZad->Text = data->GetGroupAddrZad();
     Edit_DnuZad_Code->Text = data->GetDnuZad();
     Edit_DnuZad_Value->Text = data->GetDnuValueZad();
     Edit_VoltageHiZad_Code->Text = data->GetVoltageHiZad();
     comboBox_VoltageHiZad_Value->Text = data->GetVoltageHiValueZad();
+    Edit_WidthPwm->Text = data->GetWidthPwmZad();
+
+    delete data; // Освободить память
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)

@@ -29,8 +29,10 @@ public:
     virtual bool GetTimeInterval(unsigned char * timeInt) = 0; // Получить константу, которая определяет интервал набора счёта
     virtual bool SetTimeInterval(unsigned char timeInt) = 0; // Установить константу, которая определяет интервал набора счёта
     virtual bool GetIndAdrZ(unsigned char * indAdrZ) = 0; // Считать индивидуальный адрес БД заданный
+    virtual bool GetGroupAdrZ(unsigned char * groupAdrZ) = 0; // Считать групповой адрес БД заданный
     virtual bool GetDnuZ(unsigned short * dnuZ) = 0; // Считать значение ДНУ заданное
     virtual bool GetVoltageHiZ_Bd85(unsigned short * voltageHiZ) = 0; // Считать напряжение высокое заданное
+    virtual bool GetWidthPwmZ_Bd85(unsigned short * widthPwmZ) = 0; // Считать длительность ШИМ заданная
 };
 //---------------------------------------------------------------------------
 #endif

@@ -11,8 +11,9 @@ public:
         int lenTo,
         int maxLength);
 
-    static void SpaseText( // Заполнить все символы строки пробелами
+    static void SetCharInText(
         char * ptrText,
+        char simbol,
         int maxLength);
 
     static int GetLengText(

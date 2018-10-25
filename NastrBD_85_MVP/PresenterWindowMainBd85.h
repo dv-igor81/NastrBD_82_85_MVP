@@ -14,7 +14,6 @@ public:
         IWindowMainBd85 * view,
         IAllProtokolS * allProtokol,
         ITask * task);
-
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
 private:
@@ -60,25 +59,16 @@ private:
     bool InitMkInBd();
     bool _isConnected;
     bool ReadEEProm();
-    double CodeToValue(unsigned short code);
-    unsigned short ValueToCode(double value);
-
-    double VoltageHiCodeToValue(unsigned short code);
-    unsigned short VoltageHiValueToCode(double value);
 
     int _readParamIndex;
-        enum { verPoSize = 5
-        , indAddrZadSize = 4
-        , uShortTextSize = 6 // 5 цифр и завершающий ноль
-        , floatTextSize = 10
-    };
+    enum { verPoSize = 5 };
     //===>> Данные, считанные из EEPROM МК в БД
-    char _verPo[verPoSize];
-    char _indAddrZad[indAddrZadSize];
-    char _dnuZad[uShortTextSize];
-    char _dnuValueZad[floatTextSize];
-    char _voltageHiZad[uShortTextSize];
-    char _voltageHiValueZad[floatTextSize];
+    char _verPo[5];
+    char _indAddrZad;
+    char _groupAddrZad;
+    unsigned short _dnuZad;
+    unsigned short _voltageHiZad;
+    unsigned short _widthPwmZad;
     //<<=== Данные, считанные из EEPROM МК в БД
 };
 //---------------------------------------------------------------------------

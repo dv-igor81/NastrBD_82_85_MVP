@@ -825,7 +825,6 @@ int RSProtokol_t::CommandExec( unsigned char kOutByte, unsigned char kInByte )
       {
         return -1;
       }
-      // rc = check_confirmation( ctx, req, rsp, rc );
     }
     for ( int i = 0; i <= kInByte; i++ )
     {

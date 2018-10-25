@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
-#include "PresenterWindowMainBd85.h"
 #include <stdio.h>
+#include "PresenterWindowMainBd85.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -151,86 +151,85 @@ bool PresenterWindowMainBd85::ReadEEProm()
 {
     if ( _readParamIndex == 0 )
     {
-        if ( _allProtokol->GetVersia( _verPo ) == false ) // Проверка связи
+        if ( _allProtokol->GetVersia( _verPo ) == false )
         {
             return false;
         }
         _readParamIndex++;
+    }
+    if ( _isConnected == false )
+    {
+        return false;
     }
     if ( _readParamIndex == 1 )
     {
-        unsigned char indAddrZ;
-        if ( _allProtokol->GetIndAdrZ( & indAddrZ ) == false )
+        if ( _allProtokol->GetIndAdrZ( & _indAddrZad ) == false )
         {
             return false;
         }
         _readParamIndex++;
-        sprintf(_indAddrZad, "%d", indAddrZ);
     }
     if ( _readParamIndex == 2 )
     {
-        unsigned short dnuZ;
-        float dnuVZ;
-        if ( _allProtokol->GetDnuZ( & dnuZ ) == false )
+        if ( _allProtokol->GetGroupAdrZ( & _groupAddrZad ) == false )
         {
             return false;
         }
         _readParamIndex++;
-        dnuVZ = CodeToValue(dnuZ);
-        sprintf(_dnuZad, "%d", dnuZ);
-        sprintf(_dnuValueZad, "%0.3f", dnuVZ);
+    }
+    if ( _isConnected == false )
+    {
+        return false;
     }
     if ( _readParamIndex == 3 )
     {
-        unsigned short voltageHiZ;
-        float hiVZ;
-        if ( _allProtokol->GetVoltageHiZ_Bd85( & voltageHiZ ) == false )
+        if ( _allProtokol->GetDnuZ( & _dnuZad ) == false )
         {
             return false;
         }
         _readParamIndex++;
-        hiVZ = VoltageHiCodeToValue( voltageHiZ );
-        sprintf(_voltageHiZad, "%d", voltageHiZ);
-        sprintf(_voltageHiValueZad, "%0.2f", hiVZ);
+    }
+    if ( _isConnected == false )
+    {
+        return false;
+    }
+    if ( _readParamIndex == 4 )
+    {
+        if ( _allProtokol->GetVoltageHiZ_Bd85( & _voltageHiZad ) == false )
+        {
+            return false;
+        }
+        _readParamIndex++;
+    }
+    if ( _isConnected == false )
+    {
+        return false;
+    }
+    if ( _readParamIndex == 5 )
+    {
+        if ( _allProtokol->GetWidthPwmZ_Bd85( & _widthPwmZad ) == false )
+        {
+            return false;
+        }
+        _readParamIndex++;
+    }
+    if ( _isConnected == false )
+    {
+        return false;
     }
 
     _data = new StartDataNewBd85(
         _verPo // Версия прошивки
         , _indAddrZad // Индивидуальный адрес заданный
+        , _groupAddrZad // Групповой адрес заданный
         , _dnuZad // ДНУ заданное КОД
-        , _dnuValueZad // ДНУ заданное ЗНАЧЕНИЕ
         , _voltageHiZad // Напряжение высокое заданное КОД
-        , _voltageHiValueZad // Напряжение высокое заданное ЗНАЧЕНИЕ
+        , _widthPwmZad // Длительность ШИМ заданная
         );
     _task->BeginInvoke( & as_OprosStarInvoke );
     return true;
 }
 //---------------------------------------------------------------------------
-double PresenterWindowMainBd85::CodeToValue(unsigned short code)
-{
-    double retVal = code;
-    retVal *= 2.5;
-    retVal /= 4095;
-    return retVal;
-}
-//---------------------------------------------------------------------------
-unsigned short PresenterWindowMainBd85::ValueToCode(double value)
-{
-    return 0; // stub
-}
-//---------------------------------------------------------------------------
-double PresenterWindowMainBd85::VoltageHiCodeToValue(unsigned short code)
-{
-    double retVal = code;
-    retVal *= (2.5 * 1000);
-    retVal /= 4096;
-    return retVal;
-}
-//---------------------------------------------------------------------------
-unsigned short PresenterWindowMainBd85::VoltageHiValueToCode(double value)
-{
-    return 0; // stub
-}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

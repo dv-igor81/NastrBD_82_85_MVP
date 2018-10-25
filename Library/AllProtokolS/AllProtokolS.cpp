@@ -115,6 +115,7 @@ bool AllProtokolS::Open()
         _flagError = false;
         return false;
     }
+    protokol->flagSpeed = true;
     int errorCode = protokol->RSConnect( comPortName );
     if ( errorCode != 0 )
     {
@@ -186,6 +187,15 @@ bool AllProtokolS::GetIndAdrZ(unsigned char * indAdrZ)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetGroupAdrZ(unsigned char * groupAdrZ)
+{
+    int result;
+    unsigned long data;
+    result = protokol->ReadFlashInvert( 0x05, & data );
+    *groupAdrZ = (data & 0xFF);
+    return ErrorChecked( result );
+}
+//---------------------------------------------------------------------------
 bool AllProtokolS::GetDnuZ(unsigned short * dnuZ)
 {
     int result;
@@ -204,6 +214,14 @@ bool AllProtokolS::GetVoltageHiZ_Bd85(unsigned short * voltageHiZ)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetWidthPwmZ_Bd85(unsigned short * widthPwmZ)
+{
+    int result;
+    unsigned long data;
+    result = protokol->ReadFlashInvert( 0x08, & data );
+    *widthPwmZ = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
