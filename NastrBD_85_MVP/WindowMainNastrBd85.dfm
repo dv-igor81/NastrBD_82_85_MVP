@@ -1513,7 +1513,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 15
             Text = '   '#1042
           end
-          object Panel_VoltageHi_0: TPanel
+          object Panel_VoltageHiZad_0: TPanel
             Left = 8
             Top = 104
             Width = 241
@@ -1583,7 +1583,7 @@ object WindowMainBd85: TWindowMainBd85
               '1290'
               '1300')
           end
-          object Edit_VoltageHi_3: TEdit
+          object Edit_VoltageHiZad_3: TEdit
             Left = 394
             Top = 104
             Width = 43
@@ -1602,7 +1602,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 19
             Text = '   '#1042
           end
-          object Panel_WidthPwm_0: TPanel
+          object Panel_WidthPwmZad_0: TPanel
             Left = 8
             Top = 126
             Width = 241
@@ -1618,7 +1618,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 20
           end
-          object Edit_WidthPwm: TEdit
+          object Edit_WidthPwmZad: TEdit
             Left = 250
             Top = 126
             Width = 67
@@ -1634,14 +1634,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 21
           end
-          object Panel_WidthPwm_2: TPanel
+          object Panel_WidthPwmZad_2: TPanel
             Left = 318
             Top = 126
             Width = 75
             Height = 20
             TabOrder = 22
           end
-          object Edit_WidthPwm_3: TEdit
+          object Edit_WidthPwmZad_3: TEdit
             Left = 394
             Top = 126
             Width = 43
@@ -1660,7 +1660,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 23
             Text = ' '#1077#1076'.'
           end
-          object Panel28: TPanel
+          object Panel_OffsetPwmZad_0: TPanel
             Left = 8
             Top = 148
             Width = 241
@@ -1676,7 +1676,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 24
           end
-          object Edit18: TEdit
+          object Edit_OffsetPwmZad: TEdit
             Left = 250
             Top = 148
             Width = 67
@@ -1692,14 +1692,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 25
           end
-          object Panel29: TPanel
+          object Panel_OffsetPwmZad_2: TPanel
             Left = 318
             Top = 148
             Width = 75
             Height = 20
             TabOrder = 26
           end
-          object Edit19: TEdit
+          object Edit_OffsetPwmZad_3: TEdit
             Left = 394
             Top = 148
             Width = 43

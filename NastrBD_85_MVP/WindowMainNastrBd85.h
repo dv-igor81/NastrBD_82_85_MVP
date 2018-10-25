@@ -67,18 +67,18 @@ __published:	// IDE-managed Components
         TEdit *Edit_DnuZad_Code;
         TMaskEdit *Edit_DnuZad_Value;
         TEdit *Edit_DnuZad_3;
-        TPanel *Panel_VoltageHi_0;
+        TPanel *Panel_VoltageHiZad_0;
         TEdit *Edit_VoltageHiZad_Code;
         TComboBox *comboBox_VoltageHiZad_Value;
-        TEdit *Edit_VoltageHi_3;
-        TPanel *Panel_WidthPwm_0;
-        TEdit *Edit_WidthPwm;
-        TPanel *Panel_WidthPwm_2;
-        TEdit *Edit_WidthPwm_3;
-        TPanel *Panel28;
-        TEdit *Edit18;
-        TPanel *Panel29;
-        TEdit *Edit19;
+        TEdit *Edit_VoltageHiZad_3;
+        TPanel *Panel_WidthPwmZad_0;
+        TEdit *Edit_WidthPwmZad;
+        TPanel *Panel_WidthPwmZad_2;
+        TEdit *Edit_WidthPwmZad_3;
+        TPanel *Panel_OffsetPwmZad_0;
+        TEdit *Edit_OffsetPwmZad;
+        TPanel *Panel_OffsetPwmZad_2;
+        TEdit *Edit_OffsetPwmZad_3;
         TPanel *Panel2;
         TEdit *Edit16;
         TPanel *Panel6;
@@ -262,7 +262,5 @@ public:		// User declarations
 
     HelperConnectFourBdProt* GetConnectFourBdProt();
 };
-//---------------------------------------------------------------------------
-//extern PACKAGE TWindowMainBd85 *WindowMainBd85;
 //---------------------------------------------------------------------------
 #endif

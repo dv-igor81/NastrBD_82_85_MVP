@@ -217,6 +217,18 @@ bool PresenterWindowMainBd85::ReadEEProm()
     {
         return false;
     }
+    if ( _readParamIndex == 6 )
+    {
+        if ( _allProtokol->GetOffsetPwmZ_Bd85( & _offsetPwmZ ) == false )
+        {
+            return false;
+        }
+        _readParamIndex++;
+    }
+    if ( _isConnected == false )
+    {
+        return false;
+    }
 
     _data = new StartDataNewBd85(
         _verPo // Версия прошивки
@@ -225,6 +237,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
         , _dnuZad // ДНУ заданное КОД
         , _voltageHiZad // Напряжение высокое заданное КОД
         , _widthPwmZad // Длительность ШИМ заданная
+        , _offsetPwmZ //  Смешение ШИМ заданное
         );
     _task->BeginInvoke( & as_OprosStarInvoke );
     return true;

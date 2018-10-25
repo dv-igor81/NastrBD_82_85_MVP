@@ -69,6 +69,7 @@ private:
     unsigned short _dnuZad;
     unsigned short _voltageHiZad;
     unsigned short _widthPwmZad;
+    unsigned short _offsetPwmZ;
     //<<=== Данные, считанные из EEPROM МК в БД
 };
 //---------------------------------------------------------------------------

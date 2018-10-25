@@ -7,8 +7,6 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
-//TWindowMainBd85 *WindowMainBd85;
-//---------------------------------------------------------------------------
 __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         : TForm(Owner)
         , as_wrapShow(this, &TWindowMainBd85::WrapShow)
@@ -225,7 +223,8 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_DnuZad_Value->Text = data->GetDnuValueZad();
     Edit_VoltageHiZad_Code->Text = data->GetVoltageHiZad();
     comboBox_VoltageHiZad_Value->Text = data->GetVoltageHiValueZad();
-    Edit_WidthPwm->Text = data->GetWidthPwmZad();
+    Edit_WidthPwmZad->Text = data->GetWidthPwmZad();
+    Edit_OffsetPwmZad->Text = data->GetOffsetPwmZad();
 
     delete data; // Освободить память
 }

@@ -12,6 +12,7 @@ public:
         , unsigned short dnuZad
         , unsigned short voltageHiZad
         , unsigned short widthPwmZad // Длительность ШИМ заданная
+        , unsigned short offsetPwmZ // Смешение ШИМ заданное
     );
     StartDataNewBd85();        
     const char* GetVerPo();
@@ -22,6 +23,7 @@ public:
     const char* GetVoltageHiZad();
     const char* GetVoltageHiValueZad();
     const char* GetWidthPwmZad();
+    const char* GetOffsetPwmZad();
 private:
     enum { verPoSize = 5
         , indAddrZadSize = 4
@@ -36,6 +38,7 @@ private:
     char _voltageHiZad[uShortTextSize];
     char _voltageHiValueZad[floatTextSize];
     char _widthPwmZad[uShortTextSize]; // Длительность ШИМ заданная
+    char _offsetPwmZ[uShortTextSize]; // Смешение ШИМ заданное
 };
 //---------------------------------------------------------------------------
 #endif

@@ -33,6 +33,7 @@ public:
     virtual bool GetDnuZ(unsigned short * dnuZ) = 0; // Считать значение ДНУ заданное
     virtual bool GetVoltageHiZ_Bd85(unsigned short * voltageHiZ) = 0; // Считать напряжение высокое заданное
     virtual bool GetWidthPwmZ_Bd85(unsigned short * widthPwmZ) = 0; // Считать длительность ШИМ заданная
+    virtual bool GetOffsetPwmZ_Bd85(unsigned short * offsetPwmZ) = 0; // Считать смешение ШИМ заданное
 };
 //---------------------------------------------------------------------------
 #endif

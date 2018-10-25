@@ -223,6 +223,14 @@ bool AllProtokolS::GetWidthPwmZ_Bd85(unsigned short * widthPwmZ)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetOffsetPwmZ_Bd85(unsigned short * offsetPwmZ)
+{
+    int result;
+    unsigned long data;
+    result = protokol->ReadFlashInvert( 0x09, & data );
+    *offsetPwmZ = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

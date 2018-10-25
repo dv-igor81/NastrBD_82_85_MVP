@@ -14,6 +14,7 @@ StartDataNewBd85::StartDataNewBd85(
         , unsigned short dnuZad
         , unsigned short voltageHiZad
         , unsigned short widthPwmZad // Длительность ШИМ заданная
+        , unsigned short offsetPwmZ // Смешение ШИМ заданное
     )
 {
     TextHelper::CopyText(_verPo, verPo, verPoSize);
@@ -27,6 +28,7 @@ StartDataNewBd85::StartDataNewBd85(
     sprintf(_voltageHiZad, "%d", voltageHiZad);
     sprintf(_voltageHiValueZad, "%0.2f", voltageValueZad);
     sprintf(_widthPwmZad, "%d", widthPwmZad);
+    sprintf(_offsetPwmZ, "%d", offsetPwmZ);
 }
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85()
@@ -39,6 +41,7 @@ StartDataNewBd85::StartDataNewBd85()
     TextHelper::SetCharInText(_voltageHiZad, 0, uShortTextSize);
     TextHelper::SetCharInText(_voltageHiValueZad, 0, floatTextSize);
     TextHelper::SetCharInText(_widthPwmZad, 0, uShortTextSize);
+    TextHelper::SetCharInText(_offsetPwmZ, 0, uShortTextSize);
 }
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetVerPo()
@@ -81,6 +84,10 @@ const char* StartDataNewBd85::GetWidthPwmZad()
     return _widthPwmZad;
 }
 //---------------------------------------------------------------------------
+const char* StartDataNewBd85::GetOffsetPwmZad()
+{
+    return _offsetPwmZ;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
