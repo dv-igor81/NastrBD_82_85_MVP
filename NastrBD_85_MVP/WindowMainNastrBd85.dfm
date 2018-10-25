@@ -270,9 +270,9 @@ object WindowMainBd85: TWindowMainBd85
         end
         object GroupBox2: TGroupBox
           Left = 1
-          Top = 198
+          Top = 221
           Width = 446
-          Height = 145
+          Height = 141
           Caption = ' '#1055#1086#1083#1091#1095#1077#1085#1080#1077' '#1089#1095#1105#1090#1072' '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -728,7 +728,7 @@ object WindowMainBd85: TWindowMainBd85
           Left = 1
           Top = -1
           Width = 446
-          Height = 199
+          Height = 219
           Caption = ' '#1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1089' '#1041#1044' '
           Ctl3D = True
           Font.Charset = DEFAULT_CHARSET
@@ -759,9 +759,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 0
           end
           object Panel_rate_Code: TPanel
-            Left = 249
+            Left = 250
             Top = 16
-            Width = 68
+            Width = 67
             Height = 20
             Alignment = taLeftJustify
             Caption = '     '#1050#1054#1044
@@ -828,9 +828,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 4
           end
           object EmptyPanel01: TPanel
-            Left = 249
+            Left = 250
             Top = 38
-            Width = 68
+            Width = 67
             Height = 20
             TabOrder = 5
           end
@@ -878,9 +878,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 8
           end
           object EmptyPanel02: TPanel
-            Left = 249
+            Left = 250
             Top = 60
-            Width = 68
+            Width = 67
             Height = 20
             TabOrder = 9
           end
@@ -928,9 +928,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 12
           end
           object TprCodeEdit: TEdit
-            Left = 250
+            Left = 251
             Top = 82
-            Width = 67
+            Width = 66
             Height = 20
             TabStop = False
             Color = clMoneyGreen
@@ -1001,9 +1001,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 16
           end
           object DNUICodeEdit: TEdit
-            Left = 250
+            Left = 251
             Top = 104
-            Width = 67
+            Width = 66
             Height = 20
             TabStop = False
             Color = clMoneyGreen
@@ -1074,9 +1074,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 20
           end
           object UhiICodeEdit: TEdit
-            Left = 250
+            Left = 251
             Top = 126
-            Width = 67
+            Width = 66
             Height = 20
             TabStop = False
             Color = clMoneyGreen
@@ -1147,9 +1147,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 24
           end
           object Edit5: TEdit
-            Left = 250
+            Left = 251
             Top = 148
-            Width = 67
+            Width = 66
             Height = 20
             TabStop = False
             Color = clMoneyGreen
@@ -1220,9 +1220,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 28
           end
           object Edit10: TEdit
-            Left = 250
+            Left = 251
             Top = 170
-            Width = 67
+            Width = 66
             Height = 20
             TabStop = False
             Color = clMoneyGreen
@@ -1274,12 +1274,74 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 31
             Text = '  '#1084#1082#1089
           end
+          object Panel16: TPanel
+            Left = 8
+            Top = 192
+            Width = 241
+            Height = 20
+            Alignment = taLeftJustify
+            BorderWidth = 1
+            Caption = ' '#1057#1095#1077#1090' '#1089' '#1041#1044' '#1079#1072' 1 '#1089#1077#1082' '
+            Ctl3D = True
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -12
+            Font.Name = 'Courier New'
+            Font.Style = []
+            ParentCtl3D = False
+            ParentFont = False
+            TabOrder = 32
+          end
+          object Panel18: TPanel
+            Left = 250
+            Top = 192
+            Width = 67
+            Height = 20
+            TabOrder = 33
+          end
+          object Edit22: TEdit
+            Left = 318
+            Top = 192
+            Width = 75
+            Height = 20
+            TabStop = False
+            Color = clMoneyGreen
+            Ctl3D = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Courier New'
+            Font.Style = []
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 34
+          end
+          object Edit15: TEdit
+            Left = 394
+            Top = 192
+            Width = 43
+            Height = 20
+            TabStop = False
+            Color = clMoneyGreen
+            Ctl3D = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Courier New'
+            Font.Style = []
+            ParentCtl3D = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 35
+            Text = ' '#1080#1084#1087
+          end
         end
         object GroupBox_EEPROM: TGroupBox
           Left = 1
-          Top = 342
+          Top = 365
           Width = 446
-          Height = 247
+          Height = 224
           Caption = ' '#1059#1089#1090#1072#1085#1086#1074#1082#1072' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074' '#1041#1044' '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -1718,7 +1780,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 27
             Text = ' '#1077#1076'.'
           end
-          object Panel2: TPanel
+          object Panel_PeriodPwmZad_0: TPanel
             Left = 8
             Top = 170
             Width = 241
@@ -1734,7 +1796,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 28
           end
-          object Edit16: TEdit
+          object Edit_PeriodPwmZad: TEdit
             Left = 250
             Top = 170
             Width = 67
@@ -1750,14 +1812,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 29
           end
-          object Panel6: TPanel
+          object Panel_PeriodPwmZad_2: TPanel
             Left = 318
             Top = 170
             Width = 75
             Height = 20
             TabOrder = 30
           end
-          object Edit17: TEdit
+          object Edit_PeriodPwmZad_3: TEdit
             Left = 394
             Top = 170
             Width = 43
@@ -1776,71 +1838,9 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 31
             Text = ' '#1077#1076'.'
           end
-          object Panel16: TPanel
-            Left = 8
-            Top = 192
-            Width = 241
-            Height = 20
-            Alignment = taLeftJustify
-            BorderWidth = 1
-            Caption = ' '#1057#1095#1077#1090' '#1089' '#1041#1044' '#1079#1072' 1 '#1089#1077#1082' '
-            Ctl3D = True
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -12
-            Font.Name = 'Courier New'
-            Font.Style = []
-            ParentCtl3D = False
-            ParentFont = False
-            TabOrder = 32
-          end
-          object Panel18: TPanel
-            Left = 249
-            Top = 192
-            Width = 68
-            Height = 20
-            TabOrder = 33
-          end
-          object Edit22: TEdit
-            Left = 318
-            Top = 192
-            Width = 75
-            Height = 21
-            TabStop = False
-            Color = clMoneyGreen
-            Ctl3D = False
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Courier New'
-            Font.Style = []
-            ParentCtl3D = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 34
-          end
-          object Edit15: TEdit
-            Left = 394
-            Top = 192
-            Width = 43
-            Height = 21
-            TabStop = False
-            Color = clMoneyGreen
-            Ctl3D = False
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Courier New'
-            Font.Style = []
-            ParentCtl3D = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 35
-            Text = ' '#1080#1084#1087
-          end
           object button_WriteToEeprom: TButton
             Left = 9
-            Top = 216
+            Top = 193
             Width = 152
             Height = 25
             Caption = #1047#1072#1087#1080#1089#1100' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074
@@ -1850,12 +1850,12 @@ object WindowMainBd85: TWindowMainBd85
             Font.Name = 'Courier New'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 36
+            TabOrder = 32
             OnClick = button_WriteToEepromClick
           end
           object btnDefaults: TButton
             Left = 177
-            Top = 216
+            Top = 193
             Width = 131
             Height = 25
             Caption = #1048#1079' '#1092#1072#1081#1083#1072
@@ -1865,11 +1865,11 @@ object WindowMainBd85: TWindowMainBd85
             Font.Name = 'Courier New'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 37
+            TabOrder = 33
           end
           object btnPwmAuto: TButton
             Left = 321
-            Top = 216
+            Top = 193
             Width = 116
             Height = 25
             Caption = #1064#1048#1052' '#1072#1074#1090#1086
@@ -1880,7 +1880,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Name = 'Courier New'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 38
+            TabOrder = 34
           end
         end
       end
