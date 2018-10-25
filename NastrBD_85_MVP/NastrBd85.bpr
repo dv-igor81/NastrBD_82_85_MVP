@@ -132,18 +132,20 @@ ProductVersion=1.0.0.0
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=5
-Item0=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item1=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item2=Library\smartevents;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item3=D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item4=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Count=6
+Item0=..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item2=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item3=Library\smartevents;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item4=D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item5=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
-Count=3
-Item0=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item1=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item2=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Count=4
+Item0=..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item3=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1

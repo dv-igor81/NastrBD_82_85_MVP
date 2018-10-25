@@ -63,6 +63,9 @@ private:
     double CodeToValue(unsigned short code);
     unsigned short ValueToCode(double value);
 
+    double VoltageHiCodeToValue(unsigned short code);
+    unsigned short VoltageHiValueToCode(double value);
+
     int _readParamIndex;
         enum { verPoSize = 5
         , indAddrZadSize = 4
@@ -74,6 +77,8 @@ private:
     char _indAddrZad[indAddrZadSize];
     char _dnuZad[uShortTextSize];
     char _dnuValueZad[floatTextSize];
+    char _voltageHiZad[uShortTextSize];
+    char _voltageHiValueZad[floatTextSize];
     //<<=== Данные, считанные из EEPROM МК в БД
 };
 //---------------------------------------------------------------------------

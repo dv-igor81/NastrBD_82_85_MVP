@@ -26,6 +26,7 @@ public:
     bool SetTimeInterval(unsigned char timeInt);
     bool GetIndAdrZ(unsigned char * indAdrZ);
     bool GetDnuZ(unsigned short * dnuZ);
+    bool GetVoltageHiZ_Bd85(unsigned short * voltageHiZ);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
 

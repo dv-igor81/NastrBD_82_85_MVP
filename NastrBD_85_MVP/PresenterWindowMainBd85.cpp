@@ -178,7 +178,20 @@ bool PresenterWindowMainBd85::ReadEEProm()
         _readParamIndex++;
         dnuVZ = CodeToValue(dnuZ);
         sprintf(_dnuZad, "%d", dnuZ);
-        sprintf(_dnuValueZad, "%5.3f", dnuVZ);
+        sprintf(_dnuValueZad, "%0.3f", dnuVZ);
+    }
+    if ( _readParamIndex == 3 )
+    {
+        unsigned short voltageHiZ;
+        float hiVZ;
+        if ( _allProtokol->GetVoltageHiZ_Bd85( & voltageHiZ ) == false )
+        {
+            return false;
+        }
+        _readParamIndex++;
+        hiVZ = VoltageHiCodeToValue( voltageHiZ );
+        sprintf(_voltageHiZad, "%d", voltageHiZ);
+        sprintf(_voltageHiValueZad, "%0.2f", hiVZ);
     }
 
     _data = new StartDataNewBd85(
@@ -186,6 +199,8 @@ bool PresenterWindowMainBd85::ReadEEProm()
         , _indAddrZad // Индивидуальный адрес заданный
         , _dnuZad // ДНУ заданное КОД
         , _dnuValueZad // ДНУ заданное ЗНАЧЕНИЕ
+        , _voltageHiZad // Напряжение высокое заданное КОД
+        , _voltageHiValueZad // Напряжение высокое заданное ЗНАЧЕНИЕ
         );
     _task->BeginInvoke( & as_OprosStarInvoke );
     return true;
@@ -204,7 +219,18 @@ unsigned short PresenterWindowMainBd85::ValueToCode(double value)
     return 0; // stub
 }
 //---------------------------------------------------------------------------
+double PresenterWindowMainBd85::VoltageHiCodeToValue(unsigned short code)
+{
+    double retVal = code;
+    retVal *= (2.5 * 1000);
+    retVal /= 4096;
+    return retVal;
+}
 //---------------------------------------------------------------------------
+unsigned short PresenterWindowMainBd85::VoltageHiValueToCode(double value)
+{
+    return 0; // stub
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

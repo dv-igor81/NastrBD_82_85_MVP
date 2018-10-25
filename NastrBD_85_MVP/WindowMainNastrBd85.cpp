@@ -7,6 +7,8 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
+//TWindowMainBd85 *WindowMainBd85;
+//---------------------------------------------------------------------------
 __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         : TForm(Owner)
         , as_wrapShow(this, &TWindowMainBd85::WrapShow)
@@ -220,6 +222,8 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_IndAddrZad->Text = data->GetIndAddrZad();
     Edit_DnuZad_Code->Text = data->GetDnuZad();
     Edit_DnuZad_Value->Text = data->GetDnuValueZad();
+    Edit_VoltageHiZad_Code->Text = data->GetVoltageHiZad();
+    comboBox_VoltageHiZad_Value->Text = data->GetVoltageHiValueZad();
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)

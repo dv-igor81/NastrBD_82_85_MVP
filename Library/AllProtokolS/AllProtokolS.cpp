@@ -190,11 +190,19 @@ bool AllProtokolS::GetDnuZ(unsigned short * dnuZ)
 {
     int result;
     unsigned long data;
-    result = protokol->ReadFlashInvert( 0, & data ); // !!!
+    result = protokol->ReadFlashInvert( 0, & data );
     *dnuZ = (data & 0xFFFF);
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetVoltageHiZ_Bd85(unsigned short * voltageHiZ)
+{
+    int result;
+    unsigned long data;
+    result = protokol->ReadFlashInvert( 0x03, & data );
+    *voltageHiZ = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
