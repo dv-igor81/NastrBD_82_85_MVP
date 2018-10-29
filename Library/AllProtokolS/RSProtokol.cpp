@@ -2,7 +2,6 @@
 #include <stdio.h>
 //---------------------------------------------------------------------------
 #include "RSProtokol.h"
-#include "Unit_82_Form_Start.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -4050,16 +4049,21 @@ int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
   {
     indexArrTime = 0;
   }
-  if (Form_82_Start->bfZvukOn == true)
-  {
-    Form_82_Start->bfZvukOn = false;
-    Form_82_Start->ZvukOn();
-  }
-  if (Form_82_Start->bfZvukOff == true)
-  {
-    Form_82_Start->bfZvukOff = false;
-    Form_82_Start->ZvukOff();
-  }
+
+  //===>>
+  ev_OprosBDParam();
+  //if (Form_82_Start->bfZvukOn == true)
+  //{
+  //  Form_82_Start->bfZvukOn = false;
+  //  Form_82_Start->ZvukOn();
+  //}
+  //if (Form_82_Start->bfZvukOff == true)
+  //{
+  //  Form_82_Start->bfZvukOff = false;
+  //  Form_82_Start->ZvukOff();
+  //} 
+  //<<===
+
   return 0; // удачное завершение
 }
 //---------------------------------------------------------------------------
@@ -4125,10 +4129,13 @@ bool RSProtokol_t::IsPidSResetted()
 //---------------------------------------------------------------------------
 void RSProtokol_t::FlagAvtoSnyatDiskr()
 {
-  Form_82_Start->CheckBox_DAuto_Standart->Checked = false;
-  Form_82_Start->CheckBox_DAuto_Shirokie->Checked = false;
-  Form_82_Start->CheckBox_DAuto_Rengen->Checked = false;
-  Form_82_Start->CheckBox_DAuto->Checked = false;  
+  //===>> 29.10.2018
+  //Form_82_Start->CheckBox_DAuto_Standart->Checked = false;
+  //Form_82_Start->CheckBox_DAuto_Shirokie->Checked = false;
+  //Form_82_Start->CheckBox_DAuto_Rengen->Checked = false;
+  //Form_82_Start->CheckBox_DAuto->Checked = false;
+  ev_FlagAvtoSnyatDiskr();
+  //<<=== 29.10.2018
 }
 //---------------------------------------------------------------------------
 void RSProtokol_t::FlagAvtoSnyat() // Снять галочку "Авто"
@@ -4136,11 +4143,17 @@ void RSProtokol_t::FlagAvtoSnyat() // Снять галочку "Авто"
   // Снять флажек
   if (AutoPodbor_1_Un_2_U81 == 1)
   {
-    Form_82_Start->CheckBox_auto->Checked = false;
+    //===>> 29.10.2018
+    //Form_82_Start->CheckBox_auto->Checked = false;
+    ev_CheckBoxAutoCheckedFalse();
+    //<<=== 29.10.2018
   }
   if (AutoPodbor_1_Un_2_U81 == 2)
   {
-    Form_82_Start->CheckBox_auto_0_81->Checked = false;
+    //===>> 29.10.2018
+    //Form_82_Start->CheckBox_auto_0_81->Checked = false;
+    ev_CheckBox081CheckedFalse();
+    //<<=== 29.10.2018
   }
 }
 //---------------------------------------------------------------------------

@@ -12,7 +12,6 @@
 #include <Buttons.hpp>
 #include <Grids.hpp>
 //---------------------------------------------------------------------------
-//#include "Unit_82_RSProtokol.h"
 #include "RSProtokol.h"
 #include "Protokol_t.h"
 //---------------------------------------------------------------------------
@@ -638,6 +637,17 @@ public:		// User declarations
   // Для запоминания состояния таймера
   int TimeInterv;
   bool bfTimeOnOff;
+
+  //===>> 29.10.2018
+  ActionSelf<> as_FlagAvtoSnyatDiskr;
+  void FlagAvtoSnyatDiskr_As();
+  ActionSelf<> as_OprosBDParam;
+  void OprosBDParam_As();
+  ActionSelf<> as_CheckBoxAutoCheckedFalse;
+  void CheckBoxAutoCheckedFalse_As();
+  ActionSelf<> as_CheckBox081CheckedFalse;
+  void CheckBox081CheckedFalse_As();
+  //<<=== 29.10.2018
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm_82_Start * Form_82_Start;

@@ -2,20 +2,6 @@
 #ifndef RSProtokolH
 #define RSProtokolH
 //---------------------------------------------------------------------------
-//#include "modbus.h"
-//#include "unistd.h"
-//#include "modbus-private.h"
-//#include "config.h"
-//---------------------------------------------------------------------------
-//#include <Sockets.hpp>
-//#include <windows.h>
-//#include <Classes.hpp>
-
-
-
-
-
-//---------------------------------------------------------------------------
 #include "modbus.h"
 #include "unistd.h"
 #include "modbus-private.h"
@@ -29,13 +15,10 @@
 #include <Grids.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
+#include "ActionEvent.h"
+using namespace smartevents;
+//---------------------------------------------------------------------------
 #include <Sockets.hpp>
-//---------------------------------------------------------------------------
-
-
-
-
-//---------------------------------------------------------------------------
 // создание псевдонима именам
 typedef unsigned char uint8_t;
 typedef unsigned short uint16_t;
@@ -503,25 +486,24 @@ public:
   bool IsPidSResetted();
   void FlagAvtoSnyatDiskr();
 
-    //double I_Error = 0.0;
     double I_State;
     double I_Error1;
     double I_State1;
 
     double I_Min1;
     double I_Max1;
-    //double I_Min = DRIVE_MIN;
-    //double I_Max = DRIVE_MAX;
-
 
     const double P_Gain1;
     const double I_Gain1;
     const double DRIVE1_MIN;
     const double DRIVE1_MAX;
-    //const double DRIVE_MIN = -100.0;
-    //const double DRIVE_MAX = 100.0;
-    //nst double P_Gain = -0.036;
-    //nst double I_Gain = -0.42;
+
+    //===>> 29.10.2018
+    ActionEvent<> ev_FlagAvtoSnyatDiskr;
+    ActionEvent<> ev_OprosBDParam;
+    ActionEvent<> ev_CheckBoxAutoCheckedFalse;
+    ActionEvent<> ev_CheckBox081CheckedFalse;
+    //<<=== 29.10.2018
 };
 
 //---------------------------------------------------------------------------

@@ -174,6 +174,10 @@ TOut32 * pOut32 = NULL; // Указатель на функцию Out32
 // Конструктор
 __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
         : TForm(Owner)
+        , as_FlagAvtoSnyatDiskr (this, &TForm_82_Start::FlagAvtoSnyatDiskr_As)
+        , as_OprosBDParam (this, &TForm_82_Start::OprosBDParam_As)
+        , as_CheckBoxAutoCheckedFalse (this, &TForm_82_Start::CheckBoxAutoCheckedFalse_As)
+        , as_CheckBox081CheckedFalse (this, &TForm_82_Start::CheckBox081CheckedFalse_As)
 {
   ptrUhiI = 0;
   kodUhiI = 0;
@@ -225,6 +229,17 @@ __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
   // <<=== 28.02.2015
   // Перенёс из обработчика события "FormShow"
   this->Prot = new RSProtokol_t; // Создать в "куче" экземпляр объекта протокола
+
+
+  //===>> 29.10.2018
+  this->Prot->ev_FlagAvtoSnyatDiskr += as_FlagAvtoSnyatDiskr;
+  this->Prot->ev_OprosBDParam += as_OprosBDParam;
+  this->Prot->ev_CheckBoxAutoCheckedFalse += as_CheckBoxAutoCheckedFalse;
+  this->Prot->ev_CheckBox081CheckedFalse += as_CheckBox081CheckedFalse;
+  //<<=== 29.10.2018
+
+
+
   // Перенёс из обработчика события "FormShow"
   Cprw = new ComPortReadWrite_t(true); // true - Не запускать поток при выделение памяти
   // Перенёс из обработчика события "FormShow"
@@ -4704,4 +4719,38 @@ void __fastcall TForm_82_Start::Edit_2_Col2_4_Row_14Change(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
+//===>> 29.10.2018
+void TForm_82_Start::FlagAvtoSnyatDiskr_As()
+{
+    CheckBox_DAuto_Standart->Checked = false;
+    CheckBox_DAuto_Shirokie->Checked = false;
+    CheckBox_DAuto_Rengen->Checked = false;
+    CheckBox_DAuto->Checked = false;
+}
+//---------------------------------------------------------------------------
+void TForm_82_Start::OprosBDParam_As()
+{
+  if (bfZvukOn == true)
+  {
+    bfZvukOn = false;
+    ZvukOn();
+  }
+  if (bfZvukOff == true)
+  {
+    bfZvukOff = false;
+    ZvukOff();
+  }
+}
+//---------------------------------------------------------------------------
+void TForm_82_Start::CheckBoxAutoCheckedFalse_As()
+{
+    CheckBox_auto->Checked = false;
+}
+//---------------------------------------------------------------------------
+void TForm_82_Start::CheckBox081CheckedFalse_As()
+{
+    CheckBox_auto_0_81->Checked = false;
+}
+//---------------------------------------------------------------------------
+//<<=== 29.10.2018
 
