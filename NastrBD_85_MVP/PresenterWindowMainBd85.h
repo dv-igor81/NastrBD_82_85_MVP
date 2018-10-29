@@ -13,7 +13,8 @@ public:
     PresenterWindowMainBd85(
         IWindowMainBd85 * view,
         IAllProtokolS * allProtokol,
-        ITask * task);
+        ITask * task,
+        ActionSelf<> & as_ShowDispetWindow);
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
 private:
@@ -57,6 +58,8 @@ private:
 
     ActionEvent<IterDataNewBd85*> ev_DisplayIterData;
     IterDataNewBd85* _iterData;
+
+    ActionEvent<> ev_ShowDispetWindow;
 
     bool InitMkInBd();
     bool _isConnected;

@@ -7,10 +7,11 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-WindowLoader::WindowLoader(TComponent* Owner) :
+WindowLoader::WindowLoader(TForm * Owner) :
     _presenter(0),
     _allProtokol(0),
-    _task(0)
+    _task(0),
+    as_ShowDispetWindow(this, &WindowLoader::ShowDispetWindow)
 {
     _owner = Owner;
     _allProtokol = new AllProtokolS();
@@ -27,7 +28,7 @@ WindowLoader::~WindowLoader()
     delete _task;
 }
 //---------------------------------------------------------------------------
-void WindowLoader::LoadWindowMain()
+void WindowLoader::LoadWindowBd85Main()
 {
     bool viewIsLoaded = true;
     if ( _presenter == 0 )
@@ -42,7 +43,16 @@ void WindowLoader::LoadWindowMain()
     if ( viewIsLoaded == false )
     {
         TWindowMainBd85 * view = new TWindowMainBd85(_owner);
-        _presenter = new PresenterWindowMainBd85(view, _allProtokol, _task);
+        _presenter = new PresenterWindowMainBd85(
+            view,
+            _allProtokol,
+            _task,
+            as_ShowDispetWindow);
     }
+}
+//---------------------------------------------------------------------------
+void WindowLoader::ShowDispetWindow()
+{
+    _owner->Show();
 }
 //---------------------------------------------------------------------------

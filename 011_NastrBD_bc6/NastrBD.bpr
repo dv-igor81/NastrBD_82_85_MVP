@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="NastrBD.exe"/>
+    <OBJFILES value="NastrBD.obj BD82SRC\Unit_82_ComPortReadWrite.obj 
+      BD82SRC\Unit_82_FileDirect.obj BD82SRC\Unit_82_Form_Graph.obj 
+      BD82SRC\Unit_82_Form_ARCH.obj BD82SRC\Unit_82_Form_LoadParam.obj 
+      BD82SRC\Unit_82_Form_Puasson.obj BD82SRC\Unit_82_Form_Puasson8BD.obj 
+      BD82SRC\Unit_82_Form_Puasson8BD_RepErr.obj 
+      BD82SRC\Unit_82_Form_RearFromEEPROM.obj BD82SRC\Unit_82_Form_Start.obj 
+      BD82SRC\Unit_82_Priklad_Funk.obj BD82SRC\Unit_82_Resourse.obj 
+      BD82SRC\Unit_82_Form_Spectr.obj BD82SRC\Unit_82_Form_Image.obj 
+      BD82SRC\Unit_82_Log.obj Utilites_For_Edit.obj 
+      ..\Library\AllProtokolS\AllProtokolS.obj 
+      ..\Library\AllProtokolS\IAllProtokolS.obj 
+      ..\Library\AllProtokolS\modbus.obj ..\Library\AllProtokolS\modbus-data.obj 
+      ..\Library\AllProtokolS\modbus-tcp.obj 
+      ..\Library\AllProtokolS\RSProtokol.obj 
+      ..\Library\AllProtokolS\Protokol_t.obj ..\Library\Unit_DIA_Global_Funk.obj 
+      ..\Library\smartevents\ActionAllBase.obj 
+      ..\Library\smartevents\ActionDebugSettings.obj 
+      ..\Library\smartevents\ActionEventBase.obj 
+      ..\Library\smartevents\ActionObjectBase.obj 
+      ..\Library\smartevents\ActionSelfBase.obj ..\Library\Utilites\TextHelper.obj"/>
+    <RESFILES value="NastrBD.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) BD82SRC\Unit_82_Form_Graph.dfm BD82SRC\Unit_82_Form_ARCH.dfm 
+      BD82SRC\Unit_82_Form_LoadParam.dfm BD82SRC\Unit_82_Form_Puasson.dfm 
+      BD82SRC\Unit_82_Form_Puasson8BD.dfm 
+      BD82SRC\Unit_82_Form_Puasson8BD_RepErr.dfm 
+      BD82SRC\Unit_82_Form_RearFromEEPROM.dfm BD82SRC\Unit_82_Form_Start.dfm 
+      BD82SRC\Unit_82_Form_Spectr.dfm BD82SRC\Unit_82_Form_Image.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="inet.lib tee.lib vclx.lib bcbsmp.lib vcl.lib rtl.lib"/>
+    <SPARELIBS value="rtl.lib vcl.lib bcbsmp.lib vclx.lib tee.lib inet.lib"/>
+    <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
+      vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
+      teedb.bpi tee.bpi dss.bpi teeqr.bpi visualclx.bpi visualdbclx.bpi 
+      dsnapcrba.bpi dsnapcon.bpi bcbsmp.bpi vclie.bpi xmlrtl.bpi inet.bpi 
+      inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
+      bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
+      indy.bpi bcb2kaxserver.bpi Iocomp65.bpi"/>
+    <PATHCPP value=".;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Utilites"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="NO_STRICT"/>
+    <MAINSOURCE value="NastrBD.cpp"/>
+    <INCLUDEPATH value="..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB"/>
+    <LIBPATH value="..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I..\Library\Utilites -I..\Library\smartevents -I..\Library 
+      -I..\Library\AllProtokolS 
+      -I&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot; -IBD82SRC\lmb 
+      -IBD82SRC -I$(BCB)\include -I$(BCB)\include\vcl -I..\DIA_SRC_LIB 
+      -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tW -tWM"/>
+    <PFLAGS value="-$Y+ -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mt.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="NastrBD.res" FORMNAME="" UNITNAME="NastrBD.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="NastrBD.cpp" FORMNAME="" UNITNAME="NastrBD" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_ComPortReadWrite.cpp" FORMNAME="" UNITNAME="Unit_82_ComPortReadWrite.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_FileDirect.cpp" FORMNAME="" UNITNAME="Unit_82_FileDirect.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_Graph.cpp" FORMNAME="Form_Graph" UNITNAME="Unit_82_Form_Graph" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_ARCH.cpp" FORMNAME="Form_ARCH" UNITNAME="Unit_82_Form_ARCH" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_LoadParam.cpp" FORMNAME="Form_LoadParam" UNITNAME="Unit_82_Form_LoadParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_Puasson.cpp" FORMNAME="Form_Puasson" UNITNAME="Unit_82_Form_Puasson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_Puasson8BD.cpp" FORMNAME="FormPuasson8BD" UNITNAME="Unit_82_Form_Puasson8BD" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_Puasson8BD_RepErr.cpp" FORMNAME="FormPuasson8BDPepErr" UNITNAME="Unit_82_Form_Puasson8BD_RepErr" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_RearFromEEPROM.cpp" FORMNAME="Form_RearFromEEPROM" UNITNAME="Unit_82_Form_RearFromEEPROM" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_Start.cpp" FORMNAME="Form_82_Start" UNITNAME="Unit_82_Form_Start" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Priklad_Funk.cpp" FORMNAME="" UNITNAME="Unit_82_Priklad_Funk.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Resourse.cpp" FORMNAME="" UNITNAME="Unit_82_Resourse.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_Spectr.cpp" FORMNAME="Form_82_Spectr_BD84" UNITNAME="Unit_82_Form_Spectr" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Form_Image.cpp" FORMNAME="Form_Image" UNITNAME="Unit_82_Form_Image" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="BD82SRC\Unit_82_Log.cpp" FORMNAME="" UNITNAME="Unit_82_Log" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Utilites_For_Edit.cpp" FORMNAME="" UNITNAME="Utilites_For_Edit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\AllProtokolS.cpp" FORMNAME="" UNITNAME="AllProtokolS.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\IAllProtokolS.cpp" FORMNAME="" UNITNAME="IAllProtokolS.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\modbus.cpp" FORMNAME="" UNITNAME="modbus.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\modbus-data.cpp" FORMNAME="" UNITNAME="modbus-data.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\modbus-tcp.cpp" FORMNAME="" UNITNAME="modbus-tcp.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\Protokol_t.cpp" FORMNAME="" UNITNAME="Protokol_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\Unit_DIA_Global_Funk.cpp" FORMNAME="" UNITNAME="Unit_DIA_Global_Funk" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionAllBase.cpp" FORMNAME="" UNITNAME="ActionAllBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionDebugSettings.cpp" FORMNAME="" UNITNAME="ActionDebugSettings.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionEventBase.cpp" FORMNAME="" UNITNAME="ActionEventBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionObjectBase.cpp" FORMNAME="" UNITNAME="ActionObjectBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\smartevents\ActionSelfBase.cpp" FORMNAME="" UNITNAME="ActionSelfBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\Utilites\TextHelper.cpp" FORMNAME="" UNITNAME="TextHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=4
+MinorVer=0
+Release=0
+Build=3
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=VNIIA
+FileDescription=ТСРМ82.100
+FileVersion=4.0.0.3
+InternalName=
+LegalCopyright=Дорофеев Игорь Александрович (подр. 561)
+LegalTrademarks=
+OriginalFilename=NastrBD
+ProductName=
+ProductVersion=4.0
+Comments=Программа для настройки БД ТСРМ82.100
+
+[HistoryLists\hlIncludePath]
+Count=10
+Item0=BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB
+Item1=D:\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;D:\ProjectS\BUILDER6\031_NastrBD_82_85\DIA_SRC_LIB
+Item2=BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;D:\ProjectS\BUILDER6\031_NastrBD_82_85\DIA_SRC_LIB
+Item3=..\..\..\..\..\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;..\..\..\..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl;D:\ВНИИА\02. Игорь Дорофеев\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB
+Item4=lmb;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl;D:\ВНИИА\02. Игорь Дорофеев\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB
+Item5=..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item6=..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item7=BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item8=..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item9=E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=11
+Item0=..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\DIA_SRC_LIB;D:\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item2=BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item3=..\..\..\..\..\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item4=..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item5=..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item6=BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item7=..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item8=$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item9=E:\011_NastrBD_bc6;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item10=E:\011_NastrBD_bc6;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=3
+Item0=_DEBUG
+Item1=_DEBUG; _DIA_OBEDINENIE_
+Item2=_DEBUG;_DIA_OBEDINENIE_
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

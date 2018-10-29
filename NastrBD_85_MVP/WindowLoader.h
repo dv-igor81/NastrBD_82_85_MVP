@@ -11,14 +11,17 @@
 class WindowLoader 
 {
 public:
-    WindowLoader(TComponent* Owner);
+    WindowLoader(TForm * Owner);
     ~WindowLoader();
-    void LoadWindowMain();
+    void LoadWindowBd85Main();
 private:
-    TComponent * _owner;
+    TForm * _owner;
     PresenterWindowMainBd85 * _presenter;
     IAllProtokolS * _allProtokol;
     ITask * _task;
+    //===
+    ActionSelf<> as_ShowDispetWindow;
+    void ShowDispetWindow();
 };
 //---------------------------------------------------------------------------
 #endif

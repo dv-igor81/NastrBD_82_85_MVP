@@ -1,20 +1,16 @@
 //---------------------------------------------------------------------------
+
 #include <vcl.h>
 #pragma hdrstop
-#include "WindowStartNastrBd85.h"
+
+#include "Unit_82_Form_Image.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-TWindowStart *WindowStart;
+TForm_Image *Form_Image;
 //---------------------------------------------------------------------------
-__fastcall TWindowStart::TWindowStart(TComponent* Owner)
-        : TForm(Owner), viewLoader(this)
+__fastcall TForm_Image::TForm_Image(TComponent* Owner)
+        : TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TWindowStart::Button_StartClick(TObject *Sender)
-{
-    viewLoader.LoadWindowBd85Main();
-}
-//---------------------------------------------------------------------------
-

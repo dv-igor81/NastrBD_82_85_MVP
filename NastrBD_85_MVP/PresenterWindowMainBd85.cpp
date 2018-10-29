@@ -8,7 +8,8 @@
 PresenterWindowMainBd85::PresenterWindowMainBd85(
     IWindowMainBd85 * view,
     IAllProtokolS * allProtokol,
-    ITask * task) :
+    ITask * task,
+    ActionSelf<> & as_ShowDispetWindow) :
         as_FormClose(this, &PresenterWindowMainBd85::FormClose)
         , as_OprosStar(this, &PresenterWindowMainBd85::OprosStar)
         , as_OprosStarInvoke(this, &PresenterWindowMainBd85::OprosStarInvoke)
@@ -34,6 +35,8 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayStartData += _view->GetSelfDisplayStartData();
     *_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
     ev_DisplayIterData += _view->GetSelfDisplayIterData();
+
+    ev_ShowDispetWindow += as_ShowDispetWindow;
 }
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
@@ -45,6 +48,7 @@ void PresenterWindowMainBd85::FormClose()
 {
     _connectBdProt->Disconnect();
     _isViewLoaded = false;
+    ev_ShowDispetWindow(); // Показать форму диспетчера
 }
 //---------------------------------------------------------------------------
 bool PresenterWindowMainBd85::IsViewLoaded()

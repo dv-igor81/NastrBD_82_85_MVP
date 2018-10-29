@@ -2,12 +2,39 @@
 #ifndef RSProtokolH
 #define RSProtokolH
 //---------------------------------------------------------------------------
+//#include "modbus.h"
+//#include "unistd.h"
+//#include "modbus-private.h"
+//#include "config.h"
+//---------------------------------------------------------------------------
+//#include <Sockets.hpp>
+//#include <windows.h>
+//#include <Classes.hpp>
+
+
+
+
+
+//---------------------------------------------------------------------------
 #include "modbus.h"
 #include "unistd.h"
 #include "modbus-private.h"
 #include "config.h"
 //---------------------------------------------------------------------------
+#include <Classes.hpp>
+#include <Controls.hpp>
+#include <StdCtrls.hpp>
+#include <Forms.hpp>
+#include <ComCtrls.hpp>
+#include <Grids.hpp>
+#include <ExtCtrls.hpp>
+//---------------------------------------------------------------------------
 #include <Sockets.hpp>
+//---------------------------------------------------------------------------
+
+
+
+
 //---------------------------------------------------------------------------
 // создание псевдонима именам
 typedef unsigned char uint8_t;
@@ -418,21 +445,21 @@ public:
   int data_bit;
   int stop_bit;
 
-  //unsigned long Edit_3_01;
-  //unsigned long Edit_3_02;
-  //unsigned long Edit_3_03;
-  //unsigned long Edit_3_04;
-  //unsigned long Edit_3_05;
-  //unsigned long Edit_3_06;
-  //unsigned long Edit_3_07;
-  //unsigned long Edit_3_08;
-  //unsigned long Edit_3_09;
-  //unsigned long Edit_3_10;
-  //unsigned long Edit_3_11;
-  //unsigned long Edit_3_12;
-  //unsigned long Edit_3_13;
-  //unsigned long Edit_3_14;
-  //unsigned long Edit_3_15;
+  unsigned long Edit_3_01;
+  unsigned long Edit_3_02;
+  unsigned long Edit_3_03;
+  unsigned long Edit_3_04;
+  unsigned long Edit_3_05;
+  unsigned long Edit_3_06;
+  unsigned long Edit_3_07;
+  unsigned long Edit_3_08;
+  unsigned long Edit_3_09;
+  unsigned long Edit_3_10;
+  unsigned long Edit_3_11;
+  unsigned long Edit_3_12;
+  unsigned long Edit_3_13;
+  unsigned long Edit_3_14;
+  unsigned long Edit_3_15;
 
   unsigned long * ptr_Edit_3_01__14[15];
   unsigned short AddrRegModBus_BD82[15];
@@ -461,32 +488,41 @@ public:
 
   DWORD ReadTimeout;
   DWORD WriteTimeout;
+
+  int OprosBD_2(void); // -1 - ошибка связи, 0 - звязь работает
+  void OprosSpectra(bool bf); // bf = true - разрешить опрос спектра в функции OprosBD()
+  int OprosBD( void ); // -1 - ошибка связи, 0 - звязь работает
+  int OprosBDSpektr(bool bfTime, int * iTimeRead, int * iTimeGotov );
+  int OprosBDParam( void );
+  void SetKolTikSpectr(unsigned char kolTik);
+  bool bFlagChengeKolTik;
+  double UpdatePID0(double error);
+  void ResetPID0(void);
+  double UpdatePID1(double error);
+  void ResetPID1(void);
+  bool IsPidSResetted();
+  void FlagAvtoSnyatDiskr();
+
+    //double I_Error = 0.0;
+    double I_State;
+    double I_Error1;
+    double I_State1;
+
+    double I_Min1;
+    double I_Max1;
+    //double I_Min = DRIVE_MIN;
+    //double I_Max = DRIVE_MAX;
+
+
+    const double P_Gain1;
+    const double I_Gain1;
+    const double DRIVE1_MIN;
+    const double DRIVE1_MAX;
+    //const double DRIVE_MIN = -100.0;
+    //const double DRIVE_MAX = 100.0;
+    //nst double P_Gain = -0.036;
+    //nst double I_Gain = -0.42;
 };
-//---------------------------------------------------------------------------
-//double I_Error = 0.0;
-//double I_State = 0.0;
-
-//double I_Error1 = 0.0;
-//double I_State1 = 0.0;
-
-//const double P_Gain1 = 12.0;
-//const double I_Gain1 = 2.0;
-
-//const double DRIVE1_MIN = -25.0;
-//const double DRIVE1_MAX	= 25.0;
-
-//const double DRIVE_MIN = -100.0;
-//const double DRIVE_MAX = 100.0;
-
-//const double P_Gain	= -0.036;
-//const double I_Gain	= -0.42;
-
-//double I_Min1 = DRIVE1_MIN;
-//double I_Max1 = DRIVE1_MAX;
-
-//double I_Min = DRIVE_MIN;
-//double I_Max = DRIVE_MAX;
-
 
 //---------------------------------------------------------------------------
 #endif
