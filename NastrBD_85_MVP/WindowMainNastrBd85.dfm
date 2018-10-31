@@ -1055,7 +1055,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 19
             Text = '   '#1042
           end
-          object UhiIPanel: TPanel
+          object Panel_VoltageHi_0: TPanel
             Left = 8
             Top = 126
             Width = 241
@@ -1073,7 +1073,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 20
           end
-          object UhiICodeEdit: TEdit
+          object Edit_VoltageHi_Code: TEdit
             Left = 251
             Top = 126
             Width = 66
@@ -1091,7 +1091,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 21
           end
-          object Edit14: TEdit
+          object Edit_VoltageHi_Value: TEdit
             Left = 318
             Top = 126
             Width = 75
@@ -1109,7 +1109,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 22
           end
-          object UhiIUnitEdit: TEdit
+          object Edit_VoltageHi_3: TEdit
             Left = 394
             Top = 126
             Width = 43

@@ -106,10 +106,10 @@ __published:	// IDE-managed Components
         TEdit *Edit_DNU_Code;
         TEdit *Edit_DNU_Value;
         TEdit *Edit_DNU_3;
-        TPanel *UhiIPanel;
-        TEdit *UhiICodeEdit;
-        TEdit *Edit14;
-        TEdit *UhiIUnitEdit;
+        TPanel *Panel_VoltageHi_0;
+        TEdit *Edit_VoltageHi_Code;
+        TEdit *Edit_VoltageHi_Value;
+        TEdit *Edit_VoltageHi_3;
         TPanel *Panel1;
         TEdit *Edit5;
         TEdit *Edit20;

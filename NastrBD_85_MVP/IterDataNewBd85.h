@@ -10,6 +10,7 @@ public:
         , unsigned char groupAddr // Групповой адрес
         , unsigned short temperature // Температура МК (КОД)
         , unsigned short dnu
+        , unsigned short voltageHi
     );
     IterDataNewBd85();
 
@@ -19,6 +20,8 @@ public:
     const char* GetTemperatureValue();
     const char* GetDnuCode();
     const char* GetDnuValue();
+    const char* GetVoltageHiCode();
+    const char* GetVoltageHiValue();
 private:
     enum { indAddrSize = 4
         , uShortTextSize = 6 // 5 цифр и завершающий ноль
@@ -30,6 +33,8 @@ private:
     char _temperatureValue[floatTextSize];
     char _dnuCode[uShortTextSize];
     char _dnuValue[floatTextSize];
+    char _voltageHiCode[uShortTextSize];
+    char _voltageHiValue[floatTextSize];
 };
 //---------------------------------------------------------------------------
 #endif

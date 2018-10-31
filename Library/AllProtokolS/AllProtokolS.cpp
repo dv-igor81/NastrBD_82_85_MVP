@@ -275,6 +275,13 @@ bool AllProtokolS::GetDVU(unsigned short * dvu)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetVoltageHi(unsigned short * voltageHi)
+{
+    unsigned int data;
+    int result = protokol->GetUhi( & data );
+    *voltageHi = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

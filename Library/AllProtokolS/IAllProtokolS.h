@@ -41,6 +41,7 @@ public:
     virtual bool GetTemperature(unsigned short * temper) = 0; // Получить температуру МК (КК 0x08)
     virtual bool GetDNU(unsigned short * dnu) = 0; // Получить ДНУ измеренное (КК 0x17)
     virtual bool GetDVU(unsigned short * dvu) = 0; // Получить ДВУ измеренное (КК 0x18)
+    virtual bool GetVoltageHi(unsigned short * voltageHi) = 0; // Считать напряжение высокое (КК 0x07)
 };
 //---------------------------------------------------------------------------
 #endif

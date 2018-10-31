@@ -83,6 +83,7 @@ private:
     unsigned char _groupAddr;
     unsigned short _temperature;
     unsigned short _dnu;
+    unsigned short _voltageHi;
 };
 //---------------------------------------------------------------------------
 #endif

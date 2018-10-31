@@ -37,6 +37,7 @@ public:
     bool GetTemperature(unsigned short * temper);
     bool GetDNU(unsigned short * dnu);
     bool GetDVU(unsigned short * dvu);
+    bool GetVoltageHi(unsigned short * voltageHi);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
 

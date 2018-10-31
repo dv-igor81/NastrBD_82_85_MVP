@@ -12,6 +12,7 @@ IterDataNewBd85::IterDataNewBd85(
     , unsigned char groupAddr // Групповой адрес
     , unsigned short temperature // Температура МК (КОД)
     , unsigned short dnu
+    , unsigned short voltageHi
 )
 {
     sprintf(_indAddr, "%d", indAddr);
@@ -22,6 +23,9 @@ IterDataNewBd85::IterDataNewBd85(
     sprintf(_dnuCode, "%d", dnu );
     double dnuVal = ConvertHelper::CodeToValue(dnu);
     sprintf(_dnuValue, "%0.3f", dnuVal );
+    sprintf(_voltageHiCode, "%d", voltageHi );
+    double voltageHiVal = ConvertHelper::VoltageHiCodeToValue(voltageHi);
+    sprintf(_voltageHiValue, "%0.1f", voltageHiVal );
 }
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85()
@@ -32,6 +36,8 @@ IterDataNewBd85::IterDataNewBd85()
     TextHelper::SetCharInText(_temperatureValue, 0, floatTextSize);
     TextHelper::SetCharInText(_dnuCode, 0, uShortTextSize);
     TextHelper::SetCharInText(_dnuValue, 0, floatTextSize);
+    TextHelper::SetCharInText(_voltageHiCode, 0, uShortTextSize);
+    TextHelper::SetCharInText(_voltageHiValue, 0, floatTextSize);
 }
 //---------------------------------------------------------------------------
 const char* IterDataNewBd85::GetIndAddr()
@@ -64,7 +70,15 @@ const char* IterDataNewBd85::GetDnuValue()
     return _dnuValue;
 }
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetVoltageHiCode()
+{
+    return _voltageHiCode;
+}
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetVoltageHiValue()
+{
+    return _voltageHiValue;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

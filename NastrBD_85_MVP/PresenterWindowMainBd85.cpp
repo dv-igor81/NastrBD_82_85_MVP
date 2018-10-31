@@ -128,6 +128,10 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
+    if ( _allProtokol->GetVoltageHi( & _voltageHi ) == false )
+    {
+        return;
+    }
 
 
 
@@ -140,6 +144,7 @@ void PresenterWindowMainBd85::OprosIter()
         , _groupAddr // Групповой адрес
         , _temperature // Температура МК (КОД)
         , _dnu
+        , _voltageHi
     );
     _task->BeginInvoke( & as_OprosIterInvoke );
 }
