@@ -11,6 +11,7 @@ IterDataNewBd85::IterDataNewBd85(
     unsigned char indAddr // Индивидуальный адрес
     , unsigned char groupAddr // Групповой адрес
     , unsigned short temperature // Температура МК (КОД)
+    , unsigned short dnu
 )
 {
     sprintf(_indAddr, "%d", indAddr);
@@ -18,6 +19,9 @@ IterDataNewBd85::IterDataNewBd85(
     sprintf(_temperatureCode, "%d", temperature);
     double temperVal = ConvertHelper::TemperatureCodeToValue(temperature);
     sprintf(_temperatureValue, "%0.2f", temperVal);
+    sprintf(_dnuCode, "%d", dnu );
+    double dnuVal = ConvertHelper::CodeToValue(dnu);
+    sprintf(_dnuValue, "%0.3f", dnuVal );
 }
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85()
@@ -26,6 +30,8 @@ IterDataNewBd85::IterDataNewBd85()
     TextHelper::SetCharInText(_groupAddr, 0, indAddrSize);
     TextHelper::SetCharInText(_temperatureCode, 0, uShortTextSize);
     TextHelper::SetCharInText(_temperatureValue, 0, floatTextSize);
+    TextHelper::SetCharInText(_dnuCode, 0, uShortTextSize);
+    TextHelper::SetCharInText(_dnuValue, 0, floatTextSize);
 }
 //---------------------------------------------------------------------------
 const char* IterDataNewBd85::GetIndAddr()
@@ -48,7 +54,15 @@ const char* IterDataNewBd85::GetTemperatureValue()
     return _temperatureValue;
 }
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetDnuCode()
+{
+    return _dnuCode;
+}
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetDnuValue()
+{
+    return _dnuValue;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

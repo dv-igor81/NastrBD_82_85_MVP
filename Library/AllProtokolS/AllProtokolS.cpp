@@ -259,7 +259,21 @@ bool AllProtokolS::GetTemperature(unsigned short * temper)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetDNU(unsigned short * dnu)
+{
+    unsigned int data;
+    int result = protokol->GetDNU( & data );
+    *dnu = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetDVU(unsigned short * dvu)
+{
+    unsigned int data;
+    int result = protokol->GetDVU( & data );
+    *dvu = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

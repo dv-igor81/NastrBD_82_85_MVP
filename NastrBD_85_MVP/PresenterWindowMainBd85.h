@@ -82,6 +82,7 @@ private:
     unsigned char _indAddr;
     unsigned char _groupAddr;
     unsigned short _temperature;
+    unsigned short _dnu;
 };
 //---------------------------------------------------------------------------
 #endif

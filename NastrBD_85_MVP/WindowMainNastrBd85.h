@@ -102,10 +102,10 @@ __published:	// IDE-managed Components
         TEdit *Edit_Temperature_Code;
         TEdit *Edit_Temperature_Value;
         TEdit *Edit_Temperature_3;
-        TPanel *DNUIPanel;
-        TEdit *DNUICodeEdit;
-        TEdit *Edit4;
-        TEdit *DNUIUnitEdit;
+        TPanel *Panel_DNU_0;
+        TEdit *Edit_DNU_Code;
+        TEdit *Edit_DNU_Value;
+        TEdit *Edit_DNU_3;
         TPanel *UhiIPanel;
         TEdit *UhiICodeEdit;
         TEdit *Edit14;

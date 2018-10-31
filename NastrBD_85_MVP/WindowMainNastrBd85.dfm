@@ -982,7 +982,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 15
             Text = '  '#176'C'
           end
-          object DNUIPanel: TPanel
+          object Panel_DNU_0: TPanel
             Left = 8
             Top = 104
             Width = 241
@@ -1000,7 +1000,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 16
           end
-          object DNUICodeEdit: TEdit
+          object Edit_DNU_Code: TEdit
             Left = 251
             Top = 104
             Width = 66
@@ -1018,7 +1018,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 17
           end
-          object Edit4: TEdit
+          object Edit_DNU_Value: TEdit
             Left = 318
             Top = 104
             Width = 75
@@ -1036,7 +1036,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 18
           end
-          object DNUIUnitEdit: TEdit
+          object Edit_DNU_3: TEdit
             Left = 394
             Top = 104
             Width = 43

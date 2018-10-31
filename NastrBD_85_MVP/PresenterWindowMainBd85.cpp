@@ -124,6 +124,10 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
+    if ( _allProtokol->GetDNU( & _dnu ) == false )
+    {
+        return;
+    }
 
 
 
@@ -135,6 +139,7 @@ void PresenterWindowMainBd85::OprosIter()
         _indAddr // Индивидуальный адрес
         , _groupAddr // Групповой адрес
         , _temperature // Температура МК (КОД)
+        , _dnu
     );
     _task->BeginInvoke( & as_OprosIterInvoke );
 }
