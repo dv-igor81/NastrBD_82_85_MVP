@@ -33,6 +33,7 @@ public:
     bool GetPeriodPwmZ_Bd85(unsigned short * periodPwmZ);
     //===
     bool GetIndAdr(unsigned char * indAdr);
+    bool GetGrpAdr(unsigned char * groupAdr);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
 

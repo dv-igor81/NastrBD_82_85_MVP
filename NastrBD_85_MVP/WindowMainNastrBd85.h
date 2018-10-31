@@ -94,10 +94,10 @@ __published:	// IDE-managed Components
         TPanel *Panel_IndAddr_1;
         TEdit *Edit_IndAddr;
         TPanel *Panel_IndAddr_3;
-        TPanel *GrpAdrPanel;
-        TPanel *EmptyPanel02;
-        TEdit *GrpAdrEdit;
-        TPanel *EmptyPanel08;
+        TPanel *Panel_GroupAdr_0;
+        TPanel *Panel_GroupAdr_1;
+        TEdit *Edit_GroupAdr;
+        TPanel *Panel_GroupAdr_3;
         TPanel *TprPanel;
         TEdit *TprCodeEdit;
         TEdit *TprEdit;

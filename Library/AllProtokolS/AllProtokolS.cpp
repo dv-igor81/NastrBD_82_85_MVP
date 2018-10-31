@@ -246,6 +246,10 @@ bool AllProtokolS::GetIndAdr(unsigned char * indAdr)
     return ErrorChecked( protokol->GetIndAdr( indAdr ) );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetGrpAdr(unsigned char * groupAdr)
+{
+    return ErrorChecked( protokol->GetGrpAdr( groupAdr ) );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

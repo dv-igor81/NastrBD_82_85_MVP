@@ -557,7 +557,7 @@ object WindowMainBd85: TWindowMainBd85
           object Label6: TLabel
             Left = 35
             Top = 130
-            Width = 53
+            Width = 48
             Height = 16
             Caption = #1042#1077#1088#1089#1080#1103
             Font.Charset = DEFAULT_CHARSET
@@ -838,7 +838,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 38
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -859,7 +859,7 @@ object WindowMainBd85: TWindowMainBd85
             Height = 20
             TabOrder = 7
           end
-          object GrpAdrPanel: TPanel
+          object Panel_GroupAdr_0: TPanel
             Left = 8
             Top = 60
             Width = 241
@@ -877,18 +877,18 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 8
           end
-          object EmptyPanel02: TPanel
+          object Panel_GroupAdr_1: TPanel
             Left = 250
             Top = 60
             Width = 67
             Height = 20
             TabOrder = 9
           end
-          object GrpAdrEdit: TEdit
+          object Edit_GroupAdr: TEdit
             Left = 318
             Top = 60
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -902,7 +902,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 10
           end
-          object EmptyPanel08: TPanel
+          object Panel_GroupAdr_3: TPanel
             Left = 394
             Top = 60
             Width = 43
@@ -931,7 +931,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 251
             Top = 82
             Width = 66
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -949,7 +949,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 82
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -967,7 +967,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 394
             Top = 82
             Width = 43
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1004,7 +1004,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 251
             Top = 104
             Width = 66
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1022,7 +1022,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 104
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1040,7 +1040,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 394
             Top = 104
             Width = 43
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1077,7 +1077,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 251
             Top = 126
             Width = 66
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1095,7 +1095,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 126
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1113,7 +1113,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 394
             Top = 126
             Width = 43
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1150,7 +1150,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 251
             Top = 148
             Width = 66
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1168,7 +1168,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 148
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1186,7 +1186,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 394
             Top = 148
             Width = 43
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1223,7 +1223,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 251
             Top = 170
             Width = 66
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1241,7 +1241,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 170
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1259,7 +1259,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 394
             Top = 170
             Width = 43
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1303,7 +1303,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 192
             Width = 75
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
@@ -1321,7 +1321,7 @@ object WindowMainBd85: TWindowMainBd85
             Left = 394
             Top = 192
             Width = 43
-            Height = 20
+            Height = 21
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False

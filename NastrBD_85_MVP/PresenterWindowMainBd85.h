@@ -80,6 +80,7 @@ private:
 
     unsigned char _ssp;
     unsigned char _indAddr;
+    unsigned char _groupAddr;
 };
 //---------------------------------------------------------------------------
 #endif

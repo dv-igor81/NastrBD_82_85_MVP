@@ -37,6 +37,7 @@ public:
     virtual bool GetPeriodPwmZ_Bd85(unsigned short * periodPwmZ) = 0; // Считать период ШИМ заданный
 
     virtual bool GetIndAdr(unsigned char * indAdr) = 0; // Считать индивидуальный адрес БД
+    virtual bool GetGrpAdr(unsigned char * groupAdr) = 0; // Считать групповой адрес БД
 };
 //---------------------------------------------------------------------------
 #endif

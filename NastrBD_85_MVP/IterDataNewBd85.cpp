@@ -8,14 +8,17 @@
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85(
     unsigned char indAddr
+    , unsigned char groupAddr
 )
 {
     sprintf(_indAddr, "%d", indAddr);
+    sprintf(_groupAddr, "%d", groupAddr);
 }
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85()
 {
     TextHelper::SetCharInText(_indAddr, 0, indAddrSize);
+    TextHelper::SetCharInText(_groupAddr, 0, indAddrSize);
 }
 //---------------------------------------------------------------------------
 const char* IterDataNewBd85::GetIndAddr()
@@ -23,6 +26,10 @@ const char* IterDataNewBd85::GetIndAddr()
     return _indAddr;
 }
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetGroupAddr()
+{
+    return _groupAddr;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

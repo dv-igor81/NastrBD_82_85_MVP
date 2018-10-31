@@ -19,6 +19,9 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_OprosEndInvoke(this, &PresenterWindowMainBd85::OprosEndInvoke)
         , as_SetConnectionState(this, &PresenterWindowMainBd85::SetConnectionState)
 {
+    _startData = 0;
+    _iterData = 0;
+    //===
     _isConnected = false; // Не подключились к БД (через ком-порт либо по TCP/IP)
     _isViewLoaded = true; // основное окно (вид) загружено
     _view = view;
@@ -66,12 +69,13 @@ void PresenterWindowMainBd85::ConnectIsGood() // Соединение (по ком порту или TC
 void PresenterWindowMainBd85::OprosStar()
 {
     _startData = new StartDataNewBd85();
-    ev_DisplayStartData( _startData );
-
+    ev_DisplayStartData( _startData ); // Очистить все поля
     _iterData = new IterDataNewBd85();
-
-    ev_DisplayIterData( _iterData );
-
+    ev_DisplayIterData( _iterData ); // Очистить все поля
+    delete _startData; // Освободить память
+    _startData = 0;
+    delete _iterData; // Освободить память
+    _iterData = 0;    
     while ( _isConnected )
     {
         if ( InitMkInBd() ) // Инициализация МК в БД (интервал набота счета, задать колтик = 8)
@@ -79,6 +83,7 @@ void PresenterWindowMainBd85::OprosStar()
             break;
         }
     }
+
     _readParamIndex = 0;
     while ( _isConnected )
     {
@@ -92,6 +97,8 @@ void PresenterWindowMainBd85::OprosStar()
 void PresenterWindowMainBd85::OprosStarInvoke()
 {
     ev_DisplayStartData( _startData );
+    delete _startData; // Освободить память
+    _startData = 0;
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosIter()
@@ -105,13 +112,21 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
-
     if ( _allProtokol->GetIndAdr( & _indAddr ) == false )
+    {
+        return;
+    }
+    if ( _allProtokol->GetGrpAdr( & _groupAddr ) == false )
+    {
+        return;
+    }
+    if ( _iterData != 0 ) // Основной поток не успел отобразить данные
     {
         return;
     }
     _iterData = new IterDataNewBd85(
         _indAddr // Индивидуальный адрес
+        , _groupAddr // Групповой адрес
     );
     _task->BeginInvoke( & as_OprosIterInvoke );
 }
@@ -119,6 +134,8 @@ void PresenterWindowMainBd85::OprosIter()
 void PresenterWindowMainBd85::OprosIterInvoke()
 {
     ev_DisplayIterData( _iterData );
+    delete _iterData;
+    _iterData = 0;
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosEnd()
@@ -264,7 +281,10 @@ bool PresenterWindowMainBd85::ReadEEProm()
         }
         _readParamIndex++;
     }
-
+    if ( _startData != 0 )
+    {
+        return false; // Основной поток не успел отобразить данные
+    }
     _startData = new StartDataNewBd85(
         _verPo // Версия прошивки
         , _indAddrZad // Индивидуальный адрес заданный

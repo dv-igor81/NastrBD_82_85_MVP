@@ -227,16 +227,13 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_WidthPwmZad->Text = data->GetWidthPwmZad();
     Edit_OffsetPwmZad->Text = data->GetOffsetPwmZad();
     Edit_PeriodPwmZad->Text = data->GetPeriodPwmZad();
-
-    delete data; // Освободить память
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
 {
     this->Edit_IndAddr->Text = data->GetIndAddr();
+    this->Edit_GroupAdr->Text = data->GetGroupAddr();
 
-    
-    delete data; // Освободить память
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)
