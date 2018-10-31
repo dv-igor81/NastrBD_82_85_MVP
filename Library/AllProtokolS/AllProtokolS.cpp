@@ -17,6 +17,11 @@ AllProtokolS::~AllProtokolS()
     delete protokol;
 }
 //---------------------------------------------------------------------------
+ProtokolName AllProtokolS::GetProtokolName()
+{
+    return _protokolName;
+}
+//---------------------------------------------------------------------------
 void AllProtokolS::UpdateComPotrs()
 {
     AnsiString comPortName;
@@ -52,24 +57,24 @@ bool AllProtokolS::NextComPortIndex(int * comPortIndex)
     return false;
 }
 //---------------------------------------------------------------------------
-void AllProtokolS::SetProtokol(Protokol protokolName)
+void AllProtokolS::SetProtokol(ProtokolName protokolName)
 {
     _protokolName = protokolName;
     switch ( protokolName )
     {
-    case Protokol_t::NineBit: // 9-ти битный
+    case ProtokolName_t::NineBit: // 9-ти битный
         protokol->flagModbusProtokol = 0;
         break;
-    case Protokol_t::ModBus_RTU: // ModBus RTU
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
         protokol->flagModbusProtokol = 1;
         break;
-    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
         protokol->flagModbusProtokol = 2;
         break;
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         protokol->flagModbusProtokol = 3;
         break;
-    case Protokol_t::NeVybran:
+    case ProtokolName_t::NeVybran:
         protokol->flagModbusProtokol = -1;
         break;
     }
@@ -94,15 +99,15 @@ void AllProtokolS::SetBdAddr(int addrBd)
 {
     switch ( _protokolName )
     {
-    case Protokol_t::NineBit: // 9-ти битный
-    case Protokol_t::ModBus_RTU: // ModBus RTU
+    case ProtokolName_t::NineBit: // 9-ти битный
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
         protokol->AddrBD = addrBd;
         break;
-    case Protokol_t::ModBus_TCP: // ModBus TCP
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         protokol->Data.Addr_BD_TCP = addrBd;
         break;
-    case Protokol_t::NeVybran:
+    case ProtokolName_t::NeVybran:
         _flagError = true;
         break;
     }
@@ -172,15 +177,15 @@ bool AllProtokolS::GetIndAdrZ(unsigned char * indAdrZ)
     unsigned long data;
     switch ( _protokolName )
     {
-    case Protokol_t::NineBit: // 9-ти битный
+    case ProtokolName_t::NineBit: // 9-ти битный
         result = protokol->ReadFlashInvert( 0x04, & data );
         break;
-    case Protokol_t::ModBus_RTU: // ModBus RTU
-    case Protokol_t::ModBus_TCP: // ModBus TCP
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         result = protokol->ReadFlash2( 0x300+1, & data );
         break;
-    case Protokol_t::NeVybran:
+    case ProtokolName_t::NeVybran:
         break;
     }
     *indAdrZ = (data & 0xFF);
@@ -283,8 +288,29 @@ bool AllProtokolS::GetVoltageHi(unsigned short * voltageHi)
     return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetWidthPwm(unsigned short * widthPwm)
+{
+    unsigned int data;
+    int result = protokol->GetSIM3( & data );
+    *widthPwm = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetPeriodPwm(unsigned short * periodPwm)
+{
+    unsigned int data;
+    int result = protokol->GetSIM4( & data );
+    *periodPwm = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetScaling(unsigned short * scaling)
+{
+    unsigned int data;
+    int result = protokol->GetCountImp( & data );
+    *scaling = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

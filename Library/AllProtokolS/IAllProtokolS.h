@@ -17,7 +17,7 @@ public:
     virtual void UpdateComPotrs() = 0;
     virtual bool NextComPortIndex(int * comPortIndex) = 0;
 
-    virtual void SetProtokol(Protokol protokolName) = 0;
+    virtual void SetProtokol(ProtokolName protokolName) = 0;
     virtual void SetComPortName(const char* comPortName) = 0;
     virtual void SetIpAddr(const char* ipAddr) = 0;
     virtual void SetTcpPort(int tcpPort) = 0;
@@ -41,7 +41,10 @@ public:
     virtual bool GetTemperature(unsigned short * temper) = 0; // Получить температуру МК (КК 0x08)
     virtual bool GetDNU(unsigned short * dnu) = 0; // Получить ДНУ измеренное (КК 0x17)
     virtual bool GetDVU(unsigned short * dvu) = 0; // Получить ДВУ измеренное (КК 0x18)
-    virtual bool GetVoltageHi(unsigned short * voltageHi) = 0; // Считать напряжение высокое (КК 0x07)
+    virtual bool GetVoltageHi(unsigned short * voltageHi) = 0; // Получить напряжение высокое (КК 0x07)
+    virtual bool GetWidthPwm(unsigned short * widthPwm) = 0; // Получить длительность ШИМ (КК 0x1C, 3)
+    virtual bool GetPeriodPwm(unsigned short * periodPwm) = 0; // Получить период ШИМ (КК 0x1C, 4)
+    virtual bool GetScaling(unsigned short * scaling) = 0; // Получить счёт импульсов
 };
 //---------------------------------------------------------------------------
 #endif

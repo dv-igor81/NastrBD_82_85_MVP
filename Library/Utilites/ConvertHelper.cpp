@@ -34,9 +34,18 @@ double ConvertHelper::TemperatureCodeToValue(unsigned short code)
 {
     const double k1 = -0.3389;
     const double k2 = 378.95;
-    return code * k1 + k2;
+    double retVal = code * k1 + k2;
+    return retVal;
 }
 //---------------------------------------------------------------------------
+// (float)SIM3/16.777216
+double ConvertHelper::WidthPwmCodeToValue(unsigned short code)
+{
+    const double k = 16.777216;
+    double retVal = code;
+    retVal /= k;
+    return retVal;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

@@ -77,13 +77,19 @@ private:
     unsigned short _offsetPwmZ;
     unsigned short _periodPwmZ;
     //<<=== Данные, считанные из EEPROM МК в БД
-
+    
+    //===>> Данные опроса БД
     unsigned char _ssp;
     unsigned char _indAddr;
     unsigned char _groupAddr;
     unsigned short _temperature;
     unsigned short _dnu;
     unsigned short _voltageHi;
+    unsigned short _widthPwm;
+    unsigned short _periodPwm;
+    unsigned short _scaling;
+    //<<=== Данные опроса БД
+    unsigned int ScalingSummator(unsigned short scaling);
 };
 //---------------------------------------------------------------------------
 #endif

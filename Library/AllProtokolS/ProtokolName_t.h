@@ -1,10 +1,10 @@
 //---------------------------------------------------------------------------
-#ifndef Protokol_tH
-#define Protokol_tH
+#ifndef ProtokolName_tH
+#define ProtokolName_tH
 //---------------------------------------------------------------------------
-namespace Protokol_t
+namespace ProtokolName_t
 {
-    enum Protokol_t
+    enum ProtokolName_t
     {
         NineBit = 0, // 9-битный
         ModBus_RTU = 1, // ModBus RTU
@@ -13,6 +13,6 @@ namespace Protokol_t
         NeVybran = 4 // Протокол не выбран
     };
 }
-typedef Protokol_t::Protokol_t Protokol;
+typedef ProtokolName_t::ProtokolName_t ProtokolName;
 //---------------------------------------------------------------------------
 #endif

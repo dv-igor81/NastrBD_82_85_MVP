@@ -64,7 +64,7 @@ ConnectBdProt::ConnectBdProt(
     ev_SetConnectionState += _bdProt->GetSelfSetConnectionState();
 }
 //---------------------------------------------------------------------------
-void ConnectBdProt::ProtocolChanged(Protokol protocolName)
+void ConnectBdProt::ProtocolChanged(ProtokolName protocolName)
 {
     SettingsChengeProtokol(protocolName, false); // false - не из ini-файла
 }
@@ -74,7 +74,7 @@ void ConnectBdProt::ComPortsChange(const char* cpName)
     TextHelper::CopyText(comPortName, cpName, comPortNameSize);
 }
 //---------------------------------------------------------------------------
-void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPresenter)
+void ConnectBdProt::SettingsChengeProtokol(ProtokolName protokolName, bool fromPresenter)
 {
     bool isComPortProt;
     bool flagError = false;
@@ -82,29 +82,29 @@ void ConnectBdProt::SettingsChengeProtokol(Protokol protokolName, bool fromPrese
     _protokolName = protokolName;
     switch (protokolName)
     {
-    case Protokol_t::NineBit: // 9-ти битный
+    case ProtokolName_t::NineBit: // 9-ти битный
         isComPortProt = true;
         hintText = "RS-232";
         _addrBdPtr = & _addrBd_NineBit;
         break;
-    case Protokol_t::ModBus_RTU: // ModBus RTU
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
         isComPortProt = true;
         hintText = "RS-232";
         _addrBdPtr = & _addrBd_ModBus_RTU;
         break;
-    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
         isComPortProt = false;
         ev_setEndPoint(strIpAddr_TCP, strTcpPort_TCP);
         hintText = "АРМ МЕТРО";
         _addrBdPtr = & _addrBd_ModBus_TCP;
         break;
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         isComPortProt = false;
         ev_setEndPoint(strIpAddr_RTU_IP, strTcpPort_RTU_IP);
         hintText = "АРМ ВНИИА";
         _addrBdPtr = & _addrBd_ModBus_RTU_IP;
         break;
-    case Protokol_t::NeVybran:
+    case ProtokolName_t::NeVybran:
         hintText = "Error";
         flagError = true; // Ошибка!!!
         break;
@@ -124,7 +124,7 @@ void ConnectBdProt::WindowShow()
     TextHelper::CopyText(strIpAddr_RTU_IP, "192.168.127.254", ipAddrSize);
     TextHelper::CopyText(strTcpPort_TCP, "502", tcpPortSize);
     TextHelper::CopyText(strTcpPort_RTU_IP, "4001", tcpPortSize);
-    SettingsChengeProtokol(Protokol_t::NineBit, true);
+    SettingsChengeProtokol(ProtokolName_t::NineBit, true);
     SetControlFromConnectionState(ConnectionStateInfo_t::IsDisconnect);
     UpdateNumberOfComPorts();
 }
@@ -161,10 +161,10 @@ void ConnectBdProt::ChangeIpAddr(const char* textIpAddr)
 {
     switch (_protokolName)
     {
-    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
         TextHelper::CopyText(strIpAddr_TCP, textIpAddr, ipAddrSize);
         break;
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         TextHelper::CopyText(strIpAddr_RTU_IP, textIpAddr, ipAddrSize);
         break;
     }
@@ -174,10 +174,10 @@ void ConnectBdProt::ChangeTcpPort(const char* textTcpPort)
 {
     switch (_protokolName)
     {
-    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
         TextHelper::CopyText(strTcpPort_TCP, textTcpPort, tcpPortSize);
         break;
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         TextHelper::CopyText(strTcpPort_RTU_IP, textTcpPort, tcpPortSize);
         break;
     }
@@ -209,19 +209,19 @@ void ConnectBdProt::Connect()
     _allProtokol->SetProtokol( _protokolName );  //_protokolName
     switch ( _protokolName )
     {
-    case Protokol_t::NineBit: // 9-ти битный
-    case Protokol_t::ModBus_RTU: // ModBus RTU
+    case ProtokolName_t::NineBit: // 9-ти битный
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
         _allProtokol->SetComPortName( comPortName );
         break;
-    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
         _allProtokol->SetIpAddr( strIpAddr_TCP );
         SetTcpPort( strTcpPort_TCP, 502 );
         break;
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         _allProtokol->SetIpAddr( strIpAddr_RTU_IP );
         SetTcpPort( strTcpPort_RTU_IP, 4001 );
         break;
-    case Protokol_t::NeVybran:
+    case ProtokolName_t::NeVybran:
         break;
     }
     //SetResponseTimeout(_timeOut); // Ждать ответа timeOut мс

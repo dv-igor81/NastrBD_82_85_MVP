@@ -11,6 +11,9 @@ public:
         , unsigned short temperature // Температура МК (КОД)
         , unsigned short dnu
         , unsigned short voltageHi
+        , unsigned short widthPwm
+        , unsigned short periodPwm
+        , unsigned short scaling
     );
     IterDataNewBd85();
 
@@ -22,6 +25,10 @@ public:
     const char* GetDnuValue();
     const char* GetVoltageHiCode();
     const char* GetVoltageHiValue();
+    const char* GetWidthPwmCode();
+    const char* GetWidthPwmValue();
+    const char* GetPeriodPwmCode();
+    const char* GetPeriodPwmValue();
 private:
     enum { indAddrSize = 4
         , uShortTextSize = 6 // 5 цифр и завершающий ноль
@@ -35,6 +42,11 @@ private:
     char _dnuValue[floatTextSize];
     char _voltageHiCode[uShortTextSize];
     char _voltageHiValue[floatTextSize];
+    char _widthPwmCode[uShortTextSize];
+    char _widthPwmValue[floatTextSize];
+    char _periodPwmCode[uShortTextSize];
+    char _periodPwmValue[floatTextSize];
+    char _scaling[uShortTextSize];
 };
 //---------------------------------------------------------------------------
 #endif

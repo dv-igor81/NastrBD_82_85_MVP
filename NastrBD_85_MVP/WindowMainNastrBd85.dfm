@@ -1128,7 +1128,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 23
             Text = '   '#1042
           end
-          object Panel1: TPanel
+          object Panel_WidthPwm_0: TPanel
             Left = 8
             Top = 148
             Width = 241
@@ -1146,7 +1146,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 24
           end
-          object Edit5: TEdit
+          object Edit_WidthPwm_Code: TEdit
             Left = 251
             Top = 148
             Width = 66
@@ -1164,7 +1164,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 25
           end
-          object Edit20: TEdit
+          object Edit_WidthPwm_Value: TEdit
             Left = 318
             Top = 148
             Width = 75
@@ -1182,7 +1182,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 26
           end
-          object Edit2: TEdit
+          object Edit_WidthPwm_3: TEdit
             Left = 394
             Top = 148
             Width = 43
@@ -1201,7 +1201,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 27
             Text = '  '#1084#1082#1089
           end
-          object Panel15: TPanel
+          object Panel_PeriodPwm_0: TPanel
             Left = 8
             Top = 170
             Width = 241
@@ -1219,7 +1219,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 28
           end
-          object Edit10: TEdit
+          object Edit_PeriodPwm_Code: TEdit
             Left = 251
             Top = 170
             Width = 66
@@ -1237,7 +1237,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 29
           end
-          object Edit21: TEdit
+          object Edit_PeriodPwm_Value: TEdit
             Left = 318
             Top = 170
             Width = 75
@@ -1255,7 +1255,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 30
           end
-          object Edit9: TEdit
+          object Edit_PeriodPwm_3: TEdit
             Left = 394
             Top = 170
             Width = 43
@@ -1274,7 +1274,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 31
             Text = '  '#1084#1082#1089
           end
-          object Panel16: TPanel
+          object Panel_Scaling_0: TPanel
             Left = 8
             Top = 192
             Width = 241
@@ -1292,14 +1292,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 32
           end
-          object Panel18: TPanel
+          object Panel_Scaling_1: TPanel
             Left = 250
             Top = 192
             Width = 67
             Height = 20
             TabOrder = 33
           end
-          object Edit22: TEdit
+          object Edit_Scaling: TEdit
             Left = 318
             Top = 192
             Width = 75
@@ -1317,7 +1317,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 34
           end
-          object Edit15: TEdit
+          object Edit_Scaling_3: TEdit
             Left = 394
             Top = 192
             Width = 43

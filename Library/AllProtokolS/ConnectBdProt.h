@@ -32,8 +32,8 @@ private:
 
     HelperConnectFourBdProt* _bdProt;
 
-    ActionSelf<Protokol> as_protocolChanged;
-    void ProtocolChanged(Protokol protocolName);
+    ActionSelf<ProtokolName> as_protocolChanged;
+    void ProtocolChanged(ProtokolName protocolName);
 
     ActionSelf<const char*> as_comPortsChange;
     void ComPortsChange(const char* comPortName);
@@ -71,7 +71,7 @@ private:
     ActionEvent<> ev_clearAllComPortName;
     ActionEvent<bool> ev_setEnabledUpdateComPorts;
 
-    ActionEvent<Protokol> ev_setProtokolName;
+    ActionEvent<ProtokolName> ev_setProtokolName;
     ActionEvent<const char*, const char*> ev_setEndPoint;
     ActionEvent<const char*, const char*> ev_addComPortName;
     ActionEvent<ConnectionStateInfo> ev_SetConnectionState;
@@ -83,7 +83,7 @@ private:
     ActionSelf<int> as_SetAddrBdNumber;
     void SetAddrBdNumber(int addrBd);
 
-    void SettingsChengeProtokol(Protokol protokolName, bool fromPresenter);
+    void SettingsChengeProtokol(ProtokolName pName, bool fromPresenter);
 
     IAllProtokolS * _allProtokol;
     ITask * _task;
@@ -91,7 +91,7 @@ private:
 
     void WorkInLoop();
 
-    Protokol _protokolName;
+    ProtokolName _protokolName;
     void Connect();
     void SetTcpPort(const char* textTcpPort, int defTcpPort);
     void SetControlFromConnectionState(ConnectionStateInfo state);

@@ -13,7 +13,7 @@ public:
     void UpdateComPotrs();
     bool NextComPortIndex(int * comPortIndex);
 
-    void SetProtokol(Protokol protokolName);
+    void SetProtokol(ProtokolName protokolName);
     void SetComPortName(const char* cpName);
     void SetIpAddr(const char* ipAddr);
     void SetTcpPort(int tcpPort);
@@ -38,8 +38,13 @@ public:
     bool GetDNU(unsigned short * dnu);
     bool GetDVU(unsigned short * dvu);
     bool GetVoltageHi(unsigned short * voltageHi);
+    bool GetWidthPwm(unsigned short * widthPwm);
+    bool GetPeriodPwm(unsigned short * periodPwm);
+    bool GetScaling(unsigned short * scaling);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
+
+    ProtokolName GetProtokolName();
 
 private:
     enum { comPortCount = 100, ipAddrSize = 16, comPortNameSize = 7 };
@@ -48,7 +53,7 @@ private:
     RSProtokol_t * protokol;
     int comPortPtr;
     bool _flagError;
-    Protokol _protokolName;
+    ProtokolName _protokolName;
 
     bool ErrorChecked(int nullValue);
     int ErrorCount;

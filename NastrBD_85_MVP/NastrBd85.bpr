@@ -6,7 +6,7 @@
     <PROJECT value="NastrBd85.exe"/>
     <OBJFILES value="NastrBd85.obj WindowStartNastrBd85.obj WindowMainNastrBd85.obj 
       WindowLoader.obj IWindowMainBd85.obj PresenterWindowMainBd85.obj 
-      ConnectBdProt.obj HelperConnectFourBdProt.obj HelperNumberTextBtn.obj 
+      ConnectBdProt.obj HelperConnectFourBdProt.obj 
       ..\Library\smartevents\ActionAllBase.obj 
       ..\Library\smartevents\ActionDebugSettings.obj 
       ..\Library\smartevents\ActionEventBase.obj 
@@ -18,10 +18,12 @@
       ..\Library\AllProtokolS\modbus-data.obj 
       ..\Library\AllProtokolS\modbus-tcp.obj 
       ..\Library\AllProtokolS\RSProtokol.obj ..\Library\Task\SuperThread.obj 
-      ..\Library\Utilites\TextHelper.obj ConnectionStateInfo_t.obj 
-      StartDataNewBd85.obj ..\Library\Utilites\ConvertHelper.obj 
-      IterDataNewBd85.obj ..\Library\Unit_DIA_Global_Funk.obj 
-      ..\Library\AllProtokolS\Protokol_t.obj"/>
+      ..\Library\Utilites\TextHelper.obj StartDataNewBd85.obj 
+      ..\Library\Utilites\ConvertHelper.obj IterDataNewBd85.obj 
+      ..\Library\Unit_DIA_Global_Funk.obj ..\Library\AllProtokolS\Protokol_t.obj 
+      ..\Library\AllProtokolS\HelperNumberTextBtn.obj 
+      ..\Library\AllProtokolS\ConnectionStateInfo_t.obj 
+      ..\Library\AllProtokolS\ProtokolName_t.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -37,7 +39,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi Iocomp65.bpi"/>
-    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Task;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\Library;..\Library\AllProtokolS"/>
+    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Task;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\Library;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -82,7 +84,6 @@
       <FILE FILENAME="PresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="PresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="HelperNumberTextBtn.cpp" FORMNAME="" UNITNAME="HelperNumberTextBtn.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\smartevents\ActionAllBase.cpp" FORMNAME="" UNITNAME="ActionAllBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\smartevents\ActionDebugSettings.cpp" FORMNAME="" UNITNAME="ActionDebugSettings.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\smartevents\ActionEventBase.cpp" FORMNAME="" UNITNAME="ActionEventBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -98,12 +99,14 @@
       <FILE FILENAME="..\Library\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Task\SuperThread.cpp" FORMNAME="" UNITNAME="SuperThread" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Utilites\TextHelper.cpp" FORMNAME="" UNITNAME="TextHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="StartDataNewBd85.cpp" FORMNAME="" UNITNAME="StartDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Utilites\ConvertHelper.cpp" FORMNAME="" UNITNAME="ConvertHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IterDataNewBd85.cpp" FORMNAME="" UNITNAME="IterDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Unit_DIA_Global_Funk.cpp" FORMNAME="" UNITNAME="Unit_DIA_Global_Funk" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\Protokol_t.cpp" FORMNAME="" UNITNAME="Protokol_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\HelperNumberTextBtn.cpp" FORMNAME="" UNITNAME="HelperNumberTextBtn" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\ProtokolName_t.cpp" FORMNAME="" UNITNAME="ProtokolName_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

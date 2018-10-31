@@ -132,6 +132,18 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
+    if ( _allProtokol->GetWidthPwm( & _widthPwm ) == false )
+    {
+        return;
+    }
+    if ( _allProtokol->GetPeriodPwm( & _periodPwm ) == false )
+    {
+        return;
+    }
+    if ( _allProtokol->GetScaling( & _scaling ) == false )
+    {
+        return;
+    }
 
 
 
@@ -145,8 +157,16 @@ void PresenterWindowMainBd85::OprosIter()
         , _temperature // Температура МК (КОД)
         , _dnu
         , _voltageHi
+        , _widthPwm
+        , _periodPwm
+        , ScalingSummator(_scaling)
     );
     _task->BeginInvoke( & as_OprosIterInvoke );
+}
+//---------------------------------------------------------------------------
+unsigned int PresenterWindowMainBd85::ScalingSummator(unsigned short scaling)
+{
+    return 0; //switch ( _allProtokol )
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosIterInvoke()

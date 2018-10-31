@@ -135,21 +135,21 @@ void TWindowMainBd85::AddComPortName(
     ev_comboBox_ComPortsChange( comboBox_ComPorts->Text.c_str() );
 }
 //---------------------------------------------------------------------------
-void TWindowMainBd85::SetProtokolName(Protokol protokolName)
+void TWindowMainBd85::SetProtokolName(ProtokolName protokolName)
 {
     comboBox_Protocol->ItemIndex = (int)protokolName;
     switch (protokolName)
     {
-    case Protokol_t::NineBit: // 9-ти битный
+    case ProtokolName_t::NineBit: // 9-ти битный
         TabSheet_ModBusParam->TabVisible = false;
         break;
-    case Protokol_t::ModBus_RTU: // ModBus RTU
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
         TabSheet_ModBusParam->TabVisible = true;
         break;
-    case Protokol_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
         TabSheet_ModBusParam->TabVisible = true;
         break;
-    case Protokol_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
         TabSheet_ModBusParam->TabVisible = true;
         break;
     }
@@ -239,6 +239,10 @@ void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
     this->Edit_DNU_Value->Text = data->GetDnuValue();
     this->Edit_VoltageHi_Code->Text = data->GetVoltageHiCode();
     this->Edit_VoltageHi_Value->Text = data->GetVoltageHiValue();
+    this->Edit_WidthPwm_Code->Text = data->GetWidthPwmCode();
+    this->Edit_WidthPwm_Value->Text = data->GetWidthPwmValue();
+    this->Edit_PeriodPwm_Code->Text = data->GetPeriodPwmCode();
+    this->Edit_PeriodPwm_Value->Text = data->GetPeriodPwmValue();
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)
@@ -289,7 +293,7 @@ void __fastcall TWindowMainBd85::FormShow(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::comboBox_ProtocolChange(TObject *Sender)
 {
-    ev_comboBox_ProtocolChange( (Protokol)comboBox_Protocol->ItemIndex );
+    ev_comboBox_ProtocolChange( (ProtokolName)comboBox_Protocol->ItemIndex );
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::FormClose(TObject *Sender,

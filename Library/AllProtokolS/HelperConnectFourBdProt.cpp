@@ -5,7 +5,7 @@
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 HelperConnectFourBdProt::HelperConnectFourBdProt(
-    ActionEvent<Protokol>* ev_protocolChange, // Протокол меняется из ГИП
+    ActionEvent<ProtokolName>* ev_protocolChange, // Протокол меняется из ГИП
     ActionEvent<const char*>* ev_comboBox_ComPortsChange, // Меняется номер ком-порта из ГИП
     ActionSelf<bool>* as_comPortOrTcpIp, // Меняется вид программно: ком-порт или TCP/IP
     ActionSelf<const char*>* as_labelHint, // Текст подсказки
@@ -13,7 +13,7 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     ActionSelf<bool>* as_setEnabledUpdateComPorts, // Установить доступность обновления ком-портов
     ActionSelf<const char*, const char*>* as_addComPortName, // Добавить имя ком-порта
     ActionEvent<>* ev_windowShow, // Событие показать окно
-    ActionSelf<Protokol>* as_setProtokolName, // Установить имя протокола
+    ActionSelf<ProtokolName>* as_setProtokolName, // Установить имя протокола
     ActionSelf<const char*, const char*>* as_setEndPoint, // Установить IP-адрес и TCP-порт
     ActionEvent<const char*>* ev_textBox_IP_AddrChange, // Текст ip-адреса изменился из ГИП
     ActionEvent<const char*>*  ev_textBox_TCP_PortChange, // Текст tcp-порта изменился из ГИП
@@ -42,7 +42,7 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     _addrBd = addrBd;
 }
 //---------------------------------------------------------------------------
-ActionEvent<Protokol>* HelperConnectFourBdProt::GetEventProtocolChange()
+ActionEvent<ProtokolName>* HelperConnectFourBdProt::GetEventProtocolChange()
 {
     return _ev_protocolChange;
 }
@@ -72,7 +72,7 @@ ActionEvent<>* HelperConnectFourBdProt::GetEventWindowShow()
     return _ev_windowShow;
 }
 //---------------------------------------------------------------------------
-ActionSelf<Protokol>* HelperConnectFourBdProt::GetSelfSetProtokolName()
+ActionSelf<ProtokolName>* HelperConnectFourBdProt::GetSelfSetProtokolName()
 {
     return _as_setProtokolName;
 }

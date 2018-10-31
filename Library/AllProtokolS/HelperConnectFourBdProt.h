@@ -13,7 +13,7 @@ class HelperConnectFourBdProt
 {
 public:
     HelperConnectFourBdProt(
-        ActionEvent<Protokol>* ev_protocolChange, // Протокол меняется из ГИП
+        ActionEvent<ProtokolName>* ev_protocolChange, // Протокол меняется из ГИП
         ActionEvent<const char*>* ev_comboBox_ComPortsChange, // Меняется номер ком-порта из ГИП
         ActionSelf<bool>* as_comPortOrTcpIp, // Изменяю вид программно: ком-порт или TCP/IP
         ActionSelf<const char*>* as_labelHint, // Текст подсказки
@@ -21,7 +21,7 @@ public:
         ActionSelf<bool>* as_setEnabledUpdateComPorts, // Установить доступность обновления ком-портов
         ActionSelf<const char*, const char*>* as_addComPortName, // Добавить имя ком-порта
         ActionEvent<>* ev_windowShow, // Событие показать окно
-        ActionSelf<Protokol>* as_setProtokolName, // Установить имя протокола
+        ActionSelf<ProtokolName>* as_setProtokolName, // Установить имя протокола
         ActionSelf<const char*, const char*>* as_setEndPoint, // Установить IP-адрес и TCP-порт
         ActionEvent<const char*>* ev_textBox_IP_AddrChange, // Текст ip-адреса изменился из ГИП
         ActionEvent<const char*>* ev_textBox_TCP_PortChange, // Текст tcp-порта изменился из ГИП
@@ -37,11 +37,11 @@ private:
     ActionSelf<bool>* _as_setEnabledUpdateComPorts; // Установить доступность обновления ком-портов
 
     ActionSelf<const char*, const char*>* _as_addComPortName; // Добавить имя ком-порта
-    ActionSelf<Protokol>* _as_setProtokolName;
+    ActionSelf<ProtokolName>* _as_setProtokolName;
     ActionSelf<const char*, const char*>* _as_setEndPoint;
 
     ActionEvent<>* _ev_windowShow;
-    ActionEvent<Protokol>* _ev_protocolChange; // Протокол меняется из ГИП
+    ActionEvent<ProtokolName>* _ev_protocolChange; // Протокол меняется из ГИП
     ActionEvent<const char*>* _ev_comboBox_ComPortsChange; // Меняется номер ком-порта из ГИП
     ActionEvent<const char*>* _ev_textBox_IP_AddrChange;  // Текст ip-адреса изменился из ГИП
     ActionEvent<const char*>* _ev_textBox_TCP_PortChange; // Текст tcp-порта изменился из ГИП
@@ -58,11 +58,11 @@ public:
     ActionSelf<bool>* GetSelfSetEnabledUpdateComPorts(); // Установить доступность обновления ком-портов
 
     ActionSelf<const char*, const char*>* GetSelfAddComPortName();
-    ActionSelf<Protokol>* GetSelfSetProtokolName();
+    ActionSelf<ProtokolName>* GetSelfSetProtokolName();
     ActionSelf<const char*, const char*>* GetSelfSetEndPoint();
     ActionSelf<ConnectionStateInfo>* GetSelfSetConnectionState(); // Отобразить изменения о состоянии соединения в ГИП
 
-    ActionEvent<Protokol>* GetEventProtocolChange();
+    ActionEvent<ProtokolName>* GetEventProtocolChange();
     ActionEvent<const char*>* GetEventComPortsChange();
     ActionEvent<>* GetEventWindowShow();
     ActionEvent<const char*>* GetEventIpAddrChange(); // Текст ip-адреса изменился из ГИП

@@ -110,14 +110,14 @@ __published:	// IDE-managed Components
         TEdit *Edit_VoltageHi_Code;
         TEdit *Edit_VoltageHi_Value;
         TEdit *Edit_VoltageHi_3;
-        TPanel *Panel1;
-        TEdit *Edit5;
-        TEdit *Edit20;
-        TEdit *Edit2;
-        TPanel *Panel15;
-        TEdit *Edit10;
-        TEdit *Edit21;
-        TEdit *Edit9;
+        TPanel *Panel_WidthPwm_0;
+        TEdit *Edit_WidthPwm_Code;
+        TEdit *Edit_WidthPwm_Value;
+        TEdit *Edit_WidthPwm_3;
+        TPanel *Panel_PeriodPwm_0;
+        TEdit *Edit_PeriodPwm_Code;
+        TEdit *Edit_PeriodPwm_Value;
+        TEdit *Edit_PeriodPwm_3;
         TPanel *Panel_ErrorConnectCount;
         TEdit *Edit_ErrorConnectCount;
         TGroupBox *GroupBox_ReverseLink;
@@ -174,10 +174,10 @@ __published:	// IDE-managed Components
         TEdit *Edit_3_14;
         TButton *Button_ModBus_Write;
         TButton *Button_ModBus_SetDef;
-        TPanel *Panel16;
-        TPanel *Panel18;
-        TEdit *Edit22;
-        TEdit *Edit15;
+        TPanel *Panel_Scaling_0;
+        TPanel *Panel_Scaling_1;
+        TEdit *Edit_Scaling;
+        TEdit *Edit_Scaling_3;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
@@ -215,8 +215,8 @@ private:	// User declarations
     ActionSelf<const char*, const char*> as_addComPortName;
     void AddComPortName(const char* comPortName, const char* comPortCount);
 
-    ActionSelf<Protokol> as_setProtokolName;
-    void SetProtokolName(Protokol protokolName);
+    ActionSelf<ProtokolName> as_setProtokolName;
+    void SetProtokolName(ProtokolName protokolName);
 
     ActionSelf<const char*, const char*> as_setEndPoint;
     void SetEndPoint(const char* textIpAddr, const char* textTcpPort);
@@ -240,7 +240,7 @@ private:	// User declarations
     ActionEvent<> ev_button_AddrBd_DecClick;
     ActionEvent<> ev_button_AddrBd_IncClick;
     ActionEvent<> ev_button_StartStopClick;
-    ActionEvent<Protokol> ev_comboBox_ProtocolChange;
+    ActionEvent<ProtokolName> ev_comboBox_ProtocolChange;
     ActionEvent<const char*> ev_comboBox_ComPortsChange;
     ActionEvent<> ev_windowShow;
     ActionEvent<> ev_windowClose;

@@ -10,6 +10,7 @@ public:
     static double VoltageHiCodeToValue(unsigned short code);
     static unsigned short VoltageHiValueToCode(double value);
     static double TemperatureCodeToValue(unsigned short code);
+    static double WidthPwmCodeToValue(unsigned short code);
 };
 //---------------------------------------------------------------------------
 #endif
