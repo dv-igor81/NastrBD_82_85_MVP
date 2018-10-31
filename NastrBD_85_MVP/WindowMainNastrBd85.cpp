@@ -233,7 +233,8 @@ void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
 {
     this->Edit_IndAddr->Text = data->GetIndAddr();
     this->Edit_GroupAdr->Text = data->GetGroupAddr();
-
+    this->Edit_Temperature_Code->Text = data->GetTemperatureCode();
+    this->Edit_Temperature_Value->Text = data->GetTemperatureValue();
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)

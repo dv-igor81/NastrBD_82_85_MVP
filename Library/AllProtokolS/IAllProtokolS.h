@@ -38,6 +38,7 @@ public:
 
     virtual bool GetIndAdr(unsigned char * indAdr) = 0; // Считать индивидуальный адрес БД
     virtual bool GetGrpAdr(unsigned char * groupAdr) = 0; // Считать групповой адрес БД
+    virtual bool GetTemperature(unsigned short * temper) = 0; // Получить температуру МК (КК 0x08)
 };
 //---------------------------------------------------------------------------
 #endif

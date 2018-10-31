@@ -98,10 +98,10 @@ __published:	// IDE-managed Components
         TPanel *Panel_GroupAdr_1;
         TEdit *Edit_GroupAdr;
         TPanel *Panel_GroupAdr_3;
-        TPanel *TprPanel;
-        TEdit *TprCodeEdit;
-        TEdit *TprEdit;
-        TEdit *TprUnitEdit;
+        TPanel *Panel_Temperature_0;
+        TEdit *Edit_Temperature_Code;
+        TEdit *Edit_Temperature_Value;
+        TEdit *Edit_Temperature_3;
         TPanel *DNUIPanel;
         TEdit *DNUICodeEdit;
         TEdit *Edit4;

@@ -34,6 +34,7 @@ public:
     //===
     bool GetIndAdr(unsigned char * indAdr);
     bool GetGrpAdr(unsigned char * groupAdr);
+    bool GetTemperature(unsigned short * temper);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
 

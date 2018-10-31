@@ -3,22 +3,29 @@
 #include <stdio.h>
 #include "IterDataNewBd85.h"
 #include "TextHelper.h"
+#include "ConvertHelper.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85(
-    unsigned char indAddr
-    , unsigned char groupAddr
+    unsigned char indAddr // Индивидуальный адрес
+    , unsigned char groupAddr // Групповой адрес
+    , unsigned short temperature // Температура МК (КОД)
 )
 {
     sprintf(_indAddr, "%d", indAddr);
     sprintf(_groupAddr, "%d", groupAddr);
+    sprintf(_temperatureCode, "%d", temperature);
+    double temperVal = ConvertHelper::TemperatureCodeToValue(temperature);
+    sprintf(_temperatureValue, "%0.2f", temperVal);
 }
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85()
 {
     TextHelper::SetCharInText(_indAddr, 0, indAddrSize);
     TextHelper::SetCharInText(_groupAddr, 0, indAddrSize);
+    TextHelper::SetCharInText(_temperatureCode, 0, uShortTextSize);
+    TextHelper::SetCharInText(_temperatureValue, 0, floatTextSize);
 }
 //---------------------------------------------------------------------------
 const char* IterDataNewBd85::GetIndAddr()
@@ -31,7 +38,15 @@ const char* IterDataNewBd85::GetGroupAddr()
     return _groupAddr;
 }
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetTemperatureCode()
+{
+    return _temperatureCode;
+}
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetTemperatureValue()
+{
+    return _temperatureValue;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

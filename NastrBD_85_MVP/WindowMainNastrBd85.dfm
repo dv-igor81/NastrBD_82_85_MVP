@@ -909,7 +909,7 @@ object WindowMainBd85: TWindowMainBd85
             Height = 20
             TabOrder = 11
           end
-          object TprPanel: TPanel
+          object Panel_Temperature_0: TPanel
             Left = 8
             Top = 82
             Width = 241
@@ -927,7 +927,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 12
           end
-          object TprCodeEdit: TEdit
+          object Edit_Temperature_Code: TEdit
             Left = 251
             Top = 82
             Width = 66
@@ -945,7 +945,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 13
           end
-          object TprEdit: TEdit
+          object Edit_Temperature_Value: TEdit
             Left = 318
             Top = 82
             Width = 75
@@ -963,7 +963,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 14
           end
-          object TprUnitEdit: TEdit
+          object Edit_Temperature_3: TEdit
             Left = 394
             Top = 82
             Width = 43

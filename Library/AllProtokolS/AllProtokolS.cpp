@@ -251,6 +251,13 @@ bool AllProtokolS::GetGrpAdr(unsigned char * groupAdr)
     return ErrorChecked( protokol->GetGrpAdr( groupAdr ) );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::GetTemperature(unsigned short * temper)
+{
+    unsigned int data;
+    int result = protokol->GetTemp( & data );
+    *temper = (data & 0xFFFF);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

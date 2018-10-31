@@ -81,6 +81,7 @@ private:
     unsigned char _ssp;
     unsigned char _indAddr;
     unsigned char _groupAddr;
+    unsigned short _temperature;
 };
 //---------------------------------------------------------------------------
 #endif

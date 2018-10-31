@@ -120,6 +120,13 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
+    if ( _allProtokol->GetTemperature( & _temperature ) == false )
+    {
+        return;
+    }
+
+
+
     if ( _iterData != 0 ) // Основной поток не успел отобразить данные
     {
         return;
@@ -127,6 +134,7 @@ void PresenterWindowMainBd85::OprosIter()
     _iterData = new IterDataNewBd85(
         _indAddr // Индивидуальный адрес
         , _groupAddr // Групповой адрес
+        , _temperature // Температура МК (КОД)
     );
     _task->BeginInvoke( & as_OprosIterInvoke );
 }
