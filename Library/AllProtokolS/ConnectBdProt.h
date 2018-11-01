@@ -3,7 +3,7 @@
 #define ConnectBdProtH
 //---------------------------------------------------------------------------
 #include "HelperConnectFourBdProt.h"
-#include "Protokol_t.h"
+#include "ProtokolName_t.h"
 #include "ConnectionStateInfo_t.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"

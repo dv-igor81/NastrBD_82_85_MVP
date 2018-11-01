@@ -13,7 +13,7 @@
 #include <Grids.hpp>
 //---------------------------------------------------------------------------
 #include "RSProtokol.h"
-#include "Protokol_t.h"
+#include "ProtokolName_t.h"
 //---------------------------------------------------------------------------
 // DIA INC
 #include <Clipbrd.hpp>
@@ -399,7 +399,7 @@ __published:	// IDE-managed Components
         void __fastcall CheckBox_DAuto_RengenClick(TObject *Sender);
         void __fastcall Edit_2_Col2_4_Row_14Change(TObject *Sender);
 private:	// User declarations
-  Protokol prtotType;
+  ProtokolName prtotType;
   int AutoPodbor_1_Un_2_U81;
   float m_fltU_temp;
   unsigned int m_iU_temp;

@@ -4,18 +4,14 @@
   <MACROS>
     <VERSION value="BCB.06.00"/>
     <PROJECT value="NastrBD_82_85.exe"/>
-    <OBJFILES value="NastrBD_82_85.obj Unit_FormDispet.obj ..\NastrBD_85_MVP\ConnectBdProt.obj 
-      ..\NastrBD_85_MVP\ConnectionStateInfo_t.obj 
-      ..\NastrBD_85_MVP\HelperConnectFourBdProt.obj 
-      ..\NastrBD_85_MVP\HelperNumberTextBtn.obj 
-      ..\NastrBD_85_MVP\IterDataNewBd85.obj 
-      ..\NastrBD_85_MVP\IWindowMainBd85.obj ..\NastrBD_85_MVP\NastrBd85.obj 
+    <OBJFILES value="NastrBD_82_85.obj Unit_FormDispet.obj 
+      ..\NastrBD_85_MVP\IterDataNewBd85.obj ..\NastrBD_85_MVP\IWindowMainBd85.obj 
+      ..\NastrBD_85_MVP\NastrBd85.obj 
       ..\NastrBD_85_MVP\PresenterWindowMainBd85.obj 
       ..\NastrBD_85_MVP\StartDataNewBd85.obj ..\NastrBD_85_MVP\WindowLoader.obj 
       ..\NastrBD_85_MVP\WindowMainNastrBd85.obj 
       ..\NastrBD_85_MVP\WindowStartNastrBd85.obj 
       ..\Library\AllProtokolS\RSProtokol.obj 
-      ..\Library\AllProtokolS\Protokol_t.obj 
       ..\Library\AllProtokolS\modbus-tcp.obj 
       ..\Library\AllProtokolS\modbus-data.obj ..\Library\AllProtokolS\modbus.obj 
       ..\Library\AllProtokolS\IAllProtokolS.obj 
@@ -49,7 +45,12 @@
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Graph.obj 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Priklad_Funk.obj 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_RearFromEEPROM.obj 
-      ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_LoadParam.obj"/>
+      ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_LoadParam.obj 
+      ..\Library\AllProtokolS\ConnectBdProt.obj 
+      ..\Library\AllProtokolS\ConnectionStateInfo_t.obj 
+      ..\Library\AllProtokolS\HelperConnectFourBdProt.obj 
+      ..\Library\AllProtokolS\HelperNumberTextBtn.obj 
+      ..\Library\AllProtokolS\ProtokolName_t.obj"/>
     <RESFILES value="NastrBD_82_85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -79,7 +80,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi"/>
-    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC"/>
+    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -120,10 +121,6 @@
       <FILE FILENAME="NastrBD_82_85.res" FORMNAME="" UNITNAME="NastrBD_82_85.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="NastrBD_82_85.cpp" FORMNAME="" UNITNAME="NastrBD_82_85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Unit_FormDispet.cpp" FORMNAME="FormDispet" UNITNAME="Unit_FormDispet" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_MVP\ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_MVP\ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_MVP\HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_MVP\HelperNumberTextBtn.cpp" FORMNAME="" UNITNAME="HelperNumberTextBtn.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_85_MVP\IterDataNewBd85.cpp" FORMNAME="" UNITNAME="IterDataNewBd85.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_85_MVP\IWindowMainBd85.cpp" FORMNAME="" UNITNAME="IWindowMainBd85.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_85_MVP\NastrBd85.cpp" FORMNAME="" UNITNAME="NastrBd85.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -133,7 +130,6 @@
       <FILE FILENAME="..\NastrBD_85_MVP\WindowMainNastrBd85.cpp" FORMNAME="WindowMainBd85" UNITNAME="WindowMainNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_85_MVP\WindowStartNastrBd85.cpp" FORMNAME="WindowStart" UNITNAME="WindowStartNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\Protokol_t.cpp" FORMNAME="" UNITNAME="Protokol_t.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\modbus-tcp.cpp" FORMNAME="" UNITNAME="modbus-tcp.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\modbus-data.cpp" FORMNAME="" UNITNAME="modbus-data.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\modbus.cpp" FORMNAME="" UNITNAME="modbus.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -173,6 +169,11 @@
       <FILE FILENAME="..\011_NastrBD_bc6\BD82SRC\Unit_82_Priklad_Funk.cpp" FORMNAME="" UNITNAME="Unit_82_Priklad_Funk" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_RearFromEEPROM.cpp" FORMNAME="Form_RearFromEEPROM" UNITNAME="Unit_82_Form_RearFromEEPROM" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_LoadParam.cpp" FORMNAME="Form_LoadParam" UNITNAME="Unit_82_Form_LoadParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\HelperNumberTextBtn.cpp" FORMNAME="" UNITNAME="HelperNumberTextBtn" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\ProtokolName_t.cpp" FORMNAME="" UNITNAME="ProtokolName_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

@@ -6,7 +6,7 @@
 using namespace smartevents;
 //---------------------------------------------------------------------------
 #include "HelperNumberTextBtn.h"
-#include "Protokol_t.h"
+#include "ProtokolName_t.h"
 #include "ConnectionStateInfo_t.h"
 //---------------------------------------------------------------------------
 class HelperConnectFourBdProt

@@ -2,7 +2,7 @@
 #ifndef IAllProtokolSH
 #define IAllProtokolSH
 //---------------------------------------------------------------------------
-#include "Protokol_t.h"
+#include "ProtokolName_t.h"
 //---------------------------------------------------------------------------
 #include "ActionEvent.h"
 using namespace smartevents;

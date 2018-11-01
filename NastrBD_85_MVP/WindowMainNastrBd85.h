@@ -8,7 +8,7 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-#include "Protokol_t.h"
+#include "ProtokolName_t.h"
 #include "ConnectionStateInfo_t.h"
 #include "IWindowMainBd85.h"
 #include <ComCtrls.hpp>
