@@ -13,7 +13,9 @@ public:
     void UpdateComPotrs();
     bool NextComPortIndex(int * comPortIndex);
 
-    void SetProtokol(ProtokolName protokolName);
+    void SetProtokolName(ProtokolName protokolName);
+    ProtokolName GetProtokolName();
+
     void SetComPortName(const char* cpName);
     void SetIpAddr(const char* ipAddr);
     void SetTcpPort(int tcpPort);
@@ -43,8 +45,6 @@ public:
     bool GetScaling(unsigned short * scaling);
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
-
-    ProtokolName GetProtokolName();
 
 private:
     enum { comPortCount = 100, ipAddrSize = 16, comPortNameSize = 7 };

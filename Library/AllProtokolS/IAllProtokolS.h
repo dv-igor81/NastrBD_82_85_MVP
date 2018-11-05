@@ -17,7 +17,9 @@ public:
     virtual void UpdateComPotrs() = 0;
     virtual bool NextComPortIndex(int * comPortIndex) = 0;
 
-    virtual void SetProtokol(ProtokolName protokolName) = 0;
+    virtual void SetProtokolName(ProtokolName protokolName) = 0;
+    virtual ProtokolName GetProtokolName() = 0;
+    
     virtual void SetComPortName(const char* comPortName) = 0;
     virtual void SetIpAddr(const char* ipAddr) = 0;
     virtual void SetTcpPort(int tcpPort) = 0;

@@ -2,6 +2,8 @@
 #pragma hdrstop
 #include "TextHelper.h"
 //---------------------------------------------------------------------------
+#include <Classes.hpp>
+//---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 int TextHelper::AddText(
@@ -72,5 +74,45 @@ void TextHelper::CopyText(
     int maxLength)
 {
     AddText(ptrTo, ptrFrom, 0, maxLength);
-}    
+}
+//---------------------------------------------------------------------------
+int TextHelper::ConvertTextToNumber(
+    const char* text, int curVal)
+{
+    AnsiString str = text;
+    int retValue;
+    try
+    {
+        retValue = StrToInt( str );
+    }
+    catch (...)
+    {
+        retValue = curVal;
+    }
+    return retValue;
+}
+//---------------------------------------------------------------------------
+int TextHelper::ConvertTextToNumber(
+    const char* text, int curVal, int min, int max)
+{
+    AnsiString str = text;
+    int retValue;
+    try
+    {
+        retValue = StrToInt( str );
+        if ( retValue > max || retValue < min )
+        {
+            retValue = curVal;
+        }
+    }
+    catch (...)
+    {
+        retValue = curVal;
+    }
+    return retValue;
+}
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

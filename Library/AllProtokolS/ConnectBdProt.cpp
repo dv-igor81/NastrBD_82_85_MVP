@@ -206,7 +206,7 @@ void ConnectBdProt::ConnectionAsynk()
 //---------------------------------------------------------------------------
 void ConnectBdProt::Connect()
 {
-    _allProtokol->SetProtokol( _protokolName );  //_protokolName
+    _allProtokol->SetProtokolName( _protokolName );  //_protokolName
     switch ( _protokolName )
     {
     case ProtokolName_t::NineBit: // 9-ти битный

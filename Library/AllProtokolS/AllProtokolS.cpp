@@ -22,6 +22,29 @@ ProtokolName AllProtokolS::GetProtokolName()
     return _protokolName;
 }
 //---------------------------------------------------------------------------
+void AllProtokolS::SetProtokolName(ProtokolName protokolName)
+{
+    _protokolName = protokolName;
+    switch ( protokolName )
+    {
+    case ProtokolName_t::NineBit: // 9-ти битный
+        protokol->flagModbusProtokol = 0;
+        break;
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
+        protokol->flagModbusProtokol = 1;
+        break;
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
+        protokol->flagModbusProtokol = 2;
+        break;
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        protokol->flagModbusProtokol = 3;
+        break;
+    case ProtokolName_t::NeVybran:
+        protokol->flagModbusProtokol = -1;
+        break;
+    }
+}
+//---------------------------------------------------------------------------
 void AllProtokolS::UpdateComPotrs()
 {
     AnsiString comPortName;
@@ -55,29 +78,6 @@ bool AllProtokolS::NextComPortIndex(int * comPortIndex)
         comPortPtr++;
     }
     return false;
-}
-//---------------------------------------------------------------------------
-void AllProtokolS::SetProtokol(ProtokolName protokolName)
-{
-    _protokolName = protokolName;
-    switch ( protokolName )
-    {
-    case ProtokolName_t::NineBit: // 9-ти битный
-        protokol->flagModbusProtokol = 0;
-        break;
-    case ProtokolName_t::ModBus_RTU: // ModBus RTU
-        protokol->flagModbusProtokol = 1;
-        break;
-    case ProtokolName_t::ModBus_TCP: // ModBus TCP
-        protokol->flagModbusProtokol = 2;
-        break;
-    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
-        protokol->flagModbusProtokol = 3;
-        break;
-    case ProtokolName_t::NeVybran:
-        protokol->flagModbusProtokol = -1;
-        break;
-    }
 }
 //---------------------------------------------------------------------------
 void AllProtokolS::SetComPortName(const char* cpName)

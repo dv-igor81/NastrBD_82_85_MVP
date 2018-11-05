@@ -498,9 +498,6 @@ AnsiString Preobraz( AnsiString prov )
 void GodRes( godnost_t * godnost_var )
 {
   int i;
-
-//godnost_var->
-
   godnost_var->Reshotka = 0;
   godnost_var->SlashTwo = 0;
   godnost_var->Count = 0;

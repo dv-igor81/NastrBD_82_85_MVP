@@ -24,5 +24,15 @@ public:
         char * ptrTo,
         const char * ptrFrom,
         int maxLength);
+
+    static int ConvertTextToNumber(
+        const char* text,
+        int curVal);
+
+    static int ConvertTextToNumber(
+        const char* text,
+        int curVal,
+        int min,
+        int max);
 };
 #endif
