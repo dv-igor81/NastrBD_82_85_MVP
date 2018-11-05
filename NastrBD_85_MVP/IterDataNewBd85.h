@@ -13,7 +13,7 @@ public:
         , unsigned short voltageHi
         , unsigned short widthPwm
         , unsigned short periodPwm
-        , unsigned short scaling
+        , unsigned int scaling
     );
     IterDataNewBd85();
 
@@ -29,6 +29,7 @@ public:
     const char* GetWidthPwmValue();
     const char* GetPeriodPwmCode();
     const char* GetPeriodPwmValue();
+    const char* GetScaling();
 private:
     enum { indAddrSize = 4
         , uShortTextSize = 6 // 5 цифр и завершающий ноль

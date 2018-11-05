@@ -268,7 +268,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 4
           end
         end
-        object GroupBox2: TGroupBox
+        object GroupBox_Scaling: TGroupBox
           Left = 1
           Top = 221
           Width = 446
@@ -281,7 +281,7 @@ object WindowMainBd85: TWindowMainBd85
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 1
-          object Label3: TLabel
+          object Label_TimeMetering: TLabel
             Left = 112
             Top = 16
             Width = 119
@@ -294,7 +294,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = []
             ParentFont = False
           end
-          object T_LimitEdit: TEdit
+          object Edit_TimeMeteringLimit: TEdit
             Left = 248
             Top = 16
             Width = 68
@@ -309,7 +309,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 0
             Text = '200'
           end
-          object Count1Panel: TPanel
+          object Panel_MiddleSecondScaling_0: TPanel
             Left = 8
             Top = 38
             Width = 241
@@ -327,14 +327,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 1
           end
-          object EmptyPanel04: TPanel
+          object Panel_MiddleSecondScaling_1: TPanel
             Left = 249
             Top = 38
             Width = 68
             Height = 20
             TabOrder = 2
           end
-          object Count1Edit: TEdit
+          object Edit_MiddleSecondScaling: TEdit
             Left = 318
             Top = 38
             Width = 75
@@ -352,7 +352,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 3
           end
-          object Count1UnitEdit: TEdit
+          object Edit_MiddleSecondScaling_3: TEdit
             Left = 394
             Top = 38
             Width = 43
@@ -371,7 +371,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 4
             Text = #1080#1084#1087'/'#1089
           end
-          object SumCountPanel: TPanel
+          object Panel_TotalScaling_0: TPanel
             Left = 8
             Top = 60
             Width = 241
@@ -389,14 +389,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 5
           end
-          object EmptyPanel05: TPanel
+          object Panel_TotalScaling_1: TPanel
             Left = 249
             Top = 60
             Width = 68
             Height = 20
             TabOrder = 6
           end
-          object SumCountEdit: TEdit
+          object Edit_TotalScaling: TEdit
             Left = 318
             Top = 60
             Width = 75
@@ -414,7 +414,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 7
           end
-          object SumCountUnitEdit: TEdit
+          object Edit_TotalScaling_3: TEdit
             Left = 394
             Top = 60
             Width = 43
@@ -433,7 +433,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 8
             Text = ' '#1080#1084#1087
           end
-          object TCountPanel: TPanel
+          object Panel_TimeScaling_0: TPanel
             Left = 8
             Top = 82
             Width = 241
@@ -451,14 +451,14 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 9
           end
-          object EmptyPanel06: TPanel
+          object Panel_TimeScaling_1: TPanel
             Left = 249
             Top = 82
             Width = 68
             Height = 20
             TabOrder = 10
           end
-          object TCountEdit: TEdit
+          object Edit_TimeScaling: TEdit
             Left = 318
             Top = 82
             Width = 75
@@ -476,7 +476,7 @@ object WindowMainBd85: TWindowMainBd85
             ReadOnly = True
             TabOrder = 11
           end
-          object TCountUnitEdit: TEdit
+          object Edit_TimeScaling_3: TEdit
             Left = 394
             Top = 82
             Width = 43
@@ -495,7 +495,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 12
             Text = '  '#1089
           end
-          object SetResetButton: TButton
+          object button_ClearScaling: TButton
             Left = 8
             Top = 108
             Width = 120
@@ -511,7 +511,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 13
           end
-          object StartCountButton: TButton
+          object button_StartStopScaling: TButton
             Left = 128
             Top = 108
             Width = 120
@@ -525,8 +525,9 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 14
+            OnClick = button_StartStopScalingClick
           end
-          object btnSaveParam: TButton
+          object button_SaveToFile: TButton
             Left = 318
             Top = 108
             Width = 120

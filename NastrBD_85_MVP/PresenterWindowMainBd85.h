@@ -47,6 +47,13 @@ private:
     ActionSelf<ConnectionStateInfo> as_SetConnectionState;
     void SetConnectionState( ConnectionStateInfo state );
 
+    ActionSelf<const char*> as_StartStopScaling;
+    void StartStopScaling(const char* timeMeteringLimit);
+
+    void ScalingOprosWork();
+    ActionSelf<> as_ScalingOprosWorkInvoke;
+    void ScalingOprosWorkInvoke();
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
@@ -58,6 +65,9 @@ private:
 
     ActionEvent<IterDataNewBd85*> ev_DisplayIterData;
     IterDataNewBd85* _iterData;
+
+
+    ScalingDataNewBd85* _scalingData;
 
     ActionEvent<> ev_ShowDispetWindow;
 
@@ -90,6 +100,15 @@ private:
     unsigned short _scaling;
     //<<=== Данные опроса БД
     unsigned int ScalingSummator(unsigned short scaling);
+    unsigned int _intervalQuantity; // Количество подинтервалов в секунде
+    unsigned int _intervalCounter; // Счетчик подинтервалов
+    unsigned int _scalingCounter; // Счетчик секундного счёта
+
+    bool _isScalingWork; // Работает ли расчет среднего счета за определенный пользователем интервал
+    int _timeLimitScaling; // Время, заданное пользователем, для набора среднего суммарного счёта
+    int _currTimeScaling; // Текущее время набора счета
+    unsigned int _scalingCounterTmp; // Временный счет за секунду
+    unsigned int _scalingCounterSumm; // Суммарный счет за время набора
 };
 //---------------------------------------------------------------------------
 #endif

@@ -8,6 +8,7 @@ using namespace smartevents;
 #include "HelperConnectFourBdProt.h"
 #include "StartDataNewBd85.h"
 #include "IterDataNewBd85.h"
+#include "ScalingDataNewBd85.h"
 //---------------------------------------------------------------------------
 class IWindowMainBd85
 {
@@ -20,6 +21,7 @@ public:
     virtual ActionSelf<IterDataNewBd85*>& GetSelfDisplayIterData() = 0;
     virtual ActionSelf<const char*>* GetSelfDisplayErrors() = 0;
     virtual HelperConnectFourBdProt* GetConnectFourBdProt() = 0;
+    virtual ActionEvent<const char*>* GetEventButtonStartStopScalingClick() = 0;
 };
 //---------------------------------------------------------------------------
 #endif

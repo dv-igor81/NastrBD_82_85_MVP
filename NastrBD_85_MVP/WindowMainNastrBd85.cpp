@@ -209,6 +209,7 @@ void TWindowMainBd85::ControlsAvailability(bool isEnabled)
 void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
 {
     button_WriteToEeprom->Enabled = isEnabled;
+    button_StartStopScaling->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
@@ -243,6 +244,7 @@ void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
     this->Edit_WidthPwm_Value->Text = data->GetWidthPwmValue();
     this->Edit_PeriodPwm_Code->Text = data->GetPeriodPwmCode();
     this->Edit_PeriodPwm_Value->Text = data->GetPeriodPwmValue();
+    this->Edit_Scaling->Text = data->GetScaling();
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)
@@ -326,6 +328,17 @@ void __fastcall TWindowMainBd85::comboBox_ComPortsChange(TObject *Sender)
 void __fastcall TWindowMainBd85::button_WriteToEepromClick(TObject *Sender)
 {
     ev_button_WriteToEepromClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::button_StartStopScalingClick(
+      TObject *Sender)
+{
+    ev_button_StartStopScalingClick( Edit_TimeMeteringLimit->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>* TWindowMainBd85::GetEventButtonStartStopScalingClick()
+{
+    return & ev_button_StartStopScalingClick;
 }
 //---------------------------------------------------------------------------
 

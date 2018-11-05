@@ -2,6 +2,7 @@
 #pragma hdrstop
 #include <stdio.h>
 #include "PresenterWindowMainBd85.h"
+#include "TextHelper.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -18,6 +19,8 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_OprosEnd(this, &PresenterWindowMainBd85::OprosEnd)
         , as_OprosEndInvoke(this, &PresenterWindowMainBd85::OprosEndInvoke)
         , as_SetConnectionState(this, &PresenterWindowMainBd85::SetConnectionState)
+        , as_StartStopScaling(this, &PresenterWindowMainBd85::StartStopScaling)
+        , as_ScalingOprosWorkInvoke(this, &PresenterWindowMainBd85::ScalingOprosWorkInvoke)
 {
     _startData = 0;
     _iterData = 0;
@@ -30,6 +33,9 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
 
     ev_Show += _view->GetSelfShow();
     *_view->GetEventFormClose() += as_FormClose;
+
+    *_view->GetEventButtonStartStopScalingClick() += as_StartStopScaling;
+
     _connectBdProt = new ConnectBdProt(
         _view->GetConnectFourBdProt(), _allProtokol, _task );
     ev_Show(); // Прказать форму
@@ -144,9 +150,6 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
-
-
-
     if ( _iterData != 0 ) // Основной поток не успел отобразить данные
     {
         return;
@@ -166,7 +169,23 @@ void PresenterWindowMainBd85::OprosIter()
 //---------------------------------------------------------------------------
 unsigned int PresenterWindowMainBd85::ScalingSummator(unsigned short scaling)
 {
-    return 0; //switch ( _allProtokol )
+    _intervalCounter++; // Счетчик подинтервалов
+    _scalingCounter += scaling; // _scalingCounter - Счетчик секундного счёта
+    if ( _intervalCounter % _intervalQuantity == 0 ) // _intervalQuantity - Количество подинтервалов в секунде
+    {
+        _scalingCounterTmp = _scalingCounter;
+        _scalingCounter = 0; // _scalingCounter - Счетчик секундного счёта
+        _intervalCounter = 0; // Счетчик подинтервалов
+
+        if ( _isScalingWork )
+        {
+            ScalingOprosWork();
+            _task->BeginInvoke( & as_ScalingOprosWorkInvoke );
+        }
+
+        return _scalingCounterTmp; // Текущий секундный счёт
+    }
+    return 0xFFFFFFFF; // Признак того, что счет не готов
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosIterInvoke()
@@ -175,6 +194,39 @@ void PresenterWindowMainBd85::OprosIterInvoke()
     delete _iterData;
     _iterData = 0;
 }
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::StartStopScaling(const char* timeMeteringLimit)
+{
+    if(_isScalingWork) // Идет набор счета
+    {
+        _isScalingWork = false;
+        _scalingData = new ScalingDataNewBd85(); // Пустой конструктор признак завершения работы
+    }
+    else
+    {
+        _isScalingWork = true;
+        _timeLimitScaling = TextHelper::ConvertTextToNumber(
+            timeMeteringLimit, // Текст
+            60); // 60 секунд по умолчанию
+        _currTimeScaling = 0; // Текущее время набора счета
+        _scalingCounterSumm = 0; // Суммарный счет за время набора
+
+        _scalingData = new ScalingDataNewBd85( _timeLimitScaling );
+    }
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ScalingOprosWork()
+{
+    _currTimeScaling++;
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ScalingOprosWorkInvoke()
+{
+    //ev_ScalingOpros( _scalingData );
+    //delete _scalingData;
+    //_scalingData = 0;
+}
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosEnd()
 {
@@ -220,6 +272,20 @@ void PresenterWindowMainBd85::SetConnectionState( ConnectionStateInfo state )
     case ConnectionStateInfo_t::IsConnected:
         ConnectIsGood();
         _isConnected = true;
+        switch ( _allProtokol->GetProtokolName() )
+        {
+        case ProtokolName_t::NineBit: // 9-ти битный
+            _intervalQuantity = 5; // Количество подинтервалов в секунде
+            break;
+        case ProtokolName_t::ModBus_RTU: // ModBus RTU
+        case ProtokolName_t::ModBus_TCP: // ModBus TCP
+        case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+            _intervalQuantity = 4; // Количество подинтервалов в секунде
+            break;
+        }
+        _intervalCounter = 0; // Счетчик подинтервалов
+        _scalingCounter = 0; // Счетчик секундного счёта
+        _isScalingWork = false; // Не работает набор счета за определенный пользователем интервал
         break;
     case ConnectionStateInfo_t::WaitLoopExit:
         _isConnected = false;    

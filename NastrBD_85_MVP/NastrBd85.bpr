@@ -24,7 +24,7 @@
       ..\Library\AllProtokolS\ConnectionStateInfo_t.obj 
       ..\Library\AllProtokolS\ProtokolName_t.obj 
       ..\Library\AllProtokolS\ConnectBdProt.obj 
-      ..\Library\AllProtokolS\HelperConnectFourBdProt.obj"/>
+      ..\Library\AllProtokolS\HelperConnectFourBdProt.obj ScalingDataNewBd85.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -107,6 +107,7 @@
       <FILE FILENAME="..\Library\AllProtokolS\ProtokolName_t.cpp" FORMNAME="" UNITNAME="ProtokolName_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ScalingDataNewBd85.cpp" FORMNAME="" UNITNAME="ScalingDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

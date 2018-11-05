@@ -15,9 +15,11 @@ IterDataNewBd85::IterDataNewBd85(
     , unsigned short voltageHi
     , unsigned short widthPwm
     , unsigned short periodPwm
-    , unsigned short scaling
+    , unsigned int scaling
 )
 {
+    IterDataNewBd85(); // ќчистить все пол€, вызвав конструктор без параметров
+
     sprintf(_indAddr, "%d", indAddr);
     sprintf(_groupAddr, "%d", groupAddr);
     sprintf(_temperatureCode, "%d", temperature);
@@ -35,7 +37,10 @@ IterDataNewBd85::IterDataNewBd85(
     sprintf(_periodPwmCode, "%d", periodPwm );
     double periodPwmVal = ConvertHelper::WidthPwmCodeToValue(periodPwm);
     sprintf(_periodPwmValue, "%0.2f", periodPwmVal );
-    sprintf(_scaling, "%d", scaling);
+    if ( scaling != 0xFFFFFFFF ) // —чЄт за секунду готов
+    {
+        sprintf(_scaling, "%d", scaling);
+    }
 }
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85()
@@ -115,6 +120,10 @@ const char* IterDataNewBd85::GetPeriodPwmValue()
     return _periodPwmValue;
 }
 //---------------------------------------------------------------------------
+const char* IterDataNewBd85::GetScaling()
+{
+    return _scaling;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

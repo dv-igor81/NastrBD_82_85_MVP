@@ -43,7 +43,7 @@ __published:	// IDE-managed Components
         TButton *button_StartStop;
         TPanel *label_Hint;
         TGroupBox *GroupBox_Rate;
-        TGroupBox *GroupBox2;
+        TGroupBox *GroupBox_Scaling;
         TGroupBox *GroupBox_EEPROM;
         TGroupBox *GroupBox_VerPo;
         TEdit *Edit_VerPo0;
@@ -123,23 +123,23 @@ __published:	// IDE-managed Components
         TGroupBox *GroupBox_ReverseLink;
         TRadioButton *RS1;
         TRadioButton *RS3;
-        TLabel *Label3;
-        TEdit *T_LimitEdit;
-        TPanel *Count1Panel;
-        TPanel *EmptyPanel04;
-        TEdit *Count1Edit;
-        TEdit *Count1UnitEdit;
-        TPanel *SumCountPanel;
-        TPanel *EmptyPanel05;
-        TEdit *SumCountEdit;
-        TEdit *SumCountUnitEdit;
-        TPanel *TCountPanel;
-        TPanel *EmptyPanel06;
-        TEdit *TCountEdit;
-        TEdit *TCountUnitEdit;
-        TButton *SetResetButton;
-        TButton *StartCountButton;
-        TButton *btnSaveParam;
+        TLabel *Label_TimeMetering;
+        TEdit *Edit_TimeMeteringLimit;
+        TPanel *Panel_MiddleSecondScaling_0;
+        TPanel *Panel_MiddleSecondScaling_1;
+        TEdit *Edit_MiddleSecondScaling;
+        TEdit *Edit_MiddleSecondScaling_3;
+        TPanel *Panel_TotalScaling_0;
+        TPanel *Panel_TotalScaling_1;
+        TEdit *Edit_TotalScaling;
+        TEdit *Edit_TotalScaling_3;
+        TPanel *Panel_TimeScaling_0;
+        TPanel *Panel_TimeScaling_1;
+        TEdit *Edit_TimeScaling;
+        TEdit *Edit_TimeScaling_3;
+        TButton *button_ClearScaling;
+        TButton *button_StartStopScaling;
+        TButton *button_SaveToFile;
         TLabel *Label6;
         TButton *Button5;
         TScrollBox *ScrollBox_SettingsForModBus;
@@ -191,6 +191,7 @@ __published:	// IDE-managed Components
           TObject *Sender);
         void __fastcall comboBox_ComPortsChange(TObject *Sender);
         void __fastcall button_WriteToEepromClick(TObject *Sender);
+        void __fastcall button_StartStopScalingClick(TObject *Sender);
 private:	// User declarations
     void InitComponrnts();
      
@@ -252,6 +253,8 @@ private:	// User declarations
     HelperNumberTextBtn addrBdHelper;
     HelperConnectFourBdProt bdProtHelper;
 
+    ActionEvent<const char*> ev_button_StartStopScalingClick;
+
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
 
@@ -262,10 +265,10 @@ public:		// User declarations
     ActionEvent<>* GetEventFormClose();
     ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData();
     ActionSelf<const char*>* GetSelfDisplayErrors();
-
     ActionSelf<IterDataNewBd85*>& GetSelfDisplayIterData();
-
     HelperConnectFourBdProt* GetConnectFourBdProt();
+
+    ActionEvent<const char*>* GetEventButtonStartStopScalingClick();
 };
 //---------------------------------------------------------------------------
 #endif
