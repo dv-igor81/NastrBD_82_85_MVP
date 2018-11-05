@@ -22,6 +22,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         , as_DisplayStartData(this, &TWindowMainBd85::DisplayStartData)
         , as_DisplayCountConnectError(this, &TWindowMainBd85::DisplayCountConnectError)
         , as_DisplayIterData(this, &TWindowMainBd85::DisplayIterData)
+        , as_DisplayScalingData(this, &TWindowMainBd85::DisplayScalingData)
 
         ,addrBdHelper(
             &as_textBox_AddrBd_SetText, // Изменяю текст программно
@@ -232,19 +233,40 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
 {
-    this->Edit_IndAddr->Text = data->GetIndAddr();
-    this->Edit_GroupAdr->Text = data->GetGroupAddr();
-    this->Edit_Temperature_Code->Text = data->GetTemperatureCode();
-    this->Edit_Temperature_Value->Text = data->GetTemperatureValue();
-    this->Edit_DNU_Code->Text = data->GetDnuCode();
-    this->Edit_DNU_Value->Text = data->GetDnuValue();
-    this->Edit_VoltageHi_Code->Text = data->GetVoltageHiCode();
-    this->Edit_VoltageHi_Value->Text = data->GetVoltageHiValue();
-    this->Edit_WidthPwm_Code->Text = data->GetWidthPwmCode();
-    this->Edit_WidthPwm_Value->Text = data->GetWidthPwmValue();
-    this->Edit_PeriodPwm_Code->Text = data->GetPeriodPwmCode();
-    this->Edit_PeriodPwm_Value->Text = data->GetPeriodPwmValue();
-    this->Edit_Scaling->Text = data->GetScaling();
+    Edit_IndAddr->Text = data->GetIndAddr();
+    Edit_GroupAdr->Text = data->GetGroupAddr();
+    Edit_Temperature_Code->Text = data->GetTemperatureCode();
+    Edit_Temperature_Value->Text = data->GetTemperatureValue();
+    Edit_DNU_Code->Text = data->GetDnuCode();
+    Edit_DNU_Value->Text = data->GetDnuValue();
+    Edit_VoltageHi_Code->Text = data->GetVoltageHiCode();
+    Edit_VoltageHi_Value->Text = data->GetVoltageHiValue();
+    Edit_WidthPwm_Code->Text = data->GetWidthPwmCode();
+    Edit_WidthPwm_Value->Text = data->GetWidthPwmValue();
+    Edit_PeriodPwm_Code->Text = data->GetPeriodPwmCode();
+    Edit_PeriodPwm_Value->Text = data->GetPeriodPwmValue();
+    Edit_Scaling->Text = data->GetScaling();
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::DisplayScalingData( ScalingDataNewBd85* data )
+{
+    if ( data->GetStartWorkScalingSumm() ) // Начать работу
+    {
+        button_ClearScaling->Enabled = true;
+        Edit_TimeMeteringLimit->Enabled = false;
+        button_StartStopScaling->Caption = "Стоп";
+        Edit_TimeMeteringLimit->Text = data->GetTimeMeteringLimit();
+    }
+    if ( data->GetWorkScalingSumm() == false ) // Завершить работу
+    {
+        button_ClearScaling->Enabled = false;
+        Edit_TimeMeteringLimit->Enabled = true;
+        button_StartStopScaling->Caption = "Старт";
+        Edit_TimeMeteringLimit->Enabled = true;
+    }
+    Edit_TimeScaling->Text = data->GetTimeScaling(); // Текущее время набора среднего счёта
+    Edit_TotalScaling->Text = data->GetTotalScaling(); // Суммарный счёт (Интеграл)
+    Edit_MiddleSecondScaling->Text = data->GetMiddleScaling(); // Средний счёт за секунду
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)
@@ -265,6 +287,16 @@ ActionSelf<IterDataNewBd85*>& TWindowMainBd85::GetSelfDisplayIterData()
 ActionSelf<const char*>* TWindowMainBd85::GetSelfDisplayErrors()
 {
     return & as_DisplayCountConnectError; 
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>* TWindowMainBd85::GetEventButtonStartStopScalingClick()
+{
+    return & ev_button_StartStopScalingClick;
+}
+//---------------------------------------------------------------------------
+ActionSelf<ScalingDataNewBd85*>& TWindowMainBd85::GetSelfDisplayScalingData()
+{
+    return as_DisplayScalingData;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -335,10 +367,5 @@ void __fastcall TWindowMainBd85::button_StartStopScalingClick(
 {
     ev_button_StartStopScalingClick( Edit_TimeMeteringLimit->Text.c_str() );
 }
-//---------------------------------------------------------------------------
-ActionEvent<const char*>* TWindowMainBd85::GetEventButtonStartStopScalingClick()
-{
-    return & ev_button_StartStopScalingClick;
-}
-//---------------------------------------------------------------------------
+
 

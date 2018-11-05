@@ -22,6 +22,7 @@ public:
     virtual ActionSelf<const char*>* GetSelfDisplayErrors() = 0;
     virtual HelperConnectFourBdProt* GetConnectFourBdProt() = 0;
     virtual ActionEvent<const char*>* GetEventButtonStartStopScalingClick() = 0;
+    virtual ActionSelf<ScalingDataNewBd85*>& GetSelfDisplayScalingData() = 0;
 };
 //---------------------------------------------------------------------------
 #endif

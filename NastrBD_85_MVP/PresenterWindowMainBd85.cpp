@@ -46,6 +46,8 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayIterData += _view->GetSelfDisplayIterData();
 
     ev_ShowDispetWindow += as_ShowDispetWindow;
+
+    ev_ScalingOpros += _view->GetSelfDisplayScalingData();
 }
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
@@ -89,7 +91,6 @@ void PresenterWindowMainBd85::OprosStar()
             break;
         }
     }
-
     _readParamIndex = 0;
     while ( _isConnected )
     {
@@ -180,7 +181,6 @@ unsigned int PresenterWindowMainBd85::ScalingSummator(unsigned short scaling)
         if ( _isScalingWork )
         {
             ScalingOprosWork();
-            _task->BeginInvoke( & as_ScalingOprosWorkInvoke );
         }
 
         return _scalingCounterTmp; // Текущий секундный счёт
@@ -199,32 +199,68 @@ void PresenterWindowMainBd85::StartStopScaling(const char* timeMeteringLimit)
 {
     if(_isScalingWork) // Идет набор счета
     {
-        _isScalingWork = false;
-        _scalingData = new ScalingDataNewBd85(); // Пустой конструктор признак завершения работы
+        _isExitScalingWork = true; // Сигнал, на завершение расчёта среднего счета
     }
     else
     {
-        _isScalingWork = true;
+        _isExitScalingWork = false;
         _timeLimitScaling = TextHelper::ConvertTextToNumber(
             timeMeteringLimit, // Текст
             60); // 60 секунд по умолчанию
         _currTimeScaling = 0; // Текущее время набора счета
         _scalingCounterSumm = 0; // Суммарный счет за время набора
 
+        // Проверить ошибку ввода, устранить если есть, очистить поля
         _scalingData = new ScalingDataNewBd85( _timeLimitScaling );
+        ev_ScalingOpros( _scalingData );
+        if ( _timeLimitScaling > 0 )
+        {
+            _isScalingWork = true;
+        }
     }
+    delete _scalingData;
+    _scalingData = 0;
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ScalingOprosWork()
 {
-    _currTimeScaling++;
+    int stubExit = _timeLimitScaling;
+    if ( _isExitScalingWork ) // Завершить расчёт среднего счёта
+    {
+        _isScalingWork = false;
+    }
+    else
+    { // Расчитывать средней счет
+        _currTimeScaling++;
+        _scalingCounterSumm += _scalingCounterTmp;
+        if ( _currTimeScaling >= _timeLimitScaling )
+        {
+            _isScalingWork = false; // Завершить расчёт среднего счёта
+        }
+    }
+    if ( _isScalingWork == false )
+    {
+        stubExit = -1; // Индикация завершения расчёта среднего счёта
+    }
+    if ( _scalingData != 0 ) // Основной поток не успел отобразить данные
+    {
+        return;
+    }
+
+    _scalingData = new ScalingDataNewBd85(
+        stubExit
+        , _currTimeScaling // Текущее время набора счета
+        , _scalingCounterSumm
+    );
+
+    _task->BeginInvoke( & as_ScalingOprosWorkInvoke );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ScalingOprosWorkInvoke()
 {
-    //ev_ScalingOpros( _scalingData );
-    //delete _scalingData;
-    //_scalingData = 0;
+    ev_ScalingOpros( _scalingData );
+    delete _scalingData;
+    _scalingData = 0;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -288,7 +324,9 @@ void PresenterWindowMainBd85::SetConnectionState( ConnectionStateInfo state )
         _isScalingWork = false; // Не работает набор счета за определенный пользователем интервал
         break;
     case ConnectionStateInfo_t::WaitLoopExit:
-        _isConnected = false;    
+        _isConnected = false;
+        _isExitScalingWork = true; // Сигнал, на завершение расчёта среднего счёта
+        ScalingOprosWork(); // Отобразить графически завершение расчёта среднего счёта
         break;
     case ConnectionStateInfo_t::IsDisconnect:
         break;

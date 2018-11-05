@@ -66,7 +66,7 @@ private:
     ActionEvent<IterDataNewBd85*> ev_DisplayIterData;
     IterDataNewBd85* _iterData;
 
-
+    ActionEvent<ScalingDataNewBd85*> ev_ScalingOpros;
     ScalingDataNewBd85* _scalingData;
 
     ActionEvent<> ev_ShowDispetWindow;
@@ -104,11 +104,13 @@ private:
     unsigned int _intervalCounter; // Счетчик подинтервалов
     unsigned int _scalingCounter; // Счетчик секундного счёта
 
-    bool _isScalingWork; // Работает ли расчет среднего счета за определенный пользователем интервал
+    bool _isScalingWork; // Работает ли расчёт среднего счета за определенный пользователем интервал
+    bool _isExitScalingWork; // Сигнал, на завершение расчёта среднего счёта
+
     int _timeLimitScaling; // Время, заданное пользователем, для набора среднего суммарного счёта
-    int _currTimeScaling; // Текущее время набора счета
+    int _currTimeScaling; // Текущее время набора среднего счёта
     unsigned int _scalingCounterTmp; // Временный счет за секунду
-    unsigned int _scalingCounterSumm; // Суммарный счет за время набора
+    double _scalingCounterSumm; // Суммарный счет за время набора
 };
 //---------------------------------------------------------------------------
 #endif

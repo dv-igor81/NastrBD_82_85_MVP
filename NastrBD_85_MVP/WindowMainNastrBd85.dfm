@@ -307,7 +307,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = []
             ParentFont = False
             TabOrder = 0
-            Text = '200'
+            Text = '60'
           end
           object Panel_MiddleSecondScaling_0: TPanel
             Left = 8

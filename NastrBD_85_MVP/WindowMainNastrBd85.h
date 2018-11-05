@@ -234,6 +234,9 @@ private:	// User declarations
     ActionSelf<IterDataNewBd85*> as_DisplayIterData;
     void DisplayIterData( IterDataNewBd85* data );
 
+    ActionSelf<ScalingDataNewBd85*> as_DisplayScalingData;
+    void DisplayScalingData( ScalingDataNewBd85* data );
+
     ActionSelf<const char*> as_DisplayCountConnectError;
     void DisplayCountConnectError(const char* text);
 
@@ -269,6 +272,7 @@ public:		// User declarations
     HelperConnectFourBdProt* GetConnectFourBdProt();
 
     ActionEvent<const char*>* GetEventButtonStartStopScalingClick();
+    ActionSelf<ScalingDataNewBd85*>& GetSelfDisplayScalingData();
 };
 //---------------------------------------------------------------------------
 #endif
