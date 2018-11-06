@@ -23,7 +23,7 @@ private:
     enum { indAddrSize = 4
         , uShortTextSize = 7 // 6 цифр (максимально-возможный счёт: 5 * 0xFFFF = 327675) и завершающий ноль
         , floatTextSize = 10
-    };
+        };
     bool _isWorkScalingSumm;
     bool _isStartWork;
 
@@ -31,6 +31,8 @@ private:
     char _currTimeScaling[uShortTextSize];
     char _scalingCounterSumm[floatTextSize];
     char _middleScaling[floatTextSize];
+
+    void ClearText();
 };
 //---------------------------------------------------------------------------
 #endif

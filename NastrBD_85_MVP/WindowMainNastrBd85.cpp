@@ -299,6 +299,11 @@ ActionSelf<ScalingDataNewBd85*>& TWindowMainBd85::GetSelfDisplayScalingData()
     return as_DisplayScalingData;
 }
 //---------------------------------------------------------------------------
+ActionEvent<>& TWindowMainBd85::GetEventButtonClearScalingClick()
+{
+    return ev_button_ClearScalingClick;
+}
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::button_StartStopClick(TObject *Sender)
 {
@@ -367,5 +372,10 @@ void __fastcall TWindowMainBd85::button_StartStopScalingClick(
 {
     ev_button_StartStopScalingClick( Edit_TimeMeteringLimit->Text.c_str() );
 }
-
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::button_ClearScalingClick(TObject *Sender)
+{
+    ev_button_ClearScalingClick();
+}
+//---------------------------------------------------------------------------
 

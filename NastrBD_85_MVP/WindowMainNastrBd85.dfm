@@ -510,6 +510,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 13
+            OnClick = button_ClearScalingClick
           end
           object button_StartStopScaling: TButton
             Left = 128

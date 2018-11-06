@@ -57,7 +57,7 @@ IterDataNewBd85::IterDataNewBd85()
     TextHelper::SetCharInText(_widthPwmValue, 0, floatTextSize);
     TextHelper::SetCharInText(_periodPwmCode, 0, uShortTextSize);
     TextHelper::SetCharInText(_periodPwmValue, 0, floatTextSize);
-    TextHelper::SetCharInText(_scaling, 0, floatTextSize);
+    TextHelper::SetCharInText(_scaling, 0, uShortTextSize);
 }
 //---------------------------------------------------------------------------
 const char* IterDataNewBd85::GetIndAddr()

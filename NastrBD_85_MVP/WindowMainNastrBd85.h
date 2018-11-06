@@ -192,6 +192,7 @@ __published:	// IDE-managed Components
         void __fastcall comboBox_ComPortsChange(TObject *Sender);
         void __fastcall button_WriteToEepromClick(TObject *Sender);
         void __fastcall button_StartStopScalingClick(TObject *Sender);
+        void __fastcall button_ClearScalingClick(TObject *Sender);
 private:	// User declarations
     void InitComponrnts();
      
@@ -257,6 +258,7 @@ private:	// User declarations
     HelperConnectFourBdProt bdProtHelper;
 
     ActionEvent<const char*> ev_button_StartStopScalingClick;
+    ActionEvent<> ev_button_ClearScalingClick;
 
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
@@ -273,6 +275,7 @@ public:		// User declarations
 
     ActionEvent<const char*>* GetEventButtonStartStopScalingClick();
     ActionSelf<ScalingDataNewBd85*>& GetSelfDisplayScalingData();
+    ActionEvent<>& GetEventButtonClearScalingClick();
 };
 //---------------------------------------------------------------------------
 #endif

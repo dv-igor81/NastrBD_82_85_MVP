@@ -21,6 +21,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_SetConnectionState(this, &PresenterWindowMainBd85::SetConnectionState)
         , as_StartStopScaling(this, &PresenterWindowMainBd85::StartStopScaling)
         , as_ScalingOprosWorkInvoke(this, &PresenterWindowMainBd85::ScalingOprosWorkInvoke)
+        , as_ClearScalingSumm(this, &PresenterWindowMainBd85::ClearScalingSumm)
 {
     _startData = 0;
     _iterData = 0;
@@ -30,24 +31,24 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     _view = view;
     _allProtokol = allProtokol;
     _task = task;
-
     ev_Show += _view->GetSelfShow();
     *_view->GetEventFormClose() += as_FormClose;
-
     *_view->GetEventButtonStartStopScalingClick() += as_StartStopScaling;
-
+    
     _connectBdProt = new ConnectBdProt(
         _view->GetConnectFourBdProt(), _allProtokol, _task );
-    ev_Show(); // Прказать форму
-    *_connectBdProt->GetEventSetConnectionState() += as_SetConnectionState;
 
+    //ev_Show(); // Прказать форму
+
+    *_connectBdProt->GetEventSetConnectionState() += as_SetConnectionState;
     ev_DisplayStartData += _view->GetSelfDisplayStartData();
     *_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
     ev_DisplayIterData += _view->GetSelfDisplayIterData();
-
     ev_ShowDispetWindow += as_ShowDispetWindow;
-
     ev_ScalingOpros += _view->GetSelfDisplayScalingData();
+    _view->GetEventButtonClearScalingClick() += as_ClearScalingSumm;
+
+    ev_Show(); // Прказать форму
 }
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
@@ -78,12 +79,14 @@ void PresenterWindowMainBd85::OprosStar()
 {
     _startData = new StartDataNewBd85();
     ev_DisplayStartData( _startData ); // Очистить все поля
+
     _iterData = new IterDataNewBd85();
     ev_DisplayIterData( _iterData ); // Очистить все поля
+    delete _iterData; // Освободить память
+    _iterData = 0;
     delete _startData; // Освободить память
     _startData = 0;
-    delete _iterData; // Освободить память
-    _iterData = 0;    
+
     while ( _isConnected )
     {
         if ( InitMkInBd() ) // Инициализация МК в БД (интервал набота счета, задать колтик = 8)
@@ -110,9 +113,9 @@ void PresenterWindowMainBd85::OprosStarInvoke()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosIter()
 {
+    Sleep(10);
     if ( _allProtokol->GetSsp( & _ssp ) == false )
     {
-        Sleep(10);
         return;
     }
     if ( (_ssp & 0x01) != 0x01 ) // Флаг готовности счёта НЕ получен
@@ -213,13 +216,13 @@ void PresenterWindowMainBd85::StartStopScaling(const char* timeMeteringLimit)
         // Проверить ошибку ввода, устранить если есть, очистить поля
         _scalingData = new ScalingDataNewBd85( _timeLimitScaling );
         ev_ScalingOpros( _scalingData );
+        delete _scalingData;
+        _scalingData = 0;
         if ( _timeLimitScaling > 0 )
         {
             _isScalingWork = true;
         }
     }
-    delete _scalingData;
-    _scalingData = 0;
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ScalingOprosWork()
@@ -250,7 +253,7 @@ void PresenterWindowMainBd85::ScalingOprosWork()
     _scalingData = new ScalingDataNewBd85(
         stubExit
         , _currTimeScaling // Текущее время набора счета
-        , _scalingCounterSumm
+        , _scalingCounterSumm // Суммарный счёт
     );
 
     _task->BeginInvoke( & as_ScalingOprosWorkInvoke );
@@ -261,6 +264,10 @@ void PresenterWindowMainBd85::ScalingOprosWorkInvoke()
     ev_ScalingOpros( _scalingData );
     delete _scalingData;
     _scalingData = 0;
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ClearScalingSumm()
+{
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

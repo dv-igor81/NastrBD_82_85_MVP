@@ -23,6 +23,7 @@ public:
     virtual HelperConnectFourBdProt* GetConnectFourBdProt() = 0;
     virtual ActionEvent<const char*>* GetEventButtonStartStopScalingClick() = 0;
     virtual ActionSelf<ScalingDataNewBd85*>& GetSelfDisplayScalingData() = 0;
+    virtual ActionEvent<>& GetEventButtonClearScalingClick() = 0;
 };
 //---------------------------------------------------------------------------
 #endif

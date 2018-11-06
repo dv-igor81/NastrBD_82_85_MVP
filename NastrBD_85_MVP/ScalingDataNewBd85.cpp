@@ -10,6 +10,7 @@
 ScalingDataNewBd85::ScalingDataNewBd85( int timeLimitScaling )
 {
     TextHelper::SetCharInText(_currTimeScaling, 0, uShortTextSize);
+    ClearText();
     if ( timeLimitScaling > 0 )
     {
         _isWorkScalingSumm = true;
@@ -21,9 +22,6 @@ ScalingDataNewBd85::ScalingDataNewBd85( int timeLimitScaling )
         _isWorkScalingSumm = false; // Завершение расчёта среднего счёта
         TextHelper::SetCharInText(_timeLimitScaling, 0, uShortTextSize);
     }
-    TextHelper::SetCharInText(_currTimeScaling, 0, uShortTextSize);
-    TextHelper::SetCharInText(_scalingCounterSumm, 0, floatTextSize);
-    TextHelper::SetCharInText(_middleScaling, 0, floatTextSize);
 }
 //---------------------------------------------------------------------------
 ScalingDataNewBd85::ScalingDataNewBd85(
@@ -32,6 +30,7 @@ ScalingDataNewBd85::ScalingDataNewBd85(
     , double scalingCounterSumm
 )
 {
+    ClearText();
     _isStartWork = false; // Очередная итерация, а не начало работы
     if ( timeLimitScaling > 0 )
     {
@@ -40,10 +39,21 @@ ScalingDataNewBd85::ScalingDataNewBd85(
     else
     {
         _isWorkScalingSumm = false; // Завершение расчёта среднего счёта
+        if ( scalingCounterSumm == 0 )
+        {
+            return;
+        }
     }
     sprintf(_currTimeScaling, "%d", currTimeScaling);
     sprintf(_scalingCounterSumm, "%0.0f", scalingCounterSumm);
     sprintf(_middleScaling, "%0.2f", scalingCounterSumm / currTimeScaling);
+}
+//---------------------------------------------------------------------------
+void ScalingDataNewBd85::ClearText()
+{
+    TextHelper::SetCharInText(_currTimeScaling, 0, uShortTextSize);
+    TextHelper::SetCharInText(_scalingCounterSumm, 0, floatTextSize);
+    TextHelper::SetCharInText(_middleScaling, 0, floatTextSize);
 }
 //---------------------------------------------------------------------------
 bool ScalingDataNewBd85::GetWorkScalingSumm() // false - Завершить работу

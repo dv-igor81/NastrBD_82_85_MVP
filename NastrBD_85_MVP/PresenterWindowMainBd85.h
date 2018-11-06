@@ -54,6 +54,9 @@ private:
     ActionSelf<> as_ScalingOprosWorkInvoke;
     void ScalingOprosWorkInvoke();
 
+    ActionSelf<> as_ClearScalingSumm;
+    void ClearScalingSumm();
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
