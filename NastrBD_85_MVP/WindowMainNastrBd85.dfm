@@ -41,6 +41,20 @@ object WindowMainBd85: TWindowMainBd85
         Height = 594
         Align = alClient
         TabOrder = 0
+        object Label_ChangeEEPROM: TLabel
+          Left = 484
+          Top = 460
+          Width = 133
+          Height = 15
+          Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clRed
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = []
+          ParentFont = False
+          Visible = False
+        end
         object panel_Connect: TPanel
           Left = 448
           Top = 5
@@ -556,7 +570,7 @@ object WindowMainBd85: TWindowMainBd85
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
-          object Label6: TLabel
+          object Label_VerPo: TLabel
             Left = 35
             Top = 130
             Width = 48
@@ -680,7 +694,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 6
-            object RS1: TRadioButton
+            object radioButton_ArchOn: TRadioButton
               Left = 24
               Top = 16
               Width = 89
@@ -695,7 +709,7 @@ object WindowMainBd85: TWindowMainBd85
               ParentFont = False
               TabOrder = 0
             end
-            object RS3: TRadioButton
+            object radioButton_ArchOff: TRadioButton
               Left = 24
               Top = 35
               Width = 97
@@ -1454,6 +1468,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentCtl3D = False
             ParentFont = False
             TabOrder = 6
+            OnChange = Edit_IndAddrZadChange
           end
           object Panel_indAddrZad_3: TPanel
             Left = 394
@@ -1500,6 +1515,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentCtl3D = False
             ParentFont = False
             TabOrder = 10
+            OnChange = Edit_GroupAdrZadChange
           end
           object Panel_GroupAdrZad_3: TPanel
             Left = 394
@@ -1539,6 +1555,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentCtl3D = False
             ParentFont = False
             TabOrder = 13
+            OnChange = Edit_DnuZad_CodeChange
           end
           object Edit_DnuZad_Value: TMaskEdit
             Left = 318
@@ -1697,6 +1714,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentCtl3D = False
             ParentFont = False
             TabOrder = 21
+            OnChange = Edit_WidthPwmZadChange
           end
           object Panel_WidthPwmZad_2: TPanel
             Left = 318
@@ -1755,6 +1773,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentCtl3D = False
             ParentFont = False
             TabOrder = 25
+            OnChange = Edit_OffsetPwmZadChange
           end
           object Panel_OffsetPwmZad_2: TPanel
             Left = 318
@@ -1813,6 +1832,7 @@ object WindowMainBd85: TWindowMainBd85
             ParentCtl3D = False
             ParentFont = False
             TabOrder = 29
+            OnChange = Edit_PeriodPwmZadChange
           end
           object Panel_PeriodPwmZad_2: TPanel
             Left = 318

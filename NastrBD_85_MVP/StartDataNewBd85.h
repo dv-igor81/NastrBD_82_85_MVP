@@ -14,6 +14,7 @@ public:
         , unsigned short widthPwmZad // Длительность ШИМ заданная
         , unsigned short offsetPwmZ // Смешение ШИМ заданное
         , unsigned short periodPwmZ // Период ШИМ заданный
+        , int flagArch // Флаг АРЧ (-1 - false, 0 - ничего не делать, 1 - true)
     );
     StartDataNewBd85();        
     const char* GetVerPo();
@@ -26,6 +27,7 @@ public:
     const char* GetWidthPwmZad();
     const char* GetOffsetPwmZad();
     const char* GetPeriodPwmZad();
+    int GetFlagArch();
 private:
     enum { verPoSize = 5
         , indAddrZadSize = 4
@@ -42,6 +44,7 @@ private:
     char _widthPwmZad[uShortTextSize]; // Длительность ШИМ заданная
     char _offsetPwmZ[uShortTextSize]; // Смешение ШИМ заданное
     char _periodPwmZ[uShortTextSize]; // Период ШИМ заданный
+    int _flagArch; // Флаг АРЧ   (-1 - false, 0 - ничего не делать, 1 - true)
 };
 //---------------------------------------------------------------------------
 #endif

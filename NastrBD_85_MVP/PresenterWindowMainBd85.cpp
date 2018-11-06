@@ -38,8 +38,6 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     _connectBdProt = new ConnectBdProt(
         _view->GetConnectFourBdProt(), _allProtokol, _task );
 
-    //ev_Show(); // Прказать форму
-
     *_connectBdProt->GetEventSetConnectionState() += as_SetConnectionState;
     ev_DisplayStartData += _view->GetSelfDisplayStartData();
     *_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
@@ -212,6 +210,7 @@ void PresenterWindowMainBd85::StartStopScaling(const char* timeMeteringLimit)
             60); // 60 секунд по умолчанию
         _currTimeScaling = 0; // Текущее время набора счета
         _scalingCounterSumm = 0; // Суммарный счет за время набора
+        _bfClearScaling = false;
 
         // Проверить ошибку ввода, устранить если есть, очистить поля
         _scalingData = new ScalingDataNewBd85( _timeLimitScaling );
@@ -228,6 +227,12 @@ void PresenterWindowMainBd85::StartStopScaling(const char* timeMeteringLimit)
 void PresenterWindowMainBd85::ScalingOprosWork()
 {
     int stubExit = _timeLimitScaling;
+    if (_bfClearScaling)
+    {
+        _bfClearScaling = false;
+        _currTimeScaling = 0;
+        _scalingCounterSumm = 0;
+    }
     if ( _isExitScalingWork ) // Завершить расчёт среднего счёта
     {
         _isScalingWork = false;
@@ -245,6 +250,7 @@ void PresenterWindowMainBd85::ScalingOprosWork()
     {
         stubExit = -1; // Индикация завершения расчёта среднего счёта
     }
+
     if ( _scalingData != 0 ) // Основной поток не успел отобразить данные
     {
         return;
@@ -268,6 +274,7 @@ void PresenterWindowMainBd85::ScalingOprosWorkInvoke()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ClearScalingSumm()
 {
+    _bfClearScaling = true;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -430,6 +437,15 @@ bool PresenterWindowMainBd85::ReadEEProm()
         }
         _readParamIndex++;
     }
+    if ( _readParamIndex == 8 )
+    {
+        if ( _allProtokol->GetSsp( & _ssp ) == false )
+        {
+            return false;
+        }
+        _bfARCH = SspToFlagArch( _ssp );
+        _readParamIndex++;
+    }
     if ( _startData != 0 )
     {
         return false; // Основной поток не успел отобразить данные
@@ -443,11 +459,20 @@ bool PresenterWindowMainBd85::ReadEEProm()
         , _widthPwmZad // Длительность ШИМ заданная
         , _offsetPwmZ //  Смешение ШИМ заданное
         , _periodPwmZ // Период ШИМ заданный
+        , _bfARCH // Флаг АРЧ 
         );
     _task->BeginInvoke( & as_OprosStarInvoke );
     return true;
 }
 //---------------------------------------------------------------------------
+int PresenterWindowMainBd85::SspToFlagArch(unsigned char ssp)
+{
+    if ( (ssp & 0x10) != 0 )
+    {
+        return 1;
+    }
+    return -1;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

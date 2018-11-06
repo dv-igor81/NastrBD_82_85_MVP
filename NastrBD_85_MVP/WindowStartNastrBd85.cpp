@@ -15,6 +15,7 @@ __fastcall TWindowStart::TWindowStart(TComponent* Owner)
 void __fastcall TWindowStart::Button_StartClick(TObject *Sender)
 {
     viewLoader.LoadWindowBd85Main();
+    Hide();
 }
 //---------------------------------------------------------------------------
 

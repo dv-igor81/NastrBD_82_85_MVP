@@ -16,6 +16,7 @@ StartDataNewBd85::StartDataNewBd85(
         , unsigned short widthPwmZad // Длительность ШИМ заданная
         , unsigned short offsetPwmZ // Смешение ШИМ заданное
         , unsigned short periodPwmZ // Период ШИМ заданный
+        , int flagArch // Флаг АРЧ (-1 - false, 0 - ничего не делать, 1 - true)
     )
 {
     TextHelper::CopyText(_verPo, verPo, verPoSize);
@@ -31,6 +32,7 @@ StartDataNewBd85::StartDataNewBd85(
     sprintf(_widthPwmZad, "%d", widthPwmZad);
     sprintf(_offsetPwmZ, "%d", offsetPwmZ);
     sprintf(_periodPwmZ, "%d", periodPwmZ);
+    _flagArch = flagArch;
 }
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85()
@@ -46,6 +48,7 @@ StartDataNewBd85::StartDataNewBd85()
     TextHelper::SetCharInText(_widthPwmZad, 0, uShortTextSize);
     TextHelper::SetCharInText(_offsetPwmZ, 0, uShortTextSize);
     TextHelper::SetCharInText(_periodPwmZ, 0, uShortTextSize);
+    _flagArch = 0;
 }
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetVerPo()
@@ -98,6 +101,10 @@ const char* StartDataNewBd85::GetPeriodPwmZad()
     return _periodPwmZ;
 }
 //---------------------------------------------------------------------------
+int StartDataNewBd85::GetFlagArch()
+{
+    return _flagArch;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

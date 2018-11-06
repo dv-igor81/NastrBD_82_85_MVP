@@ -121,8 +121,8 @@ __published:	// IDE-managed Components
         TPanel *Panel_ErrorConnectCount;
         TEdit *Edit_ErrorConnectCount;
         TGroupBox *GroupBox_ReverseLink;
-        TRadioButton *RS1;
-        TRadioButton *RS3;
+        TRadioButton *radioButton_ArchOn;
+        TRadioButton *radioButton_ArchOff;
         TLabel *Label_TimeMetering;
         TEdit *Edit_TimeMeteringLimit;
         TPanel *Panel_MiddleSecondScaling_0;
@@ -140,7 +140,7 @@ __published:	// IDE-managed Components
         TButton *button_ClearScaling;
         TButton *button_StartStopScaling;
         TButton *button_SaveToFile;
-        TLabel *Label6;
+        TLabel *Label_VerPo;
         TButton *Button5;
         TScrollBox *ScrollBox_SettingsForModBus;
         TGroupBox *GroupBox_SettingsForModbus;
@@ -178,6 +178,7 @@ __published:	// IDE-managed Components
         TPanel *Panel_Scaling_1;
         TEdit *Edit_Scaling;
         TEdit *Edit_Scaling_3;
+        TLabel *Label_ChangeEEPROM;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
@@ -193,6 +194,12 @@ __published:	// IDE-managed Components
         void __fastcall button_WriteToEepromClick(TObject *Sender);
         void __fastcall button_StartStopScalingClick(TObject *Sender);
         void __fastcall button_ClearScalingClick(TObject *Sender);
+        void __fastcall Edit_IndAddrZadChange(TObject *Sender);
+        void __fastcall Edit_GroupAdrZadChange(TObject *Sender);
+        void __fastcall Edit_DnuZad_CodeChange(TObject *Sender);
+        void __fastcall Edit_WidthPwmZadChange(TObject *Sender);
+        void __fastcall Edit_OffsetPwmZadChange(TObject *Sender);
+        void __fastcall Edit_PeriodPwmZadChange(TObject *Sender);
 private:	// User declarations
     void InitComponrnts();
      
@@ -252,13 +259,21 @@ private:	// User declarations
     ActionEvent<const char*> ev_textBox_IP_AddrChange;
     ActionEvent<const char*> ev_textBox_TCP_PortChange;
     ActionEvent<> ev_button_UpdateNumberOfComPortSClick;
-    ActionEvent<> ev_button_WriteToEepromClick;
 
     HelperNumberTextBtn addrBdHelper;
     HelperConnectFourBdProt bdProtHelper;
 
     ActionEvent<const char*> ev_button_StartStopScalingClick;
     ActionEvent<> ev_button_ClearScalingClick;
+    //===>> Запись в EEPROM
+    ActionEvent<> ev_button_WriteToEepromClick;
+    ActionEvent<const char*> ev_Text_IndAddrZadChange;
+    ActionEvent<const char*> ev_Text_GroupAdrZadChange;
+    ActionEvent<const char*> ev_Text_DnuZadCodeChange;
+    ActionEvent<const char*> ev_Text_WidthPwmZadChange;
+    ActionEvent<const char*> ev_Text_OffsetPwmZadChange;
+    ActionEvent<const char*> ev_Text_PeriodPwmZadChange;
+    //<<=== Запись в EEPROM
 
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
@@ -276,6 +291,16 @@ public:		// User declarations
     ActionEvent<const char*>* GetEventButtonStartStopScalingClick();
     ActionSelf<ScalingDataNewBd85*>& GetSelfDisplayScalingData();
     ActionEvent<>& GetEventButtonClearScalingClick();
+
+    //===>> Запись в EEPROM
+    ActionEvent<>& GetEventButtonWriteToEepromClick();
+    ActionEvent<const char*>& GetEventTextIndAddrZadChange();
+    ActionEvent<const char*>& GetEventTextGroupAdrZadChange();
+    ActionEvent<const char*>& GetEventTextDnuZadCodeChange();
+    ActionEvent<const char*>& GetEventTextWidthPwmZadChange();
+    ActionEvent<const char*>& GetEventTextOffsetPwmZadChange();
+    ActionEvent<const char*>& GetEventTextPeriodPwmZadChange();
+    //<<=== Запись в EEPROM
 };
 //---------------------------------------------------------------------------
 #endif

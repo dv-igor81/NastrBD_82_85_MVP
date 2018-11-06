@@ -211,6 +211,7 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
 {
     button_WriteToEeprom->Enabled = isEnabled;
     button_StartStopScaling->Enabled = isEnabled;
+    GroupBox_ReverseLink->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
@@ -229,6 +230,19 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_WidthPwmZad->Text = data->GetWidthPwmZad();
     Edit_OffsetPwmZad->Text = data->GetOffsetPwmZad();
     Edit_PeriodPwmZad->Text = data->GetPeriodPwmZad();
+    switch ( data->GetFlagArch() )
+    {
+    case -1:
+        radioButton_ArchOn->Checked = true;
+        break;
+    case 1:
+        radioButton_ArchOff->Checked = true;
+        break;
+    case 0:
+        radioButton_ArchOn->Checked = false;
+        radioButton_ArchOff->Checked = false;        
+        break;
+    }
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
@@ -304,6 +318,41 @@ ActionEvent<>& TWindowMainBd85::GetEventButtonClearScalingClick()
     return ev_button_ClearScalingClick;
 }
 //---------------------------------------------------------------------------
+ActionEvent<>& TWindowMainBd85::GetEventButtonWriteToEepromClick()
+{
+    return ev_button_WriteToEepromClick;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextIndAddrZadChange()
+{
+    return ev_Text_IndAddrZadChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextGroupAdrZadChange()
+{
+    return ev_Text_GroupAdrZadChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextDnuZadCodeChange()
+{
+    return ev_Text_DnuZadCodeChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextWidthPwmZadChange()
+{
+    return ev_Text_WidthPwmZadChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextOffsetPwmZadChange()
+{
+    return ev_Text_OffsetPwmZadChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextPeriodPwmZadChange()
+{
+    return ev_Text_PeriodPwmZadChange;
+}
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::button_StartStopClick(TObject *Sender)
 {
@@ -376,6 +425,36 @@ void __fastcall TWindowMainBd85::button_StartStopScalingClick(
 void __fastcall TWindowMainBd85::button_ClearScalingClick(TObject *Sender)
 {
     ev_button_ClearScalingClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_IndAddrZadChange(TObject *Sender)
+{
+    ev_Text_IndAddrZadChange( Edit_IndAddrZad->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_GroupAdrZadChange(TObject *Sender)
+{
+    ev_Text_GroupAdrZadChange( Edit_GroupAdrZad->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_DnuZad_CodeChange(TObject *Sender)
+{
+    ev_Text_DnuZadCodeChange( Edit_DnuZad_Code->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_WidthPwmZadChange(TObject *Sender)
+{
+    ev_Text_WidthPwmZadChange( Edit_WidthPwmZad->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_OffsetPwmZadChange(TObject *Sender)
+{
+    ev_Text_OffsetPwmZadChange( Edit_OffsetPwmZad->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_PeriodPwmZadChange(TObject *Sender)
+{
+    ev_Text_PeriodPwmZadChange( Edit_PeriodPwmZad->Text.c_str() );
 }
 //---------------------------------------------------------------------------
 

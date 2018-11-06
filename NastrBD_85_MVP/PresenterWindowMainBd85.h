@@ -114,6 +114,13 @@ private:
     int _currTimeScaling; // Текущее время набора среднего счёта
     unsigned int _scalingCounterTmp; // Временный счет за секунду
     double _scalingCounterSumm; // Суммарный счет за время набора
+
+    bool _bfClearScaling; // Флаг сигнала на сброс счёта
+
+    //* KodRS = * KodRS & 0x10;/
+    int _bfARCH; // Флаг АРЧ (1 --- true, -1 --- false)
+
+    int SspToFlagArch(unsigned char ssp); // 1 --- true, -1 --- false
 };
 //---------------------------------------------------------------------------
 #endif
