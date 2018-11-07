@@ -514,7 +514,6 @@ object WindowMainBd85: TWindowMainBd85
             Top = 108
             Width = 120
             Height = 25
-            Cursor = crHandPoint
             Caption = #1057#1073#1088#1086#1089
             Enabled = False
             Font.Charset = DEFAULT_CHARSET
@@ -531,7 +530,6 @@ object WindowMainBd85: TWindowMainBd85
             Top = 108
             Width = 120
             Height = 25
-            Cursor = crHandPoint
             Caption = #1057#1090#1072#1088#1090
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -699,7 +697,6 @@ object WindowMainBd85: TWindowMainBd85
               Top = 16
               Width = 89
               Height = 17
-              Cursor = crHandPoint
               Caption = #1042#1082#1083#1102#1095#1077#1085#1072
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -708,13 +705,13 @@ object WindowMainBd85: TWindowMainBd85
               Font.Style = []
               ParentFont = False
               TabOrder = 0
+              OnClick = radioButton_ArchOnClick
             end
             object radioButton_ArchOff: TRadioButton
               Left = 24
               Top = 35
               Width = 97
               Height = 17
-              Cursor = crHandPoint
               Caption = #1042#1099#1082#1083#1102#1095#1077#1085#1072
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -723,6 +720,7 @@ object WindowMainBd85: TWindowMainBd85
               Font.Style = []
               ParentFont = False
               TabOrder = 1
+              OnClick = radioButton_ArchOffClick
             end
           end
           object Button5: TButton
@@ -1548,7 +1546,7 @@ object WindowMainBd85: TWindowMainBd85
             Color = clCream
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clGreen
+            Font.Color = clBlack
             Font.Height = -11
             Font.Name = 'Courier New'
             Font.Style = [fsBold]
@@ -1632,15 +1630,16 @@ object WindowMainBd85: TWindowMainBd85
             Left = 320
             Top = 104
             Width = 73
-            Height = 24
+            Height = 22
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clGreen
-            Font.Height = -12
+            Font.Color = clBlack
+            Font.Height = -11
             Font.Name = 'Courier New'
             Font.Style = [fsBold]
-            ItemHeight = 16
+            ItemHeight = 14
             ParentFont = False
             TabOrder = 18
+            OnChange = comboBox_VoltageHiZad_ValueChange
             Items.Strings = (
               '1100'
               '1110'

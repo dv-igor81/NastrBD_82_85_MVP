@@ -30,9 +30,13 @@ public:
     virtual ActionEvent<const char*>& GetEventTextIndAddrZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextGroupAdrZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextDnuZadCodeChange() = 0;
+    virtual ActionEvent<const char*>& GetEventTextVoltageHiZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextWidthPwmZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextOffsetPwmZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextPeriodPwmZadChange() = 0;
+    virtual ActionEvent<bool>& GetEventRadioButtonArchOnClick() = 0;
+    virtual ActionEvent<bool>& GetEventRadioButtonArchOffClick() = 0;
+    virtual ActionSelf<bool>& GetSelfDisplayNotSaveChanges() = 0;
     //<<=== Запись в EEPROM
 };
 //---------------------------------------------------------------------------

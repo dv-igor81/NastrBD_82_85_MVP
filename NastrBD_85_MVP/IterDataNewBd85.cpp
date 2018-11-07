@@ -18,8 +18,6 @@ IterDataNewBd85::IterDataNewBd85(
     , unsigned int scaling
 )
 {
-    IterDataNewBd85(); // Очистить все поля, вызвав конструктор без параметров
-
     sprintf(_indAddr, "%d", indAddr);
     sprintf(_groupAddr, "%d", groupAddr);
     sprintf(_temperatureCode, "%d", temperature);

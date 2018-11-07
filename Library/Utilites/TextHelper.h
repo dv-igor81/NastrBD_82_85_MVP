@@ -16,6 +16,12 @@ public:
         char simbol,
         int maxLength);
 
+    static void CharReplace(
+        char * ptrText,
+        char oldSimbol,
+        char newSimbol,
+        int maxLength);
+
     static int GetLengText(
         const char * ptrText,
         int maxLength);
@@ -34,5 +40,9 @@ public:
         int curVal,
         int min,
         int max);
+
+    static double ConvertTextToDouble(
+        const char* text,
+        double curVal);
 };
 #endif

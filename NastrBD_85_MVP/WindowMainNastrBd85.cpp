@@ -23,6 +23,7 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         , as_DisplayCountConnectError(this, &TWindowMainBd85::DisplayCountConnectError)
         , as_DisplayIterData(this, &TWindowMainBd85::DisplayIterData)
         , as_DisplayScalingData(this, &TWindowMainBd85::DisplayScalingData)
+        , as_DisplayNotSaveChanges(this, &TWindowMainBd85::DisplayNotSaveChanges)
 
         ,addrBdHelper(
             &as_textBox_AddrBd_SetText, // »змен€ю текст программно
@@ -338,6 +339,11 @@ ActionEvent<const char*>& TWindowMainBd85::GetEventTextDnuZadCodeChange()
     return ev_Text_DnuZadCodeChange;
 }
 //---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextVoltageHiZadChange()
+{
+    return ev_Text_VoltageHiZadChange;
+}
+//---------------------------------------------------------------------------
 ActionEvent<const char*>& TWindowMainBd85::GetEventTextWidthPwmZadChange()
 {
     return ev_Text_WidthPwmZadChange;
@@ -351,6 +357,26 @@ ActionEvent<const char*>& TWindowMainBd85::GetEventTextOffsetPwmZadChange()
 ActionEvent<const char*>& TWindowMainBd85::GetEventTextPeriodPwmZadChange()
 {
     return ev_Text_PeriodPwmZadChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<bool>& TWindowMainBd85::GetEventRadioButtonArchOnClick()
+{
+    return ev_radioButton_ArchOnClick;
+}
+//---------------------------------------------------------------------------
+ActionEvent<bool>& TWindowMainBd85::GetEventRadioButtonArchOffClick()
+{
+    return ev_radioButton_ArchOffClick;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::DisplayNotSaveChanges(bool display)
+{
+    Label_ChangeEEPROM->Visible = display;
+}
+//---------------------------------------------------------------------------
+ActionSelf<bool>& TWindowMainBd85::GetSelfDisplayNotSaveChanges()
+{
+    return as_DisplayNotSaveChanges;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -411,11 +437,6 @@ void __fastcall TWindowMainBd85::comboBox_ComPortsChange(TObject *Sender)
     ev_comboBox_ComPortsChange( comboBox_ComPorts->Text.c_str() );
 }
 //---------------------------------------------------------------------------
-void __fastcall TWindowMainBd85::button_WriteToEepromClick(TObject *Sender)
-{
-    ev_button_WriteToEepromClick();
-}
-//---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::button_StartStopScalingClick(
       TObject *Sender)
 {
@@ -425,6 +446,11 @@ void __fastcall TWindowMainBd85::button_StartStopScalingClick(
 void __fastcall TWindowMainBd85::button_ClearScalingClick(TObject *Sender)
 {
     ev_button_ClearScalingClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::button_WriteToEepromClick(TObject *Sender)
+{
+    ev_button_WriteToEepromClick();
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::Edit_IndAddrZadChange(TObject *Sender)
@@ -442,6 +468,12 @@ void __fastcall TWindowMainBd85::Edit_DnuZad_CodeChange(TObject *Sender)
     ev_Text_DnuZadCodeChange( Edit_DnuZad_Code->Text.c_str() );
 }
 //---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::comboBox_VoltageHiZad_ValueChange(
+      TObject *Sender)
+{
+    ev_Text_VoltageHiZadChange( comboBox_VoltageHiZad_Value->Text.c_str() );
+}
+//---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::Edit_WidthPwmZadChange(TObject *Sender)
 {
     ev_Text_WidthPwmZadChange( Edit_WidthPwmZad->Text.c_str() );
@@ -455,6 +487,16 @@ void __fastcall TWindowMainBd85::Edit_OffsetPwmZadChange(TObject *Sender)
 void __fastcall TWindowMainBd85::Edit_PeriodPwmZadChange(TObject *Sender)
 {
     ev_Text_PeriodPwmZadChange( Edit_PeriodPwmZad->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::radioButton_ArchOnClick(TObject *Sender)
+{
+    ev_radioButton_ArchOnClick( radioButton_ArchOn->Checked );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::radioButton_ArchOffClick(TObject *Sender)
+{
+    ev_radioButton_ArchOffClick( radioButton_ArchOff->Checked );
 }
 //---------------------------------------------------------------------------
 

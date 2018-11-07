@@ -26,11 +26,11 @@ private:
 
     void ConnectIsGood(); // Соединение (по ком порту или TCP/IP) прошло удачно
 
-    ActionSelf<> as_OprosStar;
-    void OprosStar();
+    ActionSelf<> as_OprosStart;
+    void OprosStart();
 
-    ActionSelf<> as_OprosStarInvoke;
-    void OprosStarInvoke();
+    ActionSelf<> as_OprosStartInvoke;
+    void OprosStartInvoke();
 
     ActionSelf<> as_OprosIter;
     void OprosIter();
@@ -57,6 +57,40 @@ private:
     ActionSelf<> as_ClearScalingSumm;
     void ClearScalingSumm();
 
+    //===>> Запись в EEPROM
+
+    ActionSelf<> as_WriteToEeprom;
+    void WriteToEeprom();
+
+    ActionSelf<const char*> as_TextIndAddrZadChange;
+    void TextIndAddrZadChange(const char* text);
+
+    ActionSelf<const char*> as_TextGroupAdrZadChange;
+    void TextGroupAdrZadChange(const char* text);
+
+    ActionSelf<const char*> as_TextDnuZadCodeChange;
+    void TextDnuZadCodeChange(const char* text);
+
+    ActionSelf<const char*> as_TextVoltageHiZadChange;
+    void TextVoltageHiZadChange(const char* text);
+
+    ActionSelf<const char*> as_TextWidthPwmZadChange;
+    void TextWidthPwmZadChange(const char* text);
+
+    ActionSelf<const char*> as_TextOffsetPwmZadChange;
+    void TextOffsetPwmZadChange(const char* text);
+
+    ActionSelf<const char*> as_TextPeriodPwmZadChange;
+    void TextPeriodPwmZadChange(const char* text);
+
+    ActionSelf<bool> as_RadioButtonArchOnClick;
+    void RadioButtonArchOnClick(bool onClick);
+
+    ActionSelf<bool> as_RadioButtonArchOffClick;
+    void RadioButtonArchOffClick(bool offClick);
+
+    //<<=== Запись в EEPROM
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
@@ -73,6 +107,7 @@ private:
     ScalingDataNewBd85* _scalingData;
 
     ActionEvent<> ev_ShowDispetWindow;
+    ActionEvent<bool> ev_DisplayNotSaveChanges;
 
     bool InitMkInBd();
     bool _isConnected;
@@ -82,13 +117,36 @@ private:
     enum { verPoSize = 5 };
     //===>> Данные, считанные из EEPROM МК в БД
     char _verPo[5];
-    char _indAddrZad;
-    char _groupAddrZad;
+    unsigned char _indAddrZad;
+    unsigned char _groupAddrZad;
     unsigned short _dnuZad;
     unsigned short _voltageHiZad;
     unsigned short _widthPwmZad;
-    unsigned short _offsetPwmZ;
-    unsigned short _periodPwmZ;
+    unsigned short _offsetPwmZad;
+    unsigned short _periodPwmZad;
+    int _bfArch; // Флаг АРЧ (1 --- true, -1 --- false)
+    //===
+    int _indAddrZadChange;
+    int _groupAddrZadChange;
+    int _dnuZadChange;
+
+    int _voltageHiZadChange;
+
+    int _widthPwmZadChange;
+    int _offsetPwmZadChange;
+    int _periodPwmZadChange;
+    int _bfArchChange; // Флаг АРЧ (1 --- true, -1 --- false)
+
+
+    void DisplayChangeEepromDataInvoke();
+
+    ActionSelf<> as_DisplayChangeEepromData;
+    void DisplayChangeEepromData();
+    //bool _isTextChange;
+    bool _textChangeIgnore;
+
+    bool ChangeEepromData(); // true - Изменения внесены в ГИП, но не записаны в EEPROM
+    bool NotEqual(int var1, int var2);
     //<<=== Данные, считанные из EEPROM МК в БД
     
     //===>> Данные опроса БД
@@ -114,13 +172,11 @@ private:
     int _currTimeScaling; // Текущее время набора среднего счёта
     unsigned int _scalingCounterTmp; // Временный счет за секунду
     double _scalingCounterSumm; // Суммарный счет за время набора
-
     bool _bfClearScaling; // Флаг сигнала на сброс счёта
-
-    //* KodRS = * KodRS & 0x10;/
-    int _bfARCH; // Флаг АРЧ (1 --- true, -1 --- false)
-
     int SspToFlagArch(unsigned char ssp); // 1 --- true, -1 --- false
+
+    bool _bfChangeEepromCurr;
+    bool _bfChangeEepromOld;
 };
 //---------------------------------------------------------------------------
 #endif

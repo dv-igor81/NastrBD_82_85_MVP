@@ -200,6 +200,9 @@ __published:	// IDE-managed Components
         void __fastcall Edit_WidthPwmZadChange(TObject *Sender);
         void __fastcall Edit_OffsetPwmZadChange(TObject *Sender);
         void __fastcall Edit_PeriodPwmZadChange(TObject *Sender);
+        void __fastcall comboBox_VoltageHiZad_ValueChange(TObject *Sender);
+        void __fastcall radioButton_ArchOnClick(TObject *Sender);
+        void __fastcall radioButton_ArchOffClick(TObject *Sender);
 private:	// User declarations
     void InitComponrnts();
      
@@ -248,6 +251,9 @@ private:	// User declarations
     ActionSelf<const char*> as_DisplayCountConnectError;
     void DisplayCountConnectError(const char* text);
 
+    ActionSelf<bool> as_DisplayNotSaveChanges;
+    void DisplayNotSaveChanges(bool);
+
     ActionEvent<const char*> ev_textBox_AddrBd_Change;
     ActionEvent<> ev_button_AddrBd_DecClick;
     ActionEvent<> ev_button_AddrBd_IncClick;
@@ -270,9 +276,12 @@ private:	// User declarations
     ActionEvent<const char*> ev_Text_IndAddrZadChange;
     ActionEvent<const char*> ev_Text_GroupAdrZadChange;
     ActionEvent<const char*> ev_Text_DnuZadCodeChange;
+    ActionEvent<const char*> ev_Text_VoltageHiZadChange;
     ActionEvent<const char*> ev_Text_WidthPwmZadChange;
     ActionEvent<const char*> ev_Text_OffsetPwmZadChange;
     ActionEvent<const char*> ev_Text_PeriodPwmZadChange;
+    ActionEvent<bool> ev_radioButton_ArchOnClick;
+    ActionEvent<bool> ev_radioButton_ArchOffClick;
     //<<=== Запись в EEPROM
 
 public:		// User declarations
@@ -297,9 +306,13 @@ public:		// User declarations
     ActionEvent<const char*>& GetEventTextIndAddrZadChange();
     ActionEvent<const char*>& GetEventTextGroupAdrZadChange();
     ActionEvent<const char*>& GetEventTextDnuZadCodeChange();
+    ActionEvent<const char*>& GetEventTextVoltageHiZadChange();
     ActionEvent<const char*>& GetEventTextWidthPwmZadChange();
     ActionEvent<const char*>& GetEventTextOffsetPwmZadChange();
     ActionEvent<const char*>& GetEventTextPeriodPwmZadChange();
+    ActionEvent<bool>& GetEventRadioButtonArchOnClick();
+    ActionEvent<bool>& GetEventRadioButtonArchOffClick();
+    ActionSelf<bool>& GetSelfDisplayNotSaveChanges();
     //<<=== Запись в EEPROM
 };
 //---------------------------------------------------------------------------

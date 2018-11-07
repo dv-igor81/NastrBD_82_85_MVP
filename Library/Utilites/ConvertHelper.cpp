@@ -27,7 +27,13 @@ double ConvertHelper::VoltageHiCodeToValue(unsigned short code)
 //---------------------------------------------------------------------------
 unsigned short ConvertHelper::VoltageHiValueToCode(double value)
 {
-    return 0; // stub
+    value *= 4096;
+    value /= (2.5 * 1000);
+    //===>> Округление до ближайшего целого
+    value += 0.5;
+    unsigned short retVal = value;
+    //<<=== Округление до ближайшего целого
+    return retVal;
 }
 //---------------------------------------------------------------------------
 double ConvertHelper::TemperatureCodeToValue(unsigned short code)
@@ -38,7 +44,6 @@ double ConvertHelper::TemperatureCodeToValue(unsigned short code)
     return retVal;
 }
 //---------------------------------------------------------------------------
-// (float)SIM3/16.777216
 double ConvertHelper::WidthPwmCodeToValue(unsigned short code)
 {
     const double k = 16.777216;

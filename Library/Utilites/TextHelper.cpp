@@ -48,6 +48,23 @@ void TextHelper::SetCharInText(
     ptrText[maxLength] = 0;
 }
 //---------------------------------------------------------------------------
+void TextHelper::CharReplace(
+    char * ptrText,
+    char oldSimbol,
+    char newSimbol,
+    int maxLength)
+{
+    maxLength--;
+    for (int i = 0; i < maxLength; i++)
+    {
+        if ( ptrText[i] == oldSimbol )
+        {
+            ptrText[i] = newSimbol;
+        }
+    }
+    ptrText[maxLength] = 0;
+}
+//---------------------------------------------------------------------------
 int TextHelper::GetLengText(
     const char * ptrText,
     int maxLength)
@@ -79,8 +96,16 @@ void TextHelper::CopyText(
 int TextHelper::ConvertTextToNumber(
     const char* text, int curVal)
 {
+    if ( text == 0 )
+    {
+        return curVal;
+    }
+    if ( *text == 0 )
+    {
+        return curVal;
+    }
     AnsiString str = text;
-    int retValue;
+    int retValue;    
     try
     {
         retValue = StrToInt( str );
@@ -95,6 +120,14 @@ int TextHelper::ConvertTextToNumber(
 int TextHelper::ConvertTextToNumber(
     const char* text, int curVal, int min, int max)
 {
+    if ( text == 0 )
+    {
+        return curVal;
+    }
+    if ( *text == 0 )
+    {
+        return curVal;
+    }
     AnsiString str = text;
     int retValue;
     try
@@ -112,6 +145,34 @@ int TextHelper::ConvertTextToNumber(
     return retValue;
 }
 //---------------------------------------------------------------------------
+double TextHelper::ConvertTextToDouble(
+    const char* text,
+    double curVal)
+{
+    if ( text == 0 )
+    {
+        return curVal;
+    }
+    if ( *text == 0 )
+    {
+        return curVal;
+    }
+    const int size = 50;
+    char tmpText[size];
+    double retValue;
+    CopyText(tmpText, text, size);
+    CharReplace(tmpText, '.', ',', size);
+    AnsiString str = tmpText;
+    try
+    {
+        retValue = StrToFloat( str );
+    }
+    catch (...)
+    {
+        retValue = curVal;
+    }
+    return retValue;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
