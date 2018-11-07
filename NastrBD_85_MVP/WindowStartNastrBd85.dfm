@@ -11,6 +11,7 @@ object WindowStart: TWindowStart
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCloseQuery = FormCloseQuery
   PixelsPerInch = 96
   TextHeight = 13
   object Button_Start: TButton

@@ -14,6 +14,7 @@ class TWindowStart : public TForm
 __published:	// IDE-managed Components
         TButton *Button_Start;
         void __fastcall Button_StartClick(TObject *Sender);
+        void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
 private:	// User declarations
     WindowLoader viewLoader;
 public:		// User declarations

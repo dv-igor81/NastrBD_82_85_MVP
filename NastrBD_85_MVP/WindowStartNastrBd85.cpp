@@ -18,4 +18,11 @@ void __fastcall TWindowStart::Button_StartClick(TObject *Sender)
     Hide();
 }
 //---------------------------------------------------------------------------
+void __fastcall TWindowStart::FormCloseQuery(TObject *Sender,
+      bool &CanClose)
+{
+    bool tmp = CanClose;
+    CanClose = false;
+}
+//---------------------------------------------------------------------------
 

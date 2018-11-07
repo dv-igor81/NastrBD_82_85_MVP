@@ -58,6 +58,21 @@ void TWindowMainBd85::Destroy()
     delete this;
 }
 //---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::OnWMSysCommand( TMessage& Message )
+{
+  // —охранить описатель окна, пославшего запрос
+  //HWND hWndSecond = (HWND)Message.WParam;
+  switch( Message.WParam )
+  {
+    case SC_MINIMIZE:
+         Application->Minimize();
+         Message.Result = 0;
+         break;
+    default :
+         DefaultHandler( &Message );
+  }
+}
+//---------------------------------------------------------------------------
 void TWindowMainBd85::InitComponrnts()
 {
     comboBox_Protocol->Style = csDropDownList; // Ќедоступно дл€ редактировани€

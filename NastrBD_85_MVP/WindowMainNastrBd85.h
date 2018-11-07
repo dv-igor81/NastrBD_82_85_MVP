@@ -203,6 +203,12 @@ __published:	// IDE-managed Components
         void __fastcall comboBox_VoltageHiZad_ValueChange(TObject *Sender);
         void __fastcall radioButton_ArchOnClick(TObject *Sender);
         void __fastcall radioButton_ArchOffClick(TObject *Sender);
+public:
+    BEGIN_MESSAGE_MAP
+        MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
+    END_MESSAGE_MAP( TComponent )
+
+    void __fastcall OnWMSysCommand( TMessage& Message );
 private:	// User declarations
     void InitComponrnts();
      
