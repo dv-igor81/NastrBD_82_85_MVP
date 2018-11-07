@@ -139,6 +139,7 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
+    _bfArch = SspToFlagArch( _ssp );
     if ( (_ssp & 0x01) != 0x01 ) // Флаг готовности счёта НЕ получен
     {
         return;
@@ -175,6 +176,15 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
+
+    if ( _flagWriteToEeprom ) // true - для записи в EEPROM
+    {
+        _flagWriteToEeprom = false;
+        bool flag = WriteEEProm();
+        _readParamIndex = 0;
+        flag &= ReadEEProm();
+    }
+
     if ( _iterData != 0 ) // Основной поток не успел отобразить данные
     {
         return;
@@ -359,6 +369,8 @@ void PresenterWindowMainBd85::SetConnectionState( ConnectionStateInfo state )
         _intervalCounter = 0; // Счетчик подинтервалов
         _scalingCounter = 0; // Счетчик секундного счёта
         _isScalingWork = false; // Не работает набор счета за определенный пользователем интервал
+        _bfEepromFirstCopy = true; // Первое копирование параметров
+        _flagWriteToEeprom = false; // true - для записи в EEPROM
         break;
     case ConnectionStateInfo_t::WaitLoopExit:
         _isConnected = false;
@@ -368,6 +380,23 @@ void PresenterWindowMainBd85::SetConnectionState( ConnectionStateInfo state )
     case ConnectionStateInfo_t::IsDisconnect:
         break;
     }
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::FirstCopyEEprom()
+{
+    if ( _bfEepromFirstCopy == false )
+    {
+        return;
+    }
+    _indAddrZadChange = _indAddrZad;
+    _groupAddrZadChange = _groupAddrZad;
+    _dnuZadChange = _dnuZad;
+    _voltageHiZadChange = _voltageHiZad;
+    _widthPwmZadChange = _widthPwmZad;
+    _offsetPwmZadChange = _offsetPwmZad;
+    _periodPwmZadChange = _periodPwmZad;
+    _bfArchChange = _bfArch;
+    _bfEepromFirstCopy = false;    
 }
 //---------------------------------------------------------------------------
 bool PresenterWindowMainBd85::ReadEEProm()
@@ -382,7 +411,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _isConnected == false )
     {
-        return false;
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _readParamIndex == 1 )
     {
@@ -390,21 +419,23 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
-        _indAddrZadChange = _indAddrZad;
         _readParamIndex++;
     }
+    if ( _isConnected == false )
+    {
+        return false; // Быстрый выход их функции ReadEEProm()
+    }    
     if ( _readParamIndex == 2 )
     {
         if ( _allProtokol->GetGroupAdrZ( & _groupAddrZad ) == false )
         {
             return false;
         }
-        _groupAddrZadChange = _groupAddrZad;
         _readParamIndex++;
     }
     if ( _isConnected == false )
     {
-        return false;
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _readParamIndex == 3 )
     {
@@ -412,12 +443,11 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
-        _dnuZadChange = _dnuZad;
         _readParamIndex++;
     }
     if ( _isConnected == false )
     {
-        return false;
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _readParamIndex == 4 )
     {
@@ -425,12 +455,11 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
-        _voltageHiZadChange = _voltageHiZad;
         _readParamIndex++;
     }
     if ( _isConnected == false )
     {
-        return false;
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _readParamIndex == 5 )
     {
@@ -438,12 +467,11 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
-        _widthPwmZadChange = _widthPwmZad;
         _readParamIndex++;
     }
     if ( _isConnected == false )
     {
-        return false;
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _readParamIndex == 6 )
     {
@@ -451,12 +479,11 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
-        _offsetPwmZadChange = _offsetPwmZad;
         _readParamIndex++;
     }
     if ( _isConnected == false )
     {
-        return false;
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _readParamIndex == 7 )
     {
@@ -464,8 +491,11 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
-        _periodPwmZadChange = _periodPwmZad;
         _readParamIndex++;
+    }
+    if ( _isConnected == false )
+    {
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _readParamIndex == 8 )
     {
@@ -474,13 +504,17 @@ bool PresenterWindowMainBd85::ReadEEProm()
             return false;
         }
         _bfArch = SspToFlagArch( _ssp );
-        _bfArchChange = _bfArch;
         _readParamIndex++;
+    }
+    if ( _isConnected == false )
+    {
+        return false; // Быстрый выход их функции ReadEEProm()
     }
     if ( _startData != 0 )
     {
         return false; // Основной поток не успел отобразить данные
     }
+    FirstCopyEEprom();
     _bfChangeEepromCurr = ChangeEepromData();
     _bfChangeEepromOld = !_bfChangeEepromCurr; // Вызвать функцию в ГИПе ОБЯЗАТЕЛЬНО
     DisplayChangeEepromDataInvoke();
@@ -511,6 +545,7 @@ int PresenterWindowMainBd85::SspToFlagArch(unsigned char ssp)
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::WriteToEeprom()
 {
+    _flagWriteToEeprom = true;
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextIndAddrZadChange(const char* text)
@@ -603,7 +638,7 @@ void PresenterWindowMainBd85::DisplayChangeEepromData()
 }
 //---------------------------------------------------------------------------
 bool PresenterWindowMainBd85::ChangeEepromData()
-{
+{ // Если есть изменения хотя-бы одного параметра - изменения есть
     bool flagChenge = false;
     flagChenge |= NotEqual( _indAddrZad, _indAddrZadChange );
     flagChenge |= NotEqual( _groupAddrZad, _groupAddrZadChange );
@@ -623,5 +658,52 @@ bool PresenterWindowMainBd85::NotEqual(int var1, int var2)
         return false;
     }
     return true;
+}
+//---------------------------------------------------------------------------
+bool PresenterWindowMainBd85::WriteEEProm()
+{ // Если есть ошибка хотя бы в одной подфункции - ошибка есть во всей функции
+    bool flag = true;
+    if ( NotEqual( _indAddrZad, _indAddrZadChange ) )
+    {
+        flag &= _allProtokol->SetIndAdrZ( (unsigned char) _indAddrZadChange );
+    }
+    if ( NotEqual( _groupAddrZad, _groupAddrZadChange ) )
+    {
+        flag &= _allProtokol->SetGroupAdrZ( (unsigned char) _groupAddrZadChange );
+    }
+    if ( NotEqual( _dnuZad, _dnuZadChange ) )
+    {
+        flag &= _allProtokol->SetDnuZ( (unsigned short) _dnuZadChange );
+    }
+    if ( NotEqual( _voltageHiZad, _voltageHiZadChange ) )
+    {
+        flag &= _allProtokol->SetVoltageHiZ_Bd85( (unsigned short) _voltageHiZadChange );
+    }
+    if ( NotEqual( _widthPwmZad, _widthPwmZadChange ) )
+    {
+        flag &= _allProtokol->SetWidthPwmZ_Bd85( (unsigned short) _widthPwmZadChange );
+    }
+    if ( NotEqual( _offsetPwmZad, _offsetPwmZadChange ) )
+    {
+        flag &= _allProtokol->SetOffsetPwmZ_Bd85( (unsigned short) _offsetPwmZadChange );
+    }
+    if ( NotEqual( _periodPwmZad, _periodPwmZadChange ) )
+    {
+        flag &= _allProtokol->SetPeriodPwmZ_Bd85( (unsigned short) _periodPwmZadChange );
+    }
+    if ( NotEqual( _bfArch, _bfArchChange ) )
+    {
+        unsigned char archChange;
+        if ( _bfArchChange == -1 )
+        {
+            archChange = 0;
+        }
+        else
+        {
+            archChange = 1;
+        }
+        flag &= _allProtokol->SetArch( archChange );
+    }
+    return flag;
 }
 //---------------------------------------------------------------------------

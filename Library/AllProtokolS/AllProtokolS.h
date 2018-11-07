@@ -26,13 +26,29 @@ public:
     bool GetSsp(unsigned char * ssp);
     bool GetTimeInterval(unsigned char * timeInt);
     bool SetTimeInterval(unsigned char timeInt);
+
     bool GetIndAdrZ(unsigned char * indAdrZ);
+    bool SetIndAdrZ(unsigned char indAdrZ);
+
     bool GetGroupAdrZ(unsigned char * groupAdrZ);
+    bool SetGroupAdrZ(unsigned char groupAdrZ);
+
     bool GetDnuZ(unsigned short * dnuZ);
+    bool SetDnuZ(unsigned short dnuZ);
+
     bool GetVoltageHiZ_Bd85(unsigned short * voltageHiZ);
+    bool SetVoltageHiZ_Bd85(unsigned short voltageHiZ);
+
     bool GetWidthPwmZ_Bd85(unsigned short * widthPwmZ);
+    bool SetWidthPwmZ_Bd85(unsigned short widthPwmZ);
+
     bool GetOffsetPwmZ_Bd85(unsigned short * offsetPwmZ);
+    bool SetOffsetPwmZ_Bd85(unsigned short offsetPwmZ);
+
     bool GetPeriodPwmZ_Bd85(unsigned short * periodPwmZ);
+    bool SetPeriodPwmZ_Bd85(unsigned short periodPwmZ);
+
+    bool SetArch(unsigned char Arch);
     //===
     bool GetIndAdr(unsigned char * indAdr);
     bool GetGrpAdr(unsigned char * groupAdr);

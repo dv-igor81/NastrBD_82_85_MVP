@@ -129,9 +129,7 @@ private:
     int _indAddrZadChange;
     int _groupAddrZadChange;
     int _dnuZadChange;
-
     int _voltageHiZadChange;
-
     int _widthPwmZadChange;
     int _offsetPwmZadChange;
     int _periodPwmZadChange;
@@ -177,6 +175,10 @@ private:
 
     bool _bfChangeEepromCurr;
     bool _bfChangeEepromOld;
+    bool WriteEEProm();
+    void FirstCopyEEprom();
+    bool _bfEepromFirstCopy;
+    bool _flagWriteToEeprom; // true - для записи в EEPROM
 };
 //---------------------------------------------------------------------------
 #endif

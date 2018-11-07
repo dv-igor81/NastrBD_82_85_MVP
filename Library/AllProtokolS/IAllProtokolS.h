@@ -30,13 +30,29 @@ public:
     virtual bool GetSsp(unsigned char * ssp) = 0; // Считать слово состояния программы БД
     virtual bool GetTimeInterval(unsigned char * timeInt) = 0; // Получить константу, которая определяет интервал набора счёта
     virtual bool SetTimeInterval(unsigned char timeInt) = 0; // Установить константу, которая определяет интервал набора счёта
+
     virtual bool GetIndAdrZ(unsigned char * indAdrZ) = 0; // Считать индивидуальный адрес БД заданный
+    virtual bool SetIndAdrZ(unsigned char indAdrZ) = 0; // Прочитать индивидуальный адрес БД заданный
+
     virtual bool GetGroupAdrZ(unsigned char * groupAdrZ) = 0; // Считать групповой адрес БД заданный
+    virtual bool SetGroupAdrZ(unsigned char groupAdrZ) = 0; // Прочитать групповой адрес БД заданный
+
     virtual bool GetDnuZ(unsigned short * dnuZ) = 0; // Считать значение ДНУ заданное
+    virtual bool SetDnuZ(unsigned short dnuZ) = 0; // Прочитать значение ДНУ заданное
+
     virtual bool GetVoltageHiZ_Bd85(unsigned short * voltageHiZ) = 0; // Считать напряжение высокое заданное
+    virtual bool SetVoltageHiZ_Bd85(unsigned short voltageHiZ) = 0; // Прочитать напряжение высокое заданное
+
     virtual bool GetWidthPwmZ_Bd85(unsigned short * widthPwmZ) = 0; // Считать длительность ШИМ заданная
+    virtual bool SetWidthPwmZ_Bd85(unsigned short widthPwmZ) = 0; // Прочитать длительность ШИМ заданная
+
     virtual bool GetOffsetPwmZ_Bd85(unsigned short * offsetPwmZ) = 0; // Считать смешение ШИМ заданное
+    virtual bool SetOffsetPwmZ_Bd85(unsigned short offsetPwmZ) = 0; // Прочитать смешение ШИМ заданное
+
     virtual bool GetPeriodPwmZ_Bd85(unsigned short * periodPwmZ) = 0; // Считать период ШИМ заданный
+    virtual bool SetPeriodPwmZ_Bd85(unsigned short periodPwmZ) = 0; // Прочитать  период ШИМ заданный
+
+    virtual bool SetArch(unsigned char Arch) = 0;
 
     virtual bool GetIndAdr(unsigned char * indAdr) = 0; // Считать индивидуальный адрес БД
     virtual bool GetGrpAdr(unsigned char * groupAdr) = 0; // Считать групповой адрес БД
