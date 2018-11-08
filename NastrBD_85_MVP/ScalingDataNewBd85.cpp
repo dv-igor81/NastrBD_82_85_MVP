@@ -39,7 +39,7 @@ ScalingDataNewBd85::ScalingDataNewBd85(
     else
     {
         _isWorkScalingSumm = false; // Завершение расчёта среднего счёта
-        if ( scalingCounterSumm == 0 )
+        if ( currTimeScaling == 0 )
         {
             return;
         }

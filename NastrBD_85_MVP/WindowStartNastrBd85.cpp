@@ -21,8 +21,8 @@ void __fastcall TWindowStart::Button_StartClick(TObject *Sender)
 void __fastcall TWindowStart::FormCloseQuery(TObject *Sender,
       bool &CanClose)
 {
-    bool tmp = CanClose;
-    CanClose = false;
+    //bool tmp = CanClose;
+    //CanClose = false;
 }
 //---------------------------------------------------------------------------
 

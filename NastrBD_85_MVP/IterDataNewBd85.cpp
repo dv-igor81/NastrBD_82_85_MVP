@@ -39,6 +39,10 @@ IterDataNewBd85::IterDataNewBd85(
     {
         sprintf(_scaling, "%d", scaling);
     }
+    else
+    {
+        sprintf(_scaling, "...", scaling);    
+    }
 }
 //---------------------------------------------------------------------------
 IterDataNewBd85::IterDataNewBd85()

@@ -228,6 +228,7 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     button_WriteToEeprom->Enabled = isEnabled;
     button_StartStopScaling->Enabled = isEnabled;
     GroupBox_ReverseLink->Enabled = isEnabled;
+    BitBtn_ArchOnOffDisplay->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
@@ -250,13 +251,21 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     {
     case -1:
         radioButton_ArchOn->Checked = true;
+        BitBtn_ArchOnOffDisplay->Kind = bkRetry;
+        BitBtn_ArchOnOffDisplay->Caption = "Включена";
+        BitBtn_ArchOnOffDisplay->Font->Color = clGreen;
         break;
     case 1:
         radioButton_ArchOff->Checked = true;
+        BitBtn_ArchOnOffDisplay->Kind = bkNo;
+        BitBtn_ArchOnOffDisplay->Caption = "Отключена";
+        BitBtn_ArchOnOffDisplay->Font->Color = clRed;
         break;
     case 0:
         radioButton_ArchOn->Checked = false;
-        radioButton_ArchOff->Checked = false;        
+        radioButton_ArchOff->Checked = false;
+        BitBtn_ArchOnOffDisplay->Kind = bkNo;
+        BitBtn_ArchOnOffDisplay->Caption = "";
         break;
     }
 }
@@ -275,7 +284,11 @@ void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
     Edit_WidthPwm_Value->Text = data->GetWidthPwmValue();
     Edit_PeriodPwm_Code->Text = data->GetPeriodPwmCode();
     Edit_PeriodPwm_Value->Text = data->GetPeriodPwmValue();
-    Edit_Scaling->Text = data->GetScaling();
+    AnsiString text = data->GetScaling();
+    if ( text != "..." )// ...
+    {
+        Edit_Scaling->Text = data->GetScaling();
+    }
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayScalingData( ScalingDataNewBd85* data )

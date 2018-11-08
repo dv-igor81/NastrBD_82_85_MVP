@@ -179,6 +179,7 @@ __published:	// IDE-managed Components
         TEdit *Edit_Scaling;
         TEdit *Edit_Scaling_3;
         TLabel *Label_ChangeEEPROM;
+        TBitBtn *BitBtn_ArchOnOffDisplay;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);

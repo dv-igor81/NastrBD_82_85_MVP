@@ -1,6 +1,6 @@
 object WindowMainBd85: TWindowMainBd85
-  Left = 427
-  Top = 132
+  Left = 793
+  Top = 171
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMinimize]
   BorderWidth = 1
@@ -42,16 +42,16 @@ object WindowMainBd85: TWindowMainBd85
         Align = alClient
         TabOrder = 0
         object Label_ChangeEEPROM: TLabel
-          Left = 484
-          Top = 460
-          Width = 133
-          Height = 15
+          Left = 452
+          Top = 508
+          Width = 190
+          Height = 19
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clRed
-          Font.Height = -12
+          Font.Height = -16
           Font.Name = 'Courier New'
-          Font.Style = []
+          Font.Style = [fsItalic]
           ParentFont = False
           Visible = False
         end
@@ -275,9 +275,9 @@ object WindowMainBd85: TWindowMainBd85
             Caption = 'label_Hint'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlue
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = []
+            Font.Height = -13
+            Font.Name = 'Courier New'
+            Font.Style = [fsItalic]
             ParentFont = False
             TabOrder = 4
           end
@@ -557,9 +557,9 @@ object WindowMainBd85: TWindowMainBd85
         end
         object GroupBox_VerPo: TGroupBox
           Left = 448
-          Top = 269
+          Top = 268
           Width = 202
-          Height = 178
+          Height = 207
           Caption = ' '#1048#1085#1092#1086' '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -570,7 +570,7 @@ object WindowMainBd85: TWindowMainBd85
           TabOrder = 2
           object Label_VerPo: TLabel
             Left = 35
-            Top = 130
+            Top = 160
             Width = 48
             Height = 16
             Caption = #1042#1077#1088#1089#1080#1103
@@ -583,7 +583,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo3: TEdit
             Left = 93
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -599,7 +599,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo0: TEdit
             Left = 12
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -615,7 +615,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo1: TEdit
             Left = 39
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -631,7 +631,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo2: TEdit
             Left = 66
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -736,6 +736,23 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 7
+          end
+          object BitBtn_ArchOnOffDisplay: TBitBtn
+            Left = 8
+            Top = 132
+            Width = 145
+            Height = 28
+            Cancel = True
+            Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clNavy
+            Font.Height = -13
+            Font.Name = 'Courier New'
+            Font.Style = [fsBold]
+            ModalResult = 7
+            ParentFont = False
+            TabOrder = 8
+            NumGlyphs = 2
           end
         end
         object GroupBox_Rate: TGroupBox
