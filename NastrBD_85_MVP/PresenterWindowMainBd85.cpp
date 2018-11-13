@@ -9,9 +9,9 @@
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::PresenterWindowMainBd85(
     IWindowMainBd85 * view,
+    IFormDispetView * viewDispet,
     IAllProtokolS * allProtokol,
-    ITask * task,
-    ActionSelf<> & as_ShowDispetWindow) :
+    ITask * task) :
         as_FormClose(this, &PresenterWindowMainBd85::FormClose)
         , as_OprosStart(this, &PresenterWindowMainBd85::OprosStart)
         , as_OprosStartInvoke(this, &PresenterWindowMainBd85::OprosStartInvoke)
@@ -34,13 +34,33 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_RadioButtonArchOnClick(this, &PresenterWindowMainBd85::RadioButtonArchOnClick)
         , as_RadioButtonArchOffClick(this, &PresenterWindowMainBd85::RadioButtonArchOffClick)
         , as_DisplayChangeEepromData(this, &PresenterWindowMainBd85::DisplayChangeEepromData)
+        //===
+        , as_MbParamNumberOfBdChange(this, &PresenterWindowMainBd85::MbParamNumberOfBdChange)
+        , as_MbParamExpositionChange(this, &PresenterWindowMainBd85::MbParamExpositionChange)
+        , as_MbParamMinimumCountChange(this, &PresenterWindowMainBd85::MbParamMinimumCountChange)
+        , as_MbParamMaximumCountChange(this, &PresenterWindowMainBd85::MbParamMaximumCountChange)
+        , as_MbParamLevelOfOverloadChange(this, &PresenterWindowMainBd85::MbParamLevelOfOverloadChange)
+        , as_MbParamQuantityOfIntervalChange(this, &PresenterWindowMainBd85::MbParamQuantityOfIntervalChange)
+        , as_MbParamQuantityOfLookChange(this, &PresenterWindowMainBd85::MbParamQuantityOfLookChange)
+        , as_MbParamLevelOfAlarm1Change(this, &PresenterWindowMainBd85::MbParamLevelOfAlarm1Change)
+        , as_MbParamLevelOfAlarm2Change(this, &PresenterWindowMainBd85::MbParamLevelOfAlarm2Change)
+        , as_MbParamLevelOfAlarm3Change(this, &PresenterWindowMainBd85::MbParamLevelOfAlarm3Change)
+        , as_MbParamPhonChange(this, &PresenterWindowMainBd85::MbParamPhonChange)
+        , as_MbParamDurationOfPhonChange(this, &PresenterWindowMainBd85::MbParamDurationOfPhonChange)
+        , as_MbParamDurationOfAlarmChange(this, &PresenterWindowMainBd85::MbParamDurationOfAlarmChange)
+        , as_MbParamDurationOfVideoChange(this, &PresenterWindowMainBd85::MbParamDurationOfVideoChange)
+        , as_ButtonModBusSetDefClick(this, &PresenterWindowMainBd85::ButtonModBusSetDefClick)
+        , as_ButtonModBusWriteClick(this, &PresenterWindowMainBd85::ButtonModBusWriteClick)
 {
     _startData = 0;
     _iterData = 0;
     //===
     _isConnected = false; // Не подключились к БД (через ком-порт либо по TCP/IP)
     _isViewLoaded = true; // основное окно (вид) загружено
+    //===
     _view = view;
+    _viewDispet = viewDispet;
+    //===
     _allProtokol = allProtokol;
     _task = task;
     ev_Show += _view->GetSelfShow();
@@ -54,7 +74,6 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayStartData += _view->GetSelfDisplayStartData();
     *_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
     ev_DisplayIterData += _view->GetSelfDisplayIterData();
-    ev_ShowDispetWindow += as_ShowDispetWindow;
     ev_ScalingOpros += _view->GetSelfDisplayScalingData();
     _view->GetEventButtonClearScalingClick() += as_ClearScalingSumm;
 
@@ -72,6 +91,26 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayNotSaveChanges += _view->GetSelfDisplayNotSaveChanges();
     //<<=== Запись в EEPROM
 
+    //===>> Параметры ModBus
+    _view->GetEventMbParamNumberOfBdChange() += as_MbParamNumberOfBdChange;
+    _view->GetEventMbParamExpositionChange() += as_MbParamExpositionChange;
+    _view->GetEventMbParamMinimumCountChange() += as_MbParamMinimumCountChange;
+    _view->GetEventMbParamMaximumCountChange() += as_MbParamMaximumCountChange;
+    _view->GetEventMbParamLevelOfOverloadChange() += as_MbParamLevelOfOverloadChange;
+    _view->GetEventMbParamQuantityOfIntervalChange() += as_MbParamQuantityOfIntervalChange;
+    _view->GetEventMbParamQuantityOfLookChange() += as_MbParamQuantityOfLookChange;
+    _view->GetEventMbParamLevelOfAlarm1Change() += as_MbParamLevelOfAlarm1Change;
+    _view->GetEventMbParamLevelOfAlarm2Change() += as_MbParamLevelOfAlarm2Change;
+    _view->GetEventMbParamLevelOfAlarm3Change() += as_MbParamLevelOfAlarm3Change;
+    _view->GetEventMbParamPhonChange() += as_MbParamPhonChange;
+    _view->GetEventMbParamDurationOfPhonChange() += as_MbParamDurationOfPhonChange;
+    _view->GetEventMbParamDurationOfAlarmChange() += as_MbParamDurationOfAlarmChange;
+    _view->GetEventMbParamDurationOfVideoChange() += as_MbParamDurationOfVideoChange;
+    _view->GetEventButtonModBusSetDefClick() += as_ButtonModBusSetDefClick;
+    _view->GetEventButtonModBusWriteClick() += as_ButtonModBusWriteClick;
+    //<<=== Параметры ModBus
+
+    _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
     ev_Show(); // Прказать форму
 }
 //---------------------------------------------------------------------------
@@ -84,7 +123,8 @@ void PresenterWindowMainBd85::FormClose()
 {
     _connectBdProt->Disconnect();
     _isViewLoaded = false;
-    ev_ShowDispetWindow(); // Показать форму диспетчера
+    //ev_ShowDispetWindow(); // Показать форму диспетчера
+    _viewDispet->WrapShow(); // Показать форму диспетчера
 }
 //---------------------------------------------------------------------------
 bool PresenterWindowMainBd85::IsViewLoaded()
@@ -705,5 +745,69 @@ bool PresenterWindowMainBd85::WriteEEProm()
         flag &= _allProtokol->SetArch( archChange );
     }
     return flag;
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamNumberOfBdChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamExpositionChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamMinimumCountChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamMaximumCountChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamLevelOfOverloadChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamQuantityOfIntervalChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamQuantityOfLookChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamLevelOfAlarm1Change(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamLevelOfAlarm2Change(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamLevelOfAlarm3Change(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamPhonChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamDurationOfPhonChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamDurationOfAlarmChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::MbParamDurationOfVideoChange(const char* text)
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ButtonModBusSetDefClick()
+{
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ButtonModBusWriteClick()
+{
 }
 //---------------------------------------------------------------------------

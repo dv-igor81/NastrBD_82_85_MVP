@@ -10,10 +10,11 @@
   #include "Unit_FormDispet.h"
 #endif
 //---------------------------------------------------------------------------
+
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-extern const char * IniFileName;
+/*extern*/ const char * IniFileName = "DIA_BD82.ini";
 TForm_LoadParam *Form_LoadParam;
 //---------------------------------------------------------------------------
 __fastcall TForm_LoadParam::TForm_LoadParam(TComponent* Owner)

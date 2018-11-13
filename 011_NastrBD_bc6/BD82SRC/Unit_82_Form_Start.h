@@ -26,6 +26,7 @@ class TForm_82_Start : public TForm
 {
   private:
     void __fastcall OnWMSysCommand( TMessage& aMsg );
+    AnsiString ProgrammVersion;
   public:
     BEGIN_MESSAGE_MAP
       MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -399,7 +400,6 @@ __published:	// IDE-managed Components
         void __fastcall CheckBox_DAuto_RengenClick(TObject *Sender);
         void __fastcall Edit_2_Col2_4_Row_14Change(TObject *Sender);
 private:	// User declarations
-  ProtokolName prtotType;
   int AutoPodbor_1_Un_2_U81;
   float m_fltU_temp;
   unsigned int m_iU_temp;
@@ -411,6 +411,11 @@ private:	// User declarations
 
   // Стартовать установку ДНУ и ДВУ (1 - Стандарт, 2 - Широкие, 3 - Ренген)
   void SetDnuAndDvuStart(int);
+
+  AnsiString textIpAddrModBusTcp;
+  AnsiString textTcpPortModBusTcp;
+  AnsiString textIpAddrModBusRtuIp;
+  AnsiString textTcpPortModBusRtuIp;
 
   //////////////////////////////////////////////////
   /// 0 - запись ДНУ и ДВУ не производится
@@ -555,7 +560,8 @@ private:	// User declarations
   void __fastcall InterfaceUchSvet(int iVar);
   void __fastcall InterfaceARH(int iVar);
 public:		// User declarations
-  //bool bFlagChengeKolTik; // Отображение КолТика для счёта
+  AnsiString GetCurrentTime();
+  bool bFlagChengeKolTik; // Отображение КолТика для счёта
   bool bFlagChengeKolTikSpectr; // Отображение КолТика для спектра
   bool FlagOpros; // Флаг для изменения состояния кнопки (надпись ОТКРЫТЬ/ЗАКРЫТЬ)
   bool FlagWorkCom; // Флаг работы с Com-портом
@@ -637,17 +643,6 @@ public:		// User declarations
   // Для запоминания состояния таймера
   int TimeInterv;
   bool bfTimeOnOff;
-
-  //===>> 29.10.2018
-  ActionSelf<> as_FlagAvtoSnyatDiskr;
-  void FlagAvtoSnyatDiskr_As();
-  ActionSelf<> as_OprosBDParam;
-  void OprosBDParam_As();
-  ActionSelf<> as_CheckBoxAutoCheckedFalse;
-  void CheckBoxAutoCheckedFalse_As();
-  ActionSelf<> as_CheckBox081CheckedFalse;
-  void CheckBox081CheckedFalse_As();
-  //<<=== 29.10.2018
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TForm_82_Start * Form_82_Start;

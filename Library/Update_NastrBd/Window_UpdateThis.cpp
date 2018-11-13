@@ -24,6 +24,7 @@ void TWindow_Updater::Step_01()
     AnsiString remoteFileName =
       "\\\\fileserver\\Change\\Podr-56\\Дорофеев Игорь Александрович (DIA)\\Updater\\NastrBD\\NastrBD_82_85.exe";
     AnsiString remoteFileNameFake = "C:\\Updater\\NastrBD\\NastrBD_82_85.exe";
+
     int test;
     switch ( deystvie )
     {

@@ -25,8 +25,8 @@ protected:
   void __fastcall Execute();
 public:
   __fastcall ComPortReadWrite_t(bool CreateSuspended);
-  //void __fastcall SetTcpFlag( bool );
-  //bool __fastcall GetTcpFlag( void );
+  void __fastcall SetTcpFlag( bool );
+  bool __fastcall GetTcpFlag( void );  
   RSProtokol_t * Prot;
   int flagSostoyaniya;
   // ===
@@ -35,6 +35,7 @@ public:
   char CArr[200];
   int N;
   int AddrBD;
+  //TStartForm * StartForm;
 };
 //---------------------------------------------------------------------------
 #endif

@@ -141,37 +141,36 @@ __published:	// IDE-managed Components
         TButton *button_StartStopScaling;
         TButton *button_SaveToFile;
         TLabel *Label_VerPo;
-        TButton *Button5;
         TScrollBox *ScrollBox_SettingsForModBus;
         TGroupBox *GroupBox_SettingsForModbus;
-        TLabel *Label_3_01;
-        TLabel *Label_3_02;
-        TLabel *Label_3_03;
-        TLabel *Label_3_04;
-        TLabel *Label_3_05;
-        TLabel *Label_3_06;
-        TLabel *Label_3_07;
-        TLabel *Label_3_08;
-        TLabel *Label_3_09;
-        TLabel *Label_3_10;
-        TLabel *Label_3_11;
-        TLabel *Label_3_12;
-        TLabel *Label_3_13;
-        TLabel *Label_3_14;
-        TEdit *Edit_3_01;
-        TEdit *Edit_3_02;
-        TEdit *Edit_3_03;
-        TEdit *Edit_3_04;
-        TEdit *Edit_3_05;
-        TEdit *Edit_3_06;
-        TEdit *Edit_3_07;
-        TEdit *Edit_3_08;
-        TEdit *Edit_3_09;
-        TEdit *Edit_3_10;
-        TEdit *Edit_3_11;
-        TEdit *Edit_3_12;
-        TEdit *Edit_3_13;
-        TEdit *Edit_3_14;
+        TLabel *Label_NumberOfBd;
+        TLabel *Label_Exposition;
+        TLabel *Label_MinimumCount;
+        TLabel *Label_MaximumCount;
+        TLabel *Label_LevelOfOverload;
+        TLabel *Label_QuantityOfInterval;
+        TLabel *Label_QuantityOfLook;
+        TLabel *Label_LevelOfAlarm_1;
+        TLabel *Label_LevelOfAlarm_2;
+        TLabel *Label_LevelOfAlarm_3;
+        TLabel *Label_Phon;
+        TLabel *Label_DurationOfPhon;
+        TLabel *Label_DurationOfAlarm;
+        TLabel *Label_DurationOfVideo;
+        TEdit *Edit_NumberOfBd;
+        TEdit *Edit_Exposition;
+        TEdit *Edit_MinimumCount;
+        TEdit *Edit_MaximumCount;
+        TEdit *Edit_LevelOfOverload;
+        TEdit *Edit_QuantityOfInterval;
+        TEdit *Edit_QuantityOfLook;
+        TEdit *Edit_LevelOfAlarm_1;
+        TEdit *Edit_LevelOfAlarm_2;
+        TEdit *Edit_LevelOfAlarm_3;
+        TEdit *Edit_Phon;
+        TEdit *Edit_DurationOfPhon;
+        TEdit *Edit_DurationOfAlarm;
+        TEdit *Edit_DurationOfVideo;
         TButton *Button_ModBus_Write;
         TButton *Button_ModBus_SetDef;
         TPanel *Panel_Scaling_0;
@@ -204,6 +203,22 @@ __published:	// IDE-managed Components
         void __fastcall comboBox_VoltageHiZad_ValueChange(TObject *Sender);
         void __fastcall radioButton_ArchOnClick(TObject *Sender);
         void __fastcall radioButton_ArchOffClick(TObject *Sender);
+        void __fastcall Edit_NumberOfBdChange(TObject *Sender);
+        void __fastcall Edit_ExpositionChange(TObject *Sender);
+        void __fastcall Edit_MinimumCountChange(TObject *Sender);
+        void __fastcall Edit_LevelOfOverloadChange(TObject *Sender);
+        void __fastcall Edit_QuantityOfIntervalChange(TObject *Sender);
+        void __fastcall Edit_QuantityOfLookChange(TObject *Sender);
+        void __fastcall Edit_LevelOfAlarm_1Change(TObject *Sender);
+        void __fastcall Edit_LevelOfAlarm_2Change(TObject *Sender);
+        void __fastcall Edit_LevelOfAlarm_3Change(TObject *Sender);
+        void __fastcall Edit_PhonChange(TObject *Sender);
+        void __fastcall Edit_DurationOfPhonChange(TObject *Sender);
+        void __fastcall Edit_DurationOfAlarmChange(TObject *Sender);
+        void __fastcall Edit_DurationOfVideoChange(TObject *Sender);
+        void __fastcall Button_ModBus_SetDefClick(TObject *Sender);
+        void __fastcall Button_ModBus_WriteClick(TObject *Sender);
+        void __fastcall Edit_MaximumCountChange(TObject *Sender);
 public:
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -291,8 +306,31 @@ private:	// User declarations
     ActionEvent<bool> ev_radioButton_ArchOffClick;
     //<<=== Запись в EEPROM
 
+    //===>> Параметры ModBus
+    ActionEvent<const char*> ev_modBusParam_NumberOfBdChange;
+    ActionEvent<const char*> ev_modBusParam_ExpositionChange;
+    ActionEvent<const char*> ev_modBusParam_MinimumCountChange;
+    ActionEvent<const char*> ev_modBusParam_MaximumCountChange;
+    ActionEvent<const char*> ev_modBusParam_LevelOfOverloadChange;
+    ActionEvent<const char*> ev_modBusParam_QuantityOfIntervalChange;
+    ActionEvent<const char*> ev_modBusParam_QuantityOfLookChange;
+    ActionEvent<const char*> ev_modBusParam_LevelOfAlarm_1Change;
+    ActionEvent<const char*> ev_modBusParam_LevelOfAlarm_2Change;
+    ActionEvent<const char*> ev_modBusParam_LevelOfAlarm_3Change;
+    ActionEvent<const char*> ev_modBusParam_PhonChange;
+    ActionEvent<const char*> ev_modBusParam_DurationOfPhonChange;
+    ActionEvent<const char*> ev_modBusParam_DurationOfAlarmChange;
+    ActionEvent<const char*> ev_modBusParam_DurationOfVideoChange;
+    ActionEvent<> ev_button_ModBus_SetDefClick;
+    ActionEvent<> ev_button_ModBus_WriteClick;
+    //<<=== Параметры ModBus
+
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
+
+    //===>> Вместо GetSelf
+    void SetVerPoText(const char * text);
+    //<<=== Вместо GetSelf
 
     void Destroy();
             
@@ -321,6 +359,25 @@ public:		// User declarations
     ActionEvent<bool>& GetEventRadioButtonArchOffClick();
     ActionSelf<bool>& GetSelfDisplayNotSaveChanges();
     //<<=== Запись в EEPROM
+
+    //===>> Параметры ModBus
+    ActionEvent<const char*>& GetEventMbParamNumberOfBdChange();
+    ActionEvent<const char*>& GetEventMbParamExpositionChange();
+    ActionEvent<const char*>& GetEventMbParamMinimumCountChange();
+    ActionEvent<const char*>& GetEventMbParamMaximumCountChange();
+    ActionEvent<const char*>& GetEventMbParamLevelOfOverloadChange();
+    ActionEvent<const char*>& GetEventMbParamQuantityOfIntervalChange();
+    ActionEvent<const char*>& GetEventMbParamQuantityOfLookChange();
+    ActionEvent<const char*>& GetEventMbParamLevelOfAlarm1Change();
+    ActionEvent<const char*>& GetEventMbParamLevelOfAlarm2Change();
+    ActionEvent<const char*>& GetEventMbParamLevelOfAlarm3Change();
+    ActionEvent<const char*>& GetEventMbParamPhonChange();
+    ActionEvent<const char*>& GetEventMbParamDurationOfPhonChange();
+    ActionEvent<const char*>& GetEventMbParamDurationOfAlarmChange();
+    ActionEvent<const char*>& GetEventMbParamDurationOfVideoChange();
+    ActionEvent<>& GetEventButtonModBusSetDefClick();
+    ActionEvent<>& GetEventButtonModBusWriteClick();
+    //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------
 #endif

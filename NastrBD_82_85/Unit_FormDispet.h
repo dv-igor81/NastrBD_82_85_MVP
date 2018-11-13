@@ -16,11 +16,10 @@
 //---------------------------------------------------------------------------
 #include "WindowLoader.h" // 29.10.2018
 //---------------------------------------------------------------------------
-class TFormDispet : public TForm
+class TFormDispet : public TForm, public IFormDispetView
 {
 __published:	// IDE-managed Components
         TRadioButton *RadioButton_BD82;
-        TRadioButton *RadioButton_BD_82_85;
         TButton *Button_Initiate;
         TRadioButton *RadioButton_BD85New;
         TRadioButton *RadioButton_BD85Old;
@@ -49,10 +48,14 @@ private:	// User declarations
   void __fastcall funkOtvet( TMessage & Message ); // Функция обработки сообщения-ответа
   //void __fastcall OnWMSysCommand( TMessage& Message ); // Функция обработки ...
 
-    WindowLoader viewLoader; // 29.10.2018
+  WindowLoader viewLoader; // 29.10.2018
+  AnsiString ProgrammVersion;
+  AnsiString FormCaption;
 public:		// User declarations
-        __fastcall TFormDispet(TComponent* Owner);
+  __fastcall TFormDispet(TComponent* Owner);
   int __fastcall DiaGetWinHandle( HWND hWnd ); // Изменяет описатель окна
+  const char * GetProgrammVersion();
+  void WrapShow(); 
 
   ATOM aApp;
   char * szAppName;

@@ -19,6 +19,7 @@
 using namespace smartevents;
 //---------------------------------------------------------------------------
 #include <Sockets.hpp>
+//---------------------------------------------------------------------------
 // создание псевдонима именам
 typedef unsigned char uint8_t;
 typedef unsigned short uint16_t;
@@ -184,12 +185,16 @@ private:
   int ret_size;
   int CodeRet; // Эта переменная возвращается функциями
 
+  //!unsigned char buf_write[16]; // Буфер для чтения
+  //!unsigned char buf_read[16]; // Буфер для записи
   unsigned char buf_write[32]; // Буфер для чтения
   unsigned char buf_read[32]; // Буфер для записи
 
   unsigned char * pbuf_write; // Указатель на буфер чтения
   unsigned char * pbuf_read; // Указатель на буфер записи
 
+  //!unsigned char buf_write_modbus[16]; // Буфер для чтения NastrBD
+  //!unsigned char buf_read_modbus[16]; // Буфер для записи NastrBD
   unsigned char buf_write_modbus[32]; // Буфер для чтения NastrBD
   unsigned char buf_read_modbus[32]; // Буфер для записи NastrBD
   unsigned short CRC;
@@ -203,7 +208,7 @@ private:
   int strlcpy(char * dest, const char * src, int dest_size);
   int RSConnect(const char * device, int baud, int parity, int data_bit, int stop_bit);
   // ===
-  int WriteToPort(unsigned char * buf, int count, int parity);
+  int WriteToPort(/*const*/ unsigned char * buf, int count, int parity);
   int ReadFromPort(unsigned char * buf, int count, int parity);
   void ObnulenieArr(unsigned char Arr[], int N, unsigned char uchVal = 0);
   void ObnulenieArr(int Arr[], int N, unsigned char uchVal = 0);  
@@ -211,6 +216,7 @@ private:
   bool bfOprosSpectra;
   bool bfPervVhod; // true - Первый вход в функцию int OprosBDSpektr()
   void FlagAvtoSnyat(); // Снять галочку "Авто" (напряжение)
+  void FlagAvtoSnyatDiskr(); // Снять галочки "Авто" (пороги дискриминации)
 //---------------------------------------------------------------------------
 // стремимся выполнить это --> (U0 + Un == Uhi)
 // или это --> (U0 * 0,81 + Un == Uhi)
@@ -219,7 +225,7 @@ public:
   int AutoPodbor_1_Un_2_U81;
   int DiaGetTime(void); // Время в милисекундах
   void ClearBDSpectr(void);
-  //void OprosSpectra(bool bf); // bf = true - разрешить опрос спектра в функции OprosBD()
+  void OprosSpectra(bool bf); // bf = true - разрешить опрос спектра в функции OprosBD()
   int GetSSP(unsigned char * SSP);
   int GetCountImp(unsigned int * CImp);
   int GetVersia(unsigned char * Versia);
@@ -265,7 +271,7 @@ public:
     
   unsigned char SSP_Value; // Переменная для протокола "старый"
 
-  char err; // Возврат функции ReadFile сохраняется в err
+  /*unsigned*/ char err; // Возврат функции ReadFile сохраняется в err
   unsigned char MB_length_to_read;
   
   int FlagDebug; // Флаг отладки
@@ -282,7 +288,7 @@ public:
   // Отменил flagFirstAddr 23.10.2014
   bool flagFirstAddr; // true - при первом обращении к БД или при сбое передачи
   bool flagSpeed; // Флаг скорости опроса, для протокола "Старый" (true - выше скорость опроса)
-  //bool flagTCP;
+  bool flagTCP;
 
   int testErr;
   unsigned char AddrBD;
@@ -294,6 +300,15 @@ public:
   int indexArrTime;
   int MaxIndexArrTime;
   // ===
+  int OprosBD(void); // -1 - ошибка связи, 0 - звязь работает
+  int OprosBDParam( void ); // -1 - ошибка связи, 0 - звязь работает
+
+
+  // Возвращаемое значение: -1 - ошибка связи, 0 - звязь работает
+  // Параметры: iTimeRead - время чтения спектра, iTimeGotovh - время готовности спектра
+  int OprosBDSpektr(bool bfTime, int * iTimeRead, int * iTimeGotov );
+
+  int OprosBD_2(void);
   void Reset(void);
   // ===
   int RSConnect(const char * device);
@@ -321,6 +336,8 @@ public:
   int WriteFlash(unsigned int Adr, unsigned long Data);
   int WriteFlash2(unsigned int Adr, unsigned long Data);
 
+
+
   int ExRead( int Index, unsigned short AddrRegModBus, unsigned long * ptr_Edit_3_01__14 );
   int ReadFromBDModbus_BD82( void );
   int ReadFromBDModbus_BD85_New( void );
@@ -339,6 +356,23 @@ public:
   //
   int GetIndAdr(unsigned char * Adr);
   float Clamp(float fltValue, float fltMin, float fltMax);
+  //double UpdatePID(double error, double position);
+  double UpdatePID0(double error);
+  double UpdatePID1(double error);
+  void ResetPID(void);
+
+  void ResetPID0(void);
+  bool AvtoDnu();
+
+  void ResetPID1(void);
+  bool AvtoDvu();
+
+  bool bf_AvtoDnu;
+  bool bf_AvtoDvu;
+  bool bf_WriteDef_DVU;
+
+  /// Можно сбрасывать флажки для автоподбора дискриминаторов
+  bool IsPidSResetted();
   // ===
   void SetComPortHahdle( HANDLE hCOM );
   void FreeComPortHahdle( void );
@@ -409,6 +443,7 @@ public:
 
   bool CheckBox_auto_Checked; // = true, если флажок CheckBox_auto установлен
   bool CheckBox_DAuto_Checked; // = true, если флажок CheckBox_DAuto установлен
+  void Set_CheckBox_DAuto_Checked(bool dNu, bool dVu); // 2018.03.19
   int auto_State_Flag;
 
   Data_t Data; // Данные для вывода на форму
@@ -442,7 +477,7 @@ public:
   unsigned long Edit_3_12;
   unsigned long Edit_3_13;
   unsigned long Edit_3_14;
-  unsigned long Edit_3_15;
+  unsigned long Edit_3_15;  
 
   unsigned long * ptr_Edit_3_01__14[15];
   unsigned short AddrRegModBus_BD82[15];
@@ -472,20 +507,6 @@ public:
   DWORD ReadTimeout;
   DWORD WriteTimeout;
 
-  int OprosBD_2(void); // -1 - ошибка связи, 0 - звязь работает
-  void OprosSpectra(bool bf); // bf = true - разрешить опрос спектра в функции OprosBD()
-  int OprosBD( void ); // -1 - ошибка связи, 0 - звязь работает
-  int OprosBDSpektr(bool bfTime, int * iTimeRead, int * iTimeGotov );
-  int OprosBDParam( void );
-  void SetKolTikSpectr(unsigned char kolTik);
-  bool bFlagChengeKolTik;
-  double UpdatePID0(double error);
-  void ResetPID0(void);
-  double UpdatePID1(double error);
-  void ResetPID1(void);
-  bool IsPidSResetted();
-  void FlagAvtoSnyatDiskr();
-
     double I_State;
     double I_Error1;
     double I_State1;
@@ -505,6 +526,31 @@ public:
     ActionEvent<> ev_CheckBox081CheckedFalse;
     //<<=== 29.10.2018
 };
+//---------------------------------------------------------------------------
+//double I_Error = 0.0;
+//double I_State = 0.0;
+
+//double I_Error1 = 0.0;
+//double I_State1 = 0.0;
+
+//const double P_Gain1 = 12.0;
+//const double I_Gain1 = 2.0;
+
+//const double DRIVE1_MIN = -25.0;
+//const double DRIVE1_MAX	= 25.0;
+
+//const double DRIVE_MIN = -100.0;
+//const double DRIVE_MAX = 100.0;
+
+//const double P_Gain	= -0.036;
+//const double I_Gain	= -0.42;
+
+//double I_Min1 = DRIVE1_MIN;
+//double I_Max1 = DRIVE1_MAX;
+
+//double I_Min = DRIVE_MIN;
+//double I_Max = DRIVE_MAX;
+
 
 //---------------------------------------------------------------------------
 #endif

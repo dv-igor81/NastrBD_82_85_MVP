@@ -976,8 +976,6 @@ void __fastcall TForm_82_Spectr_BD84::Button_SpectrClick(TObject *Sender)
     this->Button_ClearSpektr->Enabled = false;
     Form_82_Start->Prot->OprosSpectra( true );
 
-    Form_82_Start->Prot->SetKolTikSpectr( SpinEdit_TimeSpektr->Value );
-
     //==\\ Form_82_Start->Prot->SpectrStart(); // Так нельзя: Ошибка связи
     // имеет большую вероятность, т.к.
     // общий ресурс (ком порт) предоставляет доступ к более чем 1-му

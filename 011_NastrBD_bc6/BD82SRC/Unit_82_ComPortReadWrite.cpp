@@ -1,21 +1,22 @@
 //---------------------------------------------------------------------------
+
 #include <vcl.h>
 #include <stdio.h>
 #pragma hdrstop
-//---------------------------------------------------------------------------
+
 #include "Unit_82_ComPortReadWrite.h"
 #include "Unit_82_Form_Start.h"
 #include "Unit_82_Form_Puasson8BD.h"
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-extern RSProtokol_t * Prot;
+//extern RSProtokol_t * Prot;
 //---------------------------------------------------------------------------
 __fastcall ComPortReadWrite_t::ComPortReadWrite_t(bool CreateSuspended)
     : TThread(CreateSuspended)
 {
   this->Prot = Form_82_Start->Prot;
   bflag_pred_err = false; // при создании объекта, ошибок связи ещё не было
-  //Prot->flagTCP = false;
+  Prot->flagTCP = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall ComPortReadWrite_t::Printing()
@@ -153,6 +154,10 @@ void __fastcall ComPortReadWrite_t::Execute()
       Prot->ReadTimeout = 100;
       Prot->WriteTimeout = 100;
     }
+    else if ( this->flagSostoyaniya == 10 ) // Набор спектра
+    {
+      //Prot->OprosBDSpektr(); // Пока не реализовано, т.к. нигде не устанавливается this->flagSostoyaniya = 10
+    }
     Suspend(); // Приостановить поток
   }
 }
@@ -203,12 +208,12 @@ void __fastcall ComPortReadWrite_t::PrintingEnd()
   Form_82_Start->RSDisConnect();
 }
 //---------------------------------------------------------------------------
-//void __fastcall ComPortReadWrite_t::SetTcpFlag( bool flag )
-//{
-//    this->Prot->flagTCP = flag;
-//}
+void __fastcall ComPortReadWrite_t::SetTcpFlag( bool flag )
+{
+  this->Prot->flagTCP = flag;
+}
 //---------------------------------------------------------------------------
-//bool __fastcall ComPortReadWrite_t::GetTcpFlag( void )
-//{
-//    return this->Prot->flagTCP;
-//}
+bool __fastcall ComPortReadWrite_t::GetTcpFlag( void )
+{
+  return this->Prot->flagTCP;
+}

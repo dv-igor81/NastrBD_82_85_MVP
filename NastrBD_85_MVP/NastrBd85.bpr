@@ -24,7 +24,8 @@
       ..\Library\AllProtokolS\ConnectionStateInfo_t.obj 
       ..\Library\AllProtokolS\ProtokolName_t.obj 
       ..\Library\AllProtokolS\ConnectBdProt.obj 
-      ..\Library\AllProtokolS\HelperConnectFourBdProt.obj ScalingDataNewBd85.obj"/>
+      ..\Library\AllProtokolS\HelperConnectFourBdProt.obj ScalingDataNewBd85.obj 
+      ModBusParam.obj ..\NastrBD_82_85\IFormDispetView.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -40,7 +41,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi Iocomp65.bpi"/>
-    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Task;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\Library;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS"/>
+    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Task;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\Library;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_82_85"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -50,13 +51,13 @@
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="NastrBd85.cpp"/>
-    <INCLUDEPATH value="..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl"/>
-    <LIBPATH value="..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <INCLUDEPATH value="..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par"/>
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <IDLCFLAGS value="-I..\Library -I..\Library\Utilites -I..\Library\Task 
+    <IDLCFLAGS value="-I..\NastrBD_82_85 -I..\Library -I..\Library\Utilites -I..\Library\Task 
       -I..\Library\AllProtokolS -I..\Library\smartevents -ILibrary\smartevents 
       -I&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot; 
       -ID:\ProjectS\BUILDER6\034_NastrBD_85_MVP -I$(BCB)\include 
@@ -108,6 +109,8 @@
       <FILE FILENAME="..\Library\AllProtokolS\ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ScalingDataNewBd85.cpp" FORMNAME="" UNITNAME="ScalingDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ModBusParam.cpp" FORMNAME="" UNITNAME="ModBusParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NastrBD_82_85\IFormDispetView.cpp" FORMNAME="" UNITNAME="IFormDispetView" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

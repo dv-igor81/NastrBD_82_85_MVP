@@ -6,8 +6,6 @@
 #include "Unit_82_FileDirect.h"
 #include "Unit_82_Form_RearFromEEPROM.h"
 #include "Unit_82_Form_LoadParam.h"
-//#include "Unit_82_RSProtokol.h"
-#include "RSProtokol.h"
 //---------------------------------------------------------------------------
 #ifdef _DIA_OBEDINENIE_
   #include "Unit_FormDispet.h"
@@ -28,7 +26,7 @@
 TForm_ARCH * Form_ARCH;
 extern bool flagPort; // Состояние порта Открыт (true)/закрыт (false)
 //---------------------------------------------------------------------------
-extern const char * IniFileName;
+const char * IniFileName = "DIA_BD82.ini";
 int UgolTangens;
 int del; // Приращение температуры
 unsigned char kol_zn = KOL_ZN;

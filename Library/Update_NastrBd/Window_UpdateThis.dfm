@@ -1,6 +1,6 @@
 object Window_Updater: TWindow_Updater
-  Left = 359
-  Top = 223
+  Left = 583
+  Top = 257
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsDialog
   Caption = #1054#1073#1085#1086#1074#1083#1077#1085#1080#1077
@@ -17,6 +17,7 @@ object Window_Updater: TWindow_Updater
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13

@@ -18,6 +18,7 @@ object WindowMainBd85: TWindowMainBd85
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -42,8 +43,8 @@ object WindowMainBd85: TWindowMainBd85
         Align = alClient
         TabOrder = 0
         object Label_ChangeEEPROM: TLabel
-          Left = 452
-          Top = 508
+          Left = 454
+          Top = 568
           Width = 190
           Height = 19
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
@@ -557,9 +558,9 @@ object WindowMainBd85: TWindowMainBd85
         end
         object GroupBox_VerPo: TGroupBox
           Left = 448
-          Top = 268
+          Top = 269
           Width = 202
-          Height = 207
+          Height = 179
           Caption = ' '#1048#1085#1092#1086' '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -570,7 +571,7 @@ object WindowMainBd85: TWindowMainBd85
           TabOrder = 2
           object Label_VerPo: TLabel
             Left = 35
-            Top = 160
+            Top = 130
             Width = 48
             Height = 16
             Caption = #1042#1077#1088#1089#1080#1103
@@ -583,7 +584,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo3: TEdit
             Left = 93
-            Top = 178
+            Top = 148
             Width = 25
             Height = 24
             TabStop = False
@@ -599,7 +600,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo0: TEdit
             Left = 12
-            Top = 178
+            Top = 148
             Width = 25
             Height = 24
             TabStop = False
@@ -615,7 +616,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo1: TEdit
             Left = 39
-            Top = 178
+            Top = 148
             Width = 25
             Height = 24
             TabStop = False
@@ -631,7 +632,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo2: TEdit
             Left = 66
-            Top = 178
+            Top = 148
             Width = 25
             Height = 24
             TabStop = False
@@ -681,7 +682,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object GroupBox_ReverseLink: TGroupBox
             Left = 6
-            Top = 70
+            Top = 40
             Width = 146
             Height = 59
             Caption = ' '#1054#1073#1088#1072#1090#1085#1072#1103' '#1089#1074#1103#1079#1100' '
@@ -723,23 +724,9 @@ object WindowMainBd85: TWindowMainBd85
               OnClick = radioButton_ArchOffClick
             end
           end
-          object Button5: TButton
-            Left = 6
-            Top = 45
-            Width = 120
-            Height = 25
-            Caption = #1057#1090#1072#1090'. '#1072#1085#1072#1083#1080#1079
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -12
-            Font.Name = 'Courier New'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 7
-          end
           object BitBtn_ArchOnOffDisplay: TBitBtn
             Left = 8
-            Top = 132
+            Top = 102
             Width = 145
             Height = 28
             Cancel = True
@@ -751,7 +738,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ModalResult = 7
             ParentFont = False
-            TabOrder = 8
+            TabOrder = 7
             NumGlyphs = 2
           end
         end
@@ -1939,203 +1926,216 @@ object WindowMainBd85: TWindowMainBd85
           Width = 543
           Height = 274
           Caption = '   '#1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1076#1083#1103' '#1041#1044' ModBus   '
-          Enabled = False
           TabOrder = 0
-          object Label_3_01: TLabel
+          object Label_NumberOfBd: TLabel
             Left = 24
             Top = 24
             Width = 67
             Height = 13
             Caption = #1053#1086#1084#1077#1088' '#1073#1083#1086#1082#1072
           end
-          object Label_3_02: TLabel
+          object Label_Exposition: TLabel
             Left = 24
             Top = 73
             Width = 81
             Height = 13
             Caption = #1069#1082#1089#1087#1086#1079#1080#1094#1080#1103', '#1084#1089
           end
-          object Label_3_03: TLabel
+          object Label_MinimumCount: TLabel
             Left = 23
             Top = 123
             Width = 98
             Height = 13
             Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1089#1095#1105#1090
           end
-          object Label_3_04: TLabel
+          object Label_MaximumCount: TLabel
             Left = 24
             Top = 173
             Width = 104
             Height = 13
             Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1099#1081' '#1089#1095#1105#1090
           end
-          object Label_3_05: TLabel
+          object Label_LevelOfOverload: TLabel
             Left = 24
             Top = 223
             Width = 105
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1087#1077#1088#1077#1075#1088#1091#1079#1082#1080
           end
-          object Label_3_06: TLabel
+          object Label_QuantityOfInterval: TLabel
             Left = 197
             Top = 26
             Width = 96
             Height = 13
             Caption = #1050#1086#1083'-'#1074#1086' '#1080#1085#1090#1077#1088#1074#1072#1083#1086#1074
           end
-          object Label_3_07: TLabel
+          object Label_QuantityOfLook: TLabel
             Left = 197
             Top = 73
             Width = 111
             Height = 13
             Caption = #1050#1086#1083'-'#1074#1086' '#1074#1079#1075#1083#1103#1076#1072' '#1087#1086#1089#1083#1077
           end
-          object Label_3_08: TLabel
+          object Label_LevelOfAlarm_1: TLabel
             Left = 197
             Top = 124
             Width = 118
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1090#1088#1077#1074#1086#1075#1080' 1 * 10'
           end
-          object Label_3_09: TLabel
+          object Label_LevelOfAlarm_2: TLabel
             Left = 197
             Top = 174
             Width = 118
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1090#1088#1077#1074#1086#1075#1080' 2 * 10'
           end
-          object Label_3_10: TLabel
+          object Label_LevelOfAlarm_3: TLabel
             Left = 197
             Top = 225
             Width = 118
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1090#1088#1077#1074#1086#1075#1080' 3 * 10'
           end
-          object Label_3_11: TLabel
+          object Label_Phon: TLabel
             Left = 372
             Top = 25
             Width = 35
             Height = 13
             Caption = #1060#1086#1085', '#1089
           end
-          object Label_3_12: TLabel
+          object Label_DurationOfPhon: TLabel
             Left = 371
             Top = 74
             Width = 152
             Height = 13
             Caption = #1044#1083#1080#1090'. '#1087#1086#1076#1080#1085#1090#1077#1088#1074#1072#1083#1072' '#1092#1086#1085#1072', '#1084#1089
           end
-          object Label_3_13: TLabel
+          object Label_DurationOfAlarm: TLabel
             Left = 373
             Top = 124
             Width = 128
             Height = 13
             Caption = #1044#1083#1080#1090'. '#1089#1080#1075#1085#1072#1083#1072' '#1090#1088#1077#1074#1086#1075#1080', '#1089
           end
-          object Label_3_14: TLabel
+          object Label_DurationOfVideo: TLabel
             Left = 373
             Top = 176
             Width = 118
             Height = 13
             Caption = #1044#1083#1080#1090'. '#1089#1080#1075#1085#1072#1083#1072' '#1074#1080#1076#1077#1086', '#1089
           end
-          object Edit_3_01: TEdit
+          object Edit_NumberOfBd: TEdit
             Left = 23
             Top = 39
             Width = 140
             Height = 21
             TabOrder = 0
+            OnChange = Edit_NumberOfBdChange
           end
-          object Edit_3_02: TEdit
+          object Edit_Exposition: TEdit
             Left = 23
             Top = 87
             Width = 140
             Height = 21
             TabOrder = 1
+            OnChange = Edit_ExpositionChange
           end
-          object Edit_3_03: TEdit
+          object Edit_MinimumCount: TEdit
             Left = 23
             Top = 138
             Width = 140
             Height = 21
             TabOrder = 2
+            OnChange = Edit_MinimumCountChange
           end
-          object Edit_3_04: TEdit
+          object Edit_MaximumCount: TEdit
             Left = 23
             Top = 189
             Width = 140
             Height = 21
             TabOrder = 3
+            OnChange = Edit_MaximumCountChange
           end
-          object Edit_3_05: TEdit
+          object Edit_LevelOfOverload: TEdit
             Left = 23
             Top = 240
             Width = 140
             Height = 21
             TabOrder = 4
+            OnChange = Edit_LevelOfOverloadChange
           end
-          object Edit_3_06: TEdit
+          object Edit_QuantityOfInterval: TEdit
             Left = 197
             Top = 39
             Width = 143
             Height = 21
             TabOrder = 5
+            OnChange = Edit_QuantityOfIntervalChange
           end
-          object Edit_3_07: TEdit
+          object Edit_QuantityOfLook: TEdit
             Left = 197
             Top = 87
             Width = 143
             Height = 21
             TabOrder = 6
+            OnChange = Edit_QuantityOfLookChange
           end
-          object Edit_3_08: TEdit
+          object Edit_LevelOfAlarm_1: TEdit
             Left = 197
             Top = 138
             Width = 143
             Height = 21
             TabOrder = 7
+            OnChange = Edit_LevelOfAlarm_1Change
           end
-          object Edit_3_09: TEdit
+          object Edit_LevelOfAlarm_2: TEdit
             Left = 197
             Top = 189
             Width = 143
             Height = 21
             TabOrder = 8
+            OnChange = Edit_LevelOfAlarm_2Change
           end
-          object Edit_3_10: TEdit
+          object Edit_LevelOfAlarm_3: TEdit
             Left = 197
             Top = 241
             Width = 142
             Height = 21
             TabOrder = 9
+            OnChange = Edit_LevelOfAlarm_3Change
           end
-          object Edit_3_11: TEdit
+          object Edit_Phon: TEdit
             Left = 372
             Top = 39
             Width = 152
             Height = 21
             TabOrder = 10
+            OnChange = Edit_PhonChange
           end
-          object Edit_3_12: TEdit
+          object Edit_DurationOfPhon: TEdit
             Left = 372
             Top = 87
             Width = 152
             Height = 21
             TabOrder = 11
+            OnChange = Edit_DurationOfPhonChange
           end
-          object Edit_3_13: TEdit
+          object Edit_DurationOfAlarm: TEdit
             Left = 373
             Top = 138
             Width = 152
             Height = 21
             TabOrder = 12
+            OnChange = Edit_DurationOfAlarmChange
           end
-          object Edit_3_14: TEdit
+          object Edit_DurationOfVideo: TEdit
             Left = 374
             Top = 190
             Width = 152
             Height = 21
             TabOrder = 13
+            OnChange = Edit_DurationOfVideoChange
           end
           object Button_ModBus_Write: TButton
             Left = 449
@@ -2143,8 +2143,8 @@ object WindowMainBd85: TWindowMainBd85
             Width = 78
             Height = 25
             Caption = #1047#1072#1087#1080#1089#1100
-            Enabled = False
             TabOrder = 14
+            OnClick = Button_ModBus_WriteClick
           end
           object Button_ModBus_SetDef: TButton
             Left = 352
@@ -2152,8 +2152,8 @@ object WindowMainBd85: TWindowMainBd85
             Width = 86
             Height = 25
             Caption = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
-            Enabled = False
             TabOrder = 15
+            OnClick = Button_ModBus_SetDefClick
           end
         end
       end

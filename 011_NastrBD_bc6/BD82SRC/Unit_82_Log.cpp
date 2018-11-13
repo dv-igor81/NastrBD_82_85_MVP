@@ -14,7 +14,6 @@ AnsiString FileName = "";
 //---------------------------------------------------------------------------
 void WriteLog_DIA(char * chString)
 {
-/*
   return; // Быстрый вылет :-)
   //
   char lpBuffer[MAX_COMPUTERNAME_LENGTH + 1];
@@ -63,7 +62,6 @@ void WriteLog_DIA(char * chString)
     //==\\strcpy(text_buf[num_lines], "Ошибка доступа к файлу: ");
     //==\\strcat(text_buf[num_lines++], FileName.c_str());
   }
-*/
 }
 //---------------------------------------------------------------------------
 

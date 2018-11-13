@@ -58,6 +58,13 @@ void TWindowMainBd85::Destroy()
     delete this;
 }
 //---------------------------------------------------------------------------
+void TWindowMainBd85::SetVerPoText(const char * text)
+{
+    AnsiString textPoVer = Caption;
+    textPoVer += text;
+    Caption = textPoVer;
+}
+//---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::OnWMSysCommand( TMessage& Message )
 {
   // —охранить описатель окна, пославшего запрос
@@ -264,7 +271,7 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     case 0:
         radioButton_ArchOn->Checked = false;
         radioButton_ArchOff->Checked = false;
-        BitBtn_ArchOnOffDisplay->Kind = bkNo;
+        BitBtn_ArchOnOffDisplay->Kind = bkCustom;
         BitBtn_ArchOnOffDisplay->Caption = "";
         break;
     }
@@ -407,6 +414,86 @@ ActionSelf<bool>& TWindowMainBd85::GetSelfDisplayNotSaveChanges()
     return as_DisplayNotSaveChanges;
 }
 //---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamNumberOfBdChange()
+{
+    return ev_modBusParam_NumberOfBdChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamExpositionChange()
+{
+    return ev_modBusParam_ExpositionChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamMinimumCountChange()
+{
+    return ev_modBusParam_MinimumCountChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamMaximumCountChange()
+{
+    return ev_modBusParam_MaximumCountChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamLevelOfOverloadChange()
+{
+    return ev_modBusParam_LevelOfOverloadChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamQuantityOfIntervalChange()
+{
+    return ev_modBusParam_QuantityOfIntervalChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamQuantityOfLookChange()
+{
+    return ev_modBusParam_QuantityOfLookChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamLevelOfAlarm1Change()
+{
+    return ev_modBusParam_LevelOfAlarm_1Change;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamLevelOfAlarm2Change()
+{
+    return ev_modBusParam_LevelOfAlarm_2Change;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamLevelOfAlarm3Change()
+{
+    return ev_modBusParam_LevelOfAlarm_3Change;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamPhonChange()
+{
+    return ev_modBusParam_PhonChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamDurationOfPhonChange()
+{
+    return ev_modBusParam_DurationOfPhonChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamDurationOfAlarmChange()
+{
+    return ev_modBusParam_DurationOfAlarmChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowMainBd85::GetEventMbParamDurationOfVideoChange()
+{
+    return ev_modBusParam_DurationOfVideoChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<>& TWindowMainBd85::GetEventButtonModBusSetDefClick()
+{
+    return ev_button_ModBus_SetDefClick;
+}
+//---------------------------------------------------------------------------
+ActionEvent<>& TWindowMainBd85::GetEventButtonModBusWriteClick()
+{
+    return ev_button_ModBus_WriteClick;
+}
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::button_StartStopClick(TObject *Sender)
 {
@@ -526,5 +613,90 @@ void __fastcall TWindowMainBd85::radioButton_ArchOffClick(TObject *Sender)
 {
     ev_radioButton_ArchOffClick( radioButton_ArchOff->Checked );
 }
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_NumberOfBdChange(TObject *Sender)
+{
+    ev_modBusParam_NumberOfBdChange( Edit_NumberOfBd->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_ExpositionChange(TObject *Sender)
+{
+    ev_modBusParam_ExpositionChange( Edit_Exposition->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_MinimumCountChange(TObject *Sender)
+{
+    ev_modBusParam_MinimumCountChange( Edit_MinimumCount->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_MaximumCountChange(TObject *Sender)
+{
+    ev_modBusParam_MaximumCountChange( Edit_MaximumCount->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_LevelOfOverloadChange(
+      TObject *Sender)
+{
+    ev_modBusParam_LevelOfOverloadChange( Edit_LevelOfOverload->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_QuantityOfIntervalChange(
+      TObject *Sender)
+{
+    ev_modBusParam_QuantityOfIntervalChange( Edit_QuantityOfInterval->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_QuantityOfLookChange(TObject *Sender)
+{
+    ev_modBusParam_QuantityOfLookChange( Edit_QuantityOfLook->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_LevelOfAlarm_1Change(TObject *Sender)
+{
+    ev_modBusParam_LevelOfAlarm_1Change( Edit_LevelOfAlarm_1->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_LevelOfAlarm_2Change(TObject *Sender)
+{
+    ev_modBusParam_LevelOfAlarm_2Change( Edit_LevelOfAlarm_2->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_LevelOfAlarm_3Change(TObject *Sender)
+{
+    ev_modBusParam_LevelOfAlarm_3Change( Edit_LevelOfAlarm_3->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_PhonChange(TObject *Sender)
+{
+    ev_modBusParam_PhonChange( Edit_Phon->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_DurationOfPhonChange(TObject *Sender)
+{
+    ev_modBusParam_DurationOfPhonChange( Edit_DurationOfPhon->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_DurationOfAlarmChange(
+      TObject *Sender)
+{
+    ev_modBusParam_DurationOfAlarmChange( Edit_DurationOfAlarm->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_DurationOfVideoChange(
+      TObject *Sender)
+{
+    ev_modBusParam_DurationOfVideoChange( Edit_DurationOfVideo->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Button_ModBus_SetDefClick(TObject *Sender)
+{
+    ev_button_ModBus_SetDefClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Button_ModBus_WriteClick(TObject *Sender)
+{
+    ev_button_ModBus_WriteClick();
+}
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 

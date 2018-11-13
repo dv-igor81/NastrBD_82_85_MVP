@@ -22,7 +22,7 @@ TForm_Puasson *Form_Puasson;
 bool Work = false;
 bool WorkCancel = false;
 extern const char * IniFileName;
-extern bool flagPort;
+extern bool flagPort = false;
 //---------------------------------------------------------------------------
 #define NMAS 300000
 float SredMas[NMAS];
@@ -325,13 +325,13 @@ void TForm_Puasson::Graph()
   if ( FileExists( filename ) == false )
   {
     str_report = "Файл \"" + filename + "\" не существует. Выход из функции...";
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add(Form_82_Start->GetCurrentTime() + str_report);
     return;
   }
   else
   {
     str_report = "Файл \"" + filename + "\" найден";
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add(Form_82_Start->GetCurrentTime() + str_report);
   }
   ////////////////////////////////////////////////////////////////////////
   std::fstream fs;
@@ -339,13 +339,13 @@ void TForm_Puasson::Graph()
   if ( fs == 0 )
   {
     str_report = "Файл \"" + filename + "\" не открывается. Выход из функции...";
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add( Form_82_Start->GetCurrentTime() + str_report );
     return;
   }
   else
   {
     str_report = "Файл \"" + filename + "\" успешно открыт";
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add(Form_82_Start->GetCurrentTime() + str_report);
   }
   count = 0;
   Err_Svyaz = 0;
@@ -400,7 +400,7 @@ void TForm_Puasson::PostrGraf()
   }
   if ( SumZn == 0 ) 
   {
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add("Внимание на файл: все значения нулевые");
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add(Form_82_Start->GetCurrentTime() + "Внимание на файл: все значения нулевые");
     return;
   }
   //среднее значение(середина распределения гистограммы)

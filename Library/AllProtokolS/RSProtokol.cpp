@@ -2,9 +2,18 @@
 #include <stdio.h>
 //---------------------------------------------------------------------------
 #include "RSProtokol.h"
+//#include "Unit_82_Form_Start.h"
+//#include "Unit_82_Form_Puasson8BD.h"
+//#include "Unit_82_Form_Puasson8BD_RepErr.h"
+//#include "Unit_82_Form_Spectr.h"
+//#include "Unit_DIA_Global_Funk.h"
 //---------------------------------------------------------------------------
+//!===>> tmp
+//typedef void (*SIG_TYP)(int);
+//typedef void (*SIG_ARG_TYP)(int);
+//SIG_TYP signal(double, double, int);
+//!<<=== tmp
 #pragma package(smart_init)
-
 int iDiaDebug;
 modbus_t * ctx;
 extern unsigned char ModBus_kInByte;
@@ -85,58 +94,58 @@ RSProtokol_t::RSProtokol_t() :
 
   flagARCH = 0;
   flagUchSv = 0;
-  //flagTCP = false;
+  flagTCP = false;
   auto_State_Flag = 0; // Для авто-подбора напряжения измеренного
   ReadTimeout = 100;
   WriteTimeout = 100;
   ClearBDSpectr();
 
-  //ptr_Edit_3_01__14[0] = & Edit_3_01;
-  //ptr_Edit_3_01__14[1] = & Edit_3_02;
-  //ptr_Edit_3_01__14[2] = & Edit_3_03;
-  //ptr_Edit_3_01__14[3] = & Edit_3_04;
-  //ptr_Edit_3_01__14[4] = & Edit_3_05;
-  //ptr_Edit_3_01__14[5] = & Edit_3_06;
-  //ptr_Edit_3_01__14[6] = & Edit_3_07;
-  //ptr_Edit_3_01__14[7] = & Edit_3_08;
-  //ptr_Edit_3_01__14[8] = & Edit_3_09;
-  //ptr_Edit_3_01__14[9] = & Edit_3_10;
-  //ptr_Edit_3_01__14[10] = & Edit_3_11;
-  //ptr_Edit_3_01__14[11] = & Edit_3_12;
-  //ptr_Edit_3_01__14[12] = & Edit_3_13;
-  //ptr_Edit_3_01__14[13] = & Edit_3_14;
-  //ptr_Edit_3_01__14[14] = & Edit_3_15;
+  ptr_Edit_3_01__14[0] = & Edit_3_01;
+  ptr_Edit_3_01__14[1] = & Edit_3_02;
+  ptr_Edit_3_01__14[2] = & Edit_3_03;
+  ptr_Edit_3_01__14[3] = & Edit_3_04;
+  ptr_Edit_3_01__14[4] = & Edit_3_05;
+  ptr_Edit_3_01__14[5] = & Edit_3_06;
+  ptr_Edit_3_01__14[6] = & Edit_3_07;
+  ptr_Edit_3_01__14[7] = & Edit_3_08;
+  ptr_Edit_3_01__14[8] = & Edit_3_09;
+  ptr_Edit_3_01__14[9] = & Edit_3_10;
+  ptr_Edit_3_01__14[10] = & Edit_3_11;
+  ptr_Edit_3_01__14[11] = & Edit_3_12;
+  ptr_Edit_3_01__14[12] = & Edit_3_13;
+  ptr_Edit_3_01__14[13] = & Edit_3_14;
+  ptr_Edit_3_01__14[14] = & Edit_3_15;
   //----------------------------------
-  //AddrRegModBus_BD82[0] = 10; // Номер блока
-  //AddrRegModBus_BD82[1] = 0x300+2; // Экспозиция
-  //AddrRegModBus_BD82[2] = 0x300+3; // Минимальный счёт
-  //AddrRegModBus_BD82[3] = 0x300+4; // Максимальный счёт
-  //AddrRegModBus_BD82[4] = 0x300+5; // Уровень перегрузки
-  //AddrRegModBus_BD82[5] = 0x300+6; // Кол-во интервалов
-  //AddrRegModBus_BD82[6] = 0x300+7; // Кол-во взгляда после
-  //AddrRegModBus_BD82[7] = 0x300+8; // Уровень тревоги 1
-  //AddrRegModBus_BD82[8] = 0x300+9; // Уровень тревоги 2
-  //AddrRegModBus_BD82[9] = 0x300+10; // Уровень тревоги 3
-  //AddrRegModBus_BD82[10] = 0x300+11; // Фон, мс
-  //AddrRegModBus_BD82[11] = 8; // Длит. подинтервала фона, [мс]
-  //AddrRegModBus_BD82[12] = 0x300 + 12; // Длит. сигнала тревоги, с
-  //AddrRegModBus_BD82[13] = 0x300 + 13; // Длит. сигнала видео, с
-  //AddrRegModBus_BD82[14] = 19; // Абсолютный фон, имп. / с
+  AddrRegModBus_BD82[0] = 10; // Номер блока
+  AddrRegModBus_BD82[1] = 0x300+2; // Экспозиция
+  AddrRegModBus_BD82[2] = 0x300+3; // Минимальный счёт
+  AddrRegModBus_BD82[3] = 0x300+4; // Максимальный счёт
+  AddrRegModBus_BD82[4] = 0x300+5; // Уровень перегрузки
+  AddrRegModBus_BD82[5] = 0x300+6; // Кол-во интервалов
+  AddrRegModBus_BD82[6] = 0x300+7; // Кол-во взгляда после
+  AddrRegModBus_BD82[7] = 0x300+8; // Уровень тревоги 1
+  AddrRegModBus_BD82[8] = 0x300+9; // Уровень тревоги 2
+  AddrRegModBus_BD82[9] = 0x300+10; // Уровень тревоги 3
+  AddrRegModBus_BD82[10] = 0x300+11; // Фон, мс
+  AddrRegModBus_BD82[11] = 8; // Длит. подинтервала фона, [мс]
+  AddrRegModBus_BD82[12] = 0x300 + 12; // Длит. сигнала тревоги, с
+  AddrRegModBus_BD82[13] = 0x300 + 13; // Длит. сигнала видео, с
+  AddrRegModBus_BD82[14] = 19; // Абсолютный фон, имп. / с  
   //----------------------------------
-  //AddrRegModBus_BD85_New[0] = 10; // Номер блока
-  //AddrRegModBus_BD85_New[1] = 0x300+2; // Экспозиция
-  //AddrRegModBus_BD85_New[2] = 0x300+3; // Минимальный счёт
-  //AddrRegModBus_BD85_New[3] = 0x300+4; // Максимальный счёт
-  //AddrRegModBus_BD85_New[4] = 0x300+5; // Уровень перегрузки
-  //AddrRegModBus_BD85_New[5] = 0x300+6; // Кол-во интервалов
-  //AddrRegModBus_BD85_New[6] = 0x300+7; // Кол-во взгляда после
-  //AddrRegModBus_BD85_New[7] = 0x300+8; // Уровень тревоги 1
-  //AddrRegModBus_BD85_New[8] = 0x300+9; // Уровень тревоги 2
-  //AddrRegModBus_BD85_New[9] = 0x300+10; // Уровень тревоги 3
-  //AddrRegModBus_BD85_New[10] = 0x300+11; // Фон, мс
-  //AddrRegModBus_BD85_New[11] = 18; // Длит. подинтервала фона, [мс]
-  //AddrRegModBus_BD85_New[12] = 0x300 + 12; // Длит. сигнала тревоги, с
-  //AddrRegModBus_BD85_New[13] = 0x300 + 13; // Длит. сигнала видео, с
+  AddrRegModBus_BD85_New[0] = 10; // Номер блока
+  AddrRegModBus_BD85_New[1] = 0x300+2; // Экспозиция
+  AddrRegModBus_BD85_New[2] = 0x300+3; // Минимальный счёт
+  AddrRegModBus_BD85_New[3] = 0x300+4; // Максимальный счёт
+  AddrRegModBus_BD85_New[4] = 0x300+5; // Уровень перегрузки
+  AddrRegModBus_BD85_New[5] = 0x300+6; // Кол-во интервалов
+  AddrRegModBus_BD85_New[6] = 0x300+7; // Кол-во взгляда после
+  AddrRegModBus_BD85_New[7] = 0x300+8; // Уровень тревоги 1
+  AddrRegModBus_BD85_New[8] = 0x300+9; // Уровень тревоги 2
+  AddrRegModBus_BD85_New[9] = 0x300+10; // Уровень тревоги 3
+  AddrRegModBus_BD85_New[10] = 0x300+11; // Фон, мс
+  AddrRegModBus_BD85_New[11] = 18; // Длит. подинтервала фона, [мс]
+  AddrRegModBus_BD85_New[12] = 0x300 + 12; // Длит. сигнала тревоги, с
+  AddrRegModBus_BD85_New[13] = 0x300 + 13; // Длит. сигнала видео, с
   //----------------------------------
   //==\\this->Data.FlagReadKolTikSpektr = false;
   this->Data.FlagWriteKolTikSpektr = false;
@@ -261,11 +270,13 @@ void RSProtokol_t::SetComPortHahdle( HANDLE hCOM )
     return;
   }
   this->COMPort = hCOM;
+  //flagPort = true; // Состояние порта Открыт (true)/закрыт (false)
 }
 //---------------------------------------------------------------------------
 void RSProtokol_t::FreeComPortHahdle( void )
 {
   this->COMPort = 0;
+  //flagPort = false; // Состояние порта Открыт (true)/закрыт (false)
 }
 //---------------------------------------------------------------------------
 int RSProtokol_t::RSConnect(const char * device)
@@ -327,6 +338,15 @@ int RSProtokol_t::RSConnect(const char * device)
     Data.bFlag_TCP_Connect = true;
     return 0; // ErrorCode
   }
+  //=== //=== //===
+  //if ( COMPort == 0 )
+  //{
+  //  flagPort = false; // Состояние порта Открыт (true)/закрыт (false)
+  //}
+  //else
+  //{
+  //  flagPort = true; // Состояние порта Открыт (true)/закрыт (false)
+  //}
   return this->ErrorCode;
 }
 //---------------------------------------------------------------------------
@@ -583,9 +603,7 @@ int RSProtokol_t::RSConnect(const char * COMNum, int baud, int parity, int data_
 //---------------------------------------------------------------------------
 int RSProtokol_t::RSDisConnect(void)
 {
-  //if ( flagTCP == true )
-  if ( flagModbusProtokol == 2 || // ModBus TCP
-       flagModbusProtokol == 3 )  // ModBus RTU (TCP/IP)
+  if ( flagTCP == true )
   {
     if ( Data.bFlag_TCP_Connect == true )
     {
@@ -602,6 +620,7 @@ int RSProtokol_t::RSDisConnect(void)
     {
       sprintf(Str_err, "%s", "Ошибка: порт уже закрыт (RSDisConnect)");
     }
+    //flagPort = false;
     ErrorCode = 7; // Код ошибки 7 - порт уже закрыт
     return -1;
   }
@@ -613,6 +632,7 @@ int RSProtokol_t::RSDisConnect(void)
     {
       sprintf(Str_err, "%s", "Ошибка: не удалось установить TDCB при закрытии порта (RSDisConnect)");
     }
+    //flagPort = false;
     ErrorCode = 8; // Код ошибки 8 - не удалось установить TDCB при закрытии порта
     return -1;
   }
@@ -624,11 +644,13 @@ int RSProtokol_t::RSDisConnect(void)
     {
       sprintf(Str_err, "%s", "Ошибка: не удалось установить TCommTimeouts при закрытии порта (RSDisConnect)");
     }
+    //flagPort = false;
     ErrorCode = 9; // Код ошибки 9 - не удалось установить TCommTimeouts при закрытии порта
     return -1;
   }
   CloseHandle(this->COMPort);
   this->COMPort = 0;
+  //flagPort = false;
   return 0;
 }
 //---------------------------------------------------------------------------
@@ -835,6 +857,7 @@ int RSProtokol_t::CommandExec( unsigned char kOutByte, unsigned char kInByte )
       {
         return -1;
       }
+      // rc = check_confirmation( ctx, req, rsp, rc );
     }
     for ( int i = 0; i <= kInByte; i++ )
     {
@@ -1165,7 +1188,7 @@ int RSProtokol_t::GetIndAdr(unsigned char * Adr)
 }
 //---------------------------------------------------------------------------
 // Считать групповой адрес БД
-int RSProtokol_t::GetGrpAdr(unsigned char * Adr)
+int RSProtokol_t::GetGrpAdr(unsigned char * Adr/*, RSProtokol_t * Prot*/)
 {
   this->buf_write[0] = 0x16;
   this->CodeRet = CommandExec(0, 1);
@@ -1531,6 +1554,36 @@ int RSProtokol_t::GetTimeSpectr(unsigned char * TimeInt)
   return this->CodeRet;
 }
 //---------------------------------------------------------------------------
+void RSProtokol_t::FlagAvtoSnyat() // Снять галочку "Авто"
+{
+  // Снять флажек
+  if (AutoPodbor_1_Un_2_U81 == 1)
+  {
+    //===>> 29.10.2018
+    //Form_82_Start->CheckBox_auto->Checked = false;
+    ev_CheckBoxAutoCheckedFalse();
+    //<<=== 29.10.2018
+  }
+  if (AutoPodbor_1_Un_2_U81 == 2)
+  {
+    //===>> 29.10.2018
+    //Form_82_Start->CheckBox_auto_0_81->Checked = false;
+    ev_CheckBox081CheckedFalse();
+    //<<=== 29.10.2018
+  }
+}
+//---------------------------------------------------------------------------
+void RSProtokol_t::FlagAvtoSnyatDiskr()
+{
+  //===>> 29.10.2018
+  //Form_82_Start->CheckBox_DAuto_Standart->Checked = false;
+  //Form_82_Start->CheckBox_DAuto_Shirokie->Checked = false;
+  //Form_82_Start->CheckBox_DAuto_Rengen->Checked = false;
+  //Form_82_Start->CheckBox_DAuto->Checked = false;
+  ev_FlagAvtoSnyatDiskr();
+  //<<=== 29.10.2018
+}
+//---------------------------------------------------------------------------
 // стремимся выполнить это --> (U0 + Un == Uhi)
 // или это --> (U0 * 0,81 + Un == Uhi)
 void RSProtokol_t::AvtoPodborUhiIter() // Автоподбот Uhi
@@ -1810,6 +1863,646 @@ void RSProtokol_t::AvtoPodborUhiIter() // Автоподбот Uhi
   } //
 }
 //---------------------------------------------------------------------------
+int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
+{
+  if ( bFlagWork == true )
+  {
+    if ( FlagDebug > 0 )
+    {
+      sprintf( Str_err, "%s", "Ошибка: Функция OprosBD уже работает" );
+    }
+    return -1;
+  }
+  // ===>>
+  bFlagWork = true;
+  this->ErrorCode = 0; // Пока ещё нет ошибки
+  // <<===
+  Data.count2++;
+  Data.flagSecond = Data.count2 % 15;
+  if (Data.flagSecond == 0)
+  {
+    Data.count2 = 0;
+  }
+
+  NullsToStr_err(); // Очистка строки сообщений об ошибках
+
+  if( Data.flagSetTimeInterval == false )
+  {
+    //==\\ if ( Form_82_Start->flagModbusProtokol == 0 ) // Выбран протокол: "9-ти битный"
+    {
+      if ( SetTimeInterval( 8 ) != 0 )
+      {
+	int len = strlen(Str_err);
+	if (len != 0)
+	{
+	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, SetTimeInterval)");
+        }
+	else
+	{
+	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, SetTimeInterval)");
+        }
+        ErrorCode = 23; // Ошибка: БД (OprosBD, GetTimeInterval())
+        bFlagWork = false;
+        return -1;
+      }
+    }
+    //===
+    Data.flagSetTimeInterval = true;
+    //Form_82_Start->bFlagChengeKolTik = true;  // Отображение КолТика для счёта
+    //bFlagChengeKolTik = true;
+  }
+  if( Data.flagGetTimeInterval == false )
+  {
+    if ( GetTimeInterval( &Data.KolTik ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+        int len = strlen(Str_err);
+        if (len != 0)
+        {
+          sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetTimeInterval())");
+        }
+        else
+        {
+          sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetTimeInterval())");
+        }
+      }
+      ErrorCode = 24; // Ошибка: БД (OprosBD, GetTimeInterval())
+      bFlagWork = false;
+      return -1;
+    }
+    Data.flagGetTimeInterval = true;
+  }
+  // ===
+  if ( GetSSP( &Data.PSW ) != 0 ) // Слово состояния и счёт
+  {
+    if (FlagDebug > 0)
+    {
+      int len = strlen(Str_err);
+      if (len != 0)
+      {
+        sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSSP)");
+      }
+      else
+      {
+        sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetSSP)");
+      }
+    }
+    ErrorCode = 36; // Ошибка: БД (OprosBD, GetSSP)
+    bFlagWork = false;
+    return -1; // Ошибка связи
+  } // Определение состояния программы БД
+  else
+  {
+    if ( ( Data.PSW & 0x01 ) == 0x01 ) // Флаг готовности счёта получен
+    {
+      testErr = 0;
+      if ( GetCountImp(&Data.CountImp) == 0 )
+      {
+        Data.count++; // Количество полученных с БД счетов (сколько раз получали счет с БД)
+        Data.flagFirst = Data.count % KolVoPodinterval;
+        Data.TSchetTemp += Data.CountImp; // TSchetTemp - счет за 1 сек., CountImp - счет за подинтервал 0,2 или 0,25 сек
+        if ( Data.flagFirst == 0 )
+        {
+          Data.TSchet = Data.TSchetTemp; // TSchet - счет за 1 сек.
+          Data.TSchetTemp = 0;
+          if ( ( ( Data.count / KolVoPodinterval ) <= Data.T_Limit ) && ( Data.bFlagCount == true ) ) // проверяем окончание времени счета импульсов
+          {
+            Data.SumSchet += Data.TSchet;
+            // TimeTSchet - Сколько время прошло (в секундах) от начала получения счёта
+            // (усреднённого за "время измерения" секунд)
+            Data.TimeTSchet = Data.count / KolVoPodinterval;
+            Data.TimeTSchet_dia = Data.TimeTSchet; // Для обнулении поля: "Текущее время счёта" при новом старте
+            if ( Data.TimeTSchet != 0 )
+            {
+              Data.Sred = static_cast<float>(Data.SumSchet) / static_cast<float>(Data.TimeTSchet);
+            }
+            else if (Data.TimeTSchet == 0)
+            {
+              Data.Sred = 0;
+            }
+          }
+          else // if ( Data.count % KolVoPodinterval == 0 ) // !!!!!!!!!!!
+          {
+            Data.count = 0;
+            Data.bFlagCount = false;
+          } // end if ( ( ( Data.count / 5 or 4 ) <= Data.T_Limit ) && (Data.bFlagCount == true) )
+        }
+      }
+      else // if ( GetCountImp(&Data.Count) != 0 )
+      {
+        if ( FlagDebug > 0 )
+        {
+          int len = strlen(Str_err);
+          if ( len != 0 )
+          {
+            sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetCountImp)");
+          }
+	  else
+	  {
+	    sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetCountImp)");
+          }
+        }
+        ErrorCode = 37; // Ошибка: БД (OprosBD, GetCountImp)
+        bFlagWork = false;
+        return -1;
+      }
+    }
+    else
+    {
+      if ( FlagDebug > 0 )
+      {
+        // Не готов флаг счёта
+        int len = strlen( Str_err );
+        if ( len != 0 )
+        {
+	  sprintf(&Str_err[len], "%s", " => Ошибка: не готов флаг счёта (OprosBD)");
+        }
+        else
+        {
+	  sprintf(Str_err, "%s", "Ошибка: не готов флаг счёта (OprosBD)");
+        }
+        //\\ErrorCode = 38; // Ошибка: БД (OprosBD, GetCountImp)
+      }
+      if ( testErr > 1 )
+      {
+        int len = strlen( Str_err );
+        if ( len != 0 )
+        {
+	  sprintf( &Str_err[len], "%s", " => Ошибка: отсут. флаг гот. счета более 1-го опроса подряд (OprosBD)" );
+        }
+        else
+        {
+	  sprintf( Str_err, "%s", "Ошибка: отсут. флаг гот. счета более 1-го опроса подряд (OprosBD)" );
+        }
+        //\\ErrorCode = 39; // Ошибка: БД (OprosBD, GetCountImp)
+      }
+      // Здесь нет серьёзной ошибки, поэтому не завершаем аварийным возвратом -1
+    }
+  }
+  // ===
+
+
+  // \\if( ( Data.flagGetGrpAdr == false ) && ( Data.flagSecond == 3 ) )
+  {
+    if ( GetGrpAdr( &Data.GrAdr ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if (len != 0)
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GrAdr)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GrAdr)" );
+        }
+      }
+      ErrorCode = 26; // Ошибка: БД (OprosBD, GrAdr)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.flagGetGrpAdr = true;
+  }
+  // \\if ( ( Data.flagGetIndAdr == false ) && (Data.flagSecond == 4) )
+  {
+    if ( GetIndAdr( &Data.IndAdr ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if (len != 0)
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetIndAdr)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetIndAdr)" );
+        }
+      }
+      ErrorCode = 25; // Ошибка: БД (OprosBD, GetIndAdr)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.flagGetIndAdr = true;
+  }
+
+  // \\if ( Data.flagSecond == 5 )
+  {
+    if ( GetTemp( &Data.Temper ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if (len != 0)
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetTemp)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetTemp)" );
+        }
+      }
+      ErrorCode = 27; // Ошибка: БД (OprosBD, GetTemp)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.flTemper = TConvert( Data.Temper );
+  }
+  // \\if ( (Data.flagSecond == 6) || (CheckBox_DAuto_Checked == true) )
+  {
+    if ( GetDNU( &Data.DNU ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if ( len != 0 )
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetDNU)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetDNU)" );
+        }
+      }
+      ErrorCode = 28; // Ошибка: БД (OprosBD, GetDNU)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.dbDNU = Code2DAC( Data.DNU );
+  }
+  // \\if ( (Data.flagSecond == 7) || (CheckBox_DAuto_Checked == true) )
+  {
+    if ( GetDVU( &Data.DVU ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if (len != 0)
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetDVU)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetDVU)" );
+        }
+      }
+      ErrorCode = 29; // Ошибка: БД (OprosBD, GetDVU)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.dbDVU = Code2DAC( Data.DVU );
+  }
+  // \\if ( (Data.flagSecond == 8) || (CheckBox_auto_Checked == true) )
+  {
+    if ( GetUhi( &Data.UhiI ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+	int len = strlen(Str_err);
+	if (len != 0)
+	{
+	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetUhi)");
+        }
+	else
+	{
+	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetUhi)");
+        }
+      }
+      ErrorCode = 30; // Ошибка: БД (OprosBD, GetUhi)
+      bFlagWork = false;
+      return -1;
+    }
+
+    Data.sumUhiI[Data.ptrUhiI] = Data.UhiI;
+    if( Data.kodUhiI < 50 )
+    {
+      Data.kodUhiI++;
+    }
+    Data.UhiIsr = 0;
+    for( unsigned int i = 0; i < Data.kodUhiI; i++ )
+    {
+      Data.UhiIsr = Data.UhiIsr + Data.sumUhiI[i];
+    }
+    Data.UhiIsr = (int)((float)Data.UhiIsr / (float)Data.kodUhiI); // Скользящее среднее
+    Data.ptrUhiI++;
+    if ( Data.ptrUhiI == 50 )
+    {
+      Data.ptrUhiI = 0;
+    }
+    Data.dbUhiIsr = Code2U( Data.UhiIsr );
+  }
+  // \\if ( Data.flagSecond == 9 )
+  {
+    if ( GetSIM3( &Data.SIM3 ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if (len != 0)
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSIM3)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetSIM3)" );
+        }
+      }
+      ErrorCode = 31; // Ошибка: БД (OprosBD, GetSIM3)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.dbSIM3 = Data.SIM3 * 0.0596;
+  }
+  // \\if ( Data.flagSecond == 10 )
+  {
+    if ( GetSIM4( &Data.SIM4 ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen(Str_err);
+	if ( len != 0 )
+        {
+	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSIM4)");
+        }
+	else
+	{
+	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetSIM4)");
+        }
+      }
+      ErrorCode = 32; // Ошибка: БД (OprosBD, GetSIM4)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.dbSIM4 = Data.SIM4 * 0.0596;
+  }
+  // \\if ( Data.flagSecond == 11 )
+  {
+    if ( GetSIM2(&Data.SIM2) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen(Str_err);
+	if ( len != 0 )
+        {
+	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSIM2)");
+        }
+	else
+	{
+	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetSIM2)");
+        }
+      }
+      ErrorCode = 33; // Ошибка: БД (OprosBD, GetSIM2)
+      bFlagWork = false;
+      return -1;
+    }
+  }
+  // \\if ( Data.flagSecond == 12 )
+  {
+    if ( GetLEDAmp( &Data.Ampl ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen(Str_err);
+	if ( len != 0 )
+        {
+	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetLEDAmp)");
+        }
+	else
+	{
+	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetLEDAmp)");
+        }
+      }
+      ErrorCode = 34; // Ошибка: БД (OprosBD, GetLEDAmp)
+      bFlagWork = false;
+      return -1;
+    }
+    if( Data.Ver_HEX != 0 )
+    {
+      if ( Data.Ver_HEX != 400 )
+      {
+        Data.dbAmpl = Data.Ampl * 2.5 / 255;
+      }
+      else
+      {
+        Data.dbAmpl = Data.Ampl * 4.5 / 255;
+      }
+    }
+  }
+  // \\if ( Data.flagSecond == 13 )
+  {
+    if ( GetLEDAmpR( &Data.LEDAmpR ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if ( len != 0 )
+        {
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetLEDAmpR)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetLEDAmpR)" );
+        }
+      }
+      ErrorCode = 35; // Ошибка: БД (OprosBD, GetLEDAmpR)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.LEDAmp[Data.ptrLEDAmp] = Data.LEDAmpR;
+    if ( Data.kodLEDAmp < 150 )
+    {
+      Data.kodLEDAmp++;
+    }
+    Data.LEDAmpRcp = 0;
+    for ( int i = 0; i < Data.kodLEDAmp; i++ )
+    {
+      Data.LEDAmpRcp += Data.LEDAmp[i];
+    }
+    Data.LEDAmpRcp /= (float)Data.kodLEDAmp;
+    Data.ptrLEDAmp++;
+    if ( Data.ptrLEDAmp == 150 )
+    {
+      Data.ptrLEDAmp = 0;
+    }
+    if( Data.Ver_HEX != 0 )
+    {
+      if ( Data.Ver_HEX != 400 )
+      {
+        Data.dbLEDAmpRcp = Data.LEDAmpRcp * 2.5 / 255;
+      }
+      else
+      {
+        Data.dbLEDAmpRcp = Data.LEDAmpRcp * 4.5 / 255;
+      }
+    }
+  }
+  // ==== ===== ===== 12.01.2016 ===>>
+  if ( flagModbusProtokol != 0 ) // Выбран протокол: НЕ "9-ти битный"
+  {
+    uint16_t Dest[2];
+    int ReadCount = read_registers(AddrBD, 100, 2, Dest);
+    if (ReadCount == 2)
+    {
+      Data.TimeZapuskBD = (unsigned int)((Dest[1] << 16) | Dest[0]);
+    }
+  }
+  // ==== ===== ===== 12.01.2016 <<===
+
+  AvtoPodborUhiIter();
+
+  //bool AvtoDnu = false;
+  //bool AvtoDvu = false;
+
+  if ( CheckBox_DAuto_Checked == true )
+  {
+
+    if ( AvtoDnu() == false )
+    {
+      double dDnu = Code2DAC( Data.DNU );
+      double dAbsDnu = fabs( Data.m_fltDac0 - dDnu );
+      if ( 0.001 < dAbsDnu )
+      {
+        Data.m_iDac0 = Clamp(Data.m_iDac0 + UpdatePID0(Data.m_fltDac0 - Code2DAC(Data.DNU)), 0, 0x0fff);
+        SetDNU( Data.m_iDac0 );
+      }
+      else
+      {
+        ResetPID0();
+      }
+    }
+    // Напряжение на выходе дискриминатора верхнего уровня КОД
+    if ( AvtoDvu() == false )
+    {
+      double dDvu = Code2DAC( Data.DVU );
+      double dAbsDvu = fabs( Data.m_fltDac1 - dDvu );
+      if ( 0.001 < dAbsDvu )
+      {
+        Data.m_iDac1 = Clamp(Data.m_iDac1 + UpdatePID1(Data.m_fltDac1 - Code2DAC(Data.DVU)), 0, 0x0fff);
+        SetDVU( Data.m_iDac1 );
+      }
+      else
+      {
+        ResetPID1();
+      }
+    }
+    if ( IsPidSResetted() )
+    {
+      CheckBox_DAuto_Checked = false;
+      FlagAvtoSnyatDiskr(); // Снять флажек; // Сбросить флажки
+    }
+  }
+  // ==== ===== =====
+  testErr++;
+  // Считать счёт за 0.2 сек
+  ///////////
+  //extern PACKAGE System::TDateTime __fastcall Date(void);
+  //extern PACKAGE System::TDateTime __fastcall Time(void);
+  //extern PACKAGE System::TDateTime __fastcall Now(void);
+  DecodeTime(Time(), ArrTimeTek.Hour, ArrTimeTek.Min, ArrTimeTek.Sec, ArrTimeTek.MSec);
+  //DecodeDate(const System::TDateTime DateTime, Word &Year, Word &Month, Word &Day);
+  //EncodeDate(Word Year, Word Month, Word Day);
+
+  ArrTime[indexArrTime].Hour = ArrTimeTek.Hour;
+  ArrTime[indexArrTime].Min = ArrTimeTek.Min;
+  ArrTime[indexArrTime].Sec = ArrTimeTek.Sec;
+  ArrTime[indexArrTime].MSec = ArrTimeTek.MSec;
+  ArrTime[indexArrTime].PSW_b0 = ArrTimeTek.PSW_b0;
+  ArrTime[indexArrTime].PSW_b1 = ArrTimeTek.PSW_b1;
+  ///////////////////////////////////////////////////////////////////
+  ArrTime[indexArrTime].flagFirst = Data.flagFirst;
+  ArrTime[indexArrTime].flagSecond = Data.flagSecond;
+  ArrTime[indexArrTime].count = Data.count;
+  if ( (Data.PSW & 0x01) == 0x01 )
+  {
+    ArrTime[indexArrTime].PSW_b0 = 1;
+    N0++; // Количество признаков готовности счёта (PSW_b0 == 1)
+  }
+  else
+  {
+    ArrTime[indexArrTime].PSW_b0 = 0;
+  }
+  //
+  if ( (Data.PSW & 0x02) == 0x02 )
+  {
+    ArrTime[indexArrTime].PSW_b1 = 1;
+    N1++; // Количество признаков неснятого счета (PSW_b1 == 1)
+  }
+  else
+  {
+    ArrTime[indexArrTime].PSW_b1 = 0;
+  }
+  if (MaxIndexArrTime < 100)
+  {
+    MaxIndexArrTime++;
+  }
+  indexArrTime++;
+  if (indexArrTime == 100)
+  {
+    indexArrTime = 0;
+  }
+
+  //===>>
+  ev_OprosBDParam();
+  //if (Form_82_Start->bfZvukOn == true)
+  //{
+  //  Form_82_Start->bfZvukOn = false;
+  //  Form_82_Start->ZvukOn();
+  //}
+  //if (Form_82_Start->bfZvukOff == true)
+  //{
+  //  Form_82_Start->bfZvukOff = false;
+  //  Form_82_Start->ZvukOff();
+  //}
+  //<<===
+  return 0; // удачное завершение
+}
+//---------------------------------------------------------------------------
+/// Можно сбрасывать флажки для автоподбора дискриминаторов
+bool RSProtokol_t::IsPidSResetted()
+{
+  bool flag = true;
+  flag &= (I_State0 == 0);
+  flag &= (I_State1 == 0);
+  flag &= (I_Error0 == 0);
+  flag &= (I_Error1 == 0);
+  return flag;
+}
+//---------------------------------------------------------------------------
+int RSProtokol_t::OprosBD( void ) // -1 - ошибка связи, 0 - звязь работает
+{
+  int iRetValue;
+  iRetValue = OprosBDParam(); // 0 - успех
+
+  if ( iRetValue != 0 )
+  {
+    bFlagWork = false;
+    return iRetValue;
+  }
+
+  if ( bfOprosSpectra == true )
+  {
+    bfOprosSpectra = bfOprosSpectra;
+    iRetValue = OprosBDSpektr( true, & Data.TimeNaboraSpectr, & Data.TimeGotovSpectr ); // false - не измерять время
+  }
+  bFlagWork = false;
+  if ( iRetValue != 0 )
+  {
+    return iRetValue;
+  }
+  return 0;
+}
+//---------------------------------------------------------------------------
+void RSProtokol_t::OprosSpectra(bool bf) // bf = true - разрешить опрос спектра в функции OprosBD()
+{
+  bfOprosSpectra = bf;
+  if ( bf == true )
+  {
+    bfPervVhod = true; // Первый вход в функцию
+  }
+}
+//---------------------------------------------------------------------------
 int RSProtokol_t::DiaGetTime(void) // Текущее время в милисекундах
 {
   int iTime;
@@ -1830,6 +2523,174 @@ void RSProtokol_t::ClearBDSpectr(void)
   Data.iSpektrZaprosCount = 0; // Количество удачных обменов спектрами
   Data.TimeNaboraSpectr = 0; // Время чтения спектра
   Data.TimeGotovSpectr = 0; // Время готовности спектра
+}
+//---------------------------------------------------------------------------
+int RSProtokol_t::OprosBDSpektr(bool bfTime, int * iTimeRead, int * iTimeGotov ) // -1 - ошибка связи, 0 - звязь работает
+{
+  // iTimeRead - время чтения спектра
+  // iTimeGotovh - время готовности спектра
+  int iRet;
+  unsigned char Interval;
+  int iTime_read_0;
+  int iTime_read_1;
+
+  static int iTimeDeltaRead_0;
+  static int iTimeDeltaRead_1;
+
+  static int iTime_got_0;
+  static int iTime_got_1;
+
+
+  int iNeUdachnyiObmen;
+  int iNeGotovSpektr;
+  int iTimeGotov_Tmp;
+
+  if ( this->Data.bfSetTimeSpektr == false ) // Первый запуск набора спектра
+  {
+    //Data.KolTikSpectr = Form_82_Spectr_BD84->SpinEdit_TimeSpektr->Value;
+    iRet = SetTimeSpectr( Data.KolTikSpectr ); // KolTikSpectr
+    if (iRet != 0)
+    {
+      return -1;
+    }
+    iRet = GetTimeSpectr(&Interval);
+    if (iRet != 0)
+    {
+      return -1;
+    }
+    if(Interval != Data.KolTikSpectr)
+    {
+      return -1;
+    }
+    this->Data.bfSetTimeSpektr = true;
+  }
+  if ( this->Data.FlagWriteKolTikSpektr == true ) // Нажата кнопка "Запись"
+  {
+    //Data.KolTikSpectr = Form_82_Spectr_BD84->SpinEdit_TimeSpektr->Value;
+    iRet = SetTimeSpectr( Data.KolTikSpectr ); // KolTikSpectr
+    if (iRet != 0)
+    {
+      return -1;
+    }
+    iRet = GetTimeSpectr(&Interval);
+    if (iRet != 0)
+    {
+      return -1;
+    }
+    if(Interval != Data.KolTikSpectr)
+    {
+      return -1;
+    }
+    this->Data.FlagWriteKolTikSpektr = false;
+  }
+  if( this->Data.bf_SpectrStart == true )
+  {
+    iRet = SpectrStart();
+    if (iRet != 0)
+    {
+      return -1;
+    }
+    this->Data.bf_SpectrStart = false;
+  }
+  ObnulenieArr(Data.ArrSpectr, 512, 0);
+  iNeUdachnyiObmen = 0;
+  iNeGotovSpektr = 0;
+  while ( true )
+  {
+    int iVar;
+    iVar = GetSSP( &Data.PSW );
+    if ( iVar == 0 ) // Удачный обмен
+    {
+      if ( ( Data.PSW & 0x04) == 0x04 ) // Спектр готов
+      {
+        break; // Удача
+      }
+      else
+      {
+        iNeGotovSpektr++;
+      }
+    }
+    else
+    {
+      iNeUdachnyiObmen++;
+    }
+    if ( iNeGotovSpektr >= 100000 ) // Нет готовности спектра 100 000 раз подряд
+    {
+      break; // Ошибка готовности спектра
+    }
+    if ( iNeUdachnyiObmen >= 3 )
+    {
+      return -1; // Ошибка обмена
+    }
+  }
+
+  if ( ( Data.PSW & 0x04) == 0x04 )
+  {
+    if ( bfTime == true ) // Разрешить передавать временные интервалы
+    {
+      iTime_got_1 = DiaGetTime(); // Время завершения ожидания готовности [мс]
+      iTime_read_0 = iTime_got_1; // Время начела чтения спектра [мс]
+      if ( bfPervVhod == false ) // Второй и последующие заходы в эту часть функции (после включения)
+      {
+        iTimeGotov_Tmp = iTime_got_1 - iTime_got_0; // Интервал ожидания готовности
+      }
+      iTime_got_0 = iTime_got_1; // Время начала ожидания готовности = Время завершения ожидания готовности [мс]
+    }
+    for (int nomBlock = 0; nomBlock < 32; nomBlock++) //==\\
+    {
+      ObnulenieArr(Data.ArrSpectrBlock, 16);
+      iRet = SpectrReadBuf( nomBlock, &Data.ArrSpectrBlock[0] );
+      if ( iRet != 0 )
+      {
+        return -1;
+      }
+      for (int i = 0; i < 16; i++)
+      {
+        this->Data.ArrSpectr[nomBlock*16+i] = this->Data.ArrSpectrBlock[i];
+      }
+    }
+  }
+  else
+  {
+    this->Data.iSpektrZaprosErr++; // Количество ошибок обмена спектром (подряд)
+  }
+
+  if ( this->Data.iSpektrZaprosErr >= 3 )
+  {
+    iRet = SpectrStart(); // запустим заново набор спектра
+    this->Data.iSpektrZaprosErr = 0;
+  }
+
+  if ( bfTime == true ) // Разрешить передавать временные интервалы
+  {
+    if ( ( Data.PSW & 0x04 ) == 0x04 )
+    {
+      iTime_read_1 = DiaGetTime(); // Время завершения чтения спектра [мс]
+      iTimeDeltaRead_1 = iTime_read_1 - iTime_read_0; // Текущий интервал чтения спектра
+      // ===>>
+      for (int i = 0; i < 512; i++)
+      {
+        this->Data.ArrSpectrSumm[i] += (int)this->Data.ArrSpectr[i];
+      }
+      this->Data.iSpektrZaprosCount++; // Количество удачных обменов спектром
+      this->Data.iSpektrZaprosErr = 0; // Количество ошибок обмена спектром (подряд)
+      iRet = SpectrStart(); // запустим заново набор спектра
+      // <<===
+      if ( bfPervVhod == true ) // Первый заход в функцию, после включения
+      {
+        * iTimeRead = 0;
+        * iTimeGotov = 0;
+        bfPervVhod = false;
+      }
+      else // Второй и последующие заходы в эту часть функции (после включения)
+      {
+        * iTimeRead = iTimeDeltaRead_0; // Предидущий интервал чтения спектра [мс]
+        * iTimeGotov = iTimeGotov_Tmp - iTimeDeltaRead_0; // Интервал ожидания готовности - Предидущий интервал чтения спектра [мс]
+      }
+      iTimeDeltaRead_0 = iTimeDeltaRead_1; // Предидущий интервал чтения спектра [мс] = Текущий интервал чтения спектра [мс]
+    }
+  } 
+  return 0;
 }
 //---------------------------------------------------------------------------
 void RSProtokol_t::ObnulenieArr(unsigned char Arr[], int N, unsigned char uchVal)
@@ -1880,17 +2741,22 @@ float RSProtokol_t::TConvert(int Temper)
     }
     else
     {
+      //===>> 05.04.2018
       // Коеффициенты от Ярослава
-      g_fltTSlope = -0.714;
-      g_fltTOffset = 486.4;
 
-      // Коэффициенты от Халькиной Елены Сергеевны
-      //   ADUC834 с подгоном к окружающей температуре
-      //==\\g_fltTSlope = -0.0011058 / 0.0014; // -0.827
-      //==\\g_fltTOffset = 0.744 / 0.0014; // 531.43
+      //g_fltTSlope = -0.714;
+      //g_fltTOffset = 486.4;
 
+      //g_fltTSlope = -0.704;
+      //g_fltTOffset = 476.1;
+
+      g_fltTSlope = -0.6875;
+      g_fltTOffset = 463.78;
+
+      // Коеффициенты от Ярослава
+      //<<===
     }
-    g_Temper = g_fltTSlope * (float)Temper + g_fltTOffset;
+    g_Temper = g_fltTSlope * Temper + g_fltTOffset;
   }
   else
   {
@@ -1910,6 +2776,289 @@ double RSProtokol_t::Code2U( int var )
   {
     return var * 4.5 / 4096 * 1000;
   }
+}
+//---------------------------------------------------------------------------
+int RSProtokol_t::OprosBD_2(void) // -1 - ошибка связи, 0 - звязь работает
+{
+  if (bFlagWork == true)
+  {
+    if ( FlagDebug > 0 )
+    {
+      sprintf( Str_err, "%s", "Ошибка: Функция OprosBD_2 уже работает" );
+    }
+    return -1;
+  }
+  // ===>>
+  bFlagWork = true;
+  // <<===
+  Data.flagSecond = 0; // Временная строка
+  // ===>>
+  if ( Data.flagGetVersion == false )
+  {
+    if ( GetVersia( Data.Ver ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if (len != 0)
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetVersia)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetVersia)" );
+        }
+      }
+      ErrorCode = 23; // Ошибка: БД не отвечает (OprosBD, GetVersia)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.Ver_HEX = (Data.Ver[0] - '0')*100;
+    if ( Data.Ver[0] == '4' ) //
+    {
+      flagSpeed = false; // В каждой посылке байт адреса должен быть
+    }
+    Data.flagGetVersion = true;
+  }
+  // <<===
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 0, &Data.DNUZ ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+        sprintf( Str_err, "Ошибка: БД (OprosBD_2, DNUZ)" );
+      }
+      ErrorCode = 40; // Ошибка: БД (OprosBD_2, DNUZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.DNUZ &= 0x0000FFFF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 0x01, &Data.DVUZ ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+        sprintf(Str_err, "Ошибка: БД (OprosBD_2, DVUZ)");
+      }
+      ErrorCode = 41; // Ошибка: БД (OprosBD_2, DVUZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.DVUZ &= 0x0000FFFF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 0x02, &Data.LEDAmpZ ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+        sprintf( Str_err, "Ошибка: БД (OprosBD_2, LEDAmpZ)" );
+      }
+      ErrorCode = 42; // Ошибка: БД (OprosBD_2, LEDAmpZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.LEDAmpZ &= 0x0000FFFF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 0x03, &Data.UhiZ ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+        sprintf( Str_err, "Ошибка: БД (OprosBD_2, UhiZ)" );
+      }
+      ErrorCode = 43; // Ошибка: БД (OprosBD_2, UhiZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.UhiZ &= 0x0000FFFF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    int errSvyaz;
+    if ( flagModbusProtokol == 0 ) // 9-битный
+    {
+      errSvyaz = ReadFlashInvert( 0x04, &Data.IndAdrZ );
+    }
+    if ( flagModbusProtokol != 0 ) // ModBus RTU, ModBus TCP, ModBus RTU (TCP/IP)
+    {
+      errSvyaz = ReadFlash2( 0x300+1, &Data.IndAdrZ );
+    }
+    if ( errSvyaz != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+        sprintf( Str_err, "Ошибка: БД (OprosBD_2, IndAdrZ)" );
+      }
+      ErrorCode = 44; // Ошибка: БД (OprosBD_2, IndAdrZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.IndAdrZ &= 0x000000FF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 5, &Data.GrpAdrZ ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, GrpAdrZ)" );
+      }
+      ErrorCode = 45; // Ошибка: БД (OprosBD_2, GrpAdrZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.GrpAdrZ &= 0x000000FF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 0x07, &Data.SIMstartZ ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, SIMstartZ)" );
+      }
+      ErrorCode = 46; // Ошибка: БД (OprosBD_2, SIMstartZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.SIMstartZ &= 0x0000FFFF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 0x09, &Data.SIMminZ ) != 0 )
+    {
+      if (FlagDebug > 1)
+      {
+    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, SIMstartZ)" );
+      }
+      ErrorCode = 47; // Ошибка: БД (OprosBD_2, SIMstartZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.SIMminZ &= 0x0000FFFF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlash( 0x2B, &Data.LedZadZ ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, LedZadZ)" );
+      }
+      ErrorCode = 48; // Ошибка: БД (OprosBD_2, LedZadZ)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.LedZadZ &= 0x000000FF;
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 10, &Data.m_ulSerialNumberZ ) != 0 )
+    {
+      if (FlagDebug > 0)
+      {
+    	sprintf(Str_err, "Ошибка: БД (OprosBD_2, m_ulSerialNumberZ)");
+      }
+      ErrorCode = 49; // Ошибка: БД (OprosBD_2, m_ulSerialNumberZ)
+      bFlagWork = false;
+      return -1;
+    }
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 11, &Data.m_ulU0Z ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, m_ulU0Z)" );
+      }
+      ErrorCode = 50; // Ошибка: БД (OprosBD_2, m_ulU0Z)
+      bFlagWork = false;
+      return -1;
+    }
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 12, &Data.m_ulUZ ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+        sprintf( Str_err, "Ошибка: БД (OprosBD_2, m_ulUZ)" );
+      }
+      ErrorCode = 51; // Ошибка: БД (OprosBD_2, m_ulUZ)
+      bFlagWork = false;
+      return -1;
+    }
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( GetStickyNote( (char*)&Data.m_strStickyNote[0] ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+        sprintf(Str_err, "Ошибка: БД (OprosBD_2, m_strStickyNote)");
+      }
+      ErrorCode = 52; // Ошибка: БД (OprosBD_2, m_strStickyNote)
+      bFlagWork = false;
+      return -1;
+    }
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( ReadFlashInvert( 8, &Data.DlInterPhon ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+        sprintf( Str_err, "Ошибка: БД (OprosBD_2, DlInterPhon)" );
+      }
+      ErrorCode = 53; // Ошибка: БД (OprosBD_2, DlInterPhon)
+      bFlagWork = false;
+      return -1;
+    }
+  }
+  if ( Data.flagSecond == 0 )
+  {
+    if ( GetSSP( &Data.PSW ) != 0 ) // Слово состояния и счёт
+    {
+      bFlagWork = false;
+      flagARCH = -1;
+      flagUchSv = -1;
+      return -1;
+    }
+    else
+    {
+      if ( ( Data.PSW & 0x10 ) == 0x10 )
+      { // Состояние АРЧ (ВКЛ/ВЫКЛ)
+        flagARCH = 1; // АРЧ отключено
+      }
+      else
+      { // АРЧ включено
+        if ( ( Data.PSW & 0x20 ) == 0x20 )
+        { // Состояние АРЧ (ВКЛ/ВЫКЛ)
+          flagARCH = 2; // Ручное
+        }
+        else
+        {
+          flagARCH = 3; // Программное
+        }
+      } //===
+      if ( ( Data.PSW & 0x08 ) == 0x08  )
+      {
+        flagUchSv = 1; // Включено учащение светодиода
+      }
+      else
+      {
+        flagUchSv = 2; // Отключено учащение светодиода
+      }
+    }
+  }
+  bFlagWork = false;
+  return 0;
 }
 //---------------------------------------------------------------------------
 // Установить индивидуальный адрес БД
@@ -2146,6 +3295,107 @@ float RSProtokol_t::Clamp(float fltValue, float fltMin, float fltMax)
     return fltMin;
   }
   return fltValue;
+}
+//---------------------------------------------------------------------------
+double RSProtokol_t::UpdatePID0(double error)
+{
+  DOUBLE pTerm, iTerm;
+  // Calculate the proportional term.
+  pTerm = P_Gain0 * error;
+  // Calculate the integral state with appropriate limiting.
+  if ((I_Error0 > 0 && error < 0) || (I_Error0 < 0 && error > 0))
+  {
+	I_State0 = 0;
+	I_Error0 = 0;
+  }
+  I_State0 = Clamp(I_State0 + error, I_Min0, I_Max0);
+  I_Error0 = error;
+  // Calculate the integral term.
+  iTerm = I_Gain0 * I_State0;
+  return Clamp(pTerm + iTerm, DRIVE0_MIN, DRIVE0_MAX);
+}
+//---------------------------------------------------------------------------
+double RSProtokol_t::UpdatePID1(double error)
+{
+  double pTerm, iTerm;
+  // Calculate the proportional term.
+  pTerm = P_Gain1 * error;
+
+  // Calculate the integral state with appropriate limiting.
+  if ((I_Error1 > 0 && error < 0) || (I_Error1 < 0 && error > 0))
+  {
+    I_State1 = 0;
+    I_Error1 = 0;
+  }
+  I_State1 = Clamp(I_State1 + error, I_Min1, I_Max1);
+  I_Error1 = error;
+  // Calculate the integral term.
+  iTerm = I_Gain1 * I_State1;
+  return Clamp(pTerm + iTerm, DRIVE1_MIN, DRIVE1_MAX);
+}
+//---------------------------------------------------------------------------
+/*double RSProtokol_t::UpdatePID(double error, double position)
+{
+  double pTerm, iTerm;
+  // Calculate the proportional term.
+  pTerm = P_Gain * error;
+  // Calculate the integral state with appropriate limiting.
+  if ((I_Error > 0 && error < 0) || (I_Error < 0 && error > 0))
+  {
+    I_State = 0;
+    I_Error = 0;
+  }
+  I_State = Clamp(I_State + error, I_Min, I_Max);
+  I_Error = error;
+  // Calculate the integral term.
+  iTerm = I_Gain * I_State;
+  return Clamp(pTerm + iTerm, DRIVE_MIN, DRIVE_MAX);
+}*/
+//---------------------------------------------------------------------------
+void RSProtokol_t::ResetPID(void)
+{
+  I_State1 = 0;
+  I_Error1 = 0;
+}
+//---------------------------------------------------------------------------
+void RSProtokol_t::ResetPID0(void)
+{
+  I_State0 = 0;
+  I_Error0 = 0;
+  bf_AvtoDnu = true;
+}
+//---------------------------------------------------------------------------
+bool RSProtokol_t::AvtoDnu()
+{
+  return bf_AvtoDnu;
+}
+//---------------------------------------------------------------------------
+void RSProtokol_t::ResetPID1(void)
+{
+  I_State1 = 0;
+  I_Error1 = 0;
+  bf_AvtoDvu = true;
+}
+//---------------------------------------------------------------------------
+bool RSProtokol_t::AvtoDvu()
+{
+  if (bf_WriteDef_DVU == true)
+  {
+    bf_WriteDef_DVU = false;
+    SetDVU(4095);
+  }
+  return bf_AvtoDvu;
+}
+//---------------------------------------------------------------------------
+void RSProtokol_t::Set_CheckBox_DAuto_Checked(bool dNu, bool dVu) // 2018.03.19
+{
+  bf_WriteDef_DVU = false;
+  if (dNu == false && dVu == true)
+  {
+    bf_WriteDef_DVU = true;
+  }
+  bf_AvtoDnu = dNu;
+  bf_AvtoDvu = dVu;
 }
 //---------------------------------------------------------------------------
 // Читает holding регистры и помещает данные в массив dest
@@ -2835,7 +4085,7 @@ void RSProtokol_t::WriteKoef(
       }
       if ( buf_read[0] == 0xAA )
       {
-        //Application->MessageBox("Ошибка записи в EEPROM!", "Внимание!", MB_ICONSTOP);
+        Application->MessageBox("Ошибка записи в EEPROM!", "Внимание!", MB_ICONSTOP);
         return;
       }
     }
@@ -2893,7 +4143,7 @@ void RSProtokol_t::WriteKoef(
     }
     if ( buf_read[0] == 0xAA )
     {
-      //Application->MessageBox("Ошибка записи в EEPROM!", "Внимание!", MB_ICONSTOP);
+      Application->MessageBox("Ошибка записи в EEPROM!", "Внимание!", MB_ICONSTOP);
       return;
     }
   }
@@ -2968,1192 +4218,238 @@ void RSProtokol_t::WriteKoef(
 
   if ( Longk1PR != *Longk1 )
   {
-    //Application->MessageBox("Значение не записалось в EEPROM", "Longk1", MB_ICONINFORMATION);
+    Application->MessageBox("Значение не записалось в EEPROM", "Longk1", MB_ICONINFORMATION);
   }
   if ( LongA1PR != *LongA1 )
   {
-    //Application->MessageBox("Значение не записалось в EEPROM", "LongA1", MB_ICONINFORMATION);
+    Application->MessageBox("Значение не записалось в EEPROM", "LongA1", MB_ICONINFORMATION);
   }
   if ( Longk2PR != *Longk2 )
   {
-    //Application->MessageBox("Значение не записалось в EEPROM", "Longk2", MB_ICONINFORMATION );
+    Application->MessageBox("Значение не записалось в EEPROM", "Longk2", MB_ICONINFORMATION );
   }
   if ( LongA2PR != *LongA2 )
   {
-    //Application->MessageBox("Значение не записалось в EEPROM", "LongA2", MB_ICONINFORMATION);
+    Application->MessageBox("Значение не записалось в EEPROM", "LongA2", MB_ICONINFORMATION);
   }
   for ( int i = 0; i < 256; i++ )
   {
     str = "Значение не записалось в EEPROM\n номер ячейки = " + IntToStr(i);
     if ( MasSvetoPR[i] != MasSveto[i] )
     {
-      //Application->MessageBox(str.c_str(), "АРЧ", MB_ICONINFORMATION);
+      Application->MessageBox(str.c_str(), "АРЧ", MB_ICONINFORMATION);
     }
   }
 }
 //---------------------------------------------------------------------------
-int RSProtokol_t::OprosBD_2(void) // -1 - ошибка связи, 0 - звязь работает
-{
-  if (bFlagWork == true)
-  {
-    if ( FlagDebug > 0 )
-    {
-      sprintf( Str_err, "%s", "Ошибка: Функция OprosBD_2 уже работает" );
-    }
-    return -1;
-  }
-  // ===>>
-  bFlagWork = true;
-  // <<===
-  Data.flagSecond = 0; // Временная строка
-  // ===>>
-  if ( Data.flagGetVersion == false )
-  {
-    if ( GetVersia( Data.Ver ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if (len != 0)
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetVersia)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetVersia)" );
-        }
-      }
-      ErrorCode = 23; // Ошибка: БД не отвечает (OprosBD, GetVersia)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.Ver_HEX = (Data.Ver[0] - '0')*100;
-    if ( Data.Ver[0] == '4' ) //
-    {
-      flagSpeed = false; // В каждой посылке байт адреса должен быть
-    }
-    Data.flagGetVersion = true;
-  }
-  // <<===
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 0, &Data.DNUZ ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-        sprintf( Str_err, "Ошибка: БД (OprosBD_2, DNUZ)" );
-      }
-      ErrorCode = 40; // Ошибка: БД (OprosBD_2, DNUZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.DNUZ &= 0x0000FFFF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 0x01, &Data.DVUZ ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-        sprintf(Str_err, "Ошибка: БД (OprosBD_2, DVUZ)");
-      }
-      ErrorCode = 41; // Ошибка: БД (OprosBD_2, DVUZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.DVUZ &= 0x0000FFFF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 0x02, &Data.LEDAmpZ ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-        sprintf( Str_err, "Ошибка: БД (OprosBD_2, LEDAmpZ)" );
-      }
-      ErrorCode = 42; // Ошибка: БД (OprosBD_2, LEDAmpZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.LEDAmpZ &= 0x0000FFFF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 0x03, &Data.UhiZ ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-        sprintf( Str_err, "Ошибка: БД (OprosBD_2, UhiZ)" );
-      }
-      ErrorCode = 43; // Ошибка: БД (OprosBD_2, UhiZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.UhiZ &= 0x0000FFFF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    int errSvyaz;
-    if ( flagModbusProtokol == 0 ) // 9-битный
-    {
-      errSvyaz = ReadFlashInvert( 0x04, &Data.IndAdrZ );
-    }
-    if ( flagModbusProtokol != 0 ) // ModBus RTU, ModBus TCP, ModBus RTU (TCP/IP)
-    {
-      errSvyaz = ReadFlash2( 0x300+1, &Data.IndAdrZ );
-    }
-    if ( errSvyaz != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-        sprintf( Str_err, "Ошибка: БД (OprosBD_2, IndAdrZ)" );
-      }
-      ErrorCode = 44; // Ошибка: БД (OprosBD_2, IndAdrZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.IndAdrZ &= 0x000000FF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 5, &Data.GrpAdrZ ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, GrpAdrZ)" );
-      }
-      ErrorCode = 45; // Ошибка: БД (OprosBD_2, GrpAdrZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.GrpAdrZ &= 0x000000FF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 0x07, &Data.SIMstartZ ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, SIMstartZ)" );
-      }
-      ErrorCode = 46; // Ошибка: БД (OprosBD_2, SIMstartZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.SIMstartZ &= 0x0000FFFF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 0x09, &Data.SIMminZ ) != 0 )
-    {
-      if (FlagDebug > 1)
-      {
-    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, SIMstartZ)" );
-      }
-      ErrorCode = 47; // Ошибка: БД (OprosBD_2, SIMstartZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.SIMminZ &= 0x0000FFFF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlash( 0x2B, &Data.LedZadZ ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, LedZadZ)" );
-      }
-      ErrorCode = 48; // Ошибка: БД (OprosBD_2, LedZadZ)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.LedZadZ &= 0x000000FF;
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 10, &Data.m_ulSerialNumberZ ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-    	sprintf(Str_err, "Ошибка: БД (OprosBD_2, m_ulSerialNumberZ)");
-      }
-      ErrorCode = 49; // Ошибка: БД (OprosBD_2, m_ulSerialNumberZ)
-      bFlagWork = false;
-      return -1;
-    }
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 11, &Data.m_ulU0Z ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-    	sprintf( Str_err, "Ошибка: БД (OprosBD_2, m_ulU0Z)" );
-      }
-      ErrorCode = 50; // Ошибка: БД (OprosBD_2, m_ulU0Z)
-      bFlagWork = false;
-      return -1;
-    }
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 12, &Data.m_ulUZ ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-        sprintf( Str_err, "Ошибка: БД (OprosBD_2, m_ulUZ)" );
-      }
-      ErrorCode = 51; // Ошибка: БД (OprosBD_2, m_ulUZ)
-      bFlagWork = false;
-      return -1;
-    }
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( GetStickyNote( (char*)&Data.m_strStickyNote[0] ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-        sprintf(Str_err, "Ошибка: БД (OprosBD_2, m_strStickyNote)");
-      }
-      ErrorCode = 52; // Ошибка: БД (OprosBD_2, m_strStickyNote)
-      bFlagWork = false;
-      return -1;
-    }
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( ReadFlashInvert( 8, &Data.DlInterPhon ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-        sprintf( Str_err, "Ошибка: БД (OprosBD_2, DlInterPhon)" );
-      }
-      ErrorCode = 53; // Ошибка: БД (OprosBD_2, DlInterPhon)
-      bFlagWork = false;
-      return -1;
-    }
-  }
-  if ( Data.flagSecond == 0 )
-  {
-    if ( GetSSP( &Data.PSW ) != 0 ) // Слово состояния и счёт
-    {
-      bFlagWork = false;
-      flagARCH = -1;
-      flagUchSv = -1;
-      return -1;
-    }
-    else
-    {
-      if ( ( Data.PSW & 0x10 ) == 0x10 )
-      { // Состояние АРЧ (ВКЛ/ВЫКЛ)
-        flagARCH = 1; // АРЧ отключено
-      }
-      else
-      { // АРЧ включено
-        if ( ( Data.PSW & 0x20 ) == 0x20 )
-        { // Состояние АРЧ (ВКЛ/ВЫКЛ)
-          flagARCH = 2; // Ручное
-        }
-        else
-        {
-          flagARCH = 3; // Программное
-        }
-      } //===
-      if ( ( Data.PSW & 0x08 ) == 0x08  )
-      {
-        flagUchSv = 1; // Включено учащение светодиода
-      }
-      else
-      {
-        flagUchSv = 2; // Отключено учащение светодиода
-      }
-    }
-  }
-  bFlagWork = false;
-  return 0;
-}
+//void RSProtokol_t::OprosBD8Arr( void )
+//{
+//  struct Time_t
+//  {
+//    WORD Hour; // Час
+//    WORD Min; // Минута
+//    WORD Sec; // Секунда
+//    WORD MSec; // Милисекунда
+//  } ArrTime, ArrTimeDT, ArrTimeSum, ArrTimeDTSum;
+//  static Time_t ArrTimePeriod;
+//
+//  DecodeTime( Time(), ArrTimeSum.Hour, ArrTimeSum.Min, ArrTimeSum.Sec, ArrTimeSum.MSec );
+//
+//  if ( FormPuasson8BD->bFlagOprosBD8 == true ) // false - ещё ни разу не вызывалась функция OprosBD8Arr
+//  {
+//    FormPuasson8BD->dTPeriod =
+//        ((ArrTimeSum.Hour * (60 * 60) + ArrTimeSum.Min * (60) + ArrTimeSum.Sec) * 1000 +  ArrTimeSum.MSec)
+//        -((ArrTimePeriod.Hour * (60 * 60) + ArrTimePeriod.Min * (60) + ArrTimePeriod.Sec) * 1000 + ArrTimePeriod.MSec);
+//  }
+//  if ( FormPuasson8BD->dTPeriod > FormPuasson8BD->dTmaxPeriod )
+//  {
+//    FormPuasson8BD->dTmaxPeriod = FormPuasson8BD->dTPeriod;
+//  }
+//  ArrTimePeriod = ArrTimeSum;
+//  if ( FormPuasson8BD->bFlagOprosBD8 == false ) // false - ещё ни разу не вызывалась функция OprosBD8Arr
+//  {
+//    FormPuasson8BD->bFlagOprosBD8 = true;
+//  }
+//
+//  int mI = FormPuasson8BD->maxInd;
+//  int I0;
+//  int Funk_Error;
+//
+//  I0 = 248; // I0 = 248 --- Нет удачно опрошенного блока
+//  for ( int ind = 0, i; ind < mI; ind++ ) // Цикл по всем выбранным БД (от 1 до 8)
+//  {
+//    i = FormPuasson8BD->IndexArr[ ind ];
+//    FormPuasson8BD->bFlagDisplayArr[i] = false;
+//    FormPuasson8BD->bFlag8BD_PSW = false; // true - Один из выбранных блоков ответил успешно (есть флаг готовности счёта)
+//
+//    if ( FormPuasson8BD->AddrBDArr[i] != 248 ) // Блок обрабатывается (флажок установлен)
+//    {
+//      //==\\DecodeTime( Time(), ArrTime.Hour, ArrTime.Min, ArrTime.Sec, ArrTime.MSec );
+//      this->AddrBD = FormPuasson8BD->AddrBDArr[i];
+//      if ( FormPuasson8BD->bFlagSetTimeInterval[i] == false )
+//      {
+//        if ( SetTimeInterval(8) != 0 )
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] |= (1 << 0); // Ошибка
+//        }
+//        else
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] &= ~(1 << 0); // Успех
+//          FormPuasson8BD->bFlagSetTimeInterval[i] = true;
+//        }
+//      }
+//      else if ( FormPuasson8BD->bFlagGetSerialNum[i] == false )
+//      {
+//        if ( ReadFlashInvert(10, &FormPuasson8BD->SerialNumArr[i] ) != 0  )
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] |= (1 << 1); // Ошибка
+//        }
+//        else
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] &= ~(1 << 1); // Успех
+//          FormPuasson8BD->bFlagGetSerialNum[i] = true;
+//          FormPuasson8BD->FileArrayInit( i );
+//        }
+//      }
+//      else /*if ( (FormPuasson8BD->bFlagSetTimeInterval[i] == true) && (FormPuasson8BD->bFlagGetSerialNum[i] == true) )*/
+//      {
+//        if ( flagModbusProtokol != 0 ) // Протокол: НЕ "9-ти битный"
+//        {
+//          Funk_Error = GetSSP( &Data.PSW );
+//        }
+//        else if ( flagModbusProtokol == 0 ) // Протокол: "9-ти битный"
+//        {
+//          Funk_Error = GetCountImp( & FormPuasson8BD->Chet[i] );
+//          if ( Funk_Error == 0 ) // Нет ошибки
+//          {
+//            Data.PSW = this->SSP_Value;
+//          }
+//        }
+//        if ( Funk_Error != 0 ) // Слово состояния и счёт проверять при каждом вызове
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] |= (1 << 2); // Ошибка
+//        }
+//        else
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] &= ~(1 << 2); // Успех
+//          if ( ( Data.PSW & 0x02 ) == 0x02 )
+//          {
+//            FormPuasson8BD->PrizNesnChet[i]++; // Количество признаков неснятого счёта
+//          }
+//          if ( (Data.PSW & 0x01) == 0x01 ) // Флаг готовности счёта получен
+//          {
+//            FormPuasson8BD->bFlag8BD_PSW = true; // true - Один из выбранных блоков ответил успешно (есть флаг готовности счёта)
+//            FormPuasson8BD->PSW[i] = Data.PSW;
+//          }
+//        }
+//      } // end if ( (FormPuasson8BD->bFlagSetTimeInterval[i] == true) && (FormPuasson8BD->bFlagGetSerialNum[i] == true) )
+//      if ( FormPuasson8BD->bFlag8BD_PSW == true )
+//      { // bFlag8BD_PSW == true - Один из выбранных блоков ответил успешно (есть флаг готовности счёта)
+//        if ( flagModbusProtokol != 0 ) // Протокол: НЕ "9-ти битный"
+//        {
+//          Funk_Error = GetCountImp( & FormPuasson8BD->Chet[i] );
+//          if ( Funk_Error != 0 )
+//          {
+//            FormPuasson8BD->ErrorCodBD[i] |= (1 << 3); // Ошибка
+//          }
+//          else
+//          {
+//            FormPuasson8BD->ErrorCodBD[i] &= ~(1 << 3); // Успех
+//          }
+//        }
+//        if ( Funk_Error == 0 ) // нет ошибок функций
+//        {
+//          if ( I0 == 248 ) // I0 = 248 --- Нет удачно опрошенного блока
+//          {
+//            I0 = i; // I0 - Номер первого блока, который опрошен удачно
+//          }
+//          FormPuasson8BD->KolVoChet[i]++; // Количество полученных с БД счетов (сколько раз получали счет с БД)
+//          FormPuasson8BD->ChetNakapl[i] += FormPuasson8BD->Chet[i]; // Счёт за секунду формируется при помощи этого накапливаемого счёта
+//          if ( FormPuasson8BD->SpinEdit_Time->Value * 1000 >= FormPuasson8BD->TimeBD[i] )
+//          {
+//            FormPuasson8BD->FileWriteData( i );
+//          }
+//
+//          if ( (FormPuasson8BD->KolVoChet[i] % KolVoPodinterval) == 0 )
+//          {
+//            FormPuasson8BD->KolVoChet[i] = 0; // Количество полученных с БД счетов (сколько раз получали счет с БД)
+//            FormPuasson8BD->ChetZaSekundu[i] = FormPuasson8BD->ChetNakapl[i];
+//            FormPuasson8BD->ChetNakapl[i] = 0;
+//            FormPuasson8BD->bFlagDisplayArr[i] = true;
+//
+//            //FormPuasson8BD->UpdateGraph(i);
+//
+//            if ( i == I0 ) // I0 - Номер первого блока, который опрошен удачно
+//            {
+//              FormPuasson8BD->bFlagDisplay = true;
+//              //FormPuasson8BD->TimeBD[i] += KolVoPodinterval; // Количество полученых счетов
+//            }
+//            FormPuasson8BD->TimeBD[i] += KolVoPodinterval; // Количество полученых счетов
+//          } // end if ( (FormPuasson8BD->KolVoChet[i] % KolVoPodinterval) == 0 )
+//        } //
+//        else  // ошибоки функций есть!!!
+//        {
+//          FormPuasson8BD->FileWriteError( i );
+//        }
+//      } // end if ( bFlag8BD_PSW == true )
+//
+//      if ( FormPuasson8BD->ErrorCodBD[i] != 0 )
+//      {
+//        FormPuasson8BD->KolErrors[i]++;
+//        FormPuasson8BD->KolErrorsPodryad++;
+//      }
+//      else
+//      {
+//        FormPuasson8BD->KolErrorsPodryad = 0;
+//      }
+//      if (  FormPuasson8BD->KolErrorsPodryad >= 2 )
+//      {
+//        // Чистим буфер чтения/записи
+//        if( PurgeComm( this->COMPort, PURGE_TXCLEAR | PURGE_RXCLEAR | PURGE_TXABORT | PURGE_RXABORT) == 0 )
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] |= (1 << 5); // Ошибка
+//        }
+//        else
+//        {
+//          FormPuasson8BD->ErrorCodBD[i] &= ~(1 << 5); // Успех
+//        }
+//      }
+//
+//      //==\\DecodeTime( Time(), ArrTimeDT.Hour, ArrTimeDT.Min, ArrTimeDT.Sec, ArrTimeDT.MSec );
+//      //==\\FormPuasson8BD->dTBD[i] =
+//      //==\\    ((ArrTimeDT.Hour * (60 * 60) + ArrTimeDT.Min * (60) + ArrTimeDT.Sec) * 1000 +  ArrTimeDT.MSec)
+//      //==\\    -((ArrTime.Hour * (60 * 60)   + ArrTime.Min * (60)   + ArrTime.Sec) * 1000   +  ArrTime.MSec);
+//      //==\\if ( FormPuasson8BD->dTBD[i] > FormPuasson8BD->dTmaxBD[i] )
+//      //==\\{
+//      //==\\  FormPuasson8BD->dTmaxBD[i] = FormPuasson8BD->dTBD[i];
+//      //==\\}
+//      NullsToStr_err();
+//      if ( ind < (mI - 1) ) // Если не последний БД опрашивается
+//      {
+//        Sleep( 6 );
+//      }
+//    } // end if ( FormPuasson8BD->AddrBDArr[i] != 248 ) // Блок обрабатывается (флажок установлен)
+//  } // end for ( int ind = 0, i = 0; ind < mI; ind++ )
+//
+//
+//  DecodeTime( Time(), ArrTimeDTSum.Hour, ArrTimeDTSum.Min, ArrTimeDTSum.Sec, ArrTimeDTSum.MSec );
+//  // время в милисекундах
+//  FormPuasson8BD->dTSum =
+//      ((ArrTimeDTSum.Hour * (60 * 60) + ArrTimeDTSum.Min * (60) + ArrTimeDTSum.Sec) * 1000 +  ArrTimeDTSum.MSec)
+//      -((ArrTimeSum.Hour * (60 * 60)   + ArrTimeSum.Min * (60)   + ArrTimeSum.Sec) * 1000   +  ArrTimeSum.MSec);
+//
+//  if ( FormPuasson8BD->dTSum > FormPuasson8BD->dTmaxSum )
+//  {
+//    FormPuasson8BD->dTmaxSum = FormPuasson8BD->dTSum;
+//  }
+//}
 //---------------------------------------------------------------------------
-void RSProtokol_t::OprosSpectra(bool bf) // bf = true - разрешить опрос спектра в функции OprosBD()
-{
-  bfOprosSpectra = bf;
-  if ( bf == true )
-  {
-    bfPervVhod = true; // Первый вход в функцию
-  }
-}
-//---------------------------------------------------------------------------
-int RSProtokol_t::OprosBD( void ) // -1 - ошибка связи, 0 - звязь работает
-{
-  int iRetValue;
-  iRetValue = OprosBDParam(); // 0 - успех
-
-  if ( iRetValue != 0 )
-  {
-    bFlagWork = false;
-    return iRetValue;
-  }
-
-  if ( bfOprosSpectra == true )
-  {
-    bfOprosSpectra = bfOprosSpectra;
-    iRetValue = OprosBDSpektr( true, & Data.TimeNaboraSpectr, & Data.TimeGotovSpectr ); // false - не измерять время
-  }
-  bFlagWork = false;
-  if ( iRetValue != 0 )
-  {
-    return iRetValue;
-  }
-  return 0;
-}
-//---------------------------------------------------------------------------
-void RSProtokol_t::SetKolTikSpectr(unsigned char kolTik)
-{
-    Data.KolTikSpectr = kolTik;
-}
-//---------------------------------------------------------------------------
-int RSProtokol_t::OprosBDSpektr(bool bfTime, int * iTimeRead, int * iTimeGotov ) // -1 - ошибка связи, 0 - звязь работает
-{
-  // iTimeRead - время чтения спектра
-  // iTimeGotovh - время готовности спектра
-  int iRet;
-  unsigned char Interval;
-  int iTime_read_0;
-  int iTime_read_1;
-
-  static int iTimeDeltaRead_0;
-  static int iTimeDeltaRead_1;
-
-  static int iTime_got_0;
-  static int iTime_got_1;
 
 
-  int iNeUdachnyiObmen;
-  int iNeGotovSpektr;
-  int iTimeGotov_Tmp;
-
-  if ( this->Data.bfSetTimeSpektr == false ) // Первый запуск набора спектра
-  {
-    //Data.KolTikSpectr = Form_82_Spectr_BD84->SpinEdit_TimeSpektr->Value;
-    iRet = SetTimeSpectr( Data.KolTikSpectr ); // KolTikSpectr
-    if (iRet != 0)
-    {
-      return -1;
-    }
-    iRet = GetTimeSpectr(&Interval);
-    if (iRet != 0)
-    {
-      return -1;
-    }
-    if(Interval != Data.KolTikSpectr)
-    {
-      return -1;
-    }
-    this->Data.bfSetTimeSpektr = true;
-  }
-  if ( this->Data.FlagWriteKolTikSpektr == true ) // Нажата кнопка "Запись"
-  {
-    //Data.KolTikSpectr = Form_82_Spectr_BD84->SpinEdit_TimeSpektr->Value;
-    iRet = SetTimeSpectr( Data.KolTikSpectr ); // KolTikSpectr
-    if (iRet != 0)
-    {
-      return -1;
-    }
-    iRet = GetTimeSpectr(&Interval);
-    if (iRet != 0)
-    {
-      return -1;
-    }
-    if(Interval != Data.KolTikSpectr)
-    {
-      return -1;
-    }
-    this->Data.FlagWriteKolTikSpektr = false;
-  }
-  if( this->Data.bf_SpectrStart == true )
-  {
-    iRet = SpectrStart();
-    if (iRet != 0)
-    {
-      return -1;
-    }
-    this->Data.bf_SpectrStart = false;
-  }
-  ObnulenieArr(Data.ArrSpectr, 512, 0);
-  iNeUdachnyiObmen = 0;
-  iNeGotovSpektr = 0;
-  while ( true )
-  {
-    int iVar;
-    iVar = GetSSP( &Data.PSW );
-    if ( iVar == 0 ) // Удачный обмен
-    {
-      if ( ( Data.PSW & 0x04) == 0x04 ) // Спектр готов
-      {
-        break; // Удача
-      }
-      else
-      {
-        iNeGotovSpektr++;
-      }
-    }
-    else
-    {
-      iNeUdachnyiObmen++;
-    }
-    if ( iNeGotovSpektr >= 100000 ) // Нет готовности спектра 100 000 раз подряд
-    {
-      break; // Ошибка готовности спектра
-    }
-    if ( iNeUdachnyiObmen >= 3 )
-    {
-      return -1; // Ошибка обмена
-    }
-  }
-
-  if ( ( Data.PSW & 0x04) == 0x04 )
-  {
-    if ( bfTime == true ) // Разрешить передавать временные интервалы
-    {
-      iTime_got_1 = DiaGetTime(); // Время завершения ожидания готовности [мс]
-      iTime_read_0 = iTime_got_1; // Время начела чтения спектра [мс]
-      if ( bfPervVhod == false ) // Второй и последующие заходы в эту часть функции (после включения)
-      {
-        iTimeGotov_Tmp = iTime_got_1 - iTime_got_0; // Интервал ожидания готовности
-      }
-      iTime_got_0 = iTime_got_1; // Время начала ожидания готовности = Время завершения ожидания готовности [мс]
-    }
-    for (int nomBlock = 0; nomBlock < 32; nomBlock++) //==\\
-    {
-      ObnulenieArr(Data.ArrSpectrBlock, 16);
-      iRet = SpectrReadBuf( nomBlock, &Data.ArrSpectrBlock[0] );
-      if ( iRet != 0 )
-      {
-        return -1;
-      }
-      for (int i = 0; i < 16; i++)
-      {
-        this->Data.ArrSpectr[nomBlock*16+i] = this->Data.ArrSpectrBlock[i];
-      }
-    }
-  }
-  else
-  {
-    this->Data.iSpektrZaprosErr++; // Количество ошибок обмена спектром (подряд)
-  }
-
-  if ( this->Data.iSpektrZaprosErr >= 3 )
-  {
-    iRet = SpectrStart(); // запустим заново набор спектра
-    this->Data.iSpektrZaprosErr = 0;
-  }
-
-  if ( bfTime == true ) // Разрешить передавать временные интервалы
-  {
-    if ( ( Data.PSW & 0x04 ) == 0x04 )
-    {
-      iTime_read_1 = DiaGetTime(); // Время завершения чтения спектра [мс]
-      iTimeDeltaRead_1 = iTime_read_1 - iTime_read_0; // Текущий интервал чтения спектра
-      // ===>>
-      for (int i = 0; i < 512; i++)
-      {
-        this->Data.ArrSpectrSumm[i] += (int)this->Data.ArrSpectr[i];
-      }
-      this->Data.iSpektrZaprosCount++; // Количество удачных обменов спектром
-      this->Data.iSpektrZaprosErr = 0; // Количество ошибок обмена спектром (подряд)
-      iRet = SpectrStart(); // запустим заново набор спектра
-      // <<===
-      if ( bfPervVhod == true ) // Первый заход в функцию, после включения
-      {
-        * iTimeRead = 0;
-        * iTimeGotov = 0;
-        bfPervVhod = false;
-      }
-      else // Второй и последующие заходы в эту часть функции (после включения)
-      {
-        * iTimeRead = iTimeDeltaRead_0; // Предидущий интервал чтения спектра [мс]
-        * iTimeGotov = iTimeGotov_Tmp - iTimeDeltaRead_0; // Интервал ожидания готовности - Предидущий интервал чтения спектра [мс]
-      }
-      iTimeDeltaRead_0 = iTimeDeltaRead_1; // Предидущий интервал чтения спектра [мс] = Текущий интервал чтения спектра [мс]
-    }
-  } 
-  return 0;
-}
-//---------------------------------------------------------------------------
-int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
-{
-  if ( bFlagWork == true )
-  {
-    if ( FlagDebug > 0 )
-    {
-      sprintf( Str_err, "%s", "Ошибка: Функция OprosBD уже работает" );
-    }
-    return -1;
-  }
-  // ===>>
-  bFlagWork = true;
-  this->ErrorCode = 0; // Пока ещё нет ошибки
-  // <<===
-  Data.count2++;
-  Data.flagSecond = Data.count2 % 15;
-  if (Data.flagSecond == 0)
-  {
-    Data.count2 = 0;
-  }
-
-  NullsToStr_err(); // Очистка строки сообщений об ошибках
-
-  if( Data.flagSetTimeInterval == false )
-  {
-    //==\\ if ( Form_82_Start->flagModbusProtokol == 0 ) // Выбран протокол: "9-ти битный"
-    {
-      if ( SetTimeInterval( 8 ) != 0 )
-      {
-	int len = strlen(Str_err);
-	if (len != 0)
-	{
-	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, SetTimeInterval)");
-        }
-	else
-	{
-	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, SetTimeInterval)");
-        }
-        ErrorCode = 23; // Ошибка: БД (OprosBD, GetTimeInterval())
-        bFlagWork = false;
-        return -1;
-      }
-    }
-    //===
-    Data.flagSetTimeInterval = true;
-    //Form_82_Start->bFlagChengeKolTik = true;  // Отображение КолТика для счёта
-    bFlagChengeKolTik = true;
-  }
-  if( Data.flagGetTimeInterval == false )
-  {
-    if ( GetTimeInterval( &Data.KolTik ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-        int len = strlen(Str_err);
-        if (len != 0)
-        {
-          sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetTimeInterval())");
-        }
-        else
-        {
-          sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetTimeInterval())");
-        }
-      }
-      ErrorCode = 24; // Ошибка: БД (OprosBD, GetTimeInterval())
-      bFlagWork = false;
-      return -1;
-    }
-    Data.flagGetTimeInterval = true;
-  }
-  // ===
-  if ( GetSSP( &Data.PSW ) != 0 ) // Слово состояния и счёт
-  {
-    if (FlagDebug > 0)
-    {
-      int len = strlen(Str_err);
-      if (len != 0)
-      {
-        sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSSP)");
-      }
-      else
-      {
-        sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetSSP)");
-      }
-    }
-    ErrorCode = 36; // Ошибка: БД (OprosBD, GetSSP)
-    bFlagWork = false;
-    return -1; // Ошибка связи
-  } // Определение состояния программы БД
-  else
-  {
-    if ( ( Data.PSW & 0x01 ) == 0x01 ) // Флаг готовности счёта получен
-    {
-      testErr = 0;
-      if ( GetCountImp(&Data.CountImp) == 0 )
-      {
-        Data.count++; // Количество полученных с БД счетов (сколько раз получали счет с БД)
-        Data.flagFirst = Data.count % KolVoPodinterval;
-        Data.TSchetTemp += Data.CountImp; // TSchetTemp - счет за 1 сек., CountImp - счет за подинтервал 0,2 или 0,25 сек
-        if ( Data.flagFirst == 0 )
-        {
-          Data.TSchet = Data.TSchetTemp; // TSchet - счет за 1 сек.
-          Data.TSchetTemp = 0;
-          if ( ( ( Data.count / KolVoPodinterval ) <= Data.T_Limit ) && ( Data.bFlagCount == true ) ) // проверяем окончание времени счета импульсов
-          {
-            Data.SumSchet += Data.TSchet;
-            // TimeTSchet - Сколько время прошло (в секундах) от начала получения счёта
-            // (усреднённого за "время измерения" секунд)
-            Data.TimeTSchet = Data.count / KolVoPodinterval;
-            Data.TimeTSchet_dia = Data.TimeTSchet; // Для обнулении поля: "Текущее время счёта" при новом старте
-            if ( Data.TimeTSchet != 0 )
-            {
-              Data.Sred = static_cast<float>(Data.SumSchet) / static_cast<float>(Data.TimeTSchet);
-            }
-            else if (Data.TimeTSchet == 0)
-            {
-              Data.Sred = 0;
-            }
-          }
-          else // if ( Data.count % KolVoPodinterval == 0 ) // !!!!!!!!!!!
-          {
-            Data.count = 0;
-            Data.bFlagCount = false;
-          } // end if ( ( ( Data.count / 5 or 4 ) <= Data.T_Limit ) && (Data.bFlagCount == true) )
-        }
-      }
-      else // if ( GetCountImp(&Data.Count) != 0 )
-      {
-        if ( FlagDebug > 0 )
-        {
-          int len = strlen(Str_err);
-          if ( len != 0 )
-          {
-            sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetCountImp)");
-          }
-	  else
-	  {
-	    sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetCountImp)");
-          }
-        }
-        ErrorCode = 37; // Ошибка: БД (OprosBD, GetCountImp)
-        bFlagWork = false;
-        return -1;
-      }
-    }
-    else
-    {
-      if ( FlagDebug > 0 )
-      {
-        // Не готов флаг счёта
-        int len = strlen( Str_err );
-        if ( len != 0 )
-        {
-	  sprintf(&Str_err[len], "%s", " => Ошибка: не готов флаг счёта (OprosBD)");
-        }
-        else
-        {
-	  sprintf(Str_err, "%s", "Ошибка: не готов флаг счёта (OprosBD)");
-        }
-        //\\ErrorCode = 38; // Ошибка: БД (OprosBD, GetCountImp)
-      }
-      if ( testErr > 1 )
-      {
-        int len = strlen( Str_err );
-        if ( len != 0 )
-        {
-	  sprintf( &Str_err[len], "%s", " => Ошибка: отсут. флаг гот. счета более 1-го опроса подряд (OprosBD)" );
-        }
-        else
-        {
-	  sprintf( Str_err, "%s", "Ошибка: отсут. флаг гот. счета более 1-го опроса подряд (OprosBD)" );
-        }
-        //\\ErrorCode = 39; // Ошибка: БД (OprosBD, GetCountImp)
-      }
-      // Здесь нет серьёзной ошибки, поэтому не завершаем аварийным возвратом -1
-    }
-  }
-  // ===
 
 
-  // \\if( ( Data.flagGetGrpAdr == false ) && ( Data.flagSecond == 3 ) )
-  {
-    if ( GetGrpAdr( &Data.GrAdr ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if (len != 0)
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GrAdr)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GrAdr)" );
-        }
-      }
-      ErrorCode = 26; // Ошибка: БД (OprosBD, GrAdr)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.flagGetGrpAdr = true;
-  }
-  // \\if ( ( Data.flagGetIndAdr == false ) && (Data.flagSecond == 4) )
-  {
-    if ( GetIndAdr( &Data.IndAdr ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if (len != 0)
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetIndAdr)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetIndAdr)" );
-        }
-      }
-      ErrorCode = 25; // Ошибка: БД (OprosBD, GetIndAdr)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.flagGetIndAdr = true;
-  }
 
-  // \\if ( Data.flagSecond == 5 )
-  {
-    if ( GetTemp( &Data.Temper ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if (len != 0)
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetTemp)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetTemp)" );
-        }
-      }
-      ErrorCode = 27; // Ошибка: БД (OprosBD, GetTemp)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.flTemper = TConvert( Data.Temper );
-  }
-  // \\if ( (Data.flagSecond == 6) || (CheckBox_DAuto_Checked == true) )
-  {
-    if ( GetDNU( &Data.DNU ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if ( len != 0 )
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetDNU)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetDNU)" );
-        }
-      }
-      ErrorCode = 28; // Ошибка: БД (OprosBD, GetDNU)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.dbDNU = Code2DAC( Data.DNU );
-  }
-  // \\if ( (Data.flagSecond == 7) || (CheckBox_DAuto_Checked == true) )
-  {
-    if ( GetDVU( &Data.DVU ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if (len != 0)
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetDVU)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetDVU)" );
-        }
-      }
-      ErrorCode = 29; // Ошибка: БД (OprosBD, GetDVU)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.dbDVU = Code2DAC( Data.DVU );
-  }
-  // \\if ( (Data.flagSecond == 8) || (CheckBox_auto_Checked == true) )
-  {
-    if ( GetUhi( &Data.UhiI ) != 0 )
-    {
-      if (FlagDebug > 0)
-      {
-	int len = strlen(Str_err);
-	if (len != 0)
-	{
-	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetUhi)");
-        }
-	else
-	{
-	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetUhi)");
-        }
-      }
-      ErrorCode = 30; // Ошибка: БД (OprosBD, GetUhi)
-      bFlagWork = false;
-      return -1;
-    }
 
-    Data.sumUhiI[Data.ptrUhiI] = Data.UhiI;
-    if( Data.kodUhiI < 50 )
-    {
-      Data.kodUhiI++;
-    }
-    Data.UhiIsr = 0;
-    for( unsigned int i = 0; i < Data.kodUhiI; i++ )
-    {
-      Data.UhiIsr = Data.UhiIsr + Data.sumUhiI[i];
-    }
-    Data.UhiIsr = (int)((float)Data.UhiIsr / (float)Data.kodUhiI); // Скользящее среднее
-    Data.ptrUhiI++;
-    if ( Data.ptrUhiI == 50 )
-    {
-      Data.ptrUhiI = 0;
-    }
-    Data.dbUhiIsr = Code2U( Data.UhiIsr );
-  }
-  // \\if ( Data.flagSecond == 9 )
-  {
-    if ( GetSIM3( &Data.SIM3 ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if (len != 0)
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSIM3)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetSIM3)" );
-        }
-      }
-      ErrorCode = 31; // Ошибка: БД (OprosBD, GetSIM3)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.dbSIM3 = Data.SIM3 * 0.0596;
-  }
-  // \\if ( Data.flagSecond == 10 )
-  {
-    if ( GetSIM4( &Data.SIM4 ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen(Str_err);
-	if ( len != 0 )
-        {
-	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSIM4)");
-        }
-	else
-	{
-	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetSIM4)");
-        }
-      }
-      ErrorCode = 32; // Ошибка: БД (OprosBD, GetSIM4)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.dbSIM4 = Data.SIM4 * 0.0596;
-  }
-  // \\if ( Data.flagSecond == 11 )
-  {
-    if ( GetSIM2(&Data.SIM2) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen(Str_err);
-	if ( len != 0 )
-        {
-	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetSIM2)");
-        }
-	else
-	{
-	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetSIM2)");
-        }
-      }
-      ErrorCode = 33; // Ошибка: БД (OprosBD, GetSIM2)
-      bFlagWork = false;
-      return -1;
-    }
-  }
-  // \\if ( Data.flagSecond == 12 )
-  {
-    if ( GetLEDAmp( &Data.Ampl ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen(Str_err);
-	if ( len != 0 )
-        {
-	  sprintf(&Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetLEDAmp)");
-        }
-	else
-	{
-	  sprintf(Str_err, "%s", "Ошибка: БД (OprosBD, GetLEDAmp)");
-        }
-      }
-      ErrorCode = 34; // Ошибка: БД (OprosBD, GetLEDAmp)
-      bFlagWork = false;
-      return -1;
-    }
-    if( Data.Ver_HEX != 0 )
-    {
-      if ( Data.Ver_HEX != 400 )
-      {
-        Data.dbAmpl = Data.Ampl * 2.5 / 255;
-      }
-      else
-      {
-        Data.dbAmpl = Data.Ampl * 4.5 / 255;
-      }
-    }
-  }
-  // \\if ( Data.flagSecond == 13 )
-  {
-    if ( GetLEDAmpR( &Data.LEDAmpR ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if ( len != 0 )
-        {
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetLEDAmpR)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetLEDAmpR)" );
-        }
-      }
-      ErrorCode = 35; // Ошибка: БД (OprosBD, GetLEDAmpR)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.LEDAmp[Data.ptrLEDAmp] = Data.LEDAmpR;
-    if ( Data.kodLEDAmp < 150 )
-    {
-      Data.kodLEDAmp++;
-    }
-    Data.LEDAmpRcp = 0;
-    for ( int i = 0; i < Data.kodLEDAmp; i++ )
-    {
-      Data.LEDAmpRcp += Data.LEDAmp[i];
-    }
-    Data.LEDAmpRcp /= (float)Data.kodLEDAmp;
-    Data.ptrLEDAmp++;
-    if ( Data.ptrLEDAmp == 150 )
-    {
-      Data.ptrLEDAmp = 0;
-    }
-    if( Data.Ver_HEX != 0 )
-    {
-      if ( Data.Ver_HEX != 400 )
-      {
-        Data.dbLEDAmpRcp = Data.LEDAmpRcp * 2.5 / 255;
-      }
-      else
-      {
-        Data.dbLEDAmpRcp = Data.LEDAmpRcp * 4.5 / 255;
-      }
-    }
-  }
-  // ==== ===== ===== 12.01.2016 ===>>
-  if ( flagModbusProtokol != 0 ) // Выбран протокол: НЕ "9-ти битный"
-  {
-    uint16_t Dest[2];
-    int ReadCount = read_registers(AddrBD, 100, 2, Dest);
-    if (ReadCount == 2)
-    {
-      Data.TimeZapuskBD = (unsigned int)((Dest[1] << 16) | Dest[0]);
-    }
-  }
-  // ==== ===== ===== 12.01.2016 <<===
 
-  AvtoPodborUhiIter();
 
-  if ( CheckBox_DAuto_Checked == true )
-  {
-    double dDnu = Code2DAC( Data.DNU );
-    double dAbsDnu = fabs( Data.m_fltDac0 - dDnu );
-    if ( 0.001 < dAbsDnu )
-    {
-      Data.m_iDac0 = Clamp(Data.m_iDac0 + UpdatePID0(Data.m_fltDac0 - Code2DAC(Data.DNU)), 0, 0x0fff);
-      SetDNU( Data.m_iDac0 );
-    }
-    else
-    {
-      ResetPID0();
-    }
-    double dDvu = Code2DAC( Data.DVU );
-    double dAbsDvu = fabs( Data.m_fltDac1 - dDvu );
-    if ( 0.001 < dAbsDvu )
-    {
-      Data.m_iDac1 = Clamp(Data.m_iDac1 + UpdatePID1(Data.m_fltDac1 - Code2DAC(Data.DVU)), 0, 0x0fff);
-      SetDVU( Data.m_iDac1 );
-    }
-    else
-    {
-      ResetPID1();
-    }
-    if ( IsPidSResetted() )
-    {
-      CheckBox_DAuto_Checked = false;
-      FlagAvtoSnyatDiskr(); // Снять флажек; // Сбросить флажки
-    }
-  }
-  // ==== ===== =====
-  testErr++;
-  // Считать счёт за 0.2 сек
-  ///////////
-  //extern PACKAGE System::TDateTime __fastcall Date(void);
-  //extern PACKAGE System::TDateTime __fastcall Time(void);
-  //extern PACKAGE System::TDateTime __fastcall Now(void);
-  DecodeTime(Time(), ArrTimeTek.Hour, ArrTimeTek.Min, ArrTimeTek.Sec, ArrTimeTek.MSec);
-  //DecodeDate(const System::TDateTime DateTime, Word &Year, Word &Month, Word &Day);
-  //EncodeDate(Word Year, Word Month, Word Day);
 
-  ArrTime[indexArrTime].Hour = ArrTimeTek.Hour;
-  ArrTime[indexArrTime].Min = ArrTimeTek.Min;
-  ArrTime[indexArrTime].Sec = ArrTimeTek.Sec;
-  ArrTime[indexArrTime].MSec = ArrTimeTek.MSec;
-  ArrTime[indexArrTime].PSW_b0 = ArrTimeTek.PSW_b0;
-  ArrTime[indexArrTime].PSW_b1 = ArrTimeTek.PSW_b1;
-  ///////////////////////////////////////////////////////////////////
-  ArrTime[indexArrTime].flagFirst = Data.flagFirst;
-  ArrTime[indexArrTime].flagSecond = Data.flagSecond;
-  ArrTime[indexArrTime].count = Data.count;
-  if ( (Data.PSW & 0x01) == 0x01 )
-  {
-    ArrTime[indexArrTime].PSW_b0 = 1;
-    N0++; // Количество признаков готовности счёта (PSW_b0 == 1)
-  }
-  else
-  {
-    ArrTime[indexArrTime].PSW_b0 = 0;
-  }
-  //
-  if ( (Data.PSW & 0x02) == 0x02 )
-  {
-    ArrTime[indexArrTime].PSW_b1 = 1;
-    N1++; // Количество признаков неснятого счета (PSW_b1 == 1)
-  }
-  else
-  {
-    ArrTime[indexArrTime].PSW_b1 = 0;
-  }
-  if (MaxIndexArrTime < 100)
-  {
-    MaxIndexArrTime++;
-  }
-  indexArrTime++;
-  if (indexArrTime == 100)
-  {
-    indexArrTime = 0;
-  }
-
-  //===>>
-  ev_OprosBDParam();
-  //if (Form_82_Start->bfZvukOn == true)
-  //{
-  //  Form_82_Start->bfZvukOn = false;
-  //  Form_82_Start->ZvukOn();
-  //}
-  //if (Form_82_Start->bfZvukOff == true)
-  //{
-  //  Form_82_Start->bfZvukOff = false;
-  //  Form_82_Start->ZvukOff();
-  //} 
-  //<<===
-
-  return 0; // удачное завершение
-}
-//---------------------------------------------------------------------------
-double RSProtokol_t::UpdatePID0(double error)
-{
-  DOUBLE pTerm, iTerm;
-  // Calculate the proportional term.
-  pTerm = P_Gain0 * error;
-  // Calculate the integral state with appropriate limiting.
-  if ((I_Error0 > 0 && error < 0) || (I_Error0 < 0 && error > 0))
-  {
-	I_State0 = 0;
-	I_Error0 = 0;
-  }
-  I_State0 = Clamp(I_State0 + error, I_Min0, I_Max0);
-  I_Error0 = error;
-  // Calculate the integral term.
-  iTerm = I_Gain0 * I_State0;
-  return Clamp(pTerm + iTerm, DRIVE0_MIN, DRIVE0_MAX);
-}
-//---------------------------------------------------------------------------
-void RSProtokol_t::ResetPID0(void)
-{
-  I_State0 = 0;
-  I_Error0 = 0;
-}
-//---------------------------------------------------------------------------
-double RSProtokol_t::UpdatePID1(double error)
-{
-  double pTerm, iTerm;
-  // Calculate the proportional term.
-  pTerm = P_Gain1 * error;
-
-  // Calculate the integral state with appropriate limiting.
-  if ((I_Error1 > 0 && error < 0) || (I_Error1 < 0 && error > 0))
-  {
-    I_State1 = 0;
-    I_Error1 = 0;
-  }
-  I_State1 = Clamp(I_State1 + error, I_Min1, I_Max1);
-  I_Error1 = error;
-  // Calculate the integral term.
-  iTerm = I_Gain1 * I_State1;
-  return Clamp(pTerm + iTerm, DRIVE1_MIN, DRIVE1_MAX);
-}
-//---------------------------------------------------------------------------
-void RSProtokol_t::ResetPID1(void)
-{
-  I_State1 = 0;
-  I_Error1 = 0;
-}
-//---------------------------------------------------------------------------
-/// Можно сбрасывать флажки для автоподбора дискриминаторов
-bool RSProtokol_t::IsPidSResetted()
-{
-  bool flag = true;
-  flag &= (I_State0 == 0);
-  flag &= (I_State1 == 0);
-  flag &= (I_Error0 == 0);
-  flag &= (I_Error1 == 0);
-  return flag;
-}
-//---------------------------------------------------------------------------
-void RSProtokol_t::FlagAvtoSnyatDiskr()
-{
-  //===>> 29.10.2018
-  //Form_82_Start->CheckBox_DAuto_Standart->Checked = false;
-  //Form_82_Start->CheckBox_DAuto_Shirokie->Checked = false;
-  //Form_82_Start->CheckBox_DAuto_Rengen->Checked = false;
-  //Form_82_Start->CheckBox_DAuto->Checked = false;
-  ev_FlagAvtoSnyatDiskr();
-  //<<=== 29.10.2018
-}
-//---------------------------------------------------------------------------
-void RSProtokol_t::FlagAvtoSnyat() // Снять галочку "Авто"
-{
-  // Снять флажек
-  if (AutoPodbor_1_Un_2_U81 == 1)
-  {
-    //===>> 29.10.2018
-    //Form_82_Start->CheckBox_auto->Checked = false;
-    ev_CheckBoxAutoCheckedFalse();
-    //<<=== 29.10.2018
-  }
-  if (AutoPodbor_1_Un_2_U81 == 2)
-  {
-    //===>> 29.10.2018
-    //Form_82_Start->CheckBox_auto_0_81->Checked = false;
-    ev_CheckBox081CheckedFalse();
-    //<<=== 29.10.2018
-  }
-}
-//---------------------------------------------------------------------------

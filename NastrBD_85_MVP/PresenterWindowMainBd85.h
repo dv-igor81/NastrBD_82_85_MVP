@@ -3,6 +3,7 @@
 #define PresenterWindowMainBd85H
 //---------------------------------------------------------------------------
 #include "IWindowMainBd85.h"
+#include "IFormDispetView.h"
 #include "ConnectBdProt.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"
@@ -12,13 +13,15 @@ class PresenterWindowMainBd85
 public:
     PresenterWindowMainBd85(
         IWindowMainBd85 * view,
+        IFormDispetView * viewDispet,
         IAllProtokolS * allProtokol,
-        ITask * task,
-        ActionSelf<> & as_ShowDispetWindow);
+        ITask * task);
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
 private:
     IWindowMainBd85 * _view;
+    IFormDispetView * _viewDispet;
+
     ConnectBdProt* _connectBdProt;
 
     ActionSelf<> as_FormClose;
@@ -91,6 +94,56 @@ private:
 
     //<<=== Запись в EEPROM
 
+    //===>> Параметры ModBus
+    ActionSelf<const char*> as_MbParamNumberOfBdChange;
+    void MbParamNumberOfBdChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamExpositionChange;
+    void MbParamExpositionChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamMinimumCountChange;
+    void MbParamMinimumCountChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamMaximumCountChange;
+    void MbParamMaximumCountChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamLevelOfOverloadChange;
+    void MbParamLevelOfOverloadChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamQuantityOfIntervalChange;
+    void MbParamQuantityOfIntervalChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamQuantityOfLookChange;
+    void MbParamQuantityOfLookChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamLevelOfAlarm1Change;
+    void MbParamLevelOfAlarm1Change(const char* text);
+
+    ActionSelf<const char*> as_MbParamLevelOfAlarm2Change;
+    void MbParamLevelOfAlarm2Change(const char* text);
+
+    ActionSelf<const char*> as_MbParamLevelOfAlarm3Change;
+    void MbParamLevelOfAlarm3Change(const char* text);
+
+    ActionSelf<const char*> as_MbParamPhonChange;
+    void MbParamPhonChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamDurationOfPhonChange;
+    void MbParamDurationOfPhonChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamDurationOfAlarmChange;
+    void MbParamDurationOfAlarmChange(const char* text);
+
+    ActionSelf<const char*> as_MbParamDurationOfVideoChange;
+    void MbParamDurationOfVideoChange(const char* text);
+
+    ActionSelf<> as_ButtonModBusSetDefClick;
+    void ButtonModBusSetDefClick();
+
+    ActionSelf<> as_ButtonModBusWriteClick;
+    void ButtonModBusWriteClick();
+    //<<=== Параметры ModBus
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
@@ -106,7 +159,6 @@ private:
     ActionEvent<ScalingDataNewBd85*> ev_ScalingOpros;
     ScalingDataNewBd85* _scalingData;
 
-    ActionEvent<> ev_ShowDispetWindow;
     ActionEvent<bool> ev_DisplayNotSaveChanges;
 
     bool InitMkInBd();

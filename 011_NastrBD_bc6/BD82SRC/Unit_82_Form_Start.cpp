@@ -32,7 +32,7 @@
   AnsiString ProgrammVersion = " v4.xx";
 #else
   extern const char * IniFileName;
-  extern AnsiString ProgrammVersion;
+  //extern AnsiString ProgrammVersion;
 #endif
 bool flagPort = false; // Состояние порта Открыт (true) / закрыт (false)
 extern getaddrinfo_t * getaddrinfo;
@@ -67,24 +67,9 @@ void __fastcall TForm_82_Start::updatecom(void)
   ComboBox_NomComPort->ItemIndex = 0;
   Button_UpdateComPortsList->Enabled = false;
 
-  //AnsiString Buff;
-  //Buff = SysErrorMessage( /*87*/ 1407 );
-
-  //===>>
-  //AnsiString Buff;
-  //for ( DWORD err = 0; err < 600000; err++ )
-  //{
-  //  Buff = SysErrorMessage(err);
-  //  if (Buff != "")
-  //  {
-  //    this->Memo_For_Print_Errors->Lines->Add(AnsiString(err) + " " + Buff);
-  //  }
-  //}
-  //<<===
   SetLastError(0);
   while ( true )
   {
-    //S = /*"\\\\.\\*/"COM" + IntToStr(i) + ":";
     S = "\\\\.\\COM" + IntToStr(i); // 03.08.2016
     Sstr = "COM" + IntToStr(i);
     //==\\SetLastError(0);
@@ -133,7 +118,7 @@ void __fastcall TForm_82_Start::updatecom(void)
     }
     catch (...)
     {
-      this->Memo_For_Print_Errors->Lines->Add("updatecom: Ошибка при попытке прочитать ini-файл");
+      this->Memo_For_Print_Errors->Lines->Add(Form_82_Start->GetCurrentTime() + "updatecom: Ошибка при попытке прочитать ini-файл");
       delete IniFile;
     }
     for (int k = 0; k < j; k++)
@@ -154,8 +139,7 @@ void __fastcall TForm_82_Start::updatecom(void)
     bFlagDE = false; // Флаг доступности кнопок (в зависимости от найденых ком-портов)
   }
   Button_UpdateComPortsList->Enabled = true;
-
-  Prot->bFlagChengeKolTik = true; // Отображение КолТика для счёта
+  bFlagChengeKolTik = true; // Отображение КолТика для счёта
   bFlagChengeKolTikSpectr = true; // Отображение КолТика для спектра
 }
 //---------------------------------------------------------------------------
@@ -174,10 +158,6 @@ TOut32 * pOut32 = NULL; // Указатель на функцию Out32
 // Конструктор
 __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
         : TForm(Owner)
-        , as_FlagAvtoSnyatDiskr (this, &TForm_82_Start::FlagAvtoSnyatDiskr_As)
-        , as_OprosBDParam (this, &TForm_82_Start::OprosBDParam_As)
-        , as_CheckBoxAutoCheckedFalse (this, &TForm_82_Start::CheckBoxAutoCheckedFalse_As)
-        , as_CheckBox081CheckedFalse (this, &TForm_82_Start::CheckBox081CheckedFalse_As)
 {
   ptrUhiI = 0;
   kodUhiI = 0;
@@ -229,17 +209,6 @@ __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
   // <<=== 28.02.2015
   // Перенёс из обработчика события "FormShow"
   this->Prot = new RSProtokol_t; // Создать в "куче" экземпляр объекта протокола
-
-
-  //===>> 29.10.2018
-  this->Prot->ev_FlagAvtoSnyatDiskr += as_FlagAvtoSnyatDiskr;
-  this->Prot->ev_OprosBDParam += as_OprosBDParam;
-  this->Prot->ev_CheckBoxAutoCheckedFalse += as_CheckBoxAutoCheckedFalse;
-  this->Prot->ev_CheckBox081CheckedFalse += as_CheckBox081CheckedFalse;
-  //<<=== 29.10.2018
-
-
-
   // Перенёс из обработчика события "FormShow"
   Cprw = new ComPortReadWrite_t(true); // true - Не запускать поток при выделение памяти
   // Перенёс из обработчика события "FormShow"
@@ -254,8 +223,6 @@ __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
   bf_Zabyvchivosti = false;
   bfZvukOn = false;
   bfZvukOff = false;
-
-
 
   /*DWORD style;
   style = GetWindowLong(this->Handle, GWL_EXSTYLE);
@@ -301,7 +268,18 @@ void __fastcall TForm_82_Start::FormClose(TObject *Sender,
     IniFile->WriteInteger( "Form_82_Start_Spectr", "KolTik_Spektr", Form_82_Spectr_BD84->SpinEdit_TimeSpektr->Value );
 
     IniFile->WriteInteger( "Form_82_Start", "FormStartProtModBus", this->RadioGroup_VyborProtokola->ItemIndex );
-    IniFile->WriteInteger("Form_82_Start", "FormStartProtModBusAddr", this->SpinEdit_AddrBD->Value);
+    IniFile->WriteInteger( "Form_82_Start", "FormStartProtModBusAddr", this->SpinEdit_AddrBD->Value);
+
+    if ( RadioGroup_VyborProtokola->ItemIndex == 2 ) // ModBus TCP
+    {
+      IniFile->WriteString( "Form_82_Start", "IpAddrModBusTcp", Edit_IPAddr->Text );
+      IniFile->WriteString( "Form_82_Start", "TcpPortModBusTcp", Edit_IPPort->Text );
+    }
+    else if ( RadioGroup_VyborProtokola->ItemIndex == 3 ) // ModBus RTU (TCP/IP)
+    {
+      IniFile->WriteString( "Form_82_Start", "IpAddrModBusRtuIp", Edit_IPAddr->Text );
+      IniFile->WriteString( "Form_82_Start", "TcpPortModBusRtuIp", Edit_IPPort->Text );
+    }
 
     delete IniFile;
   }
@@ -318,6 +296,14 @@ void __fastcall TForm_82_Start::FormClose(TObject *Sender,
   RadioGroup_Povtor->ItemIndex = -1;
   RadioGroup_VyborProtokola->ItemIndex = -1;    
 #endif
+}
+//---------------------------------------------------------------------------
+AnsiString TForm_82_Start::GetCurrentTime()
+{
+    TDateTime dateTime;
+    AnsiString textTime = dateTime.CurrentTime();
+    textTime += " ";
+    return textTime;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm_82_Start::Timer1Timer(TObject *Sender)
@@ -343,7 +329,7 @@ void __fastcall TForm_82_Start::Timer1Timer(TObject *Sender)
     {
       Timer1->Enabled = false;
       sprintf(Str_err, "Прошло %d секунд", (varTime2 - varTime1)/1000);
-      Memo_For_Print_Errors->Lines->Add(Str_err);
+      Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + Str_err );
       Button_OpenBD_msek->Caption = "ОТКРЫТЬ НА";
       bFlagButton_OpenBD_msek = false; // флаг для определения состояния кнопки OpenBD
       Timer1->Enabled = false;
@@ -369,7 +355,7 @@ void __fastcall TForm_82_Start::Timer1Timer(TObject *Sender)
         sprintf(Str_err, "count = %d; flagFirst = %d; flagSecond = %d",
             Prot->ArrTime[i].count, Prot->ArrTime[i].flagFirst,
             Prot->ArrTime[i].flagSecond);
-        Memo_For_Print_Errors->Lines->Add( Str_err );
+        Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + Str_err );
         if ( i > 0 )
         {
           int VarTnev;
@@ -383,19 +369,19 @@ void __fastcall TForm_82_Start::Timer1Timer(TObject *Sender)
           sprintf(Str_err, "№%d: %d:%d:%d.%d; бит 0 = %d; бит 1 = %d, D = %d",
               i+1, Hour, Min, Sec, MSec, PSW_bit0,
               PSW_bit1, VarTnev - VarTold);
-          Memo_For_Print_Errors->Lines->Add(Str_err);
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
           if (VarTnev - VarTold > 200)
           {
-            Memo_For_Print_Errors->Lines->Add(" > 200");
+            Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + " > 200");
           }
           if ( VarTnev - VarTold < 100 )
           {
-            Memo_For_Print_Errors->Lines->Add(" < 150");
+            Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + " < 150");
           }
         }
       }
       sprintf(Str_err, "Количество признаков неснятого счета = %d", Prot->N1);
-      Memo_For_Print_Errors->Lines->Add(Str_err);
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       return;
     } // end if (varTime2 - varTime1 >= SpinEdit_Sek->Value)
   }
@@ -479,7 +465,7 @@ void __fastcall TForm_82_Start::Timer1Timer(TObject *Sender)
     if ( FlagDebug > 1 )
     {
       sprintf( text, "AutoTimer = %d; ptrBD = %d", AutoTimer, ptrBD );
-      Memo_For_Print_Errors->Lines->Add( text );
+      Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + text );
     }
     if ( AutoTimer == CisloItera ) // CisloItera - Количество повторений для проверки каждого БД
     {
@@ -531,7 +517,7 @@ void __fastcall TForm_82_Start::Button_StartClick(TObject *Sender)
     {
       if ( FlagDebug > 0 )
       {
-        Memo_For_Print_Errors->Lines->Add("Не выбрано ни одного БД");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Не выбрано ни одного БД");
         ShowMessage("Не выбрано ни одного БД");
       }
       return; // Нет ни одного выбранного БД
@@ -578,7 +564,7 @@ void __fastcall TForm_82_Start::Button_StartClick(TObject *Sender)
     {
       if ( FlagDebug > 0 )
       {
-        Memo_For_Print_Errors->Lines->Add("Ошибка открытия порта");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка открытия порта");
         ShowMessage("Ошибка открытия порта");
       }
       RSDisConnect(); // Закрыть ком-порт, если он был открыт
@@ -619,7 +605,7 @@ void __fastcall TForm_82_Start::Button_StartClick(TObject *Sender)
     {
       if ( FlagDebug > 0 )
       {
-        Memo_For_Print_Errors->Lines->Add("Порт закрыт");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Порт закрыт");
       }
     }
     if ( f_Out32 == true )
@@ -646,7 +632,7 @@ void __fastcall TForm_82_Start::Timer2Timer(TObject *Sender)
     {
       if ( FlagDebug > 0 )
       {
-        Memo_For_Print_Errors->Lines->Add("Ошибка: функция Out32 не найдена (timer2)");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: функция Out32 не найдена (timer2)");
       }
     }
     break;
@@ -665,7 +651,7 @@ void __fastcall TForm_82_Start::RadioGroup_VyborProtokolaClick(
   {
     ComPort_Or_TcpIp(true);
 
-    Memo_For_Print_Errors->Lines->Add("Выбран протокол: \"9 битный\"");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Выбран протокол: \"9 битный\"");
     Panel_MoxaSettingsDisplay->Caption = "Если \"MOXA\", то \"RealCOM\"";
 
     ButtonSearch->Enabled = false;
@@ -680,7 +666,7 @@ void __fastcall TForm_82_Start::RadioGroup_VyborProtokolaClick(
     // 28.02.2015 ===>>
     CheckBox_speed->Enabled = true;
     //!CheckBox_TCP->Enabled = false;
-    //Cprw->SetTcpFlag( false );
+    Cprw->SetTcpFlag( false );
     // 28.02.2015 <<===
   }
   if ( RadioGroup_VyborProtokola->ItemIndex == 1 || // ModBus RTU
@@ -697,16 +683,16 @@ void __fastcall TForm_82_Start::RadioGroup_VyborProtokolaClick(
     {
       ComPort_Or_TcpIp(true);
 
-      Memo_For_Print_Errors->Lines->Add("Выбран протокол: \"ModBus RTU\"");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Выбран протокол: \"ModBus RTU\"");
       Panel_MoxaSettingsDisplay->Caption = "Если \"MOXA\", то \"RealCOM\"";
 
-      //Cprw->SetTcpFlag( false );
+      Cprw->SetTcpFlag( false );
     }
     if ( RadioGroup_VyborProtokola->ItemIndex == 2 ) // ModBus TCP
     {
       ComPort_Or_TcpIp(false);
 
-      Memo_For_Print_Errors->Lines->Add("Выбран протокол: \"ModBus TCP\"");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Выбран протокол: \"ModBus TCP\"");
       if (Prot->newProsivka == true)
       {
         Panel_MoxaSettingsDisplay->Caption = "\"MOXA\" из АРМ'а для МОСКОВСКОГО метро (230 400 бит/с.)";
@@ -715,14 +701,14 @@ void __fastcall TForm_82_Start::RadioGroup_VyborProtokolaClick(
       {
         Panel_MoxaSettingsDisplay->Caption = "\"MOXA\" из АРМ'а для МОСКОВСКОГО метро (57 600 бит/с.)";
       }
-      //Cprw->SetTcpFlag( true );
+      Cprw->SetTcpFlag( true );
       CheckBox_Enabled_Write_TCP->Checked = false;
     }
     if ( RadioGroup_VyborProtokola->ItemIndex == 3 ) // ModBus RTU (TCP/IP)
     {
       ComPort_Or_TcpIp(false);
 
-      Memo_For_Print_Errors->Lines->Add("Выбран протокол: \"ModBus RTU (TCP/IP)\"");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Выбран протокол: \"ModBus RTU (TCP/IP)\"");
       if (Prot->newProsivka == true)
       {
         Panel_MoxaSettingsDisplay->Caption = "\"MOXA\" должна быть \"TCP Server\" (230 400 бит/с.)";
@@ -732,7 +718,7 @@ void __fastcall TForm_82_Start::RadioGroup_VyborProtokolaClick(
         Panel_MoxaSettingsDisplay->Caption = "\"MOXA\" должна быть \"TCP Server\" (57 600 бит/с.)";
       }
 
-      //Cprw->SetTcpFlag( true );
+      Cprw->SetTcpFlag( true );
     }
 
     ButtonSearch->Enabled = bFlagDE;
@@ -759,7 +745,7 @@ void __fastcall TForm_82_Start::RadioGroup_VyborProtokolaClick(
   {
     if (FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Порт закрыт");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Порт закрыт");
     }
   }       
 }
@@ -769,12 +755,12 @@ void __fastcall TForm_82_Start::RadioGroup_PovtorClick(TObject *Sender)
   if ( RadioGroup_Povtor->ItemIndex == 0 )
   {
     bFlagPovtora = false; // = false - повторять 1 раз, = true - поарорять постоянно
-    Memo_For_Print_Errors->Lines->Add("Повторить 1 раз");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Повторить 1 раз");
   }
   if (RadioGroup_Povtor->ItemIndex == 1)
   {
     bFlagPovtora = true;
-    Memo_For_Print_Errors->Lines->Add( "Повторять в цикле" );
+    Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + "Повторять в цикле" );
   }        
 }
 //---------------------------------------------------------------------------
@@ -856,7 +842,7 @@ void __fastcall TForm_82_Start::Button_WriteToBDClick(TObject *Sender)
 {
   Cprw->flagSostoyaniya = 3;
   bFlagKnopkaZapis = true;
-  Prot->bFlagChengeKolTik = true;
+  bFlagChengeKolTik = true;
   bFlagChengeKolTikSpectr = true;
 }
 //---------------------------------------------------------------------------
@@ -1306,7 +1292,7 @@ void __fastcall TForm_82_Start::Button_2_Col4_Row6_10Click(TObject *Sender)
   Edit_2_Col2_Row7->Text = IntToStr( iVar_Edit_2_Col2_Row7 /*90*/); // iVar_Edit_2_Col2_Row7
   Edit_2_Col2_Row8->Text = IntToStr( iVar_Edit_2_Col2_Row8 /*2600*/); // iVar_Edit_2_Col2_Row8
   Edit_2_Col2_Row9->Text = IntToStr( iVar_Edit_2_Col2_Row9 /*2300*/); // iVar_Edit_2_Col2_Row9
-  Edit_2_Col2_Row10->Text = IntToStr( iVar_Edit_2_Col2_Row10 /*225*/); // iVar_Edit_2_Col2_Row10
+  //Edit_2_Col2_Row10->Text = IntToStr( iVar_Edit_2_Col2_Row10 /*225*/); // iVar_Edit_2_Col2_Row10
 }
 //---------------------------------------------------------------------------
 bool TForm_82_Start::AutoPodborProverka()
@@ -1425,6 +1411,7 @@ void __fastcall TForm_82_Start::CheckBox_autoClick(TObject *Sender)
 void __fastcall TForm_82_Start::CheckBox_DAutoClick(TObject *Sender)
 {
   Prot->CheckBox_DAuto_Checked = this->CheckBox_DAuto->Checked; // = true, если флажок CheckBox_DAuto установлен
+
   if (CheckBox_DAuto->Checked == true)
   {
     try
@@ -1633,7 +1620,7 @@ void __fastcall TForm_82_Start::ComboBox_NomBDChange(TObject *Sender)
   {
     if (FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Ошибка: функция Out32 не найдена");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: функция Out32 не найдена");
     }
   }
   Prot->Reset();
@@ -1701,9 +1688,7 @@ void __fastcall TForm_82_Start::Printing( void )
     static char str[100];
     sprintf( str, "БД № %d", ptrBD + 1 );
 
-    //StringGrid1->Cells[2][1].ToInt() 
-
-    Memo_For_Print_Errors->Lines->Add( str );
+    Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + str );
     ErrorCode = Prot->ReturnVar;    
     if ( ( ErrorCode == 0 ) && ( ErorAuto == false ) )
     {
@@ -1739,7 +1724,7 @@ int __fastcall TForm_82_Start::OprosBD(void)
   {
     if (FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Ошибка: Функция OprosBD уже работает");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: Функция OprosBD уже работает");
     }
     return -1;
   }
@@ -1749,9 +1734,9 @@ int __fastcall TForm_82_Start::OprosBD(void)
   //===
   if ( ErrorCode != -1 )
   {
-    if ( Prot->bFlagChengeKolTik == true )
+    if ( bFlagChengeKolTik == true )
     {
-      Prot->bFlagChengeKolTik = false;
+      bFlagChengeKolTik = false;
       Edit_KolTik->Text = IntToStr((int)Prot->Data.KolTik); // GetTimeInterval, шт
     }
     //=====================================================================
@@ -1760,41 +1745,41 @@ int __fastcall TForm_82_Start::OprosBD(void)
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Индивидуальный адрес: %d", (int)IndAdr);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row2->Text = IntToStr( Prot->Data.IndAdr );
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Групповой адрес: %d", (int)Prot->Data.IndAdr);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row3->Text = IntToStr( Prot->Data.GrAdr );
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Температура КОД: %d", Prot->Data.Temper);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col2_Row4->Text = IntToStr((int)Prot->Data.Temper);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Температура град.: %.2f", Prot->Data.flTemper);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row4->Text = FormatFloat("0.00", Prot->Data.flTemper);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Напряжение ДНУ (КОД): %d", Prot->Data.DNU);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
         sprintf(Str_err, "Напряжение ДНУ [В]: %.4f", Prot->Data.dbDNU);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col2_Row5->Text = IntToStr((int)Prot->Data.DNU);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Напряжение ДВУ (КОД): %d", Prot->Data.DVU);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
         sprintf(Str_err, "Напряжение ДВУ [В]: %.4f", Prot->Data.dbDVU);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row5->Text = FormatFloat("0.000", Prot->Data.dbDNU);
       //===
@@ -1805,70 +1790,70 @@ int __fastcall TForm_82_Start::OprosBD(void)
       if (FlagDebug > 1)
       {
         sprintf(Str_err, "Напряжение ВЫСОКОЕ измерен (по50) [В]: %.02f", Prot->Data.dbUhiIsr);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row7->Text = FormatFloat("0.0", Prot->Data.dbUhiIsr);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Длительность импульса ШИМ (КОД): %d", Prot->Data.SIM3);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
         sprintf(Str_err, "Напряжение ВЫСОКОЕ измерен (по50) (КОД): %d", Prot->Data.UhiIsr);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col2_Row8->Text = IntToStr((int)Prot->Data.SIM3);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Длительность импульса ШИМ [мкс.]: %.2f", Prot->Data.dbSIM3);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row8->Text = FormatFloat("0.00", Prot->Data.dbSIM3);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Период ШИМ измеренный (КОД): %d", Prot->Data.SIM4);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col2_Row9->Text = IntToStr((int)Prot->Data.SIM4);
       if (FlagDebug > 1)
       {
         sprintf(Str_err, "Период ШИМ измеренный  [мкс.]: %.2f", Prot->Data.dbSIM4);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row9->Text = FormatFloat("0.00", Prot->Data.dbSIM4);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Ток светодиода рассчитанный (КОД): %d", Prot->Data.SIM2);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col2_Row10->Text = IntToStr((int)Prot->Data.SIM2);
       if ( FlagDebug > 1 )
       {
         sprintf(Str_err, "Отклик светодиода (ворота = 5) (КОД): %d", Prot->Data.Ampl);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col2_Row11->Text = IntToStr((int)Prot->Data.Ampl);
       if (FlagDebug > 1)
       {
         sprintf(Str_err, "Отклик светодиода (ворота = 5) [В]: %.2f", Prot->Data.dbAmpl);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row11->Text = FormatFloat("0.00", Prot->Data.dbAmpl);
       if (FlagDebug > 1)
       {
         sprintf(Str_err, "Измерен. отклик светодиода (по50) (КОД): %d", Prot->Data.LEDAmpRcp);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col2_Row12->Text = IntToStr((int)Prot->Data.LEDAmpRcp);
       if (FlagDebug > 1)
       {
         sprintf(Str_err, "Измерен. отклик светодиода (по50) [В]: %.2f", Prot->Data.dbLEDAmpRcp);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       Edit_Col3_Row12->Text = FormatFloat("0.00", Prot->Data.dbLEDAmpRcp);
       // Считать счёт за 0.2 сек
       if (FlagDebug > 1)
       {
         sprintf(Str_err, "Счёт с БД: %d", Prot->Data.CountImp);
-        Memo_For_Print_Errors->Lines->Add(Str_err);
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + Str_err);
       }
       if (Prot->Data.flagFirst == 0)
       {
@@ -1876,10 +1861,9 @@ int __fastcall TForm_82_Start::OprosBD(void)
       }
       if (Prot->ErrorCode != 0 && Prot->ErrorCode != 38) // 38 - не готов флаг счёта
       {
-        //!Memo_For_Print_Errors->Lines->Add(Prot->Str_err);
         Prot->NullsToStr_err(); //
         sprintf(Str_err, "ErrorCode: %d (%s)", Prot->ErrorCode, Prot->Str_err);
-        Memo_For_Print_Errors->Lines->Add( Str_err );
+        Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + Str_err );
       } // END: if ( Prot->Data.flagFirst == 0 )
       if (flagModbusProtokol != 0) // Не "9-ти битный"
       {
@@ -1922,7 +1906,7 @@ int __fastcall TForm_82_Start::OprosBD(void)
     if (FlagDebug > 0)
     {
       sprintf(Str_err, "ErrorCode: %d (%s)", Prot->ErrorCode, Prot->Str_err);
-      Memo_For_Print_Errors->Lines->Add( Str_err ); 
+      Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + Str_err );
       //Memo_For_Print_Errors->Lines->Add( IntToStr(Prot->ErrorCode) + " Ввел эту строку 10.03.2014" );
     }
   }
@@ -1933,20 +1917,20 @@ int __fastcall TForm_82_Start::OprosBD(void)
       Prot->ErrorCode = 0;
       //!Memo_For_Print_Errors->Lines->Add(Prot->Str_err);
       sprintf(Str_err, "ErrorCode: %d (%s)", Prot->ErrorCode, Prot->Str_err);
-      Memo_For_Print_Errors->Lines->Add( Str_err );
-      Memo_For_Print_Errors->Lines->Add("отсутствует флаг готовности счета более 1-го опроса подряд");
+      Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + Str_err );
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "отсутствует флаг готовности счета более 1-го опроса подряд");
     }
   }
   if ( Prot->auto_State_Flag == -1 )
   {
     char chText[50];
     sprintf( chText, "Напряжение ВЫСОКОЕ измерен. ОК (%d)", Prot->Data.KolPopytok );  // Data.KolPopytok
-    Memo_For_Print_Errors->Lines->Add( chText );
+    Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + chText );
     Prot->auto_State_Flag = 0;
   }
   if ( Prot->auto_State_Flag == 100 )
   {
-    Memo_For_Print_Errors->Lines->Add("Напряжение ВЫСОКОЕ измерен. НЕУДАЧА");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Напряжение ВЫСОКОЕ измерен. НЕУДАЧА");
     Prot->auto_State_Flag = 0;
   }
   if ( (Prot->auto_State_Flag != -1) && (Prot->auto_State_Flag != 100) )
@@ -1986,9 +1970,7 @@ int __fastcall TForm_82_Start::RSConnect( const char * device )
   //{
   //  Prot->newProsivka = false; //
   //}
-
-  //if ( Cprw->GetTcpFlag() == true )
-  if ( Prot->flagModbusProtokol == 2 || Prot->flagModbusProtokol == 3 )
+  if ( Cprw->GetTcpFlag() == true )
   {
     try
     {
@@ -2008,12 +1990,12 @@ int __fastcall TForm_82_Start::RSConnect( const char * device )
     {
       if (this->ErrorCode == 0)
       {
-        Memo_For_Print_Errors->Lines->Add("Порт успешно открыт");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Порт успешно открыт");
       }
       if (this->ErrorCode == 2)
       {
         this->ErrorCode = 0;
-        Memo_For_Print_Errors->Lines->Add("Порт уже был открыт");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Порт уже был открыт");
       }
     }
     CheckBox_DAuto->Checked = false;
@@ -2025,7 +2007,7 @@ int __fastcall TForm_82_Start::RSConnect( const char * device )
   {
     if (FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Ошибка открытия порта: ");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка открытия порта: ");
       //Memo_For_Print_Errors->Lines->Add(Prot->Str_err);
     }
     Prot->RSDisConnect(); // Закрыть ком-порт, если он был открыт
@@ -2042,7 +2024,7 @@ int __fastcall TForm_82_Start::RSDisConnect(void)
   {
     if(FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Порт закрыт");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Порт закрыт");
       //flagPort = false; // Порт закрыт
       //flagPort = false; // Порт закрыт          
     }
@@ -2065,7 +2047,7 @@ void __fastcall TForm_82_Start::RSDisConnect2(void)
   {
     if(FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Порт закрыт");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Порт закрыт");
       flagPort = false; // Порт закрыт      
     }
   }
@@ -2099,7 +2081,7 @@ int __fastcall TForm_82_Start::OprosBD_2(void)
   {
     if (FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Ошибка: Функция OprosBD уже работает");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: Функция OprosBD уже работает");
     }
     return -1;
   }
@@ -2151,7 +2133,7 @@ int __fastcall TForm_82_Start::OprosBD_2(void)
     if ( FlagDebug > 1 )
     {
       sprintf( Str_err, "Версия = %s", Prot->Data.Ver );
-      Memo_For_Print_Errors->Lines->Add( Str_err );
+      Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + Str_err );
     }
     Edit_2_Col3_Row2->Text = IntToStr((int)Prot->Data.IndAdrZ);
     Edit_2_Col3_Row3->Text = IntToStr((int)Prot->Data.GrpAdrZ);
@@ -2356,7 +2338,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetIndAdr( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: индивидуальный адрес БД");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: индивидуальный адрес БД");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: индивидуальный адрес БД");
       Edit_2_Col3_Row2->Text = IntToStr( Prot->Data.IndAdrZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2371,7 +2353,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.IndAdrZ = temp;
           ShowMessage("Ошибка EEPROM: индивидуальный адрес БД");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: индивидуальный адрес БД");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: индивидуальный адрес БД");
           Edit_2_Col3_Row2->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2379,7 +2361,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: индивидуальный адрес БД");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: индивидуальный адрес БД");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: индивидуальный адрес БД");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2404,7 +2386,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetGrpAdr( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: групповой адрес БД");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: групповой адрес БД");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: групповой адрес БД");
       Edit_2_Col3_Row3->Text = IntToStr( Prot->Data.GrpAdrZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2419,7 +2401,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.GrpAdrZ = temp;
           ShowMessage("Ошибка EEPROM: групповой адрес БД");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: групповой адрес БД");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: групповой адрес БД");
           Edit_2_Col3_Row3->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2427,7 +2409,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: групповой адрес БД");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: групповой адрес БД");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: групповой адрес БД");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2450,7 +2432,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetDNU( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: дискриминатор нижнего уровня");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: дискриминатор нижнего уровня");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: дискриминатор нижнего уровня");
       Edit_2_Col2_Row4->Text = IntToStr( Prot->Data.DNUZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2466,7 +2448,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.DNUZ = temp;
           ShowMessage("Ошибка EEPROM: дискриминатор нижнего уровня");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: дискриминатор нижнего уровня");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: дискриминатор нижнего уровня");
           Edit_2_Col2_Row4->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2474,7 +2456,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: дискриминатор нижнего уровня");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: дискриминатор нижнего уровня");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: дискриминатор нижнего уровня");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2504,7 +2486,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetDVU( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: дискриминатор верхнего уровня");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: дискриминатор верхнего уровня");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: дискриминатор верхнего уровня");
       Edit_2_Col2_Row5->Text = IntToStr( Prot->Data.DVUZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2520,7 +2502,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке        
           Prot->Data.DVUZ = temp;
           ShowMessage("Ошибка EEPROM: дискриминатор верхнего уровня");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: дискриминатор верхнего уровня");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: дискриминатор верхнего уровня");
           Edit_2_Col2_Row5->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2528,7 +2510,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: DVUZ");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: дискриминатор верхнего уровня");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: дискриминатор верхнего уровня");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2553,7 +2535,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetLEDAmp( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: ток светодиода заданный");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: ток светодиода заданный");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: ток светодиода заданный");
       Edit_2_Col2_Row6->Text = IntToStr( Prot->Data.LEDAmpZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2569,7 +2551,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.LEDAmpZ = temp;
           ShowMessage("Ошибка EEPROM: ток светодиода заданный");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: ток светодиода заданный");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: ток светодиода заданный");
           Edit_2_Col2_Row6->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2577,7 +2559,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: ток светодиода заданный");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: ток светодиода заданный");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: ток светодиода заданный");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2602,7 +2584,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetUhi( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: Длительность ШИМа заданная");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: Длительность ШИМа заданная");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: Длительность ШИМа заданная");
       Edit_2_Col2_Row7->Text = IntToStr( Prot->Data.UhiZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2618,7 +2600,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.UhiZ = temp;
           ShowMessage("Ошибка EEPROM: Длительность ШИМа заданная");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: Длительность ШИМа заданная");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: Длительность ШИМа заданная");
           Edit_2_Col2_Row7->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2626,7 +2608,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: Длительность ШИМа заданная");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: Длительность ШИМа заданная");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: Длительность ШИМа заданная");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2651,7 +2633,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetUhi2( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: период ШИМ начальный");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: период ШИМ начальный");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: период ШИМ начальный");
       Edit_2_Col2_Row8->Text = IntToStr( Prot->Data.SIMstartZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2667,7 +2649,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.SIMstartZ = temp;
           ShowMessage("Ошибка EEPROM: период ШИМ начальный");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: период ШИМ начальный");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: период ШИМ начальный");
           Edit_2_Col2_Row8->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2675,7 +2657,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: период ШИМ начальный");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: период ШИМ начальный");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: период ШИМ начальный");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2705,7 +2687,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->WriteFlashInvert( 9, temp ) == -1 )
     {
       ShowMessage("Ошибка записи: период ШИМ минимальный");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: период ШИМ минимальный");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: период ШИМ минимальный");
       Edit_2_Col2_Row9->Text = IntToStr( Prot->Data.SIMminZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2721,7 +2703,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.SIMminZ = temp;
           ShowMessage("Ошибка EEPROM: период ШИМ минимальный");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: период ШИМ минимальный");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: период ШИМ минимальный");
           Edit_2_Col2_Row9->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2729,7 +2711,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: период ШИМ минимальный");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: период ШИМ минимальный");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: период ШИМ минимальный");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2759,7 +2741,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->SetLEDOtkl( temp ) == -1 )
     {
       ShowMessage("Ошибка записи: заданный отклик светодиода");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: заданный отклик светодиода");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: заданный отклик светодиода");
       Edit_2_Col2_Row10->Text = IntToStr( Prot->Data.LedZadZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2775,7 +2757,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.LedZadZ = temp;
           ShowMessage("Ошибка EEPROM: заданный отклик светодиода");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: заданный отклик светодиода");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: заданный отклик светодиода");
           Edit_2_Col2_Row10->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2783,7 +2765,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: заданный отклик светодиода");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: заданный отклик светодиода");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: заданный отклик светодиода");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2808,7 +2790,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if (Prot->SetSerialNumber(temp) == -1)
     {
       ShowMessage("Ошибка записи: серийный номер");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: серийный номер");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: серийный номер");
       Edit_2_Col3_Row11->Text = IntToStr( Prot->Data.m_ulSerialNumberZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2824,7 +2806,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке        
           Prot->Data.m_ulSerialNumberZ = temp;
           ShowMessage("Ошибка EEPROM: серийный номер");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: серийный номер");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: серийный номер");
           Edit_2_Col3_Row11->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2832,7 +2814,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: серийный номер");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: серийный номер");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: серийный номер");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2859,7 +2841,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if (Prot->SetU0(temp) == -1)
     {
       ShowMessage("Ошибка записи: Напр. при нулевой длит. ШИМ");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: напр. при нулевой длит. ШИМ");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: напр. при нулевой длит. ШИМ");
       Edit_2_Col3_Row12->Text = IntToStr( Prot->Data.m_ulU0Z );
       flagUspeshnoyZapisi = false;
     }
@@ -2875,7 +2857,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке        
           Prot->Data.m_ulU0Z = temp;
           ShowMessage("Ошибка EEPROM: напр. при нулевой длит. ШИМ");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: Напр. при нулевой длит. ШИМ");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: Напр. при нулевой длит. ШИМ");
           Edit_2_Col3_Row12->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2883,7 +2865,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: напр. при нулевой длит. ШИМ");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: напр. при нулевой длит. ШИМ");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: напр. при нулевой длит. ШИМ");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2910,7 +2892,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( Prot->WriteFlashInvert(12, temp) == -1 )
     {
       ShowMessage("Ошибка записи: напр. ном.*");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: напр. ном.*");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: напр. ном.*");
       Edit_2_Col3_Row13->Text = IntToStr( Prot->Data.m_ulUZ );
       flagUspeshnoyZapisi = false;
     }
@@ -2926,7 +2908,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           Prot->Data.m_ulUZ = temp;
           ShowMessage("Ошибка EEPROM: напр. ном.*");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: напр. ном.*");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: напр. ном.*");
           Edit_2_Col3_Row13->Text = IntToStr( temp );
           flagUspeshnogoSravneniya = false;
         }
@@ -2934,7 +2916,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: напр. ном.*");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: напр. ном.*");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: напр. ном.*");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2947,7 +2929,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if( Prot->SetStickyNote( Prot->Data.m_strStickyNote_temp ) == -1 )
     {
       ShowMessage("Ошибка записи: коммент. наклейка (0...23)");
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи: коммент. наклейка (0...23)");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи: коммент. наклейка (0...23)");
       Edit_2_Col2_4_Row_14->Text = Prot->Data.m_strStickyNote;
       flagUspeshnoyZapisi = false;
     }
@@ -2962,7 +2944,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
           // попытке записи выводилось сообщение об ошибке
           strcpy( Prot->Data.m_strStickyNote, Prot->Data.m_strStickyNote_temp );
           ShowMessage("Ошибка EEPROM: коммент. наклейка (0...23)");
-          Memo_For_Print_Errors->Lines->Add("Ошибка EEPROM: коммент. наклейка (0...23)");
+          Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка EEPROM: коммент. наклейка (0...23)");
           Edit_2_Col2_4_Row_14->Text = Prot->Data.m_strStickyNote_temp;
           flagUspeshnogoSravneniya = false;
         }
@@ -2970,7 +2952,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
       else
       {
         ShowMessage("Ошибка чтения: коммент. наклейка (0...23)");
-        Memo_For_Print_Errors->Lines->Add("Ошибка чтения: коммент. наклейка (0...23)");
+        Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка чтения: коммент. наклейка (0...23)");
         flagUspeshnogoChteniya = false;
       }
     }
@@ -2994,7 +2976,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if(Prot->IncFreqLEDImp(LDImp) == -1) // temp = 1 - Включить учащение светодиода, 0 - Откл.
     {
       ShowMessage("Ошибка функции \"IncFreqLEDImp\" (учащение светодиода)");
-      Memo_For_Print_Errors->Lines->Add("Ошибка функции \"IncFreqLEDImp\" (учащение светодиода)");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка функции \"IncFreqLEDImp\" (учащение светодиода)");
       InterfaceUchSvet(Prot->flagARCH); // Вернуть внешний вид
       flagUspeshnoyZapisi = false;
     }
@@ -3032,13 +3014,13 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if(Prot->SpectrCon(SCVar) == -1)
     {
       ShowMessage("Ошибка функции \"SpectrCon\" (АРЧ)");
-      Memo_For_Print_Errors->Lines->Add("Ошибка функции \"SpectrCon\" (АРЧ)");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка функции \"SpectrCon\" (АРЧ)");
       flagUspeshnoyZapisi = false;
     }
     if(Prot->ARCHCon(ACVar) == -1)
     {
       ShowMessage("Ошибка функции \"ARCHCon\" (АРЧ)");
-      Memo_For_Print_Errors->Lines->Add("Ошибка функции \"ARCHCon\" (АРЧ)");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка функции \"ARCHCon\" (АРЧ)");
       flagUspeshnoyZapisi = false;
     }
     if (flagUspeshnoyZapisi == true)
@@ -3078,7 +3060,7 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
   if ( flagIzmeneniy == false )
   {
     ShowMessage("Данные не были изменены, перезапись не производилась");
-    Memo_For_Print_Errors->Lines->Add("Данные не были изменены, перезапись не производилась");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Данные не были изменены, перезапись не производилась");
 
     // После связи с блоком, но до записи в него параметров
     // этот флаг устанавливается в false
@@ -3094,23 +3076,23 @@ void __fastcall TForm_82_Start::ZapEEPROM(void)
     if ( flagUspeshnoyZapisi == false )
     {
       ShowMessage("Ошибка, при попытке записать данные");
-      Memo_For_Print_Errors->Lines->Add("Ошибка, при попытке записать данные");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка, при попытке записать данные");
     }
     if ( flagUspeshnogoSravneniya == false )
     {
       ShowMessage("Ошибка верификации данных");
-      Memo_For_Print_Errors->Lines->Add("Ошибка верификации данных");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка верификации данных");
     }
     if ( flagUspeshnogoChteniya == false )
     {
       ShowMessage("Ошибка, при попытке прочитать данные");
-      Memo_For_Print_Errors->Lines->Add("Ошибка, при попытке прочитать данные");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка, при попытке прочитать данные");
     }
   }
   else
   {
     ShowMessage("Внесённые изменения были сохранены");
-    Memo_For_Print_Errors->Lines->Add("Внесённые изменения были сохранены");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Внесённые изменения были сохранены");
 
     // После связи с блоком, но до записи в него параметров
     // этот флаг устанавливается в false
@@ -3173,7 +3155,7 @@ void __fastcall TForm_82_Start::ZapEEPROM_2(void)
   }
   if (Prot->SetLEDAmp(temp) == -1)
   {
-    Memo_For_Print_Errors->Lines->Add("Ошибка: LEDAmpZ");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: LEDAmpZ");
     flagUspeshnoyZapisi = false;
   }
   else
@@ -3195,7 +3177,7 @@ void __fastcall TForm_82_Start::ZapEEPROM_2(void)
   }
   if (Prot->SetUhi2(temp) == -1)
   {
-    Memo_For_Print_Errors->Lines->Add("Ошибка: SIMstartZ");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: SIMstartZ");
     flagUspeshnoyZapisi = false;
   }
   else
@@ -3205,11 +3187,11 @@ void __fastcall TForm_82_Start::ZapEEPROM_2(void)
   // ===
   if ( flagUspeshnoyZapisi == false )
   {
-    Memo_For_Print_Errors->Lines->Add("Ошибка, при попытке записать данные (ZapEEPROM_2)");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка, при попытке записать данные (ZapEEPROM_2)");
   }
   else
   {
-    Memo_For_Print_Errors->Lines->Add("Внесённые изменения были сохранены (ZapEEPROM_2)");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Внесённые изменения были сохранены (ZapEEPROM_2)");
   }
   // ===
 }
@@ -3228,7 +3210,7 @@ void __fastcall TForm_82_Start::Button_OpenBDClick(TObject *Sender)
     {
       GroupBox_ComPort->Enabled = false; // 17.07.2017
 
-      Prot->bFlagChengeKolTik = true; // Отображение КолТика для счёта
+      bFlagChengeKolTik = true; // Отображение КолТика для счёта
       bFlagChengeKolTikSpectr = true; // Отображение КолТика для спектра
       Prot->AddrBD = StrToInt( SpinEdit_AddrBD->Text );
       Button_OpenBD->Caption = "ЗАКРЫТЬ";
@@ -3423,8 +3405,8 @@ bool __fastcall TForm_82_Start::IzvlechrnieDLL( void )
       iErr = GetLastError();
       strErrorString = "Ошибка " + IntToStr ( iErr );
       strErrorString += ": " + SysErrorMessage( iErr );
-      Memo_For_Print_Errors->Lines->Add("Не удалось найти ресурс файла \"inpout32.dll\"");
-      Memo_For_Print_Errors->Lines->Add( strErrorString );
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Не удалось найти ресурс файла \"inpout32.dll\"");
+      Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + strErrorString );
       return false;
     }
     SetLastError ( 0 );
@@ -3438,8 +3420,8 @@ bool __fastcall TForm_82_Start::IzvlechrnieDLL( void )
       iErr = GetLastError();
       strErrorString = "Ошибка " + IntToStr ( iErr );
       strErrorString += ": " + SysErrorMessage( iErr );
-      Memo_For_Print_Errors->Lines->Add("Не удалось сохранить файл в каталоге: \"" + sPath + "\"");
-      Memo_For_Print_Errors->Lines->Add( strErrorString );
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Не удалось сохранить файл в каталоге: \"" + sPath + "\"");
+      Memo_For_Print_Errors->Lines->Add( GetCurrentTime() + strErrorString );
       delete FileInResource;
       return false;
     }
@@ -3452,31 +3434,31 @@ bool __fastcall TForm_82_Start::IzvlechrnieDLL( void )
   {
     pInt32 = (TInt32*)GetProcAddress( dllInstanse, "Inp32" );
     pOut32 = (TOut32*)GetProcAddress( dllInstanse, "Out32" );
-    Memo_For_Print_Errors->Lines->Add("Файл \"" +  FN1 + "\" подключён");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Файл \"" +  FN1 + "\" подключён");
   }
   else
   {
-    Memo_For_Print_Errors->Lines->Add("Ошибка: файл \"" +  FN1 + "\" НЕ подключён!");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: файл \"" +  FN1 + "\" НЕ подключён!");
   }
   //===
   if ( pInt32 != NULL )
   {
-    Memo_For_Print_Errors->Lines->Add("Функция \"Int32\" найдена");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Функция \"Int32\" найдена");
     f_Inp32 = true;
   }
   else
   {
-    Memo_For_Print_Errors->Lines->Add("Ошибка: Функция \"Int32\" НЕ найдена!");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: Функция \"Int32\" НЕ найдена!");
   }
   //===
   if ( pOut32 != NULL )
   {
-    Memo_For_Print_Errors->Lines->Add("Функция \"Out32\" найдена");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Функция \"Out32\" найдена");
     f_Out32 = true;
   }
   else
   {
-    Memo_For_Print_Errors->Lines->Add("Ошибка: Функция \"Out32\" НЕ найдена!");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: Функция \"Out32\" НЕ найдена!");
   }
   if ( ( pInt32 != NULL ) && ( pOut32 != NULL ) )
   {
@@ -3505,6 +3487,12 @@ void TForm_82_Start::Bd82Bd84( int BdTip )
       FormCaption = FormCaption82;
       break;
   }
+#ifdef _DIA_OBEDINENIE_
+  if( FormDispet != 0 )
+  {
+    ProgrammVersion = FormDispet->GetProgrammVersion();
+  }
+#endif
   FormCaption = FormCaption + ProgrammVersion;
   Form_82_Start->Caption = FormCaption;    
 }
@@ -3520,7 +3508,7 @@ void __fastcall TForm_82_Start::FormShow(TObject *Sender)
 #ifdef _DIA_OBEDINENIE_
   if( FormDispet != 0 )
   {
-    FormDispet->DiaGetWinHandle( this->Handle );  
+    FormDispet->DiaGetWinHandle( this->Handle );
   }
 #endif
   if ( CreateFormFlag_BD82 == false )
@@ -3528,10 +3516,17 @@ void __fastcall TForm_82_Start::FormShow(TObject *Sender)
     if ( this->CheckBox_Proshivka->Checked == true ) // это БД 84 (для ModBus скорость 230 400)
     {
       Prot->newProsivka = true;
+      this->Button_2_Col4_Row6_10->Enabled = false;
     }
     else // это БД 82 (для ModBus скорость 57 600)
     {
       Prot->newProsivka = false; //
+      iVar_Edit_2_Col2_Row6 = 3000;
+      iVar_Edit_2_Col2_Row7 = 90;
+      iVar_Edit_2_Col2_Row8 = 2600;
+      iVar_Edit_2_Col2_Row9 = 2300;
+      iVar_Edit_2_Col2_Row10 = 225;      
+      this->Button_2_Col4_Row6_10->Enabled = true;
     }
 
     AnsiString asFullFileName;
@@ -3576,25 +3571,20 @@ void __fastcall TForm_82_Start::FormShow(TObject *Sender)
       Form_82_Start->Height = IniFile->ReadInteger( "Form_82_Start", "FormStartHeight", 300 );
       Form_82_Start->Left =  IniFile->ReadInteger( "Form_82_Start", "FormStartLeft", 200 );
       Form_82_Start->Top = IniFile->ReadInteger( "Form_82_Start", "FormStartTop", 200 );
-
       ModBusFlag = IniFile->ReadInteger( "Form_82_Start", "FormStartProtModBus", 1 );
-
       Value_Addr_BD = IniFile->ReadInteger( "Form_82_Start", "FormStartProtModBusAddr", 247 );
       AddrLPTPort = IniFile->ReadInteger( "Form_82_Start", "FormStartLptPortAddr", 888 );
       ActivePageIndex = IniFile->ReadInteger( "Form_82_Start", "FormStartActivePageIndex", 0 );
       SpinEditLptAddr->Value = AddrLPTPort;
       PageControl_ModBus_Settings->ActivePageIndex = ActivePageIndex;
-
       tS = IniFile->ReadString( "Form_82_Start", "SelectedComPort", "COM1" );
-      //Vybor_TCP = IniFile->ReadInteger( "Form_82_Start", "FormStart_Vybor_TCP", 0 );
-
       Form_82_Spectr_BD84->SpinEdit_TimeSpektr->Value = IniFile->ReadInteger( "Form_82_Start_Spectr", "KolTik_Spektr", 8 );
 
       ComboBox_NomComPort->Items->Add( tS );
       ComboBox_NomComPort->ItemIndex = 0;
 
       
-      RadioGroup_VyborProtokola->ItemIndex = ModBusFlag;
+      // === 19.04.2018 RadioGroup_VyborProtokola->ItemIndex = ModBusFlag;
 
       RadioGroup_VyborProtokolaClick( this ); // 18.07.2017г.
 
@@ -3611,6 +3601,14 @@ void __fastcall TForm_82_Start::FormShow(TObject *Sender)
         bFlagWyborProtokola = true; // Закрывать и открывать ком порт, при обработке переключателя
         SpinEdit_AddrBD->Value = Value_Addr_BD;
       }
+
+      textIpAddrModBusTcp = IniFile->ReadString("Form_82_Start", "IpAddrModBusTcp", "192.168.3.4");
+      textTcpPortModBusTcp = IniFile->ReadString("Form_82_Start", "TcpPortModBusTcp", "502");
+      textIpAddrModBusRtuIp = IniFile->ReadString("Form_82_Start", "IpAddrModBusRtuIp", "192.168.127.254");
+      textTcpPortModBusRtuIp = IniFile->ReadString("Form_82_Start", "TcpPortModBusRtuIp", "4001");
+
+      RadioGroup_VyborProtokola->ItemIndex = ModBusFlag; // === 19.04.2018
+
       delete IniFile;
     }
     catch(...) // Любое исключение
@@ -3756,11 +3754,11 @@ void __fastcall TForm_82_Start::WriteToBDModBus(void)
     ErrorCode = Prot->ReturnVar;
     if (ErrorCode != -1)
     {
-      Memo_For_Print_Errors->Lines->Add("Успешно перезаписаны параметры ModBus");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Успешно перезаписаны параметры ModBus");
     }
     else
     {
-      Memo_For_Print_Errors->Lines->Add("Ошибка записи параметров ModBus");    
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка записи параметров ModBus");
     }
   }
 }
@@ -3797,7 +3795,7 @@ void __fastcall TForm_82_Start::RadioButton_ARCH1Click(TObject *Sender)
 {
   //if ( FlagOpros == true )
   {
-    Memo_For_Print_Errors->Lines->Add("АРЧ программное");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "АРЧ программное");
     RadioButton_ARCH1->Color = clLime;
     RadioButton_ARCH2->Color = clBtnFace;
     RadioButton_ARCH3->Color = clBtnFace;
@@ -3810,7 +3808,7 @@ void __fastcall TForm_82_Start::RadioButton_ARCH2Click(TObject *Sender)
 {
   //if ( FlagOpros == true )
   {
-    Memo_For_Print_Errors->Lines->Add("АРЧ ручное");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "АРЧ ручное");
     RadioButton_ARCH1->Color = clBtnFace;
     RadioButton_ARCH2->Color = clYellow;
     RadioButton_ARCH3->Color = clBtnFace;
@@ -3823,7 +3821,7 @@ void __fastcall TForm_82_Start::RadioButton_ARCH3Click(TObject *Sender)
 {
   //if ( FlagOpros == true )
   {
-    Memo_For_Print_Errors->Lines->Add("АРЧ отключено");
+    Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "АРЧ отключено");
     RadioButton_ARCH1->Color = clBtnFace;
     RadioButton_ARCH2->Color = clBtnFace;
     RadioButton_ARCH3->Color = clRed;
@@ -3838,12 +3836,12 @@ void __fastcall TForm_82_Start::CheckBox_DiodClick(TObject *Sender)
   {
     if ( CheckBox_Diod->Checked == true )
     {
-      Memo_For_Print_Errors->Lines->Add("Включено учащение светодиода");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Включено учащение светодиода");
       CheckBox_Diod->Color = clRed;
     }
     else
     {
-      Memo_For_Print_Errors->Lines->Add("Отключено уч. св.");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Отключено уч. св.");
       CheckBox_Diod->Color = clBtnFace;
     }
   }
@@ -3907,7 +3905,7 @@ void __fastcall TForm_82_Start::Button_Out32Click(TObject *Sender)
   {
     if (FlagDebug > 0)
     {
-      Memo_For_Print_Errors->Lines->Add("Ошибка: функция Out32 не найдена");
+      Memo_For_Print_Errors->Lines->Add(GetCurrentTime() + "Ошибка: функция Out32 не найдена");
     }
   }
 }
@@ -3932,7 +3930,7 @@ void __fastcall TForm_82_Start::ComPort_Or_TcpIp(bool comPortEnabled)
     ButtonSearch->Enabled = bFlagDE; // Флаг доступности кнопок (в зависимости от найденых ком-портов)
     EnabledWriteForTCP( true );
     GroupBox_ComPort->Caption = " Выбор порта ";
-    //Cprw->SetTcpFlag( false );
+    Cprw->SetTcpFlag( false );
     Edit_IPAddr->Text = "";
     Edit_IPPort->Text = "";
   }
@@ -3954,20 +3952,20 @@ void __fastcall TForm_82_Start::ComPort_Or_TcpIp(bool comPortEnabled)
     if ( RadioGroup_VyborProtokola->ItemIndex == 2 ) // Протокол: ModBus TCP
     {
       EnabledWriteForTCP( false );
-      Edit_IPAddr->Text = "192.168.3.4";
-      Edit_IPPort->Text = "502";
+      Edit_IPAddr->Text = textIpAddrModBusTcp; // "192.168.3.4"
+      Edit_IPPort->Text = textTcpPortModBusTcp; // "502"
     }
     if ( RadioGroup_VyborProtokola->ItemIndex == 3 ) // Протокол: ModBus RTU (TCP/IP)
     {
       EnabledWriteForTCP( true );
-      Edit_IPAddr->Text = "192.168.127.254";
-      Edit_IPPort->Text = "4001";
+      Edit_IPAddr->Text = textIpAddrModBusRtuIp; // "192.168.127.254"
+      Edit_IPPort->Text = textTcpPortModBusRtuIp; // "4001" 
     }
     GroupBox_ComPort->Caption = " TCP / IP ";
     if ( RadioGroup_VyborProtokola->ItemIndex == 2 || // Протокол: ModBus TCP
          RadioGroup_VyborProtokola->ItemIndex == 3 ) // Протокол: ModBus RTU (TCP/IP)
     {
-      //Cprw->SetTcpFlag( true );
+      Cprw->SetTcpFlag( true );
     }
   }
 }
@@ -4669,9 +4667,15 @@ void TForm_82_Start::SetDnuAndDvuStart(int mode)
     DvuKod = 687;
     DnuValue = 0.154;
     DvuValue = 0.922;
+    Prot->Set_CheckBox_DAuto_Checked(
+        false, // ДНУ - Автоподбор
+        false); // ДВУ - Автоподбор
   }
   else if (mode == 2) // Широкие
   {
+    Prot->Set_CheckBox_DAuto_Checked(
+        false, // ДНУ - Автоподбор
+        true); // ДВУ - Нет автоподбору
     DnuKod = 115;
     DvuKod = 2047;
     DnuValue = 0.154;
@@ -4679,6 +4683,9 @@ void TForm_82_Start::SetDnuAndDvuStart(int mode)
   }
   else if (mode == 3) // Ренген
   {
+    Prot->Set_CheckBox_DAuto_Checked(
+        false, // ДНУ - Автоподбор
+        true); // ДВУ - Нет автоподбору
     DnuKod = 298;
     DvuKod = 2047;
     DnuValue = 0.400;
@@ -4686,18 +4693,24 @@ void TForm_82_Start::SetDnuAndDvuStart(int mode)
   }
   else
   {
-    DnuAndDvuMode = false;  
+    DnuAndDvuMode = false;
     return; // Допускается один из режимов: 1, 2 или 3
   }
   if ( RadioGroup_KOD->ItemIndex == 0 ) // код
   {
     Edit_2_Col2_Row4->Text = IntToStr( DnuKod );
-    Edit_2_Col2_Row5->Text = IntToStr( DvuKod );
+    if ( mode == 1 )
+    {
+      Edit_2_Col2_Row5->Text = IntToStr( DvuKod );
+    }
   }
   else if ( RadioGroup_KOD->ItemIndex == 1 )
   {
     Edit_2_Col3_Row4->Text = FloatToStrF( DnuValue, ffGeneral, tochnost_DNU /* точность */, 8 /* число цифр */ );
-    Edit_2_Col3_Row5->Text = FloatToStrF( DvuValue, ffGeneral, tochnost_DVU /* точность */, 8 /* число цифр */ );
+    if ( mode == 1 )
+    {
+      Edit_2_Col3_Row5->Text = FloatToStrF( DvuValue, ffGeneral, tochnost_DVU /* точность */, 8 /* число цифр */ );
+    }
   }
   //Button_WriteToBDClick( (void*)0 );
   CheckBox_DAuto->Checked = true;
@@ -4719,38 +4732,4 @@ void __fastcall TForm_82_Start::Edit_2_Col2_4_Row_14Change(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
-//===>> 29.10.2018
-void TForm_82_Start::FlagAvtoSnyatDiskr_As()
-{
-    CheckBox_DAuto_Standart->Checked = false;
-    CheckBox_DAuto_Shirokie->Checked = false;
-    CheckBox_DAuto_Rengen->Checked = false;
-    CheckBox_DAuto->Checked = false;
-}
-//---------------------------------------------------------------------------
-void TForm_82_Start::OprosBDParam_As()
-{
-  if (bfZvukOn == true)
-  {
-    bfZvukOn = false;
-    ZvukOn();
-  }
-  if (bfZvukOff == true)
-  {
-    bfZvukOff = false;
-    ZvukOff();
-  }
-}
-//---------------------------------------------------------------------------
-void TForm_82_Start::CheckBoxAutoCheckedFalse_As()
-{
-    CheckBox_auto->Checked = false;
-}
-//---------------------------------------------------------------------------
-void TForm_82_Start::CheckBox081CheckedFalse_As()
-{
-    CheckBox_auto_0_81->Checked = false;
-}
-//---------------------------------------------------------------------------
-//<<=== 29.10.2018
 

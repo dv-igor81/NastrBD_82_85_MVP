@@ -23,13 +23,22 @@ extern unsigned char UniAdr;
 extern DWORD err;
 extern Port232 com232;
 //-------------------------------------------------------------------------------
-extern AnsiString ProgrammVersion;
+//extern AnsiString ProgrammVersion;
 AnsiString FormCaption = "Настройка БД 85 (старый)";
 //-------------------------------------------------------------------------------
 __fastcall TForm_85Old_Main::TForm_85Old_Main(TComponent* Owner)
         : TForm(Owner)
 {
   this->Caption = FormCaption;
+  AnsiString ProgrammVersion = "";  
+
+#ifdef _DIA_OBEDINENIE_
+  if( FormDispet != 0 )
+  {
+    ProgrammVersion = FormDispet->GetProgrammVersion();
+  }
+#endif
+
   this->Caption = this->Caption + ProgrammVersion;
   T_Limit = 200;
   flagRefresh = true;

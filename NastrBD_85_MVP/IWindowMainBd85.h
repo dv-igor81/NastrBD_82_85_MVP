@@ -13,6 +13,10 @@ using namespace smartevents;
 class IWindowMainBd85
 {
 public:
+    //===>> Вместо GetSelf
+    virtual void SetVerPoText(const char * text) = 0;
+    //<<=== Вместо GetSelf
+
     virtual void Destroy() = 0;
     virtual ActionSelf<>* GetSelfShow() = 0;
     virtual ActionEvent<>* GetEventFormShow() = 0;
@@ -38,6 +42,25 @@ public:
     virtual ActionEvent<bool>& GetEventRadioButtonArchOffClick() = 0;
     virtual ActionSelf<bool>& GetSelfDisplayNotSaveChanges() = 0;
     //<<=== Запись в EEPROM
+
+    //===>> Параметры ModBus
+    virtual ActionEvent<const char*>& GetEventMbParamNumberOfBdChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamExpositionChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamMinimumCountChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamMaximumCountChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamLevelOfOverloadChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamQuantityOfIntervalChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamQuantityOfLookChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamLevelOfAlarm1Change() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamLevelOfAlarm2Change() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamLevelOfAlarm3Change() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamPhonChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamDurationOfPhonChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamDurationOfAlarmChange() = 0;
+    virtual ActionEvent<const char*>& GetEventMbParamDurationOfVideoChange() = 0;
+    virtual ActionEvent<>& GetEventButtonModBusSetDefClick() = 0;
+    virtual ActionEvent<>& GetEventButtonModBusWriteClick() = 0;
+    //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------
 #endif

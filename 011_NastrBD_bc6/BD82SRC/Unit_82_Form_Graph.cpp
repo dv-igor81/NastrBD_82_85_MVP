@@ -125,7 +125,7 @@ void TForm_Graph::GraphFromFile( void )
   if ( DiaFindFile ( & filename ) == false )
   {
     str_report = "Файл \"" + filename + "\" не существует. Выход из функции...";
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add( Form_82_Start->GetCurrentTime() + str_report );
     Kisp = 0;
     sprintf(chFileName, "Имя файла =");
     Label_srednee->Caption = "Среднее значение =";
@@ -139,7 +139,7 @@ void TForm_Graph::GraphFromFile( void )
   else
   {
     str_report = "Файл \"" + filename + "\" найден";
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add( Form_82_Start->GetCurrentTime() + str_report );
     Kisp = FormPuasson8BD->SpinEdit_Time->Value * 1000;
     sprintf(chFileName, "Имя файла = %s", filename.c_str());
     ////////////////////////////////////////////////////////////////////////
@@ -148,13 +148,13 @@ void TForm_Graph::GraphFromFile( void )
     if ( fs == 0 )
     {
       str_report = "Файл \"" + filename + "\" не открывается. Выход из функции...";
-      Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+      Form_82_Start->Memo_For_Print_Errors->Lines->Add( Form_82_Start->GetCurrentTime() + str_report );
       return;
     }
     else
     {
       str_report = "Файл \"" + filename + "\" успешно открыт";
-      Form_82_Start->Memo_For_Print_Errors->Lines->Add(str_report);
+      Form_82_Start->Memo_For_Print_Errors->Lines->Add(Form_82_Start->GetCurrentTime() + str_report);
     }
     countIndex = 0;
     Err_Svyaz = 0;
@@ -259,7 +259,7 @@ void TForm_Graph::PostrGraf( void )
   }
   if ( SumZn == 0 ) 
   {
-    Form_82_Start->Memo_For_Print_Errors->Lines->Add("Внимание на файл: все значения нулевые");
+    Form_82_Start->Memo_For_Print_Errors->Lines->Add(Form_82_Start->GetCurrentTime() + "Внимание на файл: все значения нулевые");
     // Выведем на график
     this->Series1->Clear();
     this->Series2->Clear();

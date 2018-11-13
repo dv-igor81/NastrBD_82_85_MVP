@@ -16,16 +16,28 @@
 #pragma resource "*.dfm"
 TFormDispet *FormDispet;
 const char * IniFileName = "DIA_VNIIA_NASTR_BD8285";
-AnsiString ProgrammVersion = " v4.28.5";
-AnsiString FormCaption = "Программа для настройки БД: 82, 84, 85";
+//---------------------------------------------------------------------------
+const char * TFormDispet::GetProgrammVersion()
+{
+  return ProgrammVersion.c_str();
+}
+//---------------------------------------------------------------------------
+void TFormDispet::WrapShow()
+{
+  this->Show();
+}
 //---------------------------------------------------------------------------
 __fastcall TFormDispet::TFormDispet(TComponent* Owner)
         : TForm(Owner),
         szAppName( "NastrBD82_85" )
-        , viewLoader ( this )
+        , viewLoader ( this, this )        
 {
   DiaGetWinHandle( Handle );
   uiFlagApp = 0;
+
+  ProgrammVersion = " v4.29.1";
+  AnsiString FormCaption = "Программа для настройки БД: 82, 84, 85";  
+
   this->Caption = FormCaption;
   this->Caption = this->Caption + ProgrammVersion;
 }
@@ -82,7 +94,7 @@ void __fastcall TFormDispet::Button_InitiateClick(TObject *Sender)
         (RadioButton_BD82->Checked == true) ||
         (RadioButton_BD85New->Checked == true) ||
         (RadioButton_BD85Old->Checked == true) ||
-        (RadioButton_BD_82_85->Checked == true) ||
+        //(RadioButton_BD_82_85->Checked == true) ||
         (RadioButton_BD84->Checked == true)
      )
   { // Выбран хоть один пункт
@@ -123,10 +135,10 @@ void __fastcall TFormDispet::Button_InitiateClick(TObject *Sender)
   {
     Form_85Old_Main->Show();
   }
-  else if ( RadioButton_BD_82_85->Checked )
-  {
+  //else if ( RadioButton_BD_82_85->Checked )
+  //{
     //Form_NM_Start->Show();
-  }
+  //}
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormDispet::FormCreate(TObject *Sender)
@@ -150,9 +162,9 @@ void __fastcall TFormDispet::FormCreate(TObject *Sender)
     case 3:
       RadioButton_BD85Old->Checked = true;
       break;
-    case 4:
-      RadioButton_BD_82_85->Checked = true;
-      break;
+    //case 4:
+      //RadioButton_BD_82_85->Checked = true;
+      //break;
     case 5:
       RadioButton_BD84->Checked = true;
       break;
@@ -243,10 +255,10 @@ void __fastcall TFormDispet::FormClose(TObject *Sender,
     {
       iFlagVyborFormy = 3;
     }
-    if ( RadioButton_BD_82_85->Checked == true )
-    {
-      iFlagVyborFormy = 4;
-    }
+    //if ( RadioButton_BD_82_85->Checked == true )
+    //{
+    //  iFlagVyborFormy = 4;
+    //}
     if ( RadioButton_BD84->Checked == true )
     {
       iFlagVyborFormy = 5;

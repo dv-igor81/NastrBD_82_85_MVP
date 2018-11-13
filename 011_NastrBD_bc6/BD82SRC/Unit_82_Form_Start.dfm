@@ -1,6 +1,6 @@
 object Form_82_Start: TForm_82_Start
-  Left = 455
-  Top = 165
+  Left = 246
+  Top = 114
   AutoScroll = False
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1044' 82 / '#1041#1044' 84 vX.XX'
   ClientHeight = 729
@@ -1500,7 +1500,7 @@ object Form_82_Start: TForm_82_Start
             Left = 351
             Top = 121
             Width = 53
-            Height = 103
+            Height = 82
             Caption = '<---'
             Enabled = False
             TabOrder = 50
