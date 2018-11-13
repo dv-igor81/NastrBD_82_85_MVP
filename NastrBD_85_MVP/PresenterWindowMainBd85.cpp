@@ -35,22 +35,6 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_RadioButtonArchOffClick(this, &PresenterWindowMainBd85::RadioButtonArchOffClick)
         , as_DisplayChangeEepromData(this, &PresenterWindowMainBd85::DisplayChangeEepromData)
         //===
-        , as_MbParamNumberOfBdChange(this, &PresenterWindowMainBd85::MbParamNumberOfBdChange)
-        , as_MbParamExpositionChange(this, &PresenterWindowMainBd85::MbParamExpositionChange)
-        , as_MbParamMinimumCountChange(this, &PresenterWindowMainBd85::MbParamMinimumCountChange)
-        , as_MbParamMaximumCountChange(this, &PresenterWindowMainBd85::MbParamMaximumCountChange)
-        , as_MbParamLevelOfOverloadChange(this, &PresenterWindowMainBd85::MbParamLevelOfOverloadChange)
-        , as_MbParamQuantityOfIntervalChange(this, &PresenterWindowMainBd85::MbParamQuantityOfIntervalChange)
-        , as_MbParamQuantityOfLookChange(this, &PresenterWindowMainBd85::MbParamQuantityOfLookChange)
-        , as_MbParamLevelOfAlarm1Change(this, &PresenterWindowMainBd85::MbParamLevelOfAlarm1Change)
-        , as_MbParamLevelOfAlarm2Change(this, &PresenterWindowMainBd85::MbParamLevelOfAlarm2Change)
-        , as_MbParamLevelOfAlarm3Change(this, &PresenterWindowMainBd85::MbParamLevelOfAlarm3Change)
-        , as_MbParamPhonChange(this, &PresenterWindowMainBd85::MbParamPhonChange)
-        , as_MbParamDurationOfPhonChange(this, &PresenterWindowMainBd85::MbParamDurationOfPhonChange)
-        , as_MbParamDurationOfAlarmChange(this, &PresenterWindowMainBd85::MbParamDurationOfAlarmChange)
-        , as_MbParamDurationOfVideoChange(this, &PresenterWindowMainBd85::MbParamDurationOfVideoChange)
-        , as_ButtonModBusSetDefClick(this, &PresenterWindowMainBd85::ButtonModBusSetDefClick)
-        , as_ButtonModBusWriteClick(this, &PresenterWindowMainBd85::ButtonModBusWriteClick)
 {
     _startData = 0;
     _iterData = 0;
@@ -91,24 +75,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayNotSaveChanges += _view->GetSelfDisplayNotSaveChanges();
     //<<=== Запись в EEPROM
 
-    //===>> Параметры ModBus
-    _view->GetEventMbParamNumberOfBdChange() += as_MbParamNumberOfBdChange;
-    _view->GetEventMbParamExpositionChange() += as_MbParamExpositionChange;
-    _view->GetEventMbParamMinimumCountChange() += as_MbParamMinimumCountChange;
-    _view->GetEventMbParamMaximumCountChange() += as_MbParamMaximumCountChange;
-    _view->GetEventMbParamLevelOfOverloadChange() += as_MbParamLevelOfOverloadChange;
-    _view->GetEventMbParamQuantityOfIntervalChange() += as_MbParamQuantityOfIntervalChange;
-    _view->GetEventMbParamQuantityOfLookChange() += as_MbParamQuantityOfLookChange;
-    _view->GetEventMbParamLevelOfAlarm1Change() += as_MbParamLevelOfAlarm1Change;
-    _view->GetEventMbParamLevelOfAlarm2Change() += as_MbParamLevelOfAlarm2Change;
-    _view->GetEventMbParamLevelOfAlarm3Change() += as_MbParamLevelOfAlarm3Change;
-    _view->GetEventMbParamPhonChange() += as_MbParamPhonChange;
-    _view->GetEventMbParamDurationOfPhonChange() += as_MbParamDurationOfPhonChange;
-    _view->GetEventMbParamDurationOfAlarmChange() += as_MbParamDurationOfAlarmChange;
-    _view->GetEventMbParamDurationOfVideoChange() += as_MbParamDurationOfVideoChange;
-    _view->GetEventButtonModBusSetDefClick() += as_ButtonModBusSetDefClick;
-    _view->GetEventButtonModBusWriteClick() += as_ButtonModBusWriteClick;
-    //<<=== Параметры ModBus
+    _mbParam = new ModBusParam( allProtokol, _view->GetModBusEventContainer() );
 
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
     ev_Show(); // Прказать форму
@@ -116,6 +83,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
 {
+    delete _mbParam;
     _view->Destroy();
 }
 //---------------------------------------------------------------------------
@@ -746,68 +714,4 @@ bool PresenterWindowMainBd85::WriteEEProm()
     }
     return flag;
 }
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamNumberOfBdChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamExpositionChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamMinimumCountChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamMaximumCountChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamLevelOfOverloadChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamQuantityOfIntervalChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamQuantityOfLookChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamLevelOfAlarm1Change(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamLevelOfAlarm2Change(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamLevelOfAlarm3Change(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamPhonChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamDurationOfPhonChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamDurationOfAlarmChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::MbParamDurationOfVideoChange(const char* text)
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::ButtonModBusSetDefClick()
-{
-}
-//---------------------------------------------------------------------------
-void PresenterWindowMainBd85::ButtonModBusWriteClick()
-{
-}
-//---------------------------------------------------------------------------
+

@@ -17,13 +17,14 @@
       ..\Library\AllProtokolS\IAllProtokolS.obj 
       ..\Library\AllProtokolS\modbus.obj ..\Library\AllProtokolS\modbus-data.obj 
       ..\Library\AllProtokolS\modbus-tcp.obj 
-      ..\Library\AllProtokolS\RSProtokol.obj 
-      ..\Library\AllProtokolS\Protokol_t.obj ..\Library\Unit_DIA_Global_Funk.obj 
+      ..\Library\AllProtokolS\RSProtokol.obj ..\Library\Unit_DIA_Global_Funk.obj 
       ..\Library\smartevents\ActionAllBase.obj 
       ..\Library\smartevents\ActionDebugSettings.obj 
       ..\Library\smartevents\ActionEventBase.obj 
       ..\Library\smartevents\ActionObjectBase.obj 
-      ..\Library\smartevents\ActionSelfBase.obj ..\Library\Utilites\TextHelper.obj"/>
+      ..\Library\smartevents\ActionSelfBase.obj 
+      ..\Library\Utilites\TextHelper.obj 
+      ..\Library\AllProtokolS\ProtokolName_t.obj"/>
     <RESFILES value="NastrBD.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -44,7 +45,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi Iocomp65.bpi"/>
-    <PATHCPP value=".;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Utilites"/>
+    <PATHCPP value=".;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Utilites;..\Library\AllProtokolS"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -104,7 +105,6 @@
       <FILE FILENAME="..\Library\AllProtokolS\modbus-data.cpp" FORMNAME="" UNITNAME="modbus-data.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\modbus-tcp.cpp" FORMNAME="" UNITNAME="modbus-tcp.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\Protokol_t.cpp" FORMNAME="" UNITNAME="Protokol_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Unit_DIA_Global_Funk.cpp" FORMNAME="" UNITNAME="Unit_DIA_Global_Funk" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\smartevents\ActionAllBase.cpp" FORMNAME="" UNITNAME="ActionAllBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\smartevents\ActionDebugSettings.cpp" FORMNAME="" UNITNAME="ActionDebugSettings.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -112,6 +112,7 @@
       <FILE FILENAME="..\Library\smartevents\ActionObjectBase.cpp" FORMNAME="" UNITNAME="ActionObjectBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\smartevents\ActionSelfBase.cpp" FORMNAME="" UNITNAME="ActionSelfBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Utilites\TextHelper.cpp" FORMNAME="" UNITNAME="TextHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\AllProtokolS\ProtokolName_t.cpp" FORMNAME="" UNITNAME="ProtokolName_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

@@ -7,13 +7,13 @@
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
+#include <Buttons.hpp>
+#include <ComCtrls.hpp>
+#include <Mask.hpp>
 //---------------------------------------------------------------------------
 #include "ProtokolName_t.h"
 #include "ConnectionStateInfo_t.h"
 #include "IWindowMainBd85.h"
-#include <ComCtrls.hpp>
-#include <Mask.hpp>
-#include <Buttons.hpp>
 //---------------------------------------------------------------------------
 class TWindowMainBd85 : public TForm, public IWindowMainBd85
 {
@@ -141,6 +141,7 @@ __published:	// IDE-managed Components
         TButton *button_StartStopScaling;
         TButton *button_SaveToFile;
         TLabel *Label_VerPo;
+        TButton *Button5;
         TScrollBox *ScrollBox_SettingsForModBus;
         TGroupBox *GroupBox_SettingsForModbus;
         TLabel *Label_NumberOfBd;
@@ -307,22 +308,7 @@ private:	// User declarations
     //<<=== Запись в EEPROM
 
     //===>> Параметры ModBus
-    ActionEvent<const char*> ev_modBusParam_NumberOfBdChange;
-    ActionEvent<const char*> ev_modBusParam_ExpositionChange;
-    ActionEvent<const char*> ev_modBusParam_MinimumCountChange;
-    ActionEvent<const char*> ev_modBusParam_MaximumCountChange;
-    ActionEvent<const char*> ev_modBusParam_LevelOfOverloadChange;
-    ActionEvent<const char*> ev_modBusParam_QuantityOfIntervalChange;
-    ActionEvent<const char*> ev_modBusParam_QuantityOfLookChange;
-    ActionEvent<const char*> ev_modBusParam_LevelOfAlarm_1Change;
-    ActionEvent<const char*> ev_modBusParam_LevelOfAlarm_2Change;
-    ActionEvent<const char*> ev_modBusParam_LevelOfAlarm_3Change;
-    ActionEvent<const char*> ev_modBusParam_PhonChange;
-    ActionEvent<const char*> ev_modBusParam_DurationOfPhonChange;
-    ActionEvent<const char*> ev_modBusParam_DurationOfAlarmChange;
-    ActionEvent<const char*> ev_modBusParam_DurationOfVideoChange;
-    ActionEvent<> ev_button_ModBus_SetDefClick;
-    ActionEvent<> ev_button_ModBus_WriteClick;
+    ModBusEventContainer mbContainer;
     //<<=== Параметры ModBus
 
 public:		// User declarations
@@ -361,22 +347,7 @@ public:		// User declarations
     //<<=== Запись в EEPROM
 
     //===>> Параметры ModBus
-    ActionEvent<const char*>& GetEventMbParamNumberOfBdChange();
-    ActionEvent<const char*>& GetEventMbParamExpositionChange();
-    ActionEvent<const char*>& GetEventMbParamMinimumCountChange();
-    ActionEvent<const char*>& GetEventMbParamMaximumCountChange();
-    ActionEvent<const char*>& GetEventMbParamLevelOfOverloadChange();
-    ActionEvent<const char*>& GetEventMbParamQuantityOfIntervalChange();
-    ActionEvent<const char*>& GetEventMbParamQuantityOfLookChange();
-    ActionEvent<const char*>& GetEventMbParamLevelOfAlarm1Change();
-    ActionEvent<const char*>& GetEventMbParamLevelOfAlarm2Change();
-    ActionEvent<const char*>& GetEventMbParamLevelOfAlarm3Change();
-    ActionEvent<const char*>& GetEventMbParamPhonChange();
-    ActionEvent<const char*>& GetEventMbParamDurationOfPhonChange();
-    ActionEvent<const char*>& GetEventMbParamDurationOfAlarmChange();
-    ActionEvent<const char*>& GetEventMbParamDurationOfVideoChange();
-    ActionEvent<>& GetEventButtonModBusSetDefClick();
-    ActionEvent<>& GetEventButtonModBusWriteClick();
+    ModBusEventContainer * GetModBusEventContainer();
     //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------

@@ -7,6 +7,7 @@
 #include "ConnectBdProt.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"
+#include "ModBusParam.h"
 //---------------------------------------------------------------------------
 class PresenterWindowMainBd85
 {
@@ -94,56 +95,6 @@ private:
 
     //<<=== Запись в EEPROM
 
-    //===>> Параметры ModBus
-    ActionSelf<const char*> as_MbParamNumberOfBdChange;
-    void MbParamNumberOfBdChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamExpositionChange;
-    void MbParamExpositionChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamMinimumCountChange;
-    void MbParamMinimumCountChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamMaximumCountChange;
-    void MbParamMaximumCountChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamLevelOfOverloadChange;
-    void MbParamLevelOfOverloadChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamQuantityOfIntervalChange;
-    void MbParamQuantityOfIntervalChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamQuantityOfLookChange;
-    void MbParamQuantityOfLookChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamLevelOfAlarm1Change;
-    void MbParamLevelOfAlarm1Change(const char* text);
-
-    ActionSelf<const char*> as_MbParamLevelOfAlarm2Change;
-    void MbParamLevelOfAlarm2Change(const char* text);
-
-    ActionSelf<const char*> as_MbParamLevelOfAlarm3Change;
-    void MbParamLevelOfAlarm3Change(const char* text);
-
-    ActionSelf<const char*> as_MbParamPhonChange;
-    void MbParamPhonChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamDurationOfPhonChange;
-    void MbParamDurationOfPhonChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamDurationOfAlarmChange;
-    void MbParamDurationOfAlarmChange(const char* text);
-
-    ActionSelf<const char*> as_MbParamDurationOfVideoChange;
-    void MbParamDurationOfVideoChange(const char* text);
-
-    ActionSelf<> as_ButtonModBusSetDefClick;
-    void ButtonModBusSetDefClick();
-
-    ActionSelf<> as_ButtonModBusWriteClick;
-    void ButtonModBusWriteClick();
-    //<<=== Параметры ModBus
-
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
@@ -192,7 +143,6 @@ private:
 
     ActionSelf<> as_DisplayChangeEepromData;
     void DisplayChangeEepromData();
-    //bool _isTextChange;
     bool _textChangeIgnore;
 
     bool ChangeEepromData(); // true - Изменения внесены в ГИП, но не записаны в EEPROM
@@ -231,6 +181,8 @@ private:
     void FirstCopyEEprom();
     bool _bfEepromFirstCopy;
     bool _flagWriteToEeprom; // true - для записи в EEPROM
+
+    ModBusParam * _mbParam;
 };
 //---------------------------------------------------------------------------
 #endif

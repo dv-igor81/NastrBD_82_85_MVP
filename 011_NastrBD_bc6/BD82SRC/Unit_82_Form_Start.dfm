@@ -23,10 +23,10 @@ object Form_82_Start: TForm_82_Start
     Top = 0
     Width = 889
     Height = 710
-    ActivePage = TabSheet_Main
+    ActivePage = TabSheet_Modbus
     Align = alClient
     Style = tsButtons
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = PageControl_ModBus_SettingsChange
     object TabSheet_Main: TTabSheet

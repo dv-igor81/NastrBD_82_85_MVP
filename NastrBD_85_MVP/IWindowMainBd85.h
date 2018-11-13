@@ -9,6 +9,7 @@ using namespace smartevents;
 #include "StartDataNewBd85.h"
 #include "IterDataNewBd85.h"
 #include "ScalingDataNewBd85.h"
+#include "ModBusEventContainer.h"
 //---------------------------------------------------------------------------
 class IWindowMainBd85
 {
@@ -44,22 +45,7 @@ public:
     //<<=== Запись в EEPROM
 
     //===>> Параметры ModBus
-    virtual ActionEvent<const char*>& GetEventMbParamNumberOfBdChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamExpositionChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamMinimumCountChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamMaximumCountChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamLevelOfOverloadChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamQuantityOfIntervalChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamQuantityOfLookChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamLevelOfAlarm1Change() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamLevelOfAlarm2Change() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamLevelOfAlarm3Change() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamPhonChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamDurationOfPhonChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamDurationOfAlarmChange() = 0;
-    virtual ActionEvent<const char*>& GetEventMbParamDurationOfVideoChange() = 0;
-    virtual ActionEvent<>& GetEventButtonModBusSetDefClick() = 0;
-    virtual ActionEvent<>& GetEventButtonModBusWriteClick() = 0;
+    virtual ModBusEventContainer * GetModBusEventContainer() = 0;
     //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------

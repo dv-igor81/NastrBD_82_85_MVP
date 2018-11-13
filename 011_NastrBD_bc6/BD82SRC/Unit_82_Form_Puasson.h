@@ -13,7 +13,7 @@
 //---------------------------------------------------------------------------
 #include <iostream>
 #include <fstream>
-#include "Unit_82_RSProtokol.h"
+#include "RSProtokol.h"
 //---------------------------------------------------------------------------
 // 11.11.2014 - Добавил строку: #include "Unit_82_Form_Graph.h"
 #include "Unit_82_Form_Graph.h"

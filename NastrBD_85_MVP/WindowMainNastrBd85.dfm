@@ -28,10 +28,10 @@ object WindowMainBd85: TWindowMainBd85
     Top = 0
     Width = 662
     Height = 625
-    ActivePage = TabSheet_MainParam
+    ActivePage = TabSheet_ModBusParam
     Align = alClient
     Style = tsFlatButtons
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabSheet_MainParam: TTabSheet
       Caption = #1054#1089#1085#1086#1074#1085#1099#1077' '#1087#1072#1088#1072#1084#1077#1090#1088#1099
@@ -43,8 +43,8 @@ object WindowMainBd85: TWindowMainBd85
         Align = alClient
         TabOrder = 0
         object Label_ChangeEEPROM: TLabel
-          Left = 454
-          Top = 568
+          Left = 452
+          Top = 508
           Width = 190
           Height = 19
           Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
@@ -558,9 +558,9 @@ object WindowMainBd85: TWindowMainBd85
         end
         object GroupBox_VerPo: TGroupBox
           Left = 448
-          Top = 269
+          Top = 268
           Width = 202
-          Height = 179
+          Height = 207
           Caption = ' '#1048#1085#1092#1086' '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
@@ -571,7 +571,7 @@ object WindowMainBd85: TWindowMainBd85
           TabOrder = 2
           object Label_VerPo: TLabel
             Left = 35
-            Top = 130
+            Top = 160
             Width = 48
             Height = 16
             Caption = #1042#1077#1088#1089#1080#1103
@@ -584,7 +584,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo3: TEdit
             Left = 93
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -600,7 +600,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo0: TEdit
             Left = 12
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -616,7 +616,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo1: TEdit
             Left = 39
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -632,7 +632,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object Edit_VerPo2: TEdit
             Left = 66
-            Top = 148
+            Top = 178
             Width = 25
             Height = 24
             TabStop = False
@@ -682,7 +682,7 @@ object WindowMainBd85: TWindowMainBd85
           end
           object GroupBox_ReverseLink: TGroupBox
             Left = 6
-            Top = 40
+            Top = 70
             Width = 146
             Height = 59
             Caption = ' '#1054#1073#1088#1072#1090#1085#1072#1103' '#1089#1074#1103#1079#1100' '
@@ -724,9 +724,23 @@ object WindowMainBd85: TWindowMainBd85
               OnClick = radioButton_ArchOffClick
             end
           end
+          object Button5: TButton
+            Left = 6
+            Top = 45
+            Width = 120
+            Height = 25
+            Caption = #1057#1090#1072#1090'. '#1072#1085#1072#1083#1080#1079
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -12
+            Font.Name = 'Courier New'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 7
+          end
           object BitBtn_ArchOnOffDisplay: TBitBtn
             Left = 8
-            Top = 102
+            Top = 132
             Width = 145
             Height = 28
             Cancel = True
@@ -738,7 +752,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ModalResult = 7
             ParentFont = False
-            TabOrder = 7
+            TabOrder = 8
             NumGlyphs = 2
           end
         end
