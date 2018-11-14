@@ -220,6 +220,7 @@ __published:	// IDE-managed Components
         void __fastcall Button_ModBus_SetDefClick(TObject *Sender);
         void __fastcall Button_ModBus_WriteClick(TObject *Sender);
         void __fastcall Edit_MaximumCountChange(TObject *Sender);
+        void __fastcall PageControl_WindowBd85Change(TObject *Sender);
 public:
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -308,7 +309,7 @@ private:	// User declarations
     //<<=== Запись в EEPROM
 
     //===>> Параметры ModBus
-    ModBusEventContainer mbContainer;
+    ModBusEventContainerBd85 mbContainer;
     //<<=== Параметры ModBus
 
 public:		// User declarations
@@ -347,7 +348,8 @@ public:		// User declarations
     //<<=== Запись в EEPROM
 
     //===>> Параметры ModBus
-    ModBusEventContainer * GetModBusEventContainer();
+    ModBusEventContainerBd85 * GetModBusEventContainer();
+    void DisplayModBusParamData( ModBusTextDataBd85 * data );
     //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------

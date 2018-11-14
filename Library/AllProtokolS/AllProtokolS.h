@@ -62,6 +62,30 @@ public:
 
     ActionEvent<const char*>* GetEventErrorCountIncrement();
 
+    bool ReadFlashInvert(
+        unsigned int memoryAddr,
+        unsigned long * data);
+
+    bool ReadFlash(
+        unsigned int memoryAddr,
+        unsigned long * data);
+        
+    bool ReadFlash2(
+        unsigned int memoryAddr,
+        unsigned long * data);
+
+    bool WriteFlashInvert(
+        unsigned int memoryAddr,
+        unsigned long data);
+
+    bool WriteFlash(
+        unsigned int memoryAddr,
+        unsigned long data);
+
+    bool WriteFlash2(
+        unsigned int memoryAddr,
+        unsigned long data);
+
 private:
     enum { comPortCount = 100, ipAddrSize = 16, comPortNameSize = 7 };
     bool findComPorts[comPortCount];

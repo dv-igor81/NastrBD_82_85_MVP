@@ -1,11 +1,11 @@
 //---------------------------------------------------------------------------
-#ifndef ModBusEventContainerH
-#define ModBusEventContainerH
+#ifndef ModBusEventContainerBd85H
+#define ModBusEventContainerBd85H
 //---------------------------------------------------------------------------
 #include "ActionEvent.h"
 using namespace smartevents;
 //---------------------------------------------------------------------------
-class ModBusEventContainer
+class ModBusEventContainerBd85
 {
 public:
     //===>> Параметры ModBus
@@ -23,9 +23,10 @@ public:
     ActionEvent<const char*> ev_DurationOfPhonChange; // Длит. подинтервала фона, мс
     ActionEvent<const char*> ev_DurationOfAlarmChange; // Длит. сигнала тревоги
     ActionEvent<const char*> ev_DurationOfVideoChange; // Длит. сигнала видео
+    //<<=== Параметры ModBus
     ActionEvent<> ev_SetDefClick; // По умолчанию
     ActionEvent<> ev_WriteClick; // Запись
-    //<<=== Параметры ModBus
+    ActionEvent<int> ev_ActivePageIndex; // Перешли на другую вкладку
 };
 //---------------------------------------------------------------------------
 #endif

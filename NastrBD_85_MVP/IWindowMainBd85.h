@@ -9,7 +9,8 @@ using namespace smartevents;
 #include "StartDataNewBd85.h"
 #include "IterDataNewBd85.h"
 #include "ScalingDataNewBd85.h"
-#include "ModBusEventContainer.h"
+#include "ModBusEventContainerBd85.h"
+#include "ModBusTextDataBd85.h"
 //---------------------------------------------------------------------------
 class IWindowMainBd85
 {
@@ -45,7 +46,8 @@ public:
     //<<=== Запись в EEPROM
 
     //===>> Параметры ModBus
-    virtual ModBusEventContainer * GetModBusEventContainer() = 0;
+    virtual ModBusEventContainerBd85 * GetModBusEventContainer() = 0;
+    virtual void DisplayModBusParamData( ModBusTextDataBd85 * data ) = 0;
     //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------

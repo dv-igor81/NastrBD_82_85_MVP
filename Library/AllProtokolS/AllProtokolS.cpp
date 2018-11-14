@@ -362,10 +362,56 @@ bool AllProtokolS::GetScaling(unsigned short * scaling)
 bool AllProtokolS::SetArch(unsigned char Arch)
 {
     int result = protokol->ARCHCon( Arch );
-    return ErrorChecked( result );    
+    return ErrorChecked( result );
 }
 //---------------------------------------------------------------------------
+bool AllProtokolS::ReadFlashInvert(
+    unsigned int memoryAddr,
+    unsigned long * data)
+{
+    int result = protokol->ReadFlashInvert(memoryAddr, data);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
+bool AllProtokolS::ReadFlash(
+    unsigned int memoryAddr,
+    unsigned long * data)
+{
+    int result = protokol->ReadFlash(memoryAddr, data);
+    return ErrorChecked( result );
+}
+//---------------------------------------------------------------------------
+bool AllProtokolS::ReadFlash2(
+    unsigned int memoryAddr,
+    unsigned long * data)
+{
+    int result = protokol->ReadFlash2(memoryAddr, data);
+    return ErrorChecked( result );
+}
+//---------------------------------------------------------------------------
+bool AllProtokolS::WriteFlashInvert(
+    unsigned int memoryAddr,
+    unsigned long data)
+{
+    int result = protokol->WriteFlashInvert(memoryAddr, data);
+    return ErrorChecked( result );
+}
+//---------------------------------------------------------------------------
+bool AllProtokolS::WriteFlash(
+    unsigned int memoryAddr,
+    unsigned long data)
+{
+    int result = protokol->WriteFlash(memoryAddr, data);
+    return ErrorChecked( result );
+}
+//---------------------------------------------------------------------------
+bool AllProtokolS::WriteFlash2(
+    unsigned int memoryAddr,
+    unsigned long data)
+{
+    int result = protokol->WriteFlash2(memoryAddr, data);
+    return ErrorChecked( result );
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

@@ -63,6 +63,31 @@ public:
     virtual bool GetWidthPwm(unsigned short * widthPwm) = 0; // Получить длительность ШИМ (КК 0x1C, 3)
     virtual bool GetPeriodPwm(unsigned short * periodPwm) = 0; // Получить период ШИМ (КК 0x1C, 4)
     virtual bool GetScaling(unsigned short * scaling) = 0; // Получить счёт импульсов
+
+
+    virtual bool ReadFlashInvert(
+        unsigned int memoryAddr,
+        unsigned long * data) = 0;
+
+    //virtual bool ReadFlash(
+    //    unsigned int memoryAddr,
+    //    unsigned long * data) = 0;
+
+    virtual bool ReadFlash2(
+        unsigned int memoryAddr,
+        unsigned long * data) = 0;
+
+    virtual bool WriteFlashInvert(
+        unsigned int memoryAddr,
+        unsigned long data) = 0;
+
+    //virtual bool WriteFlash(
+    //    unsigned int memoryAddr,
+    //    unsigned long data) = 0;
+
+    virtual bool WriteFlash2(
+        unsigned int memoryAddr,
+        unsigned long data) = 0;
 };
 //---------------------------------------------------------------------------
 #endif

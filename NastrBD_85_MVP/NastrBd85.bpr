@@ -25,7 +25,8 @@
       ..\Library\AllProtokolS\ProtokolName_t.obj 
       ..\Library\AllProtokolS\ConnectBdProt.obj 
       ..\Library\AllProtokolS\HelperConnectFourBdProt.obj ScalingDataNewBd85.obj 
-      ..\NastrBD_82_85\IFormDispetView.obj ModBusParamBd85.obj"/>
+      ..\NastrBD_82_85\IFormDispetView.obj ModBusParamBd85.obj 
+      ModBusEventContainerBd85.obj IModBusParamDataBd85.obj ModBusTextDataBd85.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -111,6 +112,9 @@
       <FILE FILENAME="ScalingDataNewBd85.cpp" FORMNAME="" UNITNAME="ScalingDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_82_85\IFormDispetView.cpp" FORMNAME="" UNITNAME="IFormDispetView" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModBusParamBd85.cpp" FORMNAME="" UNITNAME="ModBusParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ModBusEventContainerBd85.cpp" FORMNAME="" UNITNAME="ModBusEventContainerBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="IModBusParamDataBd85.cpp" FORMNAME="" UNITNAME="IModBusParamDataBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ModBusTextDataBd85.cpp" FORMNAME="" UNITNAME="ModBusTextDataBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

@@ -319,6 +319,24 @@ void TWindowMainBd85::DisplayScalingData( ScalingDataNewBd85* data )
     Edit_MiddleSecondScaling->Text = data->GetMiddleScaling(); // —редний счЄт за секунду
 }
 //---------------------------------------------------------------------------
+void TWindowMainBd85::DisplayModBusParamData( ModBusTextDataBd85 * data )
+{
+    Edit_NumberOfBd->Text = data->GetNumberOfBd();
+    Edit_Exposition->Text = data->GetExposition();
+    Edit_MinimumCount->Text = data->GetMinimumCount();
+    Edit_MaximumCount->Text = data->GetMaximumCount();
+    Edit_LevelOfOverload->Text = data->GetLevelOfOverload();
+    Edit_QuantityOfInterval->Text = data->GetQuantityOfInterval();
+    Edit_QuantityOfLook->Text = data->GetQuantityOfLook();
+    Edit_LevelOfAlarm_1->Text = data->GetLevelOfAlarm1();
+    Edit_LevelOfAlarm_2->Text = data->GetLevelOfAlarm2();
+    Edit_LevelOfAlarm_3->Text = data->GetLevelOfAlarm3();
+    Edit_Phon->Text = data->GetPhon();
+    Edit_DurationOfPhon->Text = data->GetDurationOfPhon();
+    Edit_DurationOfAlarm->Text = data->GetDurationOfAlarm();
+    Edit_DurationOfVideo->Text = data->GetDurationOfVideo();
+}    
+//---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayCountConnectError(const char* text)
 {
     Edit_ErrorConnectCount->Text = text;
@@ -618,9 +636,15 @@ void __fastcall TWindowMainBd85::Button_ModBus_WriteClick(TObject *Sender)
     mbContainer.ev_WriteClick();
 }
 //---------------------------------------------------------------------------
-ModBusEventContainer * TWindowMainBd85::GetModBusEventContainer()
+ModBusEventContainerBd85 * TWindowMainBd85::GetModBusEventContainer()
 {
     return & mbContainer;
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::PageControl_WindowBd85Change(
+      TObject *Sender)
+{
+    mbContainer.ev_ActivePageIndex( PageControl_WindowBd85->ActivePageIndex );
 }
 //---------------------------------------------------------------------------
 

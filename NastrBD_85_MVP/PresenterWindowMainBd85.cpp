@@ -75,7 +75,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayNotSaveChanges += _view->GetSelfDisplayNotSaveChanges();
     //<<=== Запись в EEPROM
 
-    _mbParam = new ModBusParamBd85( allProtokol, _view->GetModBusEventContainer(), task );
+    _mbParam = new ModBusParamBd85( allProtokol, view, task );
 
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
     ev_Show(); // Прказать форму

@@ -6,12 +6,13 @@
 //---------------------------------------------------------------------------
 ModBusParamBd85::ModBusParamBd85(
     IAllProtokolS * protokol,
-    ModBusEventContainer * container,
+    IWindowMainBd85 * view,
     ITask * task)
 {
     _protokol = protokol;
-    _container = container;
     _task = task;
+    _view = view;
+    _container = _view->GetModBusEventContainer();
     Create(); // Создать объект
 }
 //---------------------------------------------------------------------------
@@ -45,76 +46,194 @@ const unsigned short ModBusParamBd85::_levelOfAlarm1MemoryAddr = 0x300+8; // 8) 
 const unsigned short ModBusParamBd85::_levelOfAlarm2MemoryAddr = 0x300+9; // 9) Уровень тревоги 2 * 10
 const unsigned short ModBusParamBd85::_levelOfAlarm3MemoryAddr = 0x300+10; // 10) Уровень тревоги 3 * 30
 const unsigned short ModBusParamBd85::_phonMemoryAddr = 0x300+11; // 11) Фон, с
-const unsigned short ModBusParamBd85::_durationOfPhonMemoryAddr = 18; // 12) Длит. подинтервала фона, мс
+const unsigned short ModBusParamBd85::_durationOfPhonMemoryAddr = 18; // 12) Длит. подинтервала фона, мс (8 - для БД82)
 const unsigned short ModBusParamBd85::_durationOfAlarmMemoryAddr = 0x300 + 12; // 13) Длит. сигнала тревоги, с
 const unsigned short ModBusParamBd85::_durationOfVideoMemoryAddr = 0x300 + 13; // 14) Длит. сигнала видео
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetNumberOfBd() // 1) Номер блока
+{
+    return _numberOfBd;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetExposition() // 2) Экспозиция, мс
+{
+    return _exposition;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetMinimumCount() // 3) Минимальный счёт
+{
+    return _minimumCount;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetMaximumCount() // 4) Максимальный счёт
+{
+    return _maximumCount;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetLevelOfOverload() // 5) Уровень перегрузки
+{
+    return _levelOfOverload;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetQuantityOfInterval() // 6) Кол-во интервалов
+{
+    return _quantityOfInterval;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetQuantityOfLook() // 7) Кол-во взгляда после
+{
+    return _quantityOfLook;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetLevelOfAlarm1() // 8) Уровень тревоги 1 * 10
+{
+    return _levelOfAlarm1;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetLevelOfAlarm2() // 9) Уровень тревоги 2 * 10
+{
+    return _levelOfAlarm2;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetLevelOfAlarm3() // 10) Уровень тревоги 3 * 10
+{
+    return _levelOfAlarm3;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetPhon() // 11) Фон, с
+{
+    return _phon;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetDurationOfPhon() // 12) Длит. подинтервала фона, мс
+{
+    return _durationOfPhon;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetDurationOfAlarm() // 13) Длит. сигнала тревоги, с
+{
+    return _durationOfAlarm;
+}
+//---------------------------------------------------------------------------
+unsigned long ModBusParamBd85::GetDurationOfVideo() // 14) Длит. сигнала видео
+{
+    return _durationOfVideo;
+}
 //---------------------------------------------------------------------------
 void ModBusParamBd85::Create() // Создать объект
 {
     // 1) Номер блока
     as_MbParamNumberOfBdChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamNumberOfBdChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamNumberOfBdChange);
     _container->ev_NumberOfBdChange += as_MbParamNumberOfBdChange;
     // 2) Экспозиция, мс
     as_MbParamExpositionChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamExpositionChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamExpositionChange);
     _container->ev_ExpositionChange += as_MbParamExpositionChange;
     // 3) Минимальный счёт
     as_MbParamMinimumCountChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamMinimumCountChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamMinimumCountChange);
     _container->ev_MinimumCountChange += as_MbParamMinimumCountChange;
     // 4) Максимальный счёт
     as_MbParamMaximumCountChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamMaximumCountChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamMaximumCountChange);
     _container->ev_MaximumCountChange += as_MbParamMaximumCountChange;
     // 5) Уровень перегрузки
     as_MbParamLevelOfOverloadChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamLevelOfOverloadChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamLevelOfOverloadChange);
     _container->ev_LevelOfOverloadChange += as_MbParamLevelOfOverloadChange;
     // 6) Кол-во интервалов
     as_MbParamQuantityOfIntervalChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamQuantityOfIntervalChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamQuantityOfIntervalChange);
     _container->ev_QuantityOfIntervalChange += as_MbParamQuantityOfIntervalChange;
     // 7) Кол-во взгляда после
     as_MbParamQuantityOfLookChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamQuantityOfLookChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamQuantityOfLookChange);
     _container->ev_QuantityOfLookChange += as_MbParamQuantityOfLookChange;
     // 8) Уровень тревоги 1 * 10
     as_MbParamLevelOfAlarm1Change =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamLevelOfAlarm1Change);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamLevelOfAlarm1Change);
     _container->ev_LevelOfAlarm_1Change += as_MbParamLevelOfAlarm1Change;
     // 9) Уровень тревоги 2 * 10
     as_MbParamLevelOfAlarm2Change =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamLevelOfAlarm2Change);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamLevelOfAlarm2Change);
     _container->ev_LevelOfAlarm_2Change += as_MbParamLevelOfAlarm2Change;
     // 10) Уровень тревоги 3 * 30
     as_MbParamLevelOfAlarm3Change =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamLevelOfAlarm3Change);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamLevelOfAlarm3Change);
     _container->ev_LevelOfAlarm_3Change += as_MbParamLevelOfAlarm3Change;
     // 11) Фон, с
     as_MbParamPhonChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamPhonChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamPhonChange);
     _container->ev_PhonChange += as_MbParamPhonChange;
     // 12) Длит. подинтервала фона, мс
     as_MbParamDurationOfPhonChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamDurationOfPhonChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamDurationOfPhonChange);
     _container->ev_DurationOfPhonChange += as_MbParamDurationOfPhonChange;
     // 13) Длит. сигнала тревоги, с
     as_MbParamDurationOfAlarmChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamDurationOfAlarmChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamDurationOfAlarmChange);
     _container->ev_DurationOfAlarmChange += as_MbParamDurationOfAlarmChange;
     // 14) Длит. сигнала видео
     as_MbParamDurationOfVideoChange =
-        new ActionSelf<const char*>(this, &ModBusParamBd85::MbParamDurationOfVideoChange);
+        new ActionSelf<const char*>(this,
+            &ModBusParamBd85::MbParamDurationOfVideoChange);
     _container->ev_DurationOfVideoChange += as_MbParamDurationOfVideoChange;
     // 15) По умолчанию
     as_ButtonModBusSetDefClick =
-        new ActionSelf<>(this, &ModBusParamBd85::ButtonModBusSetDefClick);
+        new ActionSelf<>(this,
+            &ModBusParamBd85::ButtonModBusSetDefClick);
     _container->ev_SetDefClick += as_ButtonModBusSetDefClick;
     // 16) Запись
     as_ButtonModBusWriteClick =
-        new ActionSelf<>(this, &ModBusParamBd85::ButtonModBusWriteClick);
+        new ActionSelf<>(this,
+            &ModBusParamBd85::ButtonModBusWriteClick);
     _container->ev_WriteClick += as_ButtonModBusWriteClick;
+    // Перешли на другую вкладку
+    as_ActivePageIndexChange =
+        new ActionSelf<int>(this,
+            &ModBusParamBd85::ActivePageIndexChange);
+    _container->ev_ActivePageIndex += as_ActivePageIndexChange;
+    // === === === === === === === === === ===
+    as_WrapReadFlashInvert =
+        new ActionSelf<unsigned short, unsigned long*, bool*>(this,
+            &ModBusParamBd85::WrapReadFlashInvert);
+
+    as_WrapReadFlash2 =
+        new ActionSelf<unsigned short, unsigned long*, bool*>(this,
+            &ModBusParamBd85::WrapReadFlash2);
+
+    as_WrapWriteFlashInvert =
+        new ActionSelf<unsigned short, unsigned long, bool*>(this,
+            &ModBusParamBd85::WrapWriteFlashInvert);
+
+    as_WrapWriteFlash2 =
+        new ActionSelf<unsigned short, unsigned long, bool*>(this,
+            &ModBusParamBd85::WrapWriteFlash2);
+    // === === === === === === === === === ===
+    as_DisplayReadReg = new ActionSelf<>(this, &ModBusParamBd85::DisplayReadReg);
+    // === === === === === === === === === ===
+    InitAddrRegModBus();
+    InitParamModBus();
+    InitReadDelegate();
+    // === === === === === === === === === ===
+    _bfNeedReadReg = false;
+    _bfNeedWriteReg = false;
+    _bfErrorReadReg = false;
+    _textData = 0;
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::Destroy() // Разрушить объект
@@ -135,10 +254,18 @@ void ModBusParamBd85::Destroy() // Разрушить объект
     delete as_MbParamDurationOfVideoChange; // 14) Длит. сигнала видео
     delete as_ButtonModBusSetDefClick; // 15) По умолчанию
     delete as_ButtonModBusWriteClick; // 16) Запись
+    delete as_ActivePageIndexChange; // 17) Перешли на другую вкладку
+    delete as_WrapReadFlashInvert; // 18) Делегат-обёртка для ReadFlashInvert
+    delete as_WrapReadFlash2;  // 19) Делегат-обёртка для ReadFlash2
+    delete as_WrapWriteFlashInvert; // 20) Делегат-обёртка для WriteFlashInvert
+    delete as_WrapWriteFlash2; // 21) Делегат-обёртка для WriteFlash2
+    delete as_DisplayReadReg; // 22) Делегат для вызова в главном потоке
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::ActionIfEvent() // Действие, если событие
 {
+    ReadRegIfNeed(); // Прочитать регистры, если нужно
+    WriteRegIfNeed(); // Записать регистры, если нужно    
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::InitAddrRegModBus()
@@ -159,6 +286,114 @@ void ModBusParamBd85::InitAddrRegModBus()
     _addrRegModBus[13] = _durationOfVideoMemoryAddr;
 }
 //---------------------------------------------------------------------------
+void ModBusParamBd85::InitParamModBus()
+{
+    _paramModBus[0] = & _numberOfBd; // 1) Номер блока
+    _paramModBus[1] = & _exposition; // 2) Экспозиция, мс
+    _paramModBus[2] = & _minimumCount; // 3) Минимальный счёт
+    _paramModBus[3] = & _maximumCount; // 4) Максимальный счёт
+    _paramModBus[4] = & _levelOfOverload; // 5) Уровень перегрузки
+    _paramModBus[5] = & _quantityOfInterval; // 6) Кол-во интервалов
+    _paramModBus[6] = & _quantityOfLook; // 7) Кол-во взгляда после
+    _paramModBus[7] = & _levelOfAlarm1; // 8) Уровень тревоги 1 * 10
+    _paramModBus[8] = & _levelOfAlarm2; // 9) Уровень тревоги 2 * 10
+    _paramModBus[9] = & _levelOfAlarm3; // 10) Уровень тревоги 3 * 10
+    _paramModBus[10] = & _phon; // 11) Фон, с
+    _paramModBus[11] = & _durationOfPhon; // 12) Длит. подинтервала фона, мс
+    _paramModBus[12] = & _durationOfAlarm; // 13) Длит. сигнала тревоги, с
+    _paramModBus[13] = & _durationOfVideo; // 14) Длит. сигнала видео
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::InitReadDelegate()
+{
+    ReadRegCurrent[0] = as_WrapReadFlashInvert; // 1) Номер блока
+    ReadRegCurrent[1] = as_WrapReadFlash2; // 2) Экспозиция, мс
+    ReadRegCurrent[2] = as_WrapReadFlash2; // 3) Минимальный счёт
+    ReadRegCurrent[3] = as_WrapReadFlash2; // 4) Максимальный счёт
+    ReadRegCurrent[4] = as_WrapReadFlash2; // 5) Уровень перегрузки
+    ReadRegCurrent[5] = as_WrapReadFlash2; // 6) Кол-во интервалов
+    ReadRegCurrent[6] = as_WrapReadFlash2; // 7) Кол-во взгляда после
+    ReadRegCurrent[7] = as_WrapReadFlash2; // 8) Уровень тревоги 1 * 10
+    ReadRegCurrent[8] = as_WrapReadFlash2; // 9) Уровень тревоги 2 * 10
+    ReadRegCurrent[9] = as_WrapReadFlash2; // 10) Уровень тревоги 3 * 10
+    ReadRegCurrent[10] = as_WrapReadFlash2; // 11) Фон, с
+    ReadRegCurrent[11] = as_WrapReadFlashInvert; // 12) Длит. подинтервала фона, мс
+    ReadRegCurrent[12] = as_WrapReadFlash2; // 13) Длит. сигнала тревоги, с
+    ReadRegCurrent[13] = as_WrapReadFlash2; // 14) Длит. сигнала видео
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::ReadRegIfNeed()
+{
+    if ( _bfNeedReadReg )
+    {
+        _bfNeedReadReg = false;
+        ReadReg();
+        if ( _textData == 0 ) // Основной поток  успел отобразить данные
+        {
+            _textData = new ModBusTextDataBd85( this );
+            _task->BeginInvoke( as_DisplayReadReg );
+        }
+    }
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::WriteRegIfNeed()
+{
+    if ( _bfNeedWriteReg )
+    {
+        _bfNeedWriteReg = false;
+        // ...  
+    }
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::ReadReg()
+{
+    bool ReturnVar;
+    _bfErrorReadReg = false;
+    for ( int i = 0; i < regCount; i++ ) // regCount данных получаем
+    {
+      (*ReadRegCurrent[i])( _addrRegModBus[i], _paramModBus[i], &ReturnVar );
+      _bfErrorReadReg == ( _bfErrorReadReg || ReturnVar );
+    }
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::DisplayReadReg()
+{
+    this->_view->DisplayModBusParamData( _textData );
+    delete _textData;
+    _textData = 0;
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::WrapReadFlashInvert(
+    unsigned short memoryAddr,
+    unsigned long * data,
+    bool * flagResult)
+{
+    *flagResult = _protokol->ReadFlashInvert(memoryAddr, data);
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::WrapReadFlash2(
+    unsigned short memoryAddr,
+    unsigned long * data,
+    bool * flagResult)
+{
+    *flagResult = _protokol->ReadFlash2(memoryAddr, data);
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::WrapWriteFlashInvert(
+    unsigned short memoryAddr,
+    unsigned long data,
+    bool * flagResult)
+{
+    *flagResult = _protokol->WriteFlashInvert(memoryAddr, data);
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::WrapWriteFlash2(
+    unsigned short memoryAddr,
+    unsigned long data,
+    bool * flagResult)
+{
+    *flagResult = _protokol->WriteFlash2(memoryAddr, data);
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -226,5 +461,15 @@ void ModBusParamBd85::ButtonModBusSetDefClick()
 //---------------------------------------------------------------------------
 void ModBusParamBd85::ButtonModBusWriteClick()
 {
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::ActivePageIndexChange(int api)
+{
+    switch ( api )
+    {
+    case 1: // Вкладка: "Параметры ModBus"
+        _bfNeedReadReg = true; // Прочитать значения регистров
+        break;
+    }
 }
 //---------------------------------------------------------------------------
