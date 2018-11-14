@@ -75,7 +75,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayNotSaveChanges += _view->GetSelfDisplayNotSaveChanges();
     //<<=== Запись в EEPROM
 
-    _mbParam = new ModBusParam( allProtokol, _view->GetModBusEventContainer() );
+    _mbParam = new ModBusParamBd85( allProtokol, _view->GetModBusEventContainer(), task );
 
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
     ev_Show(); // Прказать форму
@@ -91,7 +91,6 @@ void PresenterWindowMainBd85::FormClose()
 {
     _connectBdProt->Disconnect();
     _isViewLoaded = false;
-    //ev_ShowDispetWindow(); // Показать форму диспетчера
     _viewDispet->WrapShow(); // Показать форму диспетчера
 }
 //---------------------------------------------------------------------------
@@ -192,6 +191,8 @@ void PresenterWindowMainBd85::OprosIter()
         _readParamIndex = 0;
         flag &= ReadEEProm();
     }
+
+    _mbParam->ActionIfEvent();
 
     if ( _iterData != 0 ) // Основной поток не успел отобразить данные
     {

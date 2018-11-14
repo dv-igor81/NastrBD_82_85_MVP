@@ -7,7 +7,7 @@
 #include "ConnectBdProt.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"
-#include "ModBusParam.h"
+#include "ModBusParamBd85.h"
 //---------------------------------------------------------------------------
 class PresenterWindowMainBd85
 {
@@ -182,7 +182,7 @@ private:
     bool _bfEepromFirstCopy;
     bool _flagWriteToEeprom; // true - для записи в EEPROM
 
-    ModBusParam * _mbParam;
+    ModBusParamBd85 * _mbParam;
 };
 //---------------------------------------------------------------------------
 #endif

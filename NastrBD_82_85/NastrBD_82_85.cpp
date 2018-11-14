@@ -38,6 +38,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                  Application->CreateForm(__classid(TForm_Graph), &Form_Graph);
                  Application->CreateForm(__classid(TForm_ARCH), &Form_ARCH);
                  Application->CreateForm(__classid(TForm_RearFromEEPROM), &Form_RearFromEEPROM);
+                 Application->CreateForm(__classid(TForm_LoadParam), &Form_LoadParam);
                  Application->Run();
         }
         catch (Exception &exception)
