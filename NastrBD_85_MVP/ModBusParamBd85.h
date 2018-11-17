@@ -5,6 +5,7 @@
 #include "IAllProtokolS.h"
 #include "ModBusEventContainerBd85.h"
 #include "ITask.h"
+#include "TaskWithParam.h"
 #include "IModBusParamDataBd85.h"
 #include "ModBusTextDataBd85.h"
 #include "IWindowMainBd85.h"
@@ -15,9 +16,18 @@ public:
     ModBusParamBd85(
         IAllProtokolS * protokol,
         IWindowMainBd85 * view,
-        ITask * task);
+        TaskWithParam * task);
     ~ModBusParamBd85();
-    void ActionIfEvent(); // Действие, если событие
+
+private:
+    IAllProtokolS * _protokol;
+    ModBusEventContainerBd85 * _container;
+    TaskWithParam * _task;
+    IWindowMainBd85 * _view;
+
+public:
+    void ActionIfEventIter(); // Действие, если событие
+    void ActionStart(); // Действие, при старте
 
     unsigned long GetNumberOfBd(); // 1) Номер блока
     unsigned long GetExposition(); // 2) Экспозиция, мс
@@ -50,6 +60,21 @@ private:
     unsigned long _durationOfPhon; // 12) Длит. подинтервала фона, мс
     unsigned long _durationOfAlarm; // 13) Длит. сигнала тревоги, с
     unsigned long _durationOfVideo; // 14) Длит. сигнала видео
+
+    unsigned long _numberOfBdChange; // 1) Номер блока
+    unsigned long _expositionChange; // 2) Экспозиция, мс
+    unsigned long _minimumCountChange; // 3) Минимальный счёт
+    unsigned long _maximumCountChange; // 4) Максимальный счёт
+    unsigned long _levelOfOverloadChange; // 5) Уровень перегрузки
+    unsigned long _quantityOfIntervalChange; // 6) Кол-во интервалов
+    unsigned long _quantityOfLookChange; // 7) Кол-во взгляда после
+    unsigned long _levelOfAlarm1Change; // 8) Уровень тревоги 1 * 10
+    unsigned long _levelOfAlarm2Change; // 9) Уровень тревоги 2 * 10
+    unsigned long _levelOfAlarm3Change; // 10) Уровень тревоги 3 * 10
+    unsigned long _phonChange; // 11) Фон, с
+    unsigned long _durationOfPhonChange; // 12) Длит. подинтервала фона, мс
+    unsigned long _durationOfAlarmChange; // 13) Длит. сигнала тревоги, с
+    unsigned long _durationOfVideoChange; // 14) Длит. сигнала видео    
 
 private:
     static const unsigned short _expositionDefault; // 2) Экспозиция, мс
@@ -101,16 +126,21 @@ private:
 
     bool _bfErrorReadReg;
 private:
-    IAllProtokolS * _protokol;
-    ModBusEventContainerBd85 * _container;
-    ITask * _task;
-    IWindowMainBd85 * _view;
     //===>> Параметры ModBus
     void Create(); // Создать объект
     void Destroy(); // Разрушить объект
     void InitAddrRegModBus();
     void InitParamModBus();
     void InitReadDelegate();
+
+    void ToNumber(
+        const char* text,
+        unsigned long * change,
+        int curr,
+        int max);
+    bool _bfChangeOld;
+    bool _bfChangeCurr;
+    void DisplayChange(int change, int curr, bool _flagErrorChange);
 
     // 1) Номер блока
     ActionSelf<const char*>* as_MbParamNumberOfBdChange;

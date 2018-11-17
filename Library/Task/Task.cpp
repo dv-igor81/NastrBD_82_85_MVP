@@ -19,13 +19,11 @@ void Task::RunAsynk(ActionSelf<>* action)
 {
     _thread->StartNotSynhro( action );
     _thread->Resume();
-    //(*action)();
 }
 //---------------------------------------------------------------------------
 void Task::BeginInvoke(ActionSelf<>* action)
 {
     _thread->StartSynhro( action );
-    //(*action)();
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

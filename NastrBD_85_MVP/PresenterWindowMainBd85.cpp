@@ -11,7 +11,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     IWindowMainBd85 * view,
     IFormDispetView * viewDispet,
     IAllProtokolS * allProtokol,
-    ITask * task) :
+    TaskWithParam * task) :
         as_FormClose(this, &PresenterWindowMainBd85::FormClose)
         , as_OprosStart(this, &PresenterWindowMainBd85::OprosStart)
         , as_OprosStartInvoke(this, &PresenterWindowMainBd85::OprosStartInvoke)
@@ -33,7 +33,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_TextPeriodPwmZadChange(this, &PresenterWindowMainBd85::TextPeriodPwmZadChange)
         , as_RadioButtonArchOnClick(this, &PresenterWindowMainBd85::RadioButtonArchOnClick)
         , as_RadioButtonArchOffClick(this, &PresenterWindowMainBd85::RadioButtonArchOffClick)
-        , as_DisplayChangeEepromData(this, &PresenterWindowMainBd85::DisplayChangeEepromData)
+        , as_DisplayChangeEepromDataInvoke(this, &PresenterWindowMainBd85::DisplayChangeEepromDataInvoke)
         //===
 {
     _startData = 0;
@@ -128,12 +128,18 @@ void PresenterWindowMainBd85::OprosStart()
             break; // Считать значения из памяти МК в БД
         }
     }
+    _mbParam->ActionStart();
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosStartInvoke()
 {
+    OprosStartNotInvoke( _startData );
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::OprosStartNotInvoke(StartDataNewBd85 *& data)
+{
     _textChangeIgnore = true; // Игнорировать изменения из ГИП
-    ev_DisplayStartData( _startData );
+    ev_DisplayStartData( data );
     _textChangeIgnore = false; // Не игнорировать изменения из ГИП
     delete _startData; // Освободить память
     _startData = 0;
@@ -146,11 +152,14 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
-    _bfArch = SspToFlagArch( _ssp );
     if ( (_ssp & 0x01) != 0x01 ) // Флаг готовности счёта НЕ получен
     {
         return;
     }
+    if ( _allProtokol->GetScaling( & _scaling ) == false )
+    {
+        return;
+    }    
     if ( _allProtokol->GetIndAdr( & _indAddr ) == false )
     {
         return;
@@ -179,10 +188,6 @@ void PresenterWindowMainBd85::OprosIter()
     {
         return;
     }
-    if ( _allProtokol->GetScaling( & _scaling ) == false )
-    {
-        return;
-    }
 
     if ( _flagWriteToEeprom ) // true - для записи в EEPROM
     {
@@ -191,9 +196,6 @@ void PresenterWindowMainBd85::OprosIter()
         _readParamIndex = 0;
         flag &= ReadEEProm();
     }
-
-    _mbParam->ActionIfEvent();
-
     if ( _iterData != 0 ) // Основной поток не успел отобразить данные
     {
         return;
@@ -209,6 +211,9 @@ void PresenterWindowMainBd85::OprosIter()
         , ScalingSummator(_scaling)
     );
     _task->BeginInvoke( & as_OprosIterInvoke );
+    //===>>
+    _mbParam->ActionIfEventIter();
+    //<<===
 }
 //---------------------------------------------------------------------------
 unsigned int PresenterWindowMainBd85::ScalingSummator(unsigned short scaling)
@@ -397,22 +402,15 @@ void PresenterWindowMainBd85::FirstCopyEEprom()
     {
         return;
     }
-    _indAddrZadChange = _indAddrZad;
-    _groupAddrZadChange = _groupAddrZad;
-    _dnuZadChange = _dnuZad;
-    _voltageHiZadChange = _voltageHiZad;
-    _widthPwmZadChange = _widthPwmZad;
-    _offsetPwmZadChange = _offsetPwmZad;
-    _periodPwmZadChange = _periodPwmZad;
-    _bfArchChange = _bfArch;
-    _bfEepromFirstCopy = false;    
+    _eepromChange.Copy( _eepromSaved );
+    _eepromPrev.Copy(_eepromChange);
 }
 //---------------------------------------------------------------------------
 bool PresenterWindowMainBd85::ReadEEProm()
 {
     if ( _readParamIndex == 0 )
     {
-        if ( _allProtokol->GetVersia( _verPo ) == false )
+        if ( _allProtokol->GetVersia( _eepromSaved.VerPo ) == false )
         {
             return false;
         }
@@ -424,7 +422,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _readParamIndex == 1 )
     {
-        if ( _allProtokol->GetIndAdrZ( & _indAddrZad ) == false )
+        if ( _allProtokol->GetIndAdrZ( & _eepromSaved.IndAddrZad ) == false )
         {
             return false;
         }
@@ -436,7 +434,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }    
     if ( _readParamIndex == 2 )
     {
-        if ( _allProtokol->GetGroupAdrZ( & _groupAddrZad ) == false )
+        if ( _allProtokol->GetGroupAdrZ( & _eepromSaved.GroupAddrZad ) == false )
         {
             return false;
         }
@@ -448,7 +446,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _readParamIndex == 3 )
     {
-        if ( _allProtokol->GetDnuZ( & _dnuZad ) == false )
+        if ( _allProtokol->GetDnuZ( & _eepromSaved.DnuZad ) == false )
         {
             return false;
         }
@@ -460,7 +458,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _readParamIndex == 4 )
     {
-        if ( _allProtokol->GetVoltageHiZ_Bd85( & _voltageHiZad ) == false )
+        if ( _allProtokol->GetVoltageHiZ_Bd85( & _eepromSaved.VoltageHiZad ) == false )
         {
             return false;
         }
@@ -472,7 +470,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _readParamIndex == 5 )
     {
-        if ( _allProtokol->GetWidthPwmZ_Bd85( & _widthPwmZad ) == false )
+        if ( _allProtokol->GetWidthPwmZ_Bd85( & _eepromSaved.WidthPwmZad ) == false )
         {
             return false;
         }
@@ -484,7 +482,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _readParamIndex == 6 )
     {
-        if ( _allProtokol->GetOffsetPwmZ_Bd85( & _offsetPwmZad ) == false )
+        if ( _allProtokol->GetOffsetPwmZ_Bd85( & _eepromSaved.OffsetPwmZad ) == false )
         {
             return false;
         }
@@ -496,7 +494,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _readParamIndex == 7 )
     {
-        if ( _allProtokol->GetPeriodPwmZ_Bd85( & _periodPwmZad ) == false )
+        if ( _allProtokol->GetPeriodPwmZ_Bd85( & _eepromSaved.PeriodPwmZad ) == false )
         {
             return false;
         }
@@ -512,7 +510,7 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
-        _bfArch = SspToFlagArch( _ssp );
+        _eepromSaved.FlagArch = SspToFlagArch( _ssp );
         _readParamIndex++;
     }
     if ( _isConnected == false )
@@ -526,19 +524,9 @@ bool PresenterWindowMainBd85::ReadEEProm()
     FirstCopyEEprom();
     _bfChangeEepromCurr = ChangeEepromData();
     _bfChangeEepromOld = !_bfChangeEepromCurr; // Вызвать функцию в ГИПе ОБЯЗАТЕЛЬНО
-    DisplayChangeEepromDataInvoke();
+    WrapDisplayChangeEepromDataInvoke( true );
 
-    _startData = new StartDataNewBd85(
-        _verPo // Версия прошивки
-        , _indAddrZad // Индивидуальный адрес заданный
-        , _groupAddrZad // Групповой адрес заданный
-        , _dnuZad // ДНУ заданное КОД
-        , _voltageHiZad // Напряжение высокое заданное КОД
-        , _widthPwmZad // Длительность ШИМ заданная
-        , _offsetPwmZad //  Смешение ШИМ заданное
-        , _periodPwmZad // Период ШИМ заданный
-        , _bfArch // Флаг АРЧ 
-        );
+    _startData = new StartDataNewBd85( & _eepromSaved );
     _task->BeginInvoke( & as_OprosStartInvoke );
     return true;
 }
@@ -557,63 +545,117 @@ void PresenterWindowMainBd85::WriteToEeprom()
     _flagWriteToEeprom = true;
 }
 //---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ToNumber(
+    const char * text,
+    unsigned char * change,
+    unsigned char * prev,
+    int max)
+{
+    bool update;
+    int changeArg;
+    int prevArg = *prev;
+    TextHelper::ConvertTextToNumber( text,
+        & changeArg, // [OUT] Изменённое значение параметра
+        & prevArg, // [IN/OUT] Предыдущее значение параметра
+        & update,
+        0, max );
+    *change = ( changeArg & 0xFF );
+    *prev = ( prevArg & 0xFF );
+    DisplayChangeEepromDataInvoke( update );
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ToNumber(
+    const char * text,
+    unsigned short * change,
+    unsigned short * prev,
+    int max)
+{
+    bool update;
+    int changeArg;
+    int prevArg = *prev;
+    TextHelper::ConvertTextToNumber( text,
+        & changeArg, // [OUT] Изменённое значение параметра
+        & prevArg, // [IN/OUT] Предыдущее значение параметра
+        & update, // [OUT] true - обновить текстовое поле
+        0, max );
+    *change = ( changeArg & 0xFFFF );
+    *prev = ( prevArg & 0xFFFF );
+    DisplayChangeEepromDataInvoke( update );
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ToNumber(
+    unsigned short * change, // [IN/OUT]
+    unsigned short * prev, // [IN/OUT]
+    bool update,
+    int max)
+{
+    int changeArg = *change;
+    int prevArg = *prev;
+    TextHelper::CheckNumber(
+        & changeArg, // [IN/OUT] Изменённое значение параметра
+        & prevArg, // [IN/OUT] Предыдущее значение параметра
+        & update, // [IN/OUT]
+        0, max);
+    *change = ( changeArg & 0xFFFF );
+    *prev = ( prevArg & 0xFFFF );
+    DisplayChangeEepromDataInvoke( update );
+}
+//---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextIndAddrZadChange(const char* text)
 {
-    _indAddrZadChange = TextHelper::ConvertTextToNumber(
-        text, _indAddrZad, 0, 247);
-    DisplayChangeEepromData();
+    ToNumber( text, & _eepromChange.IndAddrZad, & _eepromPrev.IndAddrZad, 247 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextGroupAdrZadChange(const char* text)
 {
-    _groupAddrZadChange = TextHelper::ConvertTextToNumber(
-        text, _groupAddrZad, 0, 247);
-    DisplayChangeEepromData();
+    ToNumber( text, & _eepromChange.GroupAddrZad, & _eepromPrev.GroupAddrZad, 247 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextDnuZadCodeChange(const char* text)
 {
-    _dnuZadChange = TextHelper::ConvertTextToNumber(
-        text, _dnuZad, 0, 4095);
-    DisplayChangeEepromData();
+    ToNumber( text, & _eepromChange.DnuZad, & _eepromPrev.DnuZad, 4095 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextVoltageHiZadChange(const char* text)
 {
-    double voltageHiZadChangeValue = TextHelper::ConvertTextToDouble(
+    bool flagErrorConvert;
+    double voltageHiZadValue = TextHelper::ConvertTextToDouble(
         text,
-        ConvertHelper::VoltageHiCodeToValue( _voltageHiZad ));
-    _voltageHiZadChange = ConvertHelper::VoltageHiValueToCode( voltageHiZadChangeValue );
-    DisplayChangeEepromData();
+        ConvertHelper::VoltageHiCodeToValue( _eepromPrev.VoltageHiZad ),
+        & flagErrorConvert);
+    if ( flagErrorConvert == false )
+    {
+        _eepromChange.VoltageHiZad = ConvertHelper::VoltageHiValueToCode( voltageHiZadValue );
+    }
+    else
+    {
+        _eepromChange.VoltageHiZad = _eepromPrev.VoltageHiZad;
+    }
+    ToNumber( & _eepromChange.VoltageHiZad, & _eepromPrev.VoltageHiZad,
+        flagErrorConvert, 4095 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextWidthPwmZadChange(const char* text)
 {
-    _widthPwmZadChange = TextHelper::ConvertTextToNumber(
-        text, _widthPwmZad, 0, 4095);
-    DisplayChangeEepromData();
+    ToNumber( text, & _eepromChange.WidthPwmZad, & _eepromPrev.WidthPwmZad, 4095 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextOffsetPwmZadChange(const char* text)
 {
-    _offsetPwmZadChange = TextHelper::ConvertTextToNumber(
-        text, _offsetPwmZad, 0, 4095);
-    DisplayChangeEepromData();
+    ToNumber( text, & _eepromChange.OffsetPwmZad, & _eepromPrev.OffsetPwmZad, 4095 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextPeriodPwmZadChange(const char* text)
 {
-    _periodPwmZadChange = TextHelper::ConvertTextToNumber(
-        text, _periodPwmZad, 0, 4095);
-    DisplayChangeEepromData();
+    ToNumber( text, & _eepromChange.PeriodPwmZad, & _eepromPrev.PeriodPwmZad, 4095 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::RadioButtonArchOnClick(bool onClick)
 {
     if ( onClick )
     {
-        _bfArchChange = -1; // -1 --- false (0 --- null)
-        DisplayChangeEepromData();
+        _eepromChange.FlagArch = -1; // -1 --- false, 1 --- true, 0 --- null
+        DisplayChangeEepromDataInvoke( false );
     }
 }
 //---------------------------------------------------------------------------
@@ -621,89 +663,76 @@ void PresenterWindowMainBd85::RadioButtonArchOffClick(bool offClick)
 {
     if ( offClick )
     {
-        _bfArchChange = 1; // 1 --- true (0 --- null)
-        DisplayChangeEepromData();
+        _eepromChange.FlagArch = 1; // -1 --- false, 1 --- true, 0 --- null
+        DisplayChangeEepromDataInvoke( false );
     }
 }
 //---------------------------------------------------------------------------
-void PresenterWindowMainBd85::DisplayChangeEepromDataInvoke()
+void PresenterWindowMainBd85::WrapDisplayChangeEepromDataInvoke(bool updateText)
 {
-    _task->BeginInvoke( & as_DisplayChangeEepromData );
+    _task->BeginInvoke( & as_DisplayChangeEepromDataInvoke, updateText );
 }
 //---------------------------------------------------------------------------
-void PresenterWindowMainBd85::DisplayChangeEepromData()
+void PresenterWindowMainBd85::DisplayChangeEepromDataInvoke( bool updataText )
 {
     if ( _textChangeIgnore )
     { // Эти изменения внесены программно, а не пользователем (через ГИП)
       // поэтому игнорируем это событие
         return;
     }
-    _bfChangeEepromCurr = ChangeEepromData();
+    _bfChangeEepromCurr = ChangeEepromData(); // Есть ли изменения хотя-бы одного параметра?
     if ( _bfChangeEepromOld != _bfChangeEepromCurr )
     {
-        ev_DisplayNotSaveChanges( _bfChangeEepromCurr );
         _bfChangeEepromOld = _bfChangeEepromCurr;
+        ev_DisplayNotSaveChanges( _bfChangeEepromCurr );
+    }
+    if ( updataText )
+    {
+        StartDataNewBd85 * data = new StartDataNewBd85( & _eepromChange );
+        OprosStartNotInvoke( data );        
     }
 }
 //---------------------------------------------------------------------------
 bool PresenterWindowMainBd85::ChangeEepromData()
 { // Если есть изменения хотя-бы одного параметра - изменения есть
-    bool flagChenge = false;
-    flagChenge |= NotEqual( _indAddrZad, _indAddrZadChange );
-    flagChenge |= NotEqual( _groupAddrZad, _groupAddrZadChange );
-    flagChenge |= NotEqual( _dnuZad, _dnuZadChange );
-    flagChenge |= NotEqual( _voltageHiZad, _voltageHiZadChange );
-    flagChenge |= NotEqual( _widthPwmZad, _widthPwmZadChange );
-    flagChenge |= NotEqual( _offsetPwmZad, _offsetPwmZadChange );
-    flagChenge |= NotEqual( _periodPwmZad, _periodPwmZadChange );
-    flagChenge |= NotEqual( _bfArch, _bfArchChange );
-    return flagChenge;
-}
-//---------------------------------------------------------------------------
-bool PresenterWindowMainBd85::NotEqual(int var1, int var2)
-{
-    if ( var1 == var2 )
-    {
-        return false;
-    }
-    return true;
+    return _eepromChange.NotEqual( _eepromSaved );
 }
 //---------------------------------------------------------------------------
 bool PresenterWindowMainBd85::WriteEEProm()
 { // Если есть ошибка хотя бы в одной подфункции - ошибка есть во всей функции
     bool flag = true;
-    if ( NotEqual( _indAddrZad, _indAddrZadChange ) )
+    if ( _eepromSaved.IndAddrZad != _eepromChange.IndAddrZad )
     {
-        flag &= _allProtokol->SetIndAdrZ( (unsigned char) _indAddrZadChange );
+        flag &= _allProtokol->SetIndAdrZ( _eepromChange.IndAddrZad );
     }
-    if ( NotEqual( _groupAddrZad, _groupAddrZadChange ) )
+    if ( _eepromSaved.GroupAddrZad != _eepromChange.GroupAddrZad )
     {
-        flag &= _allProtokol->SetGroupAdrZ( (unsigned char) _groupAddrZadChange );
+        flag &= _allProtokol->SetGroupAdrZ( _eepromChange.GroupAddrZad );
     }
-    if ( NotEqual( _dnuZad, _dnuZadChange ) )
+    if ( _eepromSaved.DnuZad != _eepromChange.DnuZad )
     {
-        flag &= _allProtokol->SetDnuZ( (unsigned short) _dnuZadChange );
+        flag &= _allProtokol->SetDnuZ( _eepromChange.DnuZad );
     }
-    if ( NotEqual( _voltageHiZad, _voltageHiZadChange ) )
+    if ( _eepromSaved.VoltageHiZad != _eepromChange.VoltageHiZad )
     {
-        flag &= _allProtokol->SetVoltageHiZ_Bd85( (unsigned short) _voltageHiZadChange );
+        flag &= _allProtokol->SetVoltageHiZ_Bd85( _eepromChange.VoltageHiZad );
     }
-    if ( NotEqual( _widthPwmZad, _widthPwmZadChange ) )
+    if ( _eepromSaved.WidthPwmZad != _eepromChange.WidthPwmZad )
     {
-        flag &= _allProtokol->SetWidthPwmZ_Bd85( (unsigned short) _widthPwmZadChange );
+        flag &= _allProtokol->SetWidthPwmZ_Bd85( _eepromChange.WidthPwmZad );
     }
-    if ( NotEqual( _offsetPwmZad, _offsetPwmZadChange ) )
+    if ( _eepromSaved.OffsetPwmZad != _eepromChange.OffsetPwmZad )
     {
-        flag &= _allProtokol->SetOffsetPwmZ_Bd85( (unsigned short) _offsetPwmZadChange );
+        flag &= _allProtokol->SetOffsetPwmZ_Bd85( _eepromChange.OffsetPwmZad );
     }
-    if ( NotEqual( _periodPwmZad, _periodPwmZadChange ) )
+    if ( _eepromSaved.PeriodPwmZad != _eepromChange.PeriodPwmZad )
     {
-        flag &= _allProtokol->SetPeriodPwmZ_Bd85( (unsigned short) _periodPwmZadChange );
+        flag &= _allProtokol->SetPeriodPwmZ_Bd85( _eepromChange.PeriodPwmZad );
     }
-    if ( NotEqual( _bfArch, _bfArchChange ) )
+    if ( _eepromSaved.FlagArch != _eepromChange.FlagArch )
     {
         unsigned char archChange;
-        if ( _bfArchChange == -1 )
+        if ( _eepromChange.FlagArch == -1 )
         {
             archChange = 0;
         }
@@ -715,4 +744,5 @@ bool PresenterWindowMainBd85::WriteEEProm()
     }
     return flag;
 }
+//---------------------------------------------------------------------------
 

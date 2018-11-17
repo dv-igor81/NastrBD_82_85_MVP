@@ -7,7 +7,9 @@
 #include "ConnectBdProt.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"
+#include "TaskWithParam.h"
 #include "ModBusParamBd85.h"
+#include "EepromBd85Settings.h"
 //---------------------------------------------------------------------------
 class PresenterWindowMainBd85
 {
@@ -16,14 +18,15 @@ public:
         IWindowMainBd85 * view,
         IFormDispetView * viewDispet,
         IAllProtokolS * allProtokol,
-        ITask * task);
+        TaskWithParam * task);
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
 private:
     IWindowMainBd85 * _view;
     IFormDispetView * _viewDispet;
-
     ConnectBdProt* _connectBdProt;
+    IAllProtokolS * _allProtokol;
+    TaskWithParam * _task;    
 
     ActionSelf<> as_FormClose;
     void FormClose();
@@ -35,6 +38,7 @@ private:
 
     ActionSelf<> as_OprosStartInvoke;
     void OprosStartInvoke();
+    void OprosStartNotInvoke(StartDataNewBd85 *& data);
 
     ActionSelf<> as_OprosIter;
     void OprosIter();
@@ -98,11 +102,9 @@ private:
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
-    IAllProtokolS * _allProtokol;
-    ITask * _task;
-
     ActionEvent<StartDataNewBd85*> ev_DisplayStartData;
     StartDataNewBd85* _startData;
+
 
     ActionEvent<IterDataNewBd85*> ev_DisplayIterData;
     IterDataNewBd85* _iterData;
@@ -119,34 +121,17 @@ private:
     int _readParamIndex;
     enum { verPoSize = 5 };
     //===>> Данные, считанные из EEPROM МК в БД
-    char _verPo[5];
-    unsigned char _indAddrZad;
-    unsigned char _groupAddrZad;
-    unsigned short _dnuZad;
-    unsigned short _voltageHiZad;
-    unsigned short _widthPwmZad;
-    unsigned short _offsetPwmZad;
-    unsigned short _periodPwmZad;
-    int _bfArch; // Флаг АРЧ (1 --- true, -1 --- false)
-    //===
-    int _indAddrZadChange;
-    int _groupAddrZadChange;
-    int _dnuZadChange;
-    int _voltageHiZadChange;
-    int _widthPwmZadChange;
-    int _offsetPwmZadChange;
-    int _periodPwmZadChange;
-    int _bfArchChange; // Флаг АРЧ (1 --- true, -1 --- false)
+    EepromBd85Settings _eepromSaved; // Сохранённое в EEPROM состояние
+    EepromBd85Settings _eepromChange; // Текущее изменённое состояние
+    EepromBd85Settings _eepromPrev; // Предидущее изменённое состояние
+
+    void WrapDisplayChangeEepromDataInvoke( bool updateText );
+    ActionSelf<bool> as_DisplayChangeEepromDataInvoke;
+    void DisplayChangeEepromDataInvoke( bool updateText );
 
 
-    void DisplayChangeEepromDataInvoke();
-
-    ActionSelf<> as_DisplayChangeEepromData;
-    void DisplayChangeEepromData();
     bool _textChangeIgnore;
-
     bool ChangeEepromData(); // true - Изменения внесены в ГИП, но не записаны в EEPROM
-    bool NotEqual(int var1, int var2);
     //<<=== Данные, считанные из EEPROM МК в БД
     
     //===>> Данные опроса БД
@@ -181,6 +166,24 @@ private:
     void FirstCopyEEprom();
     bool _bfEepromFirstCopy;
     bool _flagWriteToEeprom; // true - для записи в EEPROM
+
+    void ToNumber(
+        const char * text,
+        unsigned char * change,
+        unsigned char * prev,
+        int max);
+
+    void ToNumber(
+        const char * text,
+        unsigned short * change,
+        unsigned short * prev,
+        int max);
+
+    void ToNumber(
+        unsigned short * change, // [IN/OUT]
+        unsigned short * prev,
+        bool update, // true Обновить текстовое поле
+        int max);
 
     ModBusParamBd85 * _mbParam;
 };

@@ -233,6 +233,16 @@ void TWindowMainBd85::ControlsAvailability(bool isEnabled)
 void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
 {
     button_WriteToEeprom->Enabled = isEnabled;
+    
+    Edit_IndAddrZad->ReadOnly = !isEnabled;
+    Edit_GroupAdrZad->ReadOnly = !isEnabled;
+    Edit_DnuZad_Code->ReadOnly = !isEnabled;
+    //comboBox_VoltageHiZad_Value->Style = csDropDownList;
+    comboBox_VoltageHiZad_Value->Enabled = isEnabled;
+    Edit_WidthPwmZad->ReadOnly = !isEnabled;
+    Edit_OffsetPwmZad->ReadOnly = !isEnabled;
+    Edit_PeriodPwmZad->ReadOnly = !isEnabled;
+
     button_StartStopScaling->Enabled = isEnabled;
     GroupBox_ReverseLink->Enabled = isEnabled;
     BitBtn_ArchOnOffDisplay->Enabled = isEnabled;

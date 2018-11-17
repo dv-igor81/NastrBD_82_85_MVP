@@ -141,7 +141,6 @@ __published:	// IDE-managed Components
         TButton *button_StartStopScaling;
         TButton *button_SaveToFile;
         TLabel *Label_VerPo;
-        TButton *Button5;
         TScrollBox *ScrollBox_SettingsForModBus;
         TGroupBox *GroupBox_SettingsForModbus;
         TLabel *Label_NumberOfBd;

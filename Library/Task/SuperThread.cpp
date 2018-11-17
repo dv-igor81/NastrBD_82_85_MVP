@@ -42,6 +42,11 @@ void SuperThread::StartNotSynhro(ActionSelf<>* action)
     as_startNotSynhro = action;
 }
 //---------------------------------------------------------------------------
+//template<class P>
+//void SuperThread::StartNotSynhroParam(ActionSelf<P>* action, P arg)
+//{
+//}
+//---------------------------------------------------------------------------
 void SuperThread::StartSynhro(ActionSelf<>* action)
 {
     as_startSynhro = action;

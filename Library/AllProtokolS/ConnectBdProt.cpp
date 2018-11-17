@@ -10,7 +10,7 @@
 ConnectBdProt::ConnectBdProt(
     HelperConnectFourBdProt * bdProt,
     IAllProtokolS * allProtokol,
-    ITask * task)  :
+    /*ITask*/TaskWithParam * task)  :
         as_protocolChanged(this, &ConnectBdProt::ProtocolChanged)
         , as_comPortsChange(this, &ConnectBdProt::ComPortsChange)
         , as_windowShow(this, &ConnectBdProt::WindowShow)

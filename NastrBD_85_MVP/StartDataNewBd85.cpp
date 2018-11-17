@@ -7,35 +7,31 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-StartDataNewBd85::StartDataNewBd85(
-        const char* verPo
-        , unsigned char indAddrZad
-        , unsigned char groupAddrZad
-        , unsigned short dnuZad
-        , unsigned short voltageHiZad
-        , unsigned short widthPwmZad // Длительность ШИМ заданная
-        , unsigned short offsetPwmZ // Смешение ШИМ заданное
-        , unsigned short periodPwmZ // Период ШИМ заданный
-        , int flagArch // Флаг АРЧ (-1 - false, 0 - ничего не делать, 1 - true)
-    )
+StartDataNewBd85::StartDataNewBd85( EepromBd85Settings * data  )
 {
-    TextHelper::CopyText(_verPo, verPo, verPoSize);
-    sprintf(_indAddrZad, "%d", indAddrZad);
-    sprintf(_groupAddrZad, "%d", groupAddrZad);
+    InsteadOfConstructor(); // Вместо конструктора
 
-    double dnuValueZad = ConvertHelper::CodeToValue( dnuZad );
-    sprintf(_dnuZad, "%d", dnuZad);
-    sprintf(_dnuValueZad, "%0.3f", dnuValueZad);
-    double voltageValueZad = ConvertHelper::VoltageHiCodeToValue(voltageHiZad);
-    sprintf(_voltageHiZad, "%d", voltageHiZad);
-    sprintf(_voltageHiValueZad, "%0.2f", voltageValueZad);
-    sprintf(_widthPwmZad, "%d", widthPwmZad);
-    sprintf(_offsetPwmZ, "%d", offsetPwmZ);
-    sprintf(_periodPwmZ, "%d", periodPwmZ);
-    _flagArch = flagArch;
+    TextHelper::CopyText( _verPo, data->VerPo, verPoSize );
+    sprintf( _indAddrZad, "%d", data->IndAddrZad );
+    sprintf( _groupAddrZad, "%d", data->GroupAddrZad );
+    double dnuValueZad = ConvertHelper::CodeToValue( data->DnuZad );
+    sprintf( _dnuZad, "%d", data->DnuZad );
+    sprintf( _dnuValueZad, "%0.3f", dnuValueZad );
+    double voltageValueZad = ConvertHelper::VoltageHiCodeToValue( data->VoltageHiZad );
+    sprintf( _voltageHiZad, "%d", data->VoltageHiZad );
+    sprintf( _voltageHiValueZad, "%0.2f", voltageValueZad );
+    sprintf( _widthPwmZad, "%d", data->WidthPwmZad );
+    sprintf( _offsetPwmZad, "%d", data->OffsetPwmZad );
+    sprintf( _periodPwmZad, "%d", data->PeriodPwmZad );
+    _flagArch = data->FlagArch;
 }
 //---------------------------------------------------------------------------
 StartDataNewBd85::StartDataNewBd85()
+{
+    InsteadOfConstructor(); // Вместо конструктора
+}
+//---------------------------------------------------------------------------
+void StartDataNewBd85::InsteadOfConstructor() // Вместо конструктора
 {
     // Заполнить все символы строки нулями
     TextHelper::SetCharInText(_verPo, 0, verPoSize);
@@ -46,8 +42,8 @@ StartDataNewBd85::StartDataNewBd85()
     TextHelper::SetCharInText(_voltageHiZad, 0, uShortTextSize);
     TextHelper::SetCharInText(_voltageHiValueZad, 0, floatTextSize);
     TextHelper::SetCharInText(_widthPwmZad, 0, uShortTextSize);
-    TextHelper::SetCharInText(_offsetPwmZ, 0, uShortTextSize);
-    TextHelper::SetCharInText(_periodPwmZ, 0, uShortTextSize);
+    TextHelper::SetCharInText(_offsetPwmZad, 0, uShortTextSize);
+    TextHelper::SetCharInText(_periodPwmZad, 0, uShortTextSize);
     _flagArch = 0;
 }
 //---------------------------------------------------------------------------
@@ -93,12 +89,12 @@ const char* StartDataNewBd85::GetWidthPwmZad()
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetOffsetPwmZad()
 {
-    return _offsetPwmZ;
+    return _offsetPwmZad;
 }
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetPeriodPwmZad()
 {
-    return _periodPwmZ;
+    return _periodPwmZad;
 }
 //---------------------------------------------------------------------------
 int StartDataNewBd85::GetFlagArch()

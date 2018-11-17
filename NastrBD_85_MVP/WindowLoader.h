@@ -7,6 +7,7 @@
 #include "PresenterWindowMainBd85.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"
+#include "TaskWithParam.h"
 #include "IFormDispetView.h"
 //---------------------------------------------------------------------------
 class WindowLoader 
@@ -22,7 +23,8 @@ private:
     TForm * _owner;
     PresenterWindowMainBd85 * _presenter;
     IAllProtokolS * _allProtokol;
-    ITask * _task;
+    //ITask * _task;
+    TaskWithParam * _task;
 };
 //---------------------------------------------------------------------------
 #endif

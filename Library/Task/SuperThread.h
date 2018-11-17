@@ -23,6 +23,8 @@ public:
   __fastcall SuperThread(bool CreateSuspended);
   void StartNotSynhro(ActionSelf<>* action);
   void StartSynhro(ActionSelf<>* action);
+
+  //template<class P> void StartNotSynhroParam(ActionSelf<P>* action, P arg);
 };
 //---------------------------------------------------------------------------
 #endif

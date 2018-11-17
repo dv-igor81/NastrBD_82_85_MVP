@@ -18,7 +18,8 @@ WindowLoader::WindowLoader(
     //_view = (IFormDispetView *)_owner; Так не работает... ошибка выполнения
     _viewDispet = view;
     _allProtokol = new AllProtokolS();
-    _task = new Task();
+    //_task = new Task();
+    _task = new TaskWithParam( new Task() );
 }
 //---------------------------------------------------------------------------
 WindowLoader::~WindowLoader()

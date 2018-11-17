@@ -7,13 +7,19 @@
 #include "ConnectionStateInfo_t.h"
 #include "IAllProtokolS.h"
 #include "ITask.h"
+#include "TaskWithParam.h"
 //---------------------------------------------------------------------------
 class ConnectBdProt{
 public:
     ConnectBdProt(
         HelperConnectFourBdProt* bdProt,
         IAllProtokolS * allProtokol,
-        ITask * task);
+        TaskWithParam * task);
+
+    IAllProtokolS * _allProtokol;
+    TaskWithParam * _task;
+    int _addrBd;
+
     void SetActionOprosStart( ActionSelf<>* action );
     void SetActionOprosIter( ActionSelf<>* action );
     void SetActionOprosEnd( ActionSelf<>* action );
@@ -84,11 +90,6 @@ private:
     void SetAddrBdNumber(int addrBd);
 
     void SettingsChengeProtokol(ProtokolName pName, bool fromPresenter);
-
-    IAllProtokolS * _allProtokol;
-    ITask * _task;
-    int _addrBd;
-
     void WorkInLoop();
 
     ProtokolName _protokolName;

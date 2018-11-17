@@ -2,21 +2,15 @@
 #ifndef StartDataNewBd85H
 #define StartDataNewBd85H
 //---------------------------------------------------------------------------
+#include "EepromBd85Settings.h"
+//---------------------------------------------------------------------------
 class StartDataNewBd85
 {
 public:
-    StartDataNewBd85(
-        const char* verPo
-        , unsigned char indAddrZad
-        , unsigned char groupAddrZad
-        , unsigned short dnuZad
-        , unsigned short voltageHiZad
-        , unsigned short widthPwmZad // Длительность ШИМ заданная
-        , unsigned short offsetPwmZ // Смешение ШИМ заданное
-        , unsigned short periodPwmZ // Период ШИМ заданный
-        , int flagArch // Флаг АРЧ (-1 - false, 0 - ничего не делать, 1 - true)
-    );
-    StartDataNewBd85();        
+    StartDataNewBd85( EepromBd85Settings * data );
+    StartDataNewBd85();
+    void InsteadOfConstructor(); // Вместо конструктора
+
     const char* GetVerPo();
     const char* GetIndAddrZad();
     const char* GetGroupAddrZad();
@@ -42,8 +36,8 @@ private:
     char _voltageHiZad[uShortTextSize];
     char _voltageHiValueZad[floatTextSize];
     char _widthPwmZad[uShortTextSize]; // Длительность ШИМ заданная
-    char _offsetPwmZ[uShortTextSize]; // Смешение ШИМ заданное
-    char _periodPwmZ[uShortTextSize]; // Период ШИМ заданный
+    char _offsetPwmZad[uShortTextSize]; // Смешение ШИМ заданное
+    char _periodPwmZad[uShortTextSize]; // Период ШИМ заданный
     int _flagArch; // Флаг АРЧ   (-1 - false, 0 - ничего не делать, 1 - true)
 };
 //---------------------------------------------------------------------------
