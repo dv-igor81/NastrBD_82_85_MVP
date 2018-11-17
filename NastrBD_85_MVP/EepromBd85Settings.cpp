@@ -24,6 +24,7 @@ void EepromBd85Settings::Copy( EepromBd85Settings & data )
     OffsetPwmZad = data.OffsetPwmZad;
     PeriodPwmZad = data.PeriodPwmZad;
     FlagArch = data.FlagArch;
+    VoltageHiZadValue = data.VoltageHiZadValue;
 }
 //---------------------------------------------------------------------------
 bool EepromBd85Settings::NotEqual( EepromBd85Settings & data )

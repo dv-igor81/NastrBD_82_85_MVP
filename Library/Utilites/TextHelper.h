@@ -59,5 +59,7 @@ public:
         double min,
         double max,
         bool * flagError);
+
+    static double Rounding(double var, int quantity);
 };
 #endif

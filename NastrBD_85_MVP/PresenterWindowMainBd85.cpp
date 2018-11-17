@@ -462,6 +462,9 @@ bool PresenterWindowMainBd85::ReadEEProm()
         {
             return false;
         }
+        _eepromSaved.VoltageHiZadValue = TextHelper::Rounding(
+            ConvertHelper::VoltageHiCodeToValue( _eepromSaved.VoltageHiZad ),
+            2 ); // Учитывать 2 цифры после запятой
         _readParamIndex++;
     }
     if ( _isConnected == false )
@@ -619,13 +622,23 @@ void PresenterWindowMainBd85::TextDnuZadCodeChange(const char* text)
 void PresenterWindowMainBd85::TextVoltageHiZadChange(const char* text)
 {
     bool flagErrorConvert;
-    double voltageHiZadValue = TextHelper::ConvertTextToDouble(
+    _eepromChange.VoltageHiZadValue = TextHelper::ConvertTextToDouble(
         text,
         ConvertHelper::VoltageHiCodeToValue( _eepromPrev.VoltageHiZad ),
         & flagErrorConvert);
     if ( flagErrorConvert == false )
     {
-        _eepromChange.VoltageHiZad = ConvertHelper::VoltageHiValueToCode( voltageHiZadValue );
+        _eepromChange.VoltageHiZad = ConvertHelper::VoltageHiValueToCode( _eepromChange.VoltageHiZadValue );
+        _eepromChange.VoltageHiZadValue = ConvertHelper::VoltageHiCodeToValue( _eepromChange.VoltageHiZad );
+        _eepromChange.VoltageHiZadValue = TextHelper::Rounding(_eepromChange.VoltageHiZadValue, 2);
+        if ( _eepromChange.VoltageHiZadValue == _eepromPrev.VoltageHiZadValue )
+        {  // Не допустить печать незначущих нулей
+            flagErrorConvert = true;
+        }
+        else
+        {
+            _eepromPrev.VoltageHiZadValue = _eepromChange.VoltageHiZadValue;
+        }
     }
     else
     {

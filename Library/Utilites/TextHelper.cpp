@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 #include "TextHelper.h"
+#include <stdio.h>
 //---------------------------------------------------------------------------
 #include <Classes.hpp>
 //---------------------------------------------------------------------------
@@ -201,6 +202,10 @@ void TextHelper::ConvertTextToNumber(
     {
     case 0: // 0 - нет ошибки
         *change = retValue; // Сохранить изменённое значение
+        if (*change == *prev)
+        { // Не допустить печать незначущих нулей
+            *update = true; // Отобразить новое значение
+        }
         *prev = retValue; // Сохранить предыдущее значение
         break;
     case 1: // 1 - ошибка формата строки
@@ -291,5 +296,22 @@ double TextHelper::ConvertTextToDouble(
     return retValue;
 }
 //---------------------------------------------------------------------------
+double TextHelper::Rounding(double var, int quantity)
+{
+    AnsiString format = "%0.";
+    format += quantity;
+    format += "f";
+    const int size = 15;
+    char number[size];
+    int length = sprintf( number, format.c_str(), var );
+    if ( length > size )
+    {
+        ; // Ошибка
+    }
+    CharReplace(number, '.', ',', size);
+    AnsiString asNumber = number;
+    double retValue = StrToFloat( asNumber );
+    return retValue;
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
