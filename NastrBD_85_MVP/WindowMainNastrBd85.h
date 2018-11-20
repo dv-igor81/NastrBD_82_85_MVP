@@ -179,6 +179,7 @@ __published:	// IDE-managed Components
         TEdit *Edit_Scaling_3;
         TLabel *Label_ChangeEEPROM;
         TBitBtn *BitBtn_ArchOnOffDisplay;
+        TLabel *Label_ChangeModBusEEPROM;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
@@ -349,6 +350,7 @@ public:		// User declarations
     //===>> Параметры ModBus
     ModBusEventContainerBd85 * GetModBusEventContainer();
     void DisplayModBusParamData( ModBusTextDataBd85 * data );
+    void DisplayModBusNotSaveChanges( bool display ); // true --- отобразить несохраненные изменения
     //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------

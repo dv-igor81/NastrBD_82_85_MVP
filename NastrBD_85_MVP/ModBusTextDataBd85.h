@@ -2,12 +2,14 @@
 #ifndef ModBusTextDataBd85H
 #define ModBusTextDataBd85H
 //---------------------------------------------------------------------------
-#include "IModBusParamDataBd85.h"
+#include "EepromModBusBd85Settings.h"
 //---------------------------------------------------------------------------
 class ModBusTextDataBd85
 {
 public:
-    ModBusTextDataBd85(IModBusParamDataBd85 * param);
+    ModBusTextDataBd85();
+    ModBusTextDataBd85(EepromModBusBd85Settings * param);
+    void InsteadOfConstructor(); // Вместо конструктора
 
     const char* GetNumberOfBd(); // 1) Номер блока
     const char* GetExposition(); // 2) Экспозиция, мс

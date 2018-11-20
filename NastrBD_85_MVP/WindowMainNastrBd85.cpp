@@ -432,7 +432,7 @@ ActionEvent<bool>& TWindowMainBd85::GetEventRadioButtonArchOffClick()
     return ev_radioButton_ArchOffClick;
 }
 //---------------------------------------------------------------------------
-void TWindowMainBd85::DisplayNotSaveChanges(bool display)
+void TWindowMainBd85::DisplayNotSaveChanges( bool display )
 {
     Label_ChangeEEPROM->Visible = display;
 }
@@ -440,6 +440,11 @@ void TWindowMainBd85::DisplayNotSaveChanges(bool display)
 ActionSelf<bool>& TWindowMainBd85::GetSelfDisplayNotSaveChanges()
 {
     return as_DisplayNotSaveChanges;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::DisplayModBusNotSaveChanges( bool display )
+{ // Отобразить не сохраненные изменения
+    Label_ChangeModBusEEPROM->Visible = display;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

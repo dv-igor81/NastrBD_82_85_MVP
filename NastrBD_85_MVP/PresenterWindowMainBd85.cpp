@@ -60,7 +60,6 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     ev_DisplayIterData += _view->GetSelfDisplayIterData();
     ev_ScalingOpros += _view->GetSelfDisplayScalingData();
     _view->GetEventButtonClearScalingClick() += as_ClearScalingSumm;
-
     //===>> Запись в EEPROM
     _view->GetEventButtonWriteToEepromClick() += as_WriteToEeprom;
     _view->GetEventTextIndAddrZadChange() += as_TextIndAddrZadChange;

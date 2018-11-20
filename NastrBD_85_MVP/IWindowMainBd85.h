@@ -47,7 +47,8 @@ public:
 
     //===>> Параметры ModBus
     virtual ModBusEventContainerBd85 * GetModBusEventContainer() = 0;
-    virtual void DisplayModBusParamData( ModBusTextDataBd85 * data ) = 0;
+    virtual void DisplayModBusParamData( ModBusTextDataBd85 * data ) = 0; // Отобразить данные
+    virtual void DisplayModBusNotSaveChanges( bool display ) = 0; // Отобразить состояние данных (изменены или нет)
     //<<=== Параметры ModBus
 };
 //---------------------------------------------------------------------------

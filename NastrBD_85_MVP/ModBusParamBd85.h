@@ -6,19 +6,19 @@
 #include "ModBusEventContainerBd85.h"
 #include "ITask.h"
 #include "TaskWithParam.h"
-#include "IModBusParamDataBd85.h"
 #include "ModBusTextDataBd85.h"
 #include "IWindowMainBd85.h"
+#include "EepromModBusBd85Settings.h"
 //---------------------------------------------------------------------------
-class ModBusParamBd85 : public IModBusParamDataBd85
+class ModBusParamBd85
 {
 public:
     ModBusParamBd85(
         IAllProtokolS * protokol,
         IWindowMainBd85 * view,
         TaskWithParam * task);
-    ~ModBusParamBd85();
 
+    ~ModBusParamBd85();
 private:
     IAllProtokolS * _protokol;
     ModBusEventContainerBd85 * _container;
@@ -28,69 +28,29 @@ private:
 public:
     void ActionIfEventIter(); // Действие, если событие
     void ActionStart(); // Действие, при старте
+    EepromModBusBd85Settings _modBusSaved; // Сохранённое в EEPROM состояние
+    EepromModBusBd85Settings _modBusChange; // Текущее изменённое состояние
+    EepromModBusBd85Settings _modBusPrev; // Предидущее изменённое состояние
 
-    unsigned long GetNumberOfBd(); // 1) Номер блока
-    unsigned long GetExposition(); // 2) Экспозиция, мс
-    unsigned long GetMinimumCount(); // 3) Минимальный счёт
-    unsigned long GetMaximumCount(); // 4) Максимальный счёт
-    unsigned long GetLevelOfOverload(); // 5) Уровень перегрузки
-    unsigned long GetQuantityOfInterval(); // 6) Кол-во интервалов
-    unsigned long GetQuantityOfLook(); // 7) Кол-во взгляда после
-    unsigned long GetLevelOfAlarm1(); // 8) Уровень тревоги 1 * 10
-    unsigned long GetLevelOfAlarm2(); // 9) Уровень тревоги 2 * 10
-    unsigned long GetLevelOfAlarm3(); // 10) Уровень тревоги 3 * 10
-    unsigned long GetPhon(); // 11) Фон, с
-    unsigned long GetDurationOfPhon(); // 12) Длит. подинтервала фона, мс
-    unsigned long GetDurationOfAlarm(); // 13) Длит. сигнала тревоги, с
-    unsigned long GetDurationOfVideo(); // 14) Длит. сигнала видео
 private:
     enum { regCount = 14 };
 
-    unsigned long _numberOfBd; // 1) Номер блока
-    unsigned long _exposition; // 2) Экспозиция, мс
-    unsigned long _minimumCount; // 3) Минимальный счёт
-    unsigned long _maximumCount; // 4) Максимальный счёт
-    unsigned long _levelOfOverload; // 5) Уровень перегрузки
-    unsigned long _quantityOfInterval; // 6) Кол-во интервалов
-    unsigned long _quantityOfLook; // 7) Кол-во взгляда после
-    unsigned long _levelOfAlarm1; // 8) Уровень тревоги 1 * 10
-    unsigned long _levelOfAlarm2; // 9) Уровень тревоги 2 * 10
-    unsigned long _levelOfAlarm3; // 10) Уровень тревоги 3 * 10
-    unsigned long _phon; // 11) Фон, с
-    unsigned long _durationOfPhon; // 12) Длит. подинтервала фона, мс
-    unsigned long _durationOfAlarm; // 13) Длит. сигнала тревоги, с
-    unsigned long _durationOfVideo; // 14) Длит. сигнала видео
+    ModBusTextDataBd85* _textData;
+    //===>> Отобразить данные
+    void DisplayReadReg( ModBusTextDataBd85 ** data );
+    ActionSelf<ModBusTextDataBd85**>* as_DisplayReadReg;
+    //<<=== Отобразить данные
+    //===>> Отобразить состояние данных (изменены или нет)
+    void DisplayNotSaveChanges( bool display );
+    ActionSelf<bool>* as_DisplayNotSaveChanges;
+    //<<=== Отобразить состояние данных (изменены или нет)
 
-    unsigned long _numberOfBdChange; // 1) Номер блока
-    unsigned long _expositionChange; // 2) Экспозиция, мс
-    unsigned long _minimumCountChange; // 3) Минимальный счёт
-    unsigned long _maximumCountChange; // 4) Максимальный счёт
-    unsigned long _levelOfOverloadChange; // 5) Уровень перегрузки
-    unsigned long _quantityOfIntervalChange; // 6) Кол-во интервалов
-    unsigned long _quantityOfLookChange; // 7) Кол-во взгляда после
-    unsigned long _levelOfAlarm1Change; // 8) Уровень тревоги 1 * 10
-    unsigned long _levelOfAlarm2Change; // 9) Уровень тревоги 2 * 10
-    unsigned long _levelOfAlarm3Change; // 10) Уровень тревоги 3 * 10
-    unsigned long _phonChange; // 11) Фон, с
-    unsigned long _durationOfPhonChange; // 12) Длит. подинтервала фона, мс
-    unsigned long _durationOfAlarmChange; // 13) Длит. сигнала тревоги, с
-    unsigned long _durationOfVideoChange; // 14) Длит. сигнала видео    
+    void DisplayChange(
+        bool updataText, // true - обновить текстовые данные
+        bool inSecondThread, // true - функция запущена во вторичном потоке
+        ModBusTextDataBd85 *& data );
 
 private:
-    static const unsigned short _expositionDefault; // 2) Экспозиция, мс
-    static const unsigned short _minimumCountDefault; // 3) Минимальный счёт
-    static const unsigned short _maximumCountDefault; // 4) Максимальный счёт
-    static const unsigned short _levelOfOverloadDefault; // 5) Уровень перегрузки
-    static const unsigned short _quantityOfIntervalDefault; // 6) Кол-во интервалов
-    static const unsigned short _quantityOfLookDefault;// 7) Кол-во взгляда после
-    static const unsigned short _levelOfAlarm1Default; // 8) Уровень тревоги 1 * 10
-    static const unsigned short _levelOfAlarm2Default; // 9) Уровень тревоги 2 * 10
-    static const unsigned short _levelOfAlarm3Default; // 10) Уровень тревоги 3 * 10
-    static const unsigned short _phonDefault; // 11) Фон, с
-    static const unsigned short _durationOfPhonDefault; // 12) Длит. подинтервала фона, мс
-    static const unsigned short _durationOfAlarmDefault; // 13) Длит. сигнала тревоги, с
-    static const unsigned short _durationOfVideoDefault; // 14) Длит. сигнала видео
-
     static const unsigned short _numberOfBdMemoryAddr; // 1) Номер блока
     static const unsigned short _expositionMemoryAddr; // 2) Экспозиция, мс
     static const unsigned short _minimumCountMemoryAddr; // 3) Минимальный счёт
@@ -107,10 +67,10 @@ private:
     static const unsigned short _durationOfVideoMemoryAddr; // 14) Длит. сигнала видео
 
     unsigned short _addrRegModBus[regCount];
-    unsigned long * _paramModBus[regCount]; // Массив указателей
+    unsigned short * _paramModBus[regCount]; // Массив указателей
 
     //  Массив указателей на "делегаты"
-    ActionSelf<unsigned short, unsigned long*, bool *>* ReadRegCurrent[regCount];
+    ActionSelf<unsigned short, unsigned short*, bool *>* ReadRegCurrent[regCount];
     
     bool _bfNeedReadReg;
     void ReadRegIfNeed();
@@ -118,13 +78,8 @@ private:
     void WriteRegIfNeed();
     void ReadReg();
 
-
-    void DisplayReadReg();
-    ModBusTextDataBd85* _textData;
-    ActionEvent<ModBusTextDataBd85*> ev_DisplayReadReg;
-    ActionSelf<>* as_DisplayReadReg;
-
     bool _bfErrorReadReg;
+    bool _textChangeIgnore;
 private:
     //===>> Параметры ModBus
     void Create(); // Создать объект
@@ -134,13 +89,18 @@ private:
     void InitReadDelegate();
 
     void ToNumber(
-        const char* text,
-        unsigned long * change,
-        int curr,
+        const char * text,
+        unsigned short * change,
+        unsigned short * prev,
         int max);
+
     bool _bfChangeOld;
     bool _bfChangeCurr;
-    void DisplayChange(int change, int curr, bool _flagErrorChange);
+
+    bool _bfChangeEepromCurr;
+    bool _bfChangeEepromOld;
+    bool ChangeEepromData();
+
 
     // 1) Номер блока
     ActionSelf<const char*>* as_MbParamNumberOfBdChange;
@@ -197,28 +157,28 @@ private:
     void ActivePageIndexChange(int api);
 
     //<<=== Функции чтения и записи регистров
-    ActionSelf<unsigned short, unsigned long*, bool*>* as_WrapReadFlashInvert;
+    ActionSelf<unsigned short, unsigned short*, bool*>* as_WrapReadFlashInvert;
     void WrapReadFlashInvert(
         unsigned short memoryAddr,
-        unsigned long * data,
+        unsigned short * data,
         bool * flagResult);
 
-    ActionSelf<unsigned short, unsigned long*, bool*>* as_WrapReadFlash2;
+    ActionSelf<unsigned short, unsigned short*, bool*>* as_WrapReadFlash2;
     void WrapReadFlash2(
         unsigned short memoryAddr,
-        unsigned long * data,
+        unsigned short * data,
         bool * flagResult);
 
-    ActionSelf<unsigned short, unsigned long, bool*>* as_WrapWriteFlashInvert;
+    ActionSelf<unsigned short, unsigned short, bool*>* as_WrapWriteFlashInvert;
     void WrapWriteFlashInvert(
         unsigned short memoryAddr,
-        unsigned long data,
+        unsigned short data,
         bool * flagResult);
 
-    ActionSelf<unsigned short, unsigned long, bool*>* as_WrapWriteFlash2;
+    ActionSelf<unsigned short, unsigned short, bool*>* as_WrapWriteFlash2;
     void WrapWriteFlash2(
         unsigned short memoryAddr,
-        unsigned long data,
+        unsigned short data,
         bool * flagResult);
     //===>> Функции чтения и записи регистров
 

@@ -26,10 +26,9 @@
       ..\Library\AllProtokolS\ConnectBdProt.obj 
       ..\Library\AllProtokolS\HelperConnectFourBdProt.obj ScalingDataNewBd85.obj 
       ..\NastrBD_82_85\IFormDispetView.obj ModBusParamBd85.obj 
-      ModBusEventContainerBd85.obj IModBusParamDataBd85.obj 
-      ModBusTextDataBd85.obj EepromBd85Settings.obj 
+      ModBusEventContainerBd85.obj ModBusTextDataBd85.obj EepromBd85Settings.obj 
       ..\Library\Task\TaskWithParam.obj ..\Library\Task\IArgTaskWithParam.obj 
-      ..\Library\Task\ArgTaskWithParam.obj"/>
+      ..\Library\Task\ArgTaskWithParam.obj EepromModBusBd85Settings.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -116,12 +115,12 @@
       <FILE FILENAME="..\NastrBD_82_85\IFormDispetView.cpp" FORMNAME="" UNITNAME="IFormDispetView" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModBusParamBd85.cpp" FORMNAME="" UNITNAME="ModBusParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModBusEventContainerBd85.cpp" FORMNAME="" UNITNAME="ModBusEventContainerBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="IModBusParamDataBd85.cpp" FORMNAME="" UNITNAME="IModBusParamDataBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModBusTextDataBd85.cpp" FORMNAME="" UNITNAME="ModBusTextDataBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="EepromBd85Settings.cpp" FORMNAME="" UNITNAME="EepromBd85Settings" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Task\TaskWithParam.cpp" FORMNAME="" UNITNAME="TaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Task\IArgTaskWithParam.cpp" FORMNAME="" UNITNAME="IArgTaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Task\ArgTaskWithParam.cpp" FORMNAME="" UNITNAME="ArgTaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EepromModBusBd85Settings.cpp" FORMNAME="" UNITNAME="EepromModBusBd85Settings" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
