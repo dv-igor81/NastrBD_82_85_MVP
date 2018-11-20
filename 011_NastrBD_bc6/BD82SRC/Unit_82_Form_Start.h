@@ -539,11 +539,12 @@ private:	// User declarations
   // при попытке сфотограффировать форму в Метро.
   bool bf_Zabyvchivosti;
 
-
   //==\\void PressKey( int Key );
   //==\\void ReleaseKey( int Key );
   //==\\void ClickKey( int Key );
-  
+
+  ActionSelf<> as_ZvukOnOff;
+  void ZvukOnOff();
 
   Graphics::TBitmap * BMCopy;
   TJPEGImage * jpg;

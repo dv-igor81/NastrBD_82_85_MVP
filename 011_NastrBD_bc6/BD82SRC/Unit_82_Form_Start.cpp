@@ -157,7 +157,8 @@ TOut32 * pOut32 = NULL; // Указатель на функцию Out32
 //---------------------------------------------------------------------------
 // Конструктор
 __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
-        : TForm(Owner)
+        : TForm(Owner),
+        as_ZvukOnOff ( this, &TForm_82_Start::ZvukOnOff )
 {
   ptrUhiI = 0;
   kodUhiI = 0;
@@ -209,6 +210,9 @@ __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
   // <<=== 28.02.2015
   // Перенёс из обработчика события "FormShow"
   this->Prot = new RSProtokol_t; // Создать в "куче" экземпляр объекта протокола
+
+  Prot->ev_ZvukOnOff += as_ZvukOnOff;
+
   // Перенёс из обработчика события "FormShow"
   Cprw = new ComPortReadWrite_t(true); // true - Не запускать поток при выделение памяти
   // Перенёс из обработчика события "FormShow"
@@ -4520,6 +4524,20 @@ void __fastcall TForm_82_Start::BitBtn_P37SetResetMouseUp(TObject *Sender,
 {
   BitBtn_P37SetReset->Font->Color = clWindowText;
   bfZvukOff = true;
+}
+//---------------------------------------------------------------------------
+void TForm_82_Start::ZvukOnOff()
+{
+    if ( bfZvukOn == true )
+    {
+        bfZvukOn = false;
+        ZvukOn();
+    }
+    if ( bfZvukOff == true )
+    {
+        bfZvukOff = false;
+        ZvukOff();
+    }
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm_82_Start::Timer3Timer(TObject *Sender)

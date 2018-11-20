@@ -625,6 +625,10 @@ void PresenterWindowMainBd85::TextVoltageHiZadChange(const char* text)
         text,
         ConvertHelper::VoltageHiCodeToValue( _eepromPrev.VoltageHiZad ),
         & flagErrorConvert);
+    if ( _eepromChange.VoltageHiZadValue < 0 )
+    {
+        _eepromChange.VoltageHiZadValue *= -1;    
+    }
     if ( flagErrorConvert == false )
     {
         _eepromChange.VoltageHiZad = ConvertHelper::VoltageHiValueToCode( _eepromChange.VoltageHiZadValue );

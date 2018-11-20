@@ -242,7 +242,22 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     Edit_WidthPwmZad->ReadOnly = !isEnabled;
     Edit_OffsetPwmZad->ReadOnly = !isEnabled;
     Edit_PeriodPwmZad->ReadOnly = !isEnabled;
-
+    //===>> Параметры ModBus
+    Edit_NumberOfBd->ReadOnly = !isEnabled; // 1)
+    Edit_Exposition->ReadOnly = !isEnabled; // 2)
+    Edit_MinimumCount->ReadOnly = !isEnabled; // 3)
+    Edit_MaximumCount->ReadOnly = !isEnabled; // 4)
+    Edit_LevelOfOverload->ReadOnly = !isEnabled; // 5)
+    Edit_QuantityOfInterval->ReadOnly = !isEnabled; // 6)
+    Edit_QuantityOfLook->ReadOnly = !isEnabled; // 7)
+    Edit_LevelOfAlarm_1->ReadOnly = !isEnabled; // 8)
+    Edit_LevelOfAlarm_2->ReadOnly = !isEnabled; // 9)
+    Edit_LevelOfAlarm_3->ReadOnly = !isEnabled; // 10)
+    Edit_Phon->ReadOnly = !isEnabled; // 11)
+    Edit_DurationOfPhon->ReadOnly = !isEnabled; // 12)
+    Edit_DurationOfAlarm->ReadOnly = !isEnabled; // 13
+    Edit_DurationOfVideo->ReadOnly = !isEnabled; // 14
+    //<<=== Параметры ModBus
     button_StartStopScaling->Enabled = isEnabled;
     GroupBox_ReverseLink->Enabled = isEnabled;
     BitBtn_ArchOnOffDisplay->Enabled = isEnabled;

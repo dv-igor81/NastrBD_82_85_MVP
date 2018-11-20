@@ -521,7 +521,10 @@ public:
 
     //===>> 29.10.2018
     ActionEvent<> ev_FlagAvtoSnyatDiskr;
-    ActionEvent<> ev_OprosBDParam;
+
+    //ActionEvent<> ev_OprosBDParam;
+    ActionEvent<> ev_ZvukOnOff;
+
     ActionEvent<> ev_CheckBoxAutoCheckedFalse;
     ActionEvent<> ev_CheckBox081CheckedFalse;
     //<<=== 29.10.2018

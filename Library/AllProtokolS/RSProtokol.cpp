@@ -2435,7 +2435,8 @@ int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
   }
 
   //===>>
-  ev_OprosBDParam();
+  ev_ZvukOnOff();
+  //ev_OprosBDParam();
   //if (Form_82_Start->bfZvukOn == true)
   //{
   //  Form_82_Start->bfZvukOn = false;
