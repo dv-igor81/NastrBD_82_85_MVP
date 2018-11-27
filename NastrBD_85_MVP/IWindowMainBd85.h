@@ -50,6 +50,9 @@ public:
     virtual void DisplayModBusParamData( ModBusTextDataBd85 * data ) = 0; // Отобразить данные
     virtual void DisplayModBusNotSaveChanges( bool display ) = 0; // Отобразить состояние данных (изменены или нет)
     //<<=== Параметры ModBus
+
+    virtual ActionEvent<>& GetEventButtonFromFileClick() = 0; // Параметры из файла
+    virtual ActionEvent<>& GetEventButtonSaveToFileClick() = 0;
 };
 //---------------------------------------------------------------------------
 #endif

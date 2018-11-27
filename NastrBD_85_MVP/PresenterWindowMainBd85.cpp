@@ -4,6 +4,7 @@
 #include "PresenterWindowMainBd85.h"
 #include "TextHelper.h"
 #include "ConvertHelper.h"
+#include "FileDirect.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -12,7 +13,8 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     IFormDispetView * viewDispet,
     IAllProtokolS * allProtokol,
     TaskWithParam * task) :
-        as_FormClose(this, &PresenterWindowMainBd85::FormClose)
+        _iniFileName( "BD85.dat" )
+        , as_FormClose(this, &PresenterWindowMainBd85::FormClose)
         , as_OprosStart(this, &PresenterWindowMainBd85::OprosStart)
         , as_OprosStartInvoke(this, &PresenterWindowMainBd85::OprosStartInvoke)
         , as_OprosIter(this, &PresenterWindowMainBd85::OprosIter)
@@ -33,7 +35,9 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_TextPeriodPwmZadChange(this, &PresenterWindowMainBd85::TextPeriodPwmZadChange)
         , as_RadioButtonArchOnClick(this, &PresenterWindowMainBd85::RadioButtonArchOnClick)
         , as_RadioButtonArchOffClick(this, &PresenterWindowMainBd85::RadioButtonArchOffClick)
-        , as_DisplayChangeEepromDataInvoke(this, &PresenterWindowMainBd85::DisplayChangeEepromDataInvoke)
+        , as_DisplayChangeEepromData(this, &PresenterWindowMainBd85::DisplayChangeEepromData)
+        , as_FromFileBd85Settings(this, &PresenterWindowMainBd85::FromFileBd85Settings)
+        , as_SaveToLogFile(this, &PresenterWindowMainBd85::SaveToLogFile)
         //===
 {
     _startData = 0;
@@ -76,7 +80,11 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
 
     _mbParam = new ModBusParamBd85( allProtokol, view, task );
 
+    _view->GetEventButtonFromFileClick() += as_FromFileBd85Settings;
+    _view->GetEventButtonSaveToFileClick() += as_SaveToLogFile;
+
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
+
     ev_Show(); // Прказать форму
 }
 //---------------------------------------------------------------------------
@@ -563,7 +571,7 @@ void PresenterWindowMainBd85::ToNumber(
         0, max );
     *change = ( changeArg & 0xFF );
     *prev = ( prevArg & 0xFF );
-    DisplayChangeEepromDataInvoke( update );
+    DisplayChangeEepromData( update );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ToNumber(
@@ -582,7 +590,7 @@ void PresenterWindowMainBd85::ToNumber(
         0, max );
     *change = ( changeArg & 0xFFFF );
     *prev = ( prevArg & 0xFFFF );
-    DisplayChangeEepromDataInvoke( update );
+    DisplayChangeEepromData( update );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ToNumber(
@@ -600,7 +608,7 @@ void PresenterWindowMainBd85::ToNumber(
         0, max);
     *change = ( changeArg & 0xFFFF );
     *prev = ( prevArg & 0xFFFF );
-    DisplayChangeEepromDataInvoke( update );
+    DisplayChangeEepromData( update );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextIndAddrZadChange(const char* text)
@@ -671,7 +679,7 @@ void PresenterWindowMainBd85::RadioButtonArchOnClick(bool onClick)
     if ( onClick )
     {
         _eepromChange.FlagArch = -1; // -1 --- false, 1 --- true, 0 --- null
-        DisplayChangeEepromDataInvoke( false );
+        DisplayChangeEepromData( false );
     }
 }
 //---------------------------------------------------------------------------
@@ -680,16 +688,16 @@ void PresenterWindowMainBd85::RadioButtonArchOffClick(bool offClick)
     if ( offClick )
     {
         _eepromChange.FlagArch = 1; // -1 --- false, 1 --- true, 0 --- null
-        DisplayChangeEepromDataInvoke( false );
+        DisplayChangeEepromData( false );
     }
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::WrapDisplayChangeEepromDataInvoke(bool updateText)
 {
-    _task->BeginInvoke( & as_DisplayChangeEepromDataInvoke, updateText );
+    _task->BeginInvoke( & as_DisplayChangeEepromData, updateText );
 }
 //---------------------------------------------------------------------------
-void PresenterWindowMainBd85::DisplayChangeEepromDataInvoke( bool updataText )
+void PresenterWindowMainBd85::DisplayChangeEepromData( bool updataText )
 {
     if ( _textChangeIgnore )
     { // Эти изменения внесены программно, а не пользователем (через ГИП)
@@ -705,7 +713,7 @@ void PresenterWindowMainBd85::DisplayChangeEepromDataInvoke( bool updataText )
     if ( updataText )
     {
         StartDataNewBd85 * data = new StartDataNewBd85( & _eepromChange );
-        OprosStartNotInvoke( data );        
+        OprosStartNotInvoke( data );
     }
 }
 //---------------------------------------------------------------------------
@@ -761,4 +769,60 @@ bool PresenterWindowMainBd85::WriteEEProm()
     return flag;
 }
 //---------------------------------------------------------------------------
+void PresenterWindowMainBd85::FromFileBd85Settings()
+{
+    FileDirect fromIni;
+    bool flagArch;
+    unsigned short voltageHiZadValue;
+    unsigned short voltageHiZad;
+    bool bfError = false;
+
+    fromIni.LoadFromFile( _iniFileName.c_str() );
+    const unsigned char Addr = 0;
+    const unsigned char AddrG = 0;
+    const unsigned short DNU = 950;
+    const unsigned short UHI = 1230;
+    const unsigned short PwmPulseLength = 40;
+    const unsigned short PwmOffset = 525;
+    const unsigned short PwmCycleTime = 2500;
+    const bool Feedback = false;
+
+    fromIni.ReadByte( & _eepromChange.IndAddrZad, "Addr", 0, Addr, 255, & bfError ); // "Addr" - совместимость со старыми версиями
+    fromIni.ReadByte( & _eepromChange.GroupAddrZad, "AddrG", 0, AddrG, 255, & bfError ); // "AddrG" - совместимость со старыми версиями
+    fromIni.ReadWord( & _eepromChange.DnuZad, "DNU", 0, DNU, 0xFFFF, & bfError ); // "DNU" - совместимость со старыми версиями
+    fromIni.ReadWord( & voltageHiZadValue, "UHI", 0, UHI, 0xFFFF, & bfError ); // "UHI" - совместимость со старыми версиями
+    _eepromChange.VoltageHiZad = ConvertHelper::VoltageHiValueToCode( voltageHiZadValue );
+    fromIni.ReadWord( & _eepromChange.WidthPwmZad, "PwmPulseLength", 0, PwmPulseLength, 0xFFFF, & bfError ); // "PwmPulseLength" - совместимость со старыми версиями
+    fromIni.ReadWord( & _eepromChange.OffsetPwmZad, "PwmOffset", 0, 525, 0xFFFF, & bfError ); // "PwmOffset" - совместимость со старыми версиями
+    fromIni.ReadWord( & _eepromChange.PeriodPwmZad, "PwmCycleTime", 0, 2500, 0xFFFF, & bfError ); // "PwmCycleTime" - совместимость со старыми версиями
+    fromIni.ReadBool( & flagArch, "Feedback", Feedback, & bfError ); // "Feedback" - совместимость со старыми версиями
+    flagArch ^= 1;
+    if ( flagArch )
+    {
+        _eepromChange.FlagArch = 1; // -1 --- false, 1 --- true, 0 --- null
+    }
+    else
+    {
+        _eepromChange.FlagArch = -1; // -1 --- false, 1 --- true, 0 --- null
+    }
+    _eepromPrev.Copy( _eepromChange );
+    DisplayChangeEepromData( true );
+
+    if ( fromIni.DiaFileExists() == false || bfError == true )
+    { // Файл не найден, либо один из параметров не подходит
+        fromIni.WriteInteger( Addr, "Addr" ); // "Addr" - совместимость со старыми версиями
+        fromIni.WriteInteger( AddrG, "AddrG" ); // "AddrG" - совместимость со старыми версиями
+        fromIni.WriteInteger( DNU, "DNU" ); // "DNU" - совместимость со старыми версиями
+        fromIni.WriteInteger( UHI, "UHI" ); // "UHI" - совместимость со старыми версиями
+        fromIni.WriteInteger( PwmPulseLength, "PwmPulseLength" ); // "PwmPulseLength" - совместимость со старыми версиями
+        fromIni.WriteInteger( PwmOffset, "PwmOffset" ); // "PwmOffset" - совместимость со старыми версиями
+        fromIni.WriteInteger( PwmCycleTime, "PwmCycleTime" ); // "PwmCycleTime" - совместимость со старыми версиями
+        fromIni.WriteInteger( Feedback, "Feedback" ); //  "Feedback" - совместимость со старыми версиями
+        fromIni.SaveToFile( _iniFileName.c_str() );
+    }
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::SaveToLogFile()
+{
+}
 

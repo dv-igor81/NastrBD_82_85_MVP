@@ -221,6 +221,8 @@ __published:	// IDE-managed Components
         void __fastcall Button_ModBus_WriteClick(TObject *Sender);
         void __fastcall Edit_MaximumCountChange(TObject *Sender);
         void __fastcall PageControl_WindowBd85Change(TObject *Sender);
+        void __fastcall button_FromFileClick(TObject *Sender);
+        void __fastcall button_SaveToFileClick(TObject *Sender);
 public:
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -312,7 +314,11 @@ private:	// User declarations
     ModBusEventContainerBd85 mbContainer;
     //<<=== Параметры ModBus
 
-    //ActionEvent<> ev_button_WriteToEepromClick;
+    //===>> Параметры из файла
+    ActionEvent<> ev_button_FromFileClick;
+    //<<=== Параметры из файла
+
+    ActionEvent<> ev_button_SaveToFileClick;
 
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
@@ -354,6 +360,12 @@ public:		// User declarations
     void DisplayModBusParamData( ModBusTextDataBd85 * data );
     void DisplayModBusNotSaveChanges( bool display ); // true --- отобразить несохраненные изменения
     //<<=== Параметры ModBus
+
+    //===>> Параметры из файла
+    ActionEvent<>& GetEventButtonFromFileClick();
+    //<<=== Параметры из файла
+
+    ActionEvent<>& GetEventButtonSaveToFileClick();
 };
 //---------------------------------------------------------------------------
 #endif

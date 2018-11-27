@@ -8,4 +8,8 @@
 *.tds
 *.ddp
 *.res
+*.dat
+*.log
+*.ini
+*.str
 

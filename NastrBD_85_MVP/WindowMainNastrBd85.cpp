@@ -263,6 +263,7 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     button_StartStopScaling->Enabled = isEnabled;
     GroupBox_ReverseLink->Enabled = isEnabled;
     BitBtn_ArchOnOffDisplay->Enabled = isEnabled;
+    button_FromFile->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
@@ -462,6 +463,16 @@ ActionSelf<bool>& TWindowMainBd85::GetSelfDisplayNotSaveChanges()
 void TWindowMainBd85::DisplayModBusNotSaveChanges( bool display )
 { // Отобразить не сохраненные изменения
     Label_ChangeModBusEEPROM->Visible = display;
+}
+//---------------------------------------------------------------------------
+ActionEvent<>& TWindowMainBd85::GetEventButtonFromFileClick()
+{
+    return ev_button_FromFileClick;
+}
+//---------------------------------------------------------------------------
+ActionEvent<>& TWindowMainBd85::GetEventButtonSaveToFileClick()
+{
+    return ev_button_SaveToFileClick;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -677,6 +688,16 @@ void __fastcall TWindowMainBd85::PageControl_WindowBd85Change(
       TObject *Sender)
 {
     mbContainer.ev_ActivePageIndex( PageControl_WindowBd85->ActivePageIndex );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::button_FromFileClick(TObject *Sender)
+{
+    ev_button_FromFileClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::button_SaveToFileClick(TObject *Sender)
+{
+    ev_button_SaveToFileClick();
 }
 //---------------------------------------------------------------------------
 

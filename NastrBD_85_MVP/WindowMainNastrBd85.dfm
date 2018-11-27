@@ -528,9 +528,9 @@ object WindowMainBd85: TWindowMainBd85
             OnClick = button_ClearScalingClick
           end
           object button_StartStopScaling: TButton
-            Left = 128
+            Left = 144
             Top = 108
-            Width = 120
+            Width = 104
             Height = 25
             Caption = #1057#1090#1072#1088#1090
             Font.Charset = DEFAULT_CHARSET
@@ -555,6 +555,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 15
+            OnClick = button_SaveToFileClick
           end
         end
         object GroupBox_VerPo: TGroupBox
@@ -1892,6 +1893,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 33
+            OnClick = button_FromFileClick
           end
           object btnPwmAuto: TButton
             Left = 321

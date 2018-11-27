@@ -99,6 +99,12 @@ private:
 
     //<<=== Запись в EEPROM
 
+    ActionSelf<> as_FromFileBd85Settings;
+    void FromFileBd85Settings();
+
+    ActionSelf<> as_SaveToLogFile;
+    void SaveToLogFile();
+
     ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
@@ -126,8 +132,8 @@ private:
     EepromBd85Settings _eepromPrev; // Предидущее изменённое состояние
 
     void WrapDisplayChangeEepromDataInvoke( bool updateText );
-    ActionSelf<bool> as_DisplayChangeEepromDataInvoke;
-    void DisplayChangeEepromDataInvoke( bool updateText );
+    ActionSelf<bool> as_DisplayChangeEepromData;
+    void DisplayChangeEepromData( bool updateText );
 
 
     bool _textChangeIgnore;
@@ -186,6 +192,7 @@ private:
         int max);
 
     ModBusParamBd85 * _mbParam;
+    const AnsiString _iniFileName;
 };
 //---------------------------------------------------------------------------
 #endif
