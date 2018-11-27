@@ -153,10 +153,12 @@ void ModBusParamBd85::Create() // Создать объект
     InitAddrRegModBus();
     InitParamModBus();
     InitReadDelegate();
+    InitWriteDelegate();
     // === === === === === === === === === ===
     _bfNeedReadReg = false;
     _bfNeedWriteReg = false;
     _bfErrorReadReg = false;
+    _bfErrorWriteReg = false;
     _textData = 0;
 }
 //---------------------------------------------------------------------------
@@ -195,12 +197,19 @@ void ModBusParamBd85::ActionIfEventIter() // Действие, если событие
 //---------------------------------------------------------------------------
 void ModBusParamBd85::ActionStart()
 {
-    ReadReg();
-    _modBusChange.Copy( _modBusSaved );
-    _modBusPrev.Copy( _modBusSaved );
-    _bfChangeEepromCurr = ChangeEepromData();
-    _bfChangeEepromOld = !_bfChangeEepromCurr; // Вызвать функцию в ГИПе ОБЯЗАТЕЛЬНО
-    _textData = 0;
+    switch ( _protokol->GetProtokolName() )
+    {
+    case ProtokolName_t::ModBus_RTU: // ModBus RTU
+    case ProtokolName_t::ModBus_TCP: // ModBus TCP
+    case ProtokolName_t::ModBus_RTU_IP: // ModBus RTU (TCP/IP)
+        ReadReg();
+        _modBusChange.Copy( _modBusSaved );
+        _modBusPrev.Copy( _modBusSaved );
+        _bfChangeEepromCurr = ChangeEepromData();
+        _bfChangeEepromOld = !_bfChangeEepromCurr; // Вызвать функцию в ГИПе ОБЯЗАТЕЛЬНО
+        _textData = 0;
+        break;
+    }
 }
 //---------------------------------------------------------------------------
 bool ModBusParamBd85::ChangeEepromData()
@@ -228,25 +237,33 @@ void ModBusParamBd85::InitAddrRegModBus()
 //---------------------------------------------------------------------------
 void ModBusParamBd85::InitParamModBus()
 {
-    _paramModBus[0] = & _modBusSaved.NumberOfBd; // 1) Номер блока
-    _paramModBus[1] = & _modBusSaved.Exposition; // 2) Экспозиция, мс
-    _paramModBus[2] = & _modBusSaved.MinimumCount; // 3) Минимальный счёт
-    _paramModBus[3] = & _modBusSaved.MaximumCount; // 4) Максимальный счёт
-    _paramModBus[4] = & _modBusSaved.LevelOfOverload; // 5) Уровень перегрузки
-    _paramModBus[5] = & _modBusSaved.QuantityOfInterval; // 6) Кол-во интервалов
-    _paramModBus[6] = & _modBusSaved.QuantityOfLook; // 7) Кол-во взгляда после
-    _paramModBus[7] = & _modBusSaved.LevelOfAlarm1; // 8) Уровень тревоги 1 * 10
-    _paramModBus[8] = & _modBusSaved.LevelOfAlarm2; // 9) Уровень тревоги 2 * 10
-    _paramModBus[9] = & _modBusSaved.LevelOfAlarm3; // 10) Уровень тревоги 3 * 10
-    _paramModBus[10] = & _modBusSaved.Phon; // 11) Фон, с
-    _paramModBus[11] = & _modBusSaved.DurationOfPhon; // 12) Длит. подинтервала фона, мс
-    _paramModBus[12] = & _modBusSaved.DurationOfAlarm; // 13) Длит. сигнала тревоги, с
-    _paramModBus[13] = & _modBusSaved.DurationOfVideo; // 14) Длит. сигнала видео
+    Binding( _paramModBusRead, _modBusSaved );
+    Binding( _paramModBusWrite, _modBusChange );
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::Binding(
+    unsigned short ** paramModBus,
+    EepromModBusBd85Settings & data)
+{
+    //paramModBus[0] = & data.NumberOfBd; // 1) Номер блока
+    paramModBus[1] = & data.Exposition; // 2) Экспозиция, мс
+    paramModBus[2] = & data.MinimumCount; // 3) Минимальный счёт
+    paramModBus[3] = & data.MaximumCount; // 4) Максимальный счёт
+    paramModBus[4] = & data.LevelOfOverload; // 5) Уровень перегрузки
+    paramModBus[5] = & data.QuantityOfInterval; // 6) Кол-во интервалов
+    paramModBus[6] = & data.QuantityOfLook; // 7) Кол-во взгляда после
+    paramModBus[7] = & data.LevelOfAlarm1; // 8) Уровень тревоги 1 * 10
+    paramModBus[8] = & data.LevelOfAlarm2; // 9) Уровень тревоги 2 * 10
+    paramModBus[9] = & data.LevelOfAlarm3; // 10) Уровень тревоги 3 * 10
+    paramModBus[10] = & data.Phon; // 11) Фон, с
+    paramModBus[11] = & data.DurationOfPhon; // 12) Длит. подинтервала фона, мс
+    paramModBus[12] = & data.DurationOfAlarm; // 13) Длит. сигнала тревоги, с
+    paramModBus[13] = & data.DurationOfVideo; // 14) Длит. сигнала видео
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::InitReadDelegate()
 {
-    ReadRegCurrent[0] = as_WrapReadFlashInvert; // 1) Номер блока
+    //ReadRegCurrent[0] = as_WrapReadFlashInvert; // 1) Номер блока
     ReadRegCurrent[1] = as_WrapReadFlash2; // 2) Экспозиция, мс
     ReadRegCurrent[2] = as_WrapReadFlash2; // 3) Минимальный счёт
     ReadRegCurrent[3] = as_WrapReadFlash2; // 4) Максимальный счёт
@@ -262,12 +279,29 @@ void ModBusParamBd85::InitReadDelegate()
     ReadRegCurrent[13] = as_WrapReadFlash2; // 14) Длит. сигнала видео
 }
 //---------------------------------------------------------------------------
+void ModBusParamBd85::InitWriteDelegate()
+{
+    WriteRegCurrent[0] = as_WrapWriteFlashInvert; // 1) Номер блока
+    WriteRegCurrent[1] = as_WrapWriteFlash2; // 2) Экспозиция, мс
+    WriteRegCurrent[2] = as_WrapWriteFlash2; // 3) Минимальный счёт
+    WriteRegCurrent[3] = as_WrapWriteFlash2; // 4) Максимальный счёт
+    WriteRegCurrent[4] = as_WrapWriteFlash2; // 5) Уровень перегрузки
+    WriteRegCurrent[5] = as_WrapWriteFlash2; // 6) Кол-во интервалов
+    WriteRegCurrent[6] = as_WrapWriteFlash2; // 7) Кол-во взгляда после
+    WriteRegCurrent[7] = as_WrapWriteFlash2; // 8) Уровень тревоги 1 * 10
+    WriteRegCurrent[8] = as_WrapWriteFlash2; // 9) Уровень тревоги 2 * 10
+    WriteRegCurrent[9] = as_WrapWriteFlash2; // 10) Уровень тревоги 3 * 10
+    WriteRegCurrent[10] = as_WrapWriteFlash2; // 11) Фон, с
+    WriteRegCurrent[11] = as_WrapWriteFlashInvert; // 12) Длит. подинтервала фона, мс
+    WriteRegCurrent[12] = as_WrapWriteFlash2; // 13) Длит. сигнала тревоги, с
+    WriteRegCurrent[13] = as_WrapWriteFlash2; // 14) Длит. сигнала видео
+}
+//---------------------------------------------------------------------------
 void ModBusParamBd85::ReadRegIfNeed()
 {
     if ( _bfNeedReadReg )
     {
         _bfNeedReadReg = false;
-        //ReadReg();
         ActionStart();
         if ( _textData == 0 ) // Основной поток  успел отобразить данные
         {
@@ -284,8 +318,36 @@ void ModBusParamBd85::WriteRegIfNeed()
 {
     if ( _bfNeedWriteReg )
     {
+        WriteReg();
+        if ( _bfErrorWriteReg )
+        {
+            return;
+        }
+        ReadReg();
+        if ( _bfErrorReadReg )
+        {
+            return;
+        }
+        if ( _modBusChange.NotEqual( _modBusPrev ) )
+        {
+            return;
+        }
+        ModBusTextDataBd85 * data = new ModBusTextDataBd85( & _modBusChange );
+        DisplayChange( false, true, data ); // true - функция вызвана во вторичном потоке
         _bfNeedWriteReg = false;
-        // ...  
+    }
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::WriteReg()
+{
+    bool ReturnVar;
+    _bfErrorWriteReg = false;
+    ReturnVar = _protokol->WriteFlashInvert( _addrRegModBus[0], _modBusChange.NumberOfBd );
+    _bfErrorWriteReg == ( _bfErrorWriteReg || ReturnVar );
+    for ( int i = 1; i < regCount; i++ ) // regCount данных записываем
+    {
+      (*WriteRegCurrent[i])( _addrRegModBus[i], *_paramModBusWrite[i], &ReturnVar );
+      _bfErrorWriteReg == ( _bfErrorWriteReg || ReturnVar );
     }
 }
 //---------------------------------------------------------------------------
@@ -293,9 +355,11 @@ void ModBusParamBd85::ReadReg()
 {
     bool ReturnVar;
     _bfErrorReadReg = false;
-    for ( int i = 0; i < regCount; i++ ) // regCount данных получаем
+    ReturnVar = _protokol->ReadFlashInvert( _addrRegModBus[0], & _modBusSaved.NumberOfBd );
+    _bfErrorReadReg == ( _bfErrorReadReg || ReturnVar );
+    for ( int i = 1; i < regCount; i++ ) // regCount данных считываем
     {
-      (*ReadRegCurrent[i])( _addrRegModBus[i], _paramModBus[i], &ReturnVar );
+      (*ReadRegCurrent[i])( _addrRegModBus[i], _paramModBusRead[i], &ReturnVar );
       _bfErrorReadReg == ( _bfErrorReadReg || ReturnVar );
     }
 }
@@ -321,7 +385,7 @@ void ModBusParamBd85::WrapReadFlashInvert(
 {
     unsigned long dataArg;
     *flagError = _protokol->ReadFlashInvert(memoryAddr, & dataArg);
-    *data = ( dataArg & 0xFFFF );    
+    *data = ( dataArg & 0xFFFF );
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::WrapReadFlash2(
@@ -366,6 +430,26 @@ void ModBusParamBd85::ToNumber(
         0, max );
     *change = ( changeArg & 0xFFFF );
     *prev = ( prevArg & 0xFFFF );
+    ModBusTextDataBd85 * data = new ModBusTextDataBd85( & _modBusChange );
+    DisplayChange( update, false, data ); // false - функция вызвана в основном потоке
+}
+//---------------------------------------------------------------------------
+void ModBusParamBd85::ToNumber(
+    const char * text,
+    unsigned long * change,
+    unsigned long * prev,
+    int max)
+{
+    bool update;
+    int changeArg = *change;
+    int prevArg = *prev;
+    TextHelper::ConvertTextToNumber( text,
+        & changeArg, // [OUT] Изменённое значение параметра
+        & prevArg, // [IN/OUT] Предыдущее значение параметра
+        & update,
+        0, max );
+    *change = ( changeArg & 0xFFFFFF );
+    *prev = ( prevArg & 0xFFFFFF );
     ModBusTextDataBd85 * data = new ModBusTextDataBd85( & _modBusChange );
     DisplayChange( update, false, data ); // false - функция вызвана в основном потоке
 }
@@ -422,7 +506,7 @@ void ModBusParamBd85::DisplayChange(
 //---------------------------------------------------------------------------
 void ModBusParamBd85::MbParamNumberOfBdChange(const char* text)
 {
-    ToNumber(text, & _modBusChange.NumberOfBd, & _modBusPrev.NumberOfBd, 0xFFFF);
+    ToNumber(text, & _modBusChange.NumberOfBd, & _modBusPrev.NumberOfBd, 0xFFFFFF); // 16777215
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::MbParamExpositionChange(const char* text)
@@ -493,10 +577,15 @@ void ModBusParamBd85::MbParamDurationOfVideoChange(const char* text)
 //---------------------------------------------------------------------------
 void ModBusParamBd85::ButtonModBusSetDefClick()
 {
+    _modBusChange.Default();
+    _modBusPrev.Default();
+    ModBusTextDataBd85 * data = new ModBusTextDataBd85( & _modBusChange );
+    DisplayChange( true, false, data ); // true - нужно обновить данные, false - функция вызвана в основном потоке    
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::ButtonModBusWriteClick()
 {
+    _bfNeedWriteReg = true; // Записать значения регистров
 }
 //---------------------------------------------------------------------------
 void ModBusParamBd85::ActivePageIndexChange(int api)

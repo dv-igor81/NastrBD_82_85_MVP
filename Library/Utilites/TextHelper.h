@@ -61,5 +61,15 @@ public:
         bool * flagError);
 
     static double Rounding(double var, int quantity);
+
+    int GetDoubleSize(
+        char * ptrText,
+        char simbol,
+        int maxLength);
+
+    int FindSimbol(
+        char * ptrText,
+        char simbol,
+        int maxLength);
 };
 #endif

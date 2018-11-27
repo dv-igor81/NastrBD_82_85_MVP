@@ -75,6 +75,22 @@ void EepromModBusBd85Settings::MarkIfNotEqual( bool & flagEqual, int arg1, int a
     flagEqual = flagEqual && ( arg1 == arg2 );
 }
 //---------------------------------------------------------------------------
+void EepromModBusBd85Settings::Default()
+{
+    Exposition = ExpositionDefault; // 2) Экспозиция, мс
+    MinimumCount = MinimumCountDefault; // 3) Минимальный счёт                                                                                             1
+    MaximumCount = MaximumCountDefault; // 4) Максимальный счёт
+    LevelOfOverload = LevelOfOverloadDefault; // 5) Уровень перегрузки
+    QuantityOfInterval = QuantityOfIntervalDefault; // 6) Кол-во интервалов
+    QuantityOfLook = QuantityOfLookDefault; // 7) Кол-во взгляда после
+    LevelOfAlarm1 = LevelOfAlarm1Default; // 8) Уровень тревоги 1 * 10
+    LevelOfAlarm2 = LevelOfAlarm2Default; // 9) Уровень тревоги 2 * 10
+    LevelOfAlarm3 = LevelOfAlarm3Default; // 10) Уровень тревоги 3 * 30
+    Phon = PhonDefault; // 11) Фон, с
+    DurationOfPhon = DurationOfPhonDefault; // 12) Длит. подинтервала фона, мс
+    DurationOfAlarm = DurationOfAlarmDefault; // 13) Длит. сигнала тревоги, с
+    DurationOfVideo = DurationOfVideoDefault; // 14) Длит. сигнала видео
+}
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

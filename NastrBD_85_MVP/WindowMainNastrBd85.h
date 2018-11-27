@@ -84,7 +84,7 @@ __published:	// IDE-managed Components
         TPanel *Panel_PeriodPwmZad_2;
         TEdit *Edit_PeriodPwmZad_3;
         TButton *button_WriteToEeprom;
-        TButton *btnDefaults;
+        TButton *button_FromFile;
         TButton *btnPwmAuto;
         TPanel *Panel_rate_Description;
         TPanel *Panel_rate_Code;
@@ -311,6 +311,8 @@ private:	// User declarations
     //===>> Параметры ModBus
     ModBusEventContainerBd85 mbContainer;
     //<<=== Параметры ModBus
+
+    //ActionEvent<> ev_button_WriteToEepromClick;
 
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);

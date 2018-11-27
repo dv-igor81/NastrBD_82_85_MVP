@@ -35,7 +35,7 @@ public:
 private:
     enum { regCount = 14 };
 
-    ModBusTextDataBd85* _textData;
+    ModBusTextDataBd85 * _textData;
     //===>> Отобразить данные
     void DisplayReadReg( ModBusTextDataBd85 ** data );
     ActionSelf<ModBusTextDataBd85**>* as_DisplayReadReg;
@@ -67,18 +67,23 @@ private:
     static const unsigned short _durationOfVideoMemoryAddr; // 14) Длит. сигнала видео
 
     unsigned short _addrRegModBus[regCount];
-    unsigned short * _paramModBus[regCount]; // Массив указателей
+    unsigned short * _paramModBusRead[regCount]; // Массив указателей
+    unsigned short * _paramModBusWrite[regCount]; // Массив указателей
 
     //  Массив указателей на "делегаты"
     ActionSelf<unsigned short, unsigned short*, bool *>* ReadRegCurrent[regCount];
+
+    //  Массив указателей на "делегаты"
+    ActionSelf<unsigned short, unsigned short, bool *>* WriteRegCurrent[regCount];
     
     bool _bfNeedReadReg;
     void ReadRegIfNeed();
     bool _bfNeedWriteReg;
     void WriteRegIfNeed();
     void ReadReg();
-
+    void WriteReg();
     bool _bfErrorReadReg;
+    bool _bfErrorWriteReg;
     bool _textChangeIgnore;
 private:
     //===>> Параметры ModBus
@@ -86,12 +91,22 @@ private:
     void Destroy(); // Разрушить объект
     void InitAddrRegModBus();
     void InitParamModBus();
+    void Binding(
+        unsigned short ** paramModBus,
+        EepromModBusBd85Settings & data);
     void InitReadDelegate();
+    void InitWriteDelegate();
 
     void ToNumber(
         const char * text,
         unsigned short * change,
         unsigned short * prev,
+        int max);
+
+    void ToNumber(
+        const char * text,
+        unsigned long * change,
+        unsigned long * prev,
         int max);
 
     bool _bfChangeOld;

@@ -5,7 +5,7 @@
 class EepromModBusBd85Settings
 {
 public:
-    unsigned short NumberOfBd; // 1) Номер БД
+    unsigned long NumberOfBd; // 1) Номер БД
     unsigned short Exposition; // 2) Экспозиция, мс
     unsigned short MinimumCount; // 3) Минимальный счёт
     unsigned short MaximumCount; // 4) Максимальный счёт
@@ -22,6 +22,7 @@ public:
 
     void Copy( EepromModBusBd85Settings & data );
     bool NotEqual( EepromModBusBd85Settings & data );
+    void Default();
     
 private:
     static const unsigned short ExpositionDefault; // 2) Экспозиция, мс

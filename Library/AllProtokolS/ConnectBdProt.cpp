@@ -10,7 +10,7 @@
 ConnectBdProt::ConnectBdProt(
     HelperConnectFourBdProt * bdProt,
     IAllProtokolS * allProtokol,
-    /*ITask*/TaskWithParam * task)  :
+    TaskWithParam * task)  :
         as_protocolChanged(this, &ConnectBdProt::ProtocolChanged)
         , as_comPortsChange(this, &ConnectBdProt::ComPortsChange)
         , as_windowShow(this, &ConnectBdProt::WindowShow)
@@ -112,7 +112,7 @@ void ConnectBdProt::SettingsChengeProtokol(ProtokolName protokolName, bool fromP
     ev_comPortOrTcpIp(isComPortProt);
     ev_labelHint(hintText);
     _addrBdHelper->SetNumber( *_addrBdPtr ); // Отобразить адрес БД на форме
-    if (/*fromPresenter &&*/ !flagError)
+    if ( !flagError )
     {
         ev_setProtokolName(protokolName);
     }

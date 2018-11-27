@@ -257,6 +257,8 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     Edit_DurationOfPhon->ReadOnly = !isEnabled; // 12)
     Edit_DurationOfAlarm->ReadOnly = !isEnabled; // 13
     Edit_DurationOfVideo->ReadOnly = !isEnabled; // 14
+    Button_ModBus_SetDef->Enabled = isEnabled;
+    Button_ModBus_Write->Enabled = isEnabled;
     //<<=== Параметры ModBus
     button_StartStopScaling->Enabled = isEnabled;
     GroupBox_ReverseLink->Enabled = isEnabled;

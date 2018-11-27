@@ -28,10 +28,10 @@ object WindowMainBd85: TWindowMainBd85
     Top = 0
     Width = 662
     Height = 625
-    ActivePage = TabSheet_ModBusParam
+    ActivePage = TabSheet_MainParam
     Align = alClient
     Style = tsFlatButtons
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     OnChange = PageControl_WindowBd85Change
     object TabSheet_MainParam: TTabSheet
@@ -1879,7 +1879,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 32
             OnClick = button_WriteToEepromClick
           end
-          object btnDefaults: TButton
+          object button_FromFile: TButton
             Left = 177
             Top = 193
             Width = 131

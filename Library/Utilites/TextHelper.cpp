@@ -66,6 +66,55 @@ void TextHelper::CharReplace(
     ptrText[maxLength] = 0;
 }
 //---------------------------------------------------------------------------
+// Определить есть ли один из знаков ("." либо ",") в строке.
+// Если нету - вернуть -1, если есть: количество знаков после одного из символов.
+// 0 --- После символа нерту знаков,
+//  вернуть позицию знака
+int TextHelper::GetDoubleSize(
+    char * ptrText,
+    char simbol,
+    int maxLength)
+{
+    const int size = 50;
+    char tmpText[size];
+
+    int len = GetLengText(ptrText, maxLength);
+    if ( len > size )
+    {
+        return -2; // Ошибка
+    }
+
+    CopyText( tmpText, ptrText, size );
+    CharReplace( tmpText,
+    '.', // Old
+    ',', // New
+    size );
+
+    int findPos = FindSimbol( tmpText, ',', maxLength );
+    if ( findPos == - 1 )
+    {
+        return -1;
+    }
+    return len - findPos;
+}
+//---------------------------------------------------------------------------
+int TextHelper::FindSimbol(
+    char * ptrText,
+    char simbol,
+    int maxLength)
+{
+    int retValue = -1;
+    maxLength--;
+    for (int i = 0; i < maxLength; i++)
+    {
+        if ( ptrText[i] == simbol )
+        {
+            retValue = i;
+        }
+    }
+    return retValue;
+}
+//---------------------------------------------------------------------------
 int TextHelper::GetLengText(
     const char * ptrText,
     int maxLength)
@@ -260,7 +309,7 @@ double TextHelper::ConvertTextToDouble(
 }
 //---------------------------------------------------------------------------
 double TextHelper::ConvertTextToDouble(
-    const char* text,
+    const char * text,
     double curVal,
     double min,
     double max,    
