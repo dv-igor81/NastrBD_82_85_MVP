@@ -22,6 +22,11 @@ public:
     virtual void WrapShow() = 0;
     virtual void Destroy() = 0;
     virtual ActionEvent<>& EventFormClose() = 0;
+    virtual ActionEvent<const char*>& EventEditFileNameChange() = 0;
+    virtual ActionEvent<const char*>& EventEditFileHeaderChange() = 0;
+    virtual ActionEvent<const char*>& EventEditTimeChange() = 0;
+    virtual ActionEvent<const char*>& EventEditNumberChange() = 0;
+    virtual ActionEvent<const char*>& EventEditDelayChange() = 0;
 };
 //---------------------------------------------------------------------------
 #endif

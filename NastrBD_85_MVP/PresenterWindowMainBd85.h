@@ -11,8 +11,9 @@
 #include "ModBusParamBd85.h"
 #include "EepromBd85Settings.h"
 #include "IWindowLoader.h"
+#include "IPresenterWindowMainBd85.h"
 //---------------------------------------------------------------------------
-class PresenterWindowMainBd85
+class PresenterWindowMainBd85 : public IPresenterWindowMainBd85
 {
 public:
     PresenterWindowMainBd85(
@@ -23,6 +24,7 @@ public:
         IWindowLoader * loader);
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
+    void ViewSaveParamBd85Close();
 private:
     IWindowMainBd85 * _view;
     IFormDispetView * _viewDispet;

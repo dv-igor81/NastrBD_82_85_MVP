@@ -49,24 +49,24 @@ void WindowLoader::LoadWindowBd85Main()
     }
     if ( viewIsLoaded == false )
     {
-        _viewMain = new TWindowMainBd85(
+        TWindowMainBd85 * view = new TWindowMainBd85(
             _owner
         );
         _presenter = new PresenterWindowMainBd85(
-            _viewMain,
+            view,
             _viewDispet,
             _allProtokol,
             _task, this);
     }
 }
 //---------------------------------------------------------------------------
-void WindowLoader::LoadWindowBd85SaveParam()
+void WindowLoader::LoadWindowBd85SaveParam(IPresenterWindowMainBd85 * mainPres)
 {
     TWindowSaveParamBd85 * _view = new TWindowSaveParamBd85(
         _owner
     );
     _vmSaveParam = new ViewModelSaveParamBd85(
-        _view, _viewDispet, _viewMain
+        _view, _viewDispet, mainPres
     );
 }
 //---------------------------------------------------------------------------

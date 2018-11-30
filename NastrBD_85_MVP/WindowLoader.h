@@ -11,7 +11,6 @@
 #include "ITask.h"
 #include "TaskWithParam.h"
 #include "IFormDispetView.h"
-#include "IWindowMainBd85.h"
 #include "IWindowLoader.h"
 //---------------------------------------------------------------------------
 class WindowLoader : public IWindowLoader
@@ -22,10 +21,10 @@ public:
         IFormDispetView * view);
     ~WindowLoader();
     void LoadWindowBd85Main();
-    void LoadWindowBd85SaveParam();
+    void LoadWindowBd85SaveParam(IPresenterWindowMainBd85 * mainPres);
 private:
     IFormDispetView * _viewDispet;
-    IWindowMainBd85 * _viewMain;
+    //IWindowMainBd85 * _viewMain;
     TForm * _owner;
     PresenterWindowMainBd85 * _presenter;
     IAllProtokolS * _allProtokol;

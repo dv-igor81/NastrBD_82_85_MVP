@@ -103,4 +103,54 @@ ActionEvent<>& TWindowSaveParamBd85::EventFormClose()
     return ev_FormClose;
 }
 //---------------------------------------------------------------------------
-
+void __fastcall TWindowSaveParamBd85::Edit_FileNameChange(TObject *Sender)
+{
+    ev_EditFileNameChange( Edit_FileName->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowSaveParamBd85::EventEditFileNameChange()
+{
+    return ev_EditFileNameChange;
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowSaveParamBd85::Edit_FileHeaderChange(
+      TObject *Sender)
+{
+    ev_EditFileHeaderChange( Edit_FileHeader->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowSaveParamBd85::EventEditFileHeaderChange()
+{
+    return ev_EditFileHeaderChange;
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowSaveParamBd85::Edit_TimeChange(TObject *Sender)
+{
+    ev_EditTimeChange( Edit_Time->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowSaveParamBd85::EventEditTimeChange()
+{
+    return ev_EditTimeChange;
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowSaveParamBd85::Edit_NumberChange(TObject *Sender)
+{
+    ev_EditNumberChange( Edit_Number->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowSaveParamBd85::EventEditNumberChange()
+{
+    return ev_EditNumberChange; 
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowSaveParamBd85::Edit_DelayChange(TObject *Sender)
+{
+    ev_EditDelayChange( Edit_Delay->Text.c_str() );
+}
+//---------------------------------------------------------------------------
+ActionEvent<const char*>& TWindowSaveParamBd85::EventEditDelayChange()
+{
+    return ev_EditDelayChange;
+}
+//---------------------------------------------------------------------------

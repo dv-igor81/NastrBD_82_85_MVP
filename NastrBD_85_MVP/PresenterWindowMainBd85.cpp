@@ -85,7 +85,6 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
     _loader = loader;
 
-    //ev_Show(); // Прказать форму
     _view->WrapShow(); // Прказать форму
 }
 //---------------------------------------------------------------------------
@@ -105,6 +104,11 @@ void PresenterWindowMainBd85::FormClose()
 bool PresenterWindowMainBd85::IsViewLoaded()
 {
     return _isViewLoaded;
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::ViewSaveParamBd85Close()
+{
+    _view->WrapShow();
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ConnectIsGood() // Соединение (по ком порту или TCP/IP) прошло удачно
@@ -826,6 +830,6 @@ void PresenterWindowMainBd85::FromFileBd85Settings()
 void PresenterWindowMainBd85::SaveToLogFile()
 {
     _view->WrapHide(); // Скрыть окно
-    _loader->LoadWindowBd85SaveParam(); // Загрузить новое окно "Bd85SaveParam"
+    _loader->LoadWindowBd85SaveParam( this ); // Загрузить новое окно "Bd85SaveParam"
 }
 

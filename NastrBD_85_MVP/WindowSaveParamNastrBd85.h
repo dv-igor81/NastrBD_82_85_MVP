@@ -26,6 +26,11 @@ __published:	// IDE-managed Components
         TButton *Button_Ok;
         TButton *Button_Cancel;
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+        void __fastcall Edit_FileNameChange(TObject *Sender);
+        void __fastcall Edit_FileHeaderChange(TObject *Sender);
+        void __fastcall Edit_TimeChange(TObject *Sender);
+        void __fastcall Edit_NumberChange(TObject *Sender);
+        void __fastcall Edit_DelayChange(TObject *Sender);
 private:	// User declarations
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -33,6 +38,11 @@ private:	// User declarations
     void __fastcall OnWMSysCommand( TMessage& Message );
 
     ActionEvent<> ev_FormClose;
+    ActionEvent<const char*> ev_EditFileNameChange;
+    ActionEvent<const char*> ev_EditFileHeaderChange;
+    ActionEvent<const char*> ev_EditTimeChange;
+    ActionEvent<const char*> ev_EditNumberChange;
+    ActionEvent<const char*> ev_EditDelayChange;
 public:		// User declarations
         __fastcall TWindowSaveParamBd85(TComponent* Owner);
     void SetVerPoText(const char * text);        
@@ -51,6 +61,11 @@ public:		// User declarations
     void Destroy();
 
     ActionEvent<>& EventFormClose();
+    ActionEvent<const char*>& EventEditFileNameChange();
+    ActionEvent<const char*>& EventEditFileHeaderChange();
+    ActionEvent<const char*>& EventEditTimeChange();
+    ActionEvent<const char*>& EventEditNumberChange();
+    ActionEvent<const char*>& EventEditDelayChange();
 };
 //---------------------------------------------------------------------------
 #endif

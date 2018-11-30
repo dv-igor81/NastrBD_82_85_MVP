@@ -59,7 +59,8 @@
       ..\NastrBD_85_MVP\EepromModBusBd85Settings.obj 
       ..\NastrBD_85_MVP\ViewModelSaveParamBd85.obj 
       ..\NastrBD_85_MVP\WindowSaveParamNastrBd85.obj 
-      ..\NastrBD_85_MVP\IViewSaveParamBd85.obj ..\Library\FileDirect.obj"/>
+      ..\NastrBD_85_MVP\IViewSaveParamBd85.obj ..\Library\FileDirect.obj 
+      ..\NastrBD_85_MVP\IPresenterWindowMainBd85.obj"/>
     <RESFILES value="NastrBD_82_85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -90,7 +91,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi"/>
-    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\Task;..\Library\Task;..\Library\Task;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library"/>
+    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\Task;..\Library\Task;..\Library\Task;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library;..\NastrBD_85_MVP"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -199,6 +200,7 @@
       <FILE FILENAME="..\NastrBD_85_MVP\WindowSaveParamNastrBd85.cpp" FORMNAME="WindowSaveParamBd85" UNITNAME="WindowSaveParamNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_85_MVP\IViewSaveParamBd85.cpp" FORMNAME="" UNITNAME="IViewSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\FileDirect.cpp" FORMNAME="" UNITNAME="FileDirect" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NastrBD_85_MVP\IPresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="IPresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

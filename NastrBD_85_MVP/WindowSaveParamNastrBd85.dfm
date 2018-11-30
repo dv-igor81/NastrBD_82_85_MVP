@@ -99,6 +99,7 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       Height = 21
       MaxLength = 512
       TabOrder = 0
+      OnChange = Edit_FileNameChange
     end
     object Edit_FileHeader: TEdit
       Left = 98
@@ -107,6 +108,7 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       Height = 21
       MaxLength = 512
       TabOrder = 1
+      OnChange = Edit_FileHeaderChange
     end
     object Edit_Time: TEdit
       Left = 138
@@ -115,6 +117,7 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       Height = 21
       MaxLength = 512
       TabOrder = 2
+      OnChange = Edit_TimeChange
     end
     object Edit_Number: TEdit
       Left = 138
@@ -123,6 +126,7 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       Height = 21
       MaxLength = 512
       TabOrder = 3
+      OnChange = Edit_NumberChange
     end
     object Edit_Delay: TEdit
       Left = 138
@@ -131,6 +135,7 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       Height = 21
       MaxLength = 512
       TabOrder = 4
+      OnChange = Edit_DelayChange
     end
     object Button_Ok: TButton
       Left = 242
