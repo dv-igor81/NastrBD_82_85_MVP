@@ -184,7 +184,6 @@ __published:	// IDE-managed Components
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
         void __fastcall textBox_AddrBdChange(TObject *Sender);
-        void __fastcall FormShow(TObject *Sender);
         void __fastcall comboBox_ProtocolChange(TObject *Sender);
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
         void __fastcall textBox_IP_AddrChange(TObject *Sender);
@@ -282,7 +281,6 @@ private:	// User declarations
     ActionEvent<> ev_button_StartStopClick;
     ActionEvent<ProtokolName> ev_comboBox_ProtocolChange;
     ActionEvent<const char*> ev_comboBox_ComPortsChange;
-    ActionEvent<> ev_windowShow;
     ActionEvent<> ev_windowClose;
     ActionEvent<const char*> ev_textBox_IP_AddrChange;
     ActionEvent<const char*> ev_textBox_TCP_PortChange;
@@ -326,7 +324,6 @@ public:		// User declarations
     //<<=== Вместо GetSelf
 
     void Destroy();
-    ActionEvent<>* GetEventFormShow();
     ActionEvent<>* GetEventFormClose();
     ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData();
     ActionSelf<const char*>* GetSelfDisplayErrors();

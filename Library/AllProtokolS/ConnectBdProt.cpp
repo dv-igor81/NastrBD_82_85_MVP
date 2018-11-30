@@ -13,7 +13,6 @@ ConnectBdProt::ConnectBdProt(
     TaskWithParam * task)  :
         as_protocolChanged(this, &ConnectBdProt::ProtocolChanged)
         , as_comPortsChange(this, &ConnectBdProt::ComPortsChange)
-        , as_windowShow(this, &ConnectBdProt::WindowShow)
         , as_changeIpAddr(this, &ConnectBdProt::ChangeIpAddr)
         , as_changeTcpPort(this, &ConnectBdProt::ChangeTcpPort)
         , as_updateNumberOfComPorts(this, &ConnectBdProt::UpdateNumberOfComPorts)
@@ -34,7 +33,6 @@ ConnectBdProt::ConnectBdProt(
     as_OprosEnd = 0;
     _addrBdPtr = 0;
 
-
     _addrBdHelper = _bdProt->GetHelperNumberAddrBd();
     _addrBd_NineBit = 63;
     _addrBd_ModBus_RTU = 247;
@@ -42,18 +40,12 @@ ConnectBdProt::ConnectBdProt(
     _addrBd_ModBus_RTU_IP = 247;
 
     *_addrBdHelper->GetEventSetNumber() += as_SetAddrBdNumber;
-
-
     *_bdProt->GetEventProtocolChange() += as_protocolChanged;
     *_bdProt->GetEventComPortsChange() += as_comPortsChange;
-
     ev_comPortOrTcpIp += _bdProt->GetSelfComPortOrTcpIp();
     ev_labelHint += _bdProt->GetSelfLabelHintSetText();
-
     ev_clearAllComPortName += _bdProt->GetSelfClearAllComPortName();
     ev_setEnabledUpdateComPorts += _bdProt->GetSelfSetEnabledUpdateComPorts();
-
-    *_bdProt->GetEventWindowShow() += as_windowShow;
     ev_setProtokolName += _bdProt->GetSelfSetProtokolName();
     ev_setEndPoint += _bdProt->GetSelfSetEndPoint();
     *_bdProt->GetEventIpAddrChange() += as_changeIpAddr;
@@ -62,6 +54,8 @@ ConnectBdProt::ConnectBdProt(
     *_bdProt->GetEventUpdateNumberOfComPorts() += as_updateNumberOfComPorts;
     *_bdProt->GetEventStartStopClick() += as_startStopClick;
     ev_SetConnectionState += _bdProt->GetSelfSetConnectionState();
+
+    SetViewParam();
 }
 //---------------------------------------------------------------------------
 void ConnectBdProt::ProtocolChanged(ProtokolName protocolName)
@@ -118,7 +112,7 @@ void ConnectBdProt::SettingsChengeProtokol(ProtokolName protokolName, bool fromP
     }
 }
 //---------------------------------------------------------------------------
-void ConnectBdProt::WindowShow()
+void ConnectBdProt::SetViewParam()
 {
     TextHelper::CopyText(strIpAddr_TCP, "192.168.3.4", ipAddrSize);
     TextHelper::CopyText(strIpAddr_RTU_IP, "192.168.127.254", ipAddrSize);
@@ -257,9 +251,16 @@ void ConnectBdProt::WorkInLoop()
     {
         (*as_OprosStart)();
     }
-    while ( _bfOprosInLoop && (as_OprosIter != 0) )
+    while ( _bfOprosInLoop )
     {
-        (*as_OprosIter)();
+        if ( as_OprosIter != 0 )
+        {
+            (*as_OprosIter)();
+        }
+        else
+        {
+            Sleep( 10 ); // Ќе слишком сильно загружать этот поток...
+        }
     }
     if ( as_OprosEnd != 0 )
     {

@@ -39,7 +39,6 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
             &as_clearAllComPortName, // Очистить список найденых ком-портов
             &as_setEnabledUpdateComPorts, // Установить доступность обновления ком-портов
             &as_addComPortName, // Добавить имя ком-порта в список доступных ком-портов
-            &ev_windowShow, // Событие показать окно
             &as_setProtokolName, // Установить имя протокола
             &as_setEndPoint, // Установить IP-адрес и TCP-порт
             &ev_textBox_IP_AddrChange, // Текст ip-адреса изменился из ГИП
@@ -99,11 +98,6 @@ void TWindowMainBd85::InitComponrnts()
     comboBox_Protocol->ItemIndex = 0;
     comboBox_Protocol->Text = "ModBus RTU (TCP/IP)";
     comboBox_ComPorts->Style = csDropDownList; // Недоступно для редактирования
-}
-//---------------------------------------------------------------------------
-ActionEvent<>* TWindowMainBd85::GetEventFormShow()
-{
-    return &ev_windowShow;
 }
 //---------------------------------------------------------------------------
 ActionEvent<>* TWindowMainBd85::GetEventFormClose()
@@ -493,11 +487,6 @@ void __fastcall TWindowMainBd85::button_AddrBd_IncClick(TObject *Sender)
 void __fastcall TWindowMainBd85::textBox_AddrBdChange(TObject *Sender)
 {
     ev_textBox_AddrBd_Change( textBox_AddrBd->Text.c_str() );
-}
-//---------------------------------------------------------------------------
-void __fastcall TWindowMainBd85::FormShow(TObject *Sender)
-{
-    ev_windowShow();
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::comboBox_ProtocolChange(TObject *Sender)

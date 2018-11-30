@@ -44,8 +44,7 @@ private:
     ActionSelf<const char*> as_comPortsChange;
     void ComPortsChange(const char* comPortName);
 
-    ActionSelf<> as_windowShow;
-    void WindowShow();
+    void SetViewParam();
 
     ActionSelf<const char*> as_changeIpAddr;
     void ChangeIpAddr(const char* textIpAddr);

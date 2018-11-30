@@ -20,7 +20,6 @@ public:
         ActionSelf<>* as_clearAllComPortName,  // Очистить список найденых ком-портов
         ActionSelf<bool>* as_setEnabledUpdateComPorts, // Установить доступность обновления ком-портов
         ActionSelf<const char*, const char*>* as_addComPortName, // Добавить имя ком-порта
-        ActionEvent<>* ev_windowShow, // Событие показать окно
         ActionSelf<ProtokolName>* as_setProtokolName, // Установить имя протокола
         ActionSelf<const char*, const char*>* as_setEndPoint, // Установить IP-адрес и TCP-порт
         ActionEvent<const char*>* ev_textBox_IP_AddrChange, // Текст ip-адреса изменился из ГИП
@@ -40,7 +39,6 @@ private:
     ActionSelf<ProtokolName>* _as_setProtokolName;
     ActionSelf<const char*, const char*>* _as_setEndPoint;
 
-    ActionEvent<>* _ev_windowShow;
     ActionEvent<ProtokolName>* _ev_protocolChange; // Протокол меняется из ГИП
     ActionEvent<const char*>* _ev_comboBox_ComPortsChange; // Меняется номер ком-порта из ГИП
     ActionEvent<const char*>* _ev_textBox_IP_AddrChange;  // Текст ip-адреса изменился из ГИП
@@ -64,7 +62,6 @@ public:
 
     ActionEvent<ProtokolName>* GetEventProtocolChange();
     ActionEvent<const char*>* GetEventComPortsChange();
-    ActionEvent<>* GetEventWindowShow();
     ActionEvent<const char*>* GetEventIpAddrChange(); // Текст ip-адреса изменился из ГИП
     ActionEvent<const char*>* GetEventTcpPortChange(); // Текст tcp-порта изменился из ГИП
     ActionEvent<>* GetEventUpdateNumberOfComPorts(); // Обновите список ком-портов

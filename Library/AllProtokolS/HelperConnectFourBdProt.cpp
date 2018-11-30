@@ -12,7 +12,6 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     ActionSelf<>* as_clearAllComPortName,  // Очистить список найденых ком-портов
     ActionSelf<bool>* as_setEnabledUpdateComPorts, // Установить доступность обновления ком-портов
     ActionSelf<const char*, const char*>* as_addComPortName, // Добавить имя ком-порта
-    ActionEvent<>* ev_windowShow, // Событие показать окно
     ActionSelf<ProtokolName>* as_setProtokolName, // Установить имя протокола
     ActionSelf<const char*, const char*>* as_setEndPoint, // Установить IP-адрес и TCP-порт
     ActionEvent<const char*>* ev_textBox_IP_AddrChange, // Текст ip-адреса изменился из ГИП
@@ -31,7 +30,6 @@ HelperConnectFourBdProt::HelperConnectFourBdProt(
     _as_setEnabledUpdateComPorts = as_setEnabledUpdateComPorts;
 
     _as_addComPortName = as_addComPortName;
-    _ev_windowShow = ev_windowShow;
     _as_setProtokolName = as_setProtokolName;
     _as_setEndPoint = as_setEndPoint;
     _ev_textBox_IP_AddrChange = ev_textBox_IP_AddrChange;
@@ -65,11 +63,6 @@ ActionSelf<const char*>* HelperConnectFourBdProt::GetSelfLabelHintSetText()
 ActionSelf<const char*, const char*>* HelperConnectFourBdProt::GetSelfAddComPortName()
 {
     return _as_addComPortName;
-}
-//---------------------------------------------------------------------------
-ActionEvent<>* HelperConnectFourBdProt::GetEventWindowShow()
-{
-    return _ev_windowShow;
 }
 //---------------------------------------------------------------------------
 ActionSelf<ProtokolName>* HelperConnectFourBdProt::GetSelfSetProtokolName()

@@ -108,6 +108,7 @@ bool PresenterWindowMainBd85::IsViewLoaded()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ViewSaveParamBd85Close()
 {
+    ConnectIsGood();
     _view->WrapShow();
 }
 //---------------------------------------------------------------------------
@@ -830,6 +831,9 @@ void PresenterWindowMainBd85::FromFileBd85Settings()
 void PresenterWindowMainBd85::SaveToLogFile()
 {
     _view->WrapHide(); // Скрыть окно
+    _connectBdProt->SetActionOprosStart( 0 );
+    _connectBdProt->SetActionOprosIter( 0 );
+    _connectBdProt->SetActionOprosEnd( 0 );
     _loader->LoadWindowBd85SaveParam( this ); // Загрузить новое окно "Bd85SaveParam"
 }
 

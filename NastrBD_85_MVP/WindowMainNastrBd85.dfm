@@ -20,7 +20,6 @@ object WindowMainBd85: TWindowMainBd85
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object PageControl_WindowBd85: TPageControl
