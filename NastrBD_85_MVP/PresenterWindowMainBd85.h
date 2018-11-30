@@ -10,6 +10,7 @@
 #include "TaskWithParam.h"
 #include "ModBusParamBd85.h"
 #include "EepromBd85Settings.h"
+#include "IWindowLoader.h"
 //---------------------------------------------------------------------------
 class PresenterWindowMainBd85
 {
@@ -18,7 +19,8 @@ public:
         IWindowMainBd85 * view,
         IFormDispetView * viewDispet,
         IAllProtokolS * allProtokol,
-        TaskWithParam * task);
+        TaskWithParam * task,
+        IWindowLoader * loader);
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
 private:
@@ -26,7 +28,8 @@ private:
     IFormDispetView * _viewDispet;
     ConnectBdProt* _connectBdProt;
     IAllProtokolS * _allProtokol;
-    TaskWithParam * _task;    
+    TaskWithParam * _task;
+    IWindowLoader * _loader;
 
     ActionSelf<> as_FormClose;
     void FormClose();
@@ -105,7 +108,6 @@ private:
     ActionSelf<> as_SaveToLogFile;
     void SaveToLogFile();
 
-    ActionEvent<> ev_Show;
     bool _isViewLoaded;
 
     ActionEvent<StartDataNewBd85*> ev_DisplayStartData;

@@ -9,7 +9,6 @@
 //---------------------------------------------------------------------------
 __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
         : TForm(Owner)
-        , as_wrapShow(this, &TWindowMainBd85::WrapShow)
         , as_textBox_AddrBd_SetText(this, &TWindowMainBd85::TextBox_AddrBd_SetText)
         , as_setComPortProtEnabled(this, &TWindowMainBd85::SetComPortProtEnabled)
         , as_label_HintSetText(this, &TWindowMainBd85::HintSetText)
@@ -65,6 +64,16 @@ void TWindowMainBd85::SetVerPoText(const char * text)
     Caption = textPoVer;
 }
 //---------------------------------------------------------------------------
+void TWindowMainBd85::WrapShow()
+{
+    this->Show();
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::WrapHide()
+{
+    this->Hide();
+}
+//---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::OnWMSysCommand( TMessage& Message )
 {
   // —охранить описатель окна, пославшего запрос
@@ -90,16 +99,6 @@ void TWindowMainBd85::InitComponrnts()
     comboBox_Protocol->ItemIndex = 0;
     comboBox_Protocol->Text = "ModBus RTU (TCP/IP)";
     comboBox_ComPorts->Style = csDropDownList; // Ќедоступно дл€ редактировани€
-}
-//---------------------------------------------------------------------------
-ActionSelf<>* TWindowMainBd85::GetSelfShow()
-{
-    return &as_wrapShow;
-}
-//---------------------------------------------------------------------------
-void TWindowMainBd85::WrapShow()
-{
-    Show();
 }
 //---------------------------------------------------------------------------
 ActionEvent<>* TWindowMainBd85::GetEventFormShow()

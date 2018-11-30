@@ -12,7 +12,8 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     IWindowMainBd85 * view,
     IFormDispetView * viewDispet,
     IAllProtokolS * allProtokol,
-    TaskWithParam * task) :
+    TaskWithParam * task,
+    IWindowLoader * loader) :
         _iniFileName( "BD85.dat" )
         , as_FormClose(this, &PresenterWindowMainBd85::FormClose)
         , as_OprosStart(this, &PresenterWindowMainBd85::OprosStart)
@@ -51,7 +52,6 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     //===
     _allProtokol = allProtokol;
     _task = task;
-    ev_Show += _view->GetSelfShow();
     *_view->GetEventFormClose() += as_FormClose;
     *_view->GetEventButtonStartStopScalingClick() += as_StartStopScaling;
     
@@ -82,10 +82,11 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
 
     _view->GetEventButtonFromFileClick() += as_FromFileBd85Settings;
     _view->GetEventButtonSaveToFileClick() += as_SaveToLogFile;
-
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
+    _loader = loader;
 
-    ev_Show(); // Прказать форму
+    //ev_Show(); // Прказать форму
+    _view->WrapShow(); // Прказать форму
 }
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::~PresenterWindowMainBd85()
@@ -824,5 +825,7 @@ void PresenterWindowMainBd85::FromFileBd85Settings()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::SaveToLogFile()
 {
+    _view->WrapHide(); // Скрыть окно
+    _loader->LoadWindowBd85SaveParam(); // Загрузить новое окно "Bd85SaveParam"
 }
 

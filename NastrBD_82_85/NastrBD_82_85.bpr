@@ -56,7 +56,10 @@
       ..\NastrBD_85_MVP\ModBusTextDataBd85.obj 
       ..\Library\Task\ArgTaskWithParam.obj ..\Library\Task\IArgTaskWithParam.obj 
       ..\Library\Task\TaskWithParam.obj ..\NastrBD_85_MVP\EepromBd85Settings.obj 
-      ..\NastrBD_85_MVP\EepromModBusBd85Settings.obj"/>
+      ..\NastrBD_85_MVP\EepromModBusBd85Settings.obj 
+      ..\NastrBD_85_MVP\ViewModelSaveParamBd85.obj 
+      ..\NastrBD_85_MVP\WindowSaveParamNastrBd85.obj 
+      ..\NastrBD_85_MVP\IViewSaveParamBd85.obj ..\Library\FileDirect.obj"/>
     <RESFILES value="NastrBD_82_85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -75,7 +78,8 @@
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Puasson8BD_RepErr.dfm 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Graph.dfm 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_RearFromEEPROM.dfm 
-      ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_LoadParam.dfm"/>
+      ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_LoadParam.dfm 
+      ..\NastrBD_85_MVP\WindowSaveParamNastrBd85.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value="dbrtl.lib vcldb.lib tee.lib inet.lib vclx.lib bcbsmp.lib rtl.lib vcl.lib"/>
     <SPARELIBS value="vcl.lib rtl.lib bcbsmp.lib vclx.lib inet.lib tee.lib vcldb.lib dbrtl.lib"/>
@@ -86,7 +90,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi"/>
-    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\Task;..\Library\Task;..\Library\Task;..\NastrBD_85_MVP;..\NastrBD_85_MVP"/>
+    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\Task;..\Library\Task;..\Library\Task;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -191,6 +195,10 @@
       <FILE FILENAME="..\Library\Task\TaskWithParam.cpp" FORMNAME="" UNITNAME="TaskWithParam.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_85_MVP\EepromBd85Settings.cpp" FORMNAME="" UNITNAME="EepromBd85Settings" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_85_MVP\EepromModBusBd85Settings.cpp" FORMNAME="" UNITNAME="EepromModBusBd85Settings" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NastrBD_85_MVP\ViewModelSaveParamBd85.cpp" FORMNAME="" UNITNAME="ViewModelSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NastrBD_85_MVP\WindowSaveParamNastrBd85.cpp" FORMNAME="WindowSaveParamBd85" UNITNAME="WindowSaveParamNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\NastrBD_85_MVP\IViewSaveParamBd85.cpp" FORMNAME="" UNITNAME="IViewSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\FileDirect.cpp" FORMNAME="" UNITNAME="FileDirect" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

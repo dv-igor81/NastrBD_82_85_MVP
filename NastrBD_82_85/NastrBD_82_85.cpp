@@ -18,6 +18,7 @@ USEFORM("..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Puasson8BD_RepErr.cpp", FormPua
 USEFORM("..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Graph.cpp", Form_Graph);
 USEFORM("..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_RearFromEEPROM.cpp", Form_RearFromEEPROM);
 USEFORM("..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_LoadParam.cpp", Form_LoadParam);
+USEFORM("..\NastrBD_85_MVP\WindowSaveParamNastrBd85.cpp", WindowSaveParamBd85);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {

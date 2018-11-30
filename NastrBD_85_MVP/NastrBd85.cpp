@@ -4,6 +4,7 @@
 //---------------------------------------------------------------------------
 USEFORM("WindowStartNastrBd85.cpp", WindowStart);
 USEFORM("WindowMainNastrBd85.cpp", WindowMainBd85);
+USEFORM("WindowSaveParamNastrBd85.cpp", WindowSaveParamBd85);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {

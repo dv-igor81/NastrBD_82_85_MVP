@@ -17,10 +17,11 @@ class IWindowMainBd85
 public:
     //===>> Вместо GetSelf
     virtual void SetVerPoText(const char * text) = 0;
+    virtual void WrapShow() = 0;
+    virtual void WrapHide() = 0;
     //<<=== Вместо GetSelf
 
     virtual void Destroy() = 0;
-    virtual ActionSelf<>* GetSelfShow() = 0;
     virtual ActionEvent<>* GetEventFormShow() = 0;
     virtual ActionEvent<>* GetEventFormClose() = 0;
     virtual ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData() = 0;

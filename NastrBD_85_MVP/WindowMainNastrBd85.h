@@ -231,10 +231,6 @@ public:
     void __fastcall OnWMSysCommand( TMessage& Message );
 private:	// User declarations
     void InitComponrnts();
-     
-    ActionSelf<> as_wrapShow;
-    void WrapShow();
-
     ActionSelf<const char*> as_textBox_AddrBd_SetText;
     void TextBox_AddrBd_SetText(const char* text);
 
@@ -325,11 +321,11 @@ public:		// User declarations
 
     //===>> Вместо GetSelf
     void SetVerPoText(const char * text);
+    void WrapShow();
+    void WrapHide();
     //<<=== Вместо GetSelf
 
     void Destroy();
-            
-    ActionSelf<>* GetSelfShow();
     ActionEvent<>* GetEventFormShow();
     ActionEvent<>* GetEventFormClose();
     ActionSelf<StartDataNewBd85*>* GetSelfDisplayStartData();

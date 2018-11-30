@@ -22,7 +22,7 @@ private:	// User declarations
 public:		// User declarations
         __fastcall TWindowStart(TComponent* Owner);
   const char * GetProgrammVersion();
-  void WrapShow();         
+  void WrapShow();
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TWindowStart *WindowStart;

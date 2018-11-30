@@ -3,7 +3,9 @@
 #include "WindowLoader.h"
 #include "AllProtokolS.h"
 #include "Task.h"
+//---------------------------------------------------------------------------
 #include "WindowMainNastrBd85.h"
+#include "WindowSaveParamNastrBd85.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -11,6 +13,7 @@ WindowLoader::WindowLoader(
     TForm * Owner,
     IFormDispetView * view) :
     _presenter(0),
+    _vmSaveParam(0),
     _allProtokol(0),
     _task(0)
 {
@@ -46,13 +49,24 @@ void WindowLoader::LoadWindowBd85Main()
     }
     if ( viewIsLoaded == false )
     {
-        TWindowMainBd85 * view = new TWindowMainBd85(
-        _owner
+        _viewMain = new TWindowMainBd85(
+            _owner
         );
         _presenter = new PresenterWindowMainBd85(
-            view,
+            _viewMain,
             _viewDispet,
             _allProtokol,
-            _task);
+            _task, this);
     }
 }
+//---------------------------------------------------------------------------
+void WindowLoader::LoadWindowBd85SaveParam()
+{
+    TWindowSaveParamBd85 * _view = new TWindowSaveParamBd85(
+        _owner
+    );
+    _vmSaveParam = new ViewModelSaveParamBd85(
+        _view, _viewDispet, _viewMain
+    );
+}
+//---------------------------------------------------------------------------
