@@ -254,6 +254,7 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     Button_ModBus_Write->Enabled = isEnabled;
     //<<=== Параметры ModBus
     button_StartStopScaling->Enabled = isEnabled;
+    button_SaveToFile->Enabled = isEnabled;
     GroupBox_ReverseLink->Enabled = isEnabled;
     BitBtn_ArchOnOffDisplay->Enabled = isEnabled;
     button_FromFile->Enabled = isEnabled;

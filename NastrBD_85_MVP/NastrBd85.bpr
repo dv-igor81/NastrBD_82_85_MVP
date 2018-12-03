@@ -31,7 +31,7 @@
       ..\Library\Task\ArgTaskWithParam.obj EepromModBusBd85Settings.obj 
       ..\Library\FileDirect.obj WindowSaveParamNastrBd85.obj IWindowLoader.obj 
       ViewModelSaveParamBd85.obj IViewSaveParamBd85.obj 
-      IPresenterWindowMainBd85.obj"/>
+      IPresenterWindowMainBd85.obj ModelSaveParamBd85.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -131,6 +131,7 @@
       <FILE FILENAME="ViewModelSaveParamBd85.cpp" FORMNAME="" UNITNAME="ViewModelSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IViewSaveParamBd85.cpp" FORMNAME="" UNITNAME="IViewSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IPresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="IPresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ModelSaveParamBd85.cpp" FORMNAME="" UNITNAME="ModelSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

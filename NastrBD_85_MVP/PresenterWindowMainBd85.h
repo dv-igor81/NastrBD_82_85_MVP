@@ -28,7 +28,7 @@ public:
 private:
     IWindowMainBd85 * _view;
     IFormDispetView * _viewDispet;
-    ConnectBdProt* _connectBdProt;
+    ConnectBdProt * _connectBdProt;
     IAllProtokolS * _allProtokol;
     TaskWithParam * _task;
     IWindowLoader * _loader;
@@ -59,6 +59,11 @@ private:
 
     ActionSelf<ConnectionStateInfo> as_SetConnectionState;
     void SetConnectionState( ConnectionStateInfo state );
+
+    //===>> Исправить перекрытие потоков 03.12.2018
+    ActionSelf<const char*> as_DisplayErrors;
+    void DisplayErrors(const char * text);
+    //<<===  Исправить перекрытие потоков 03.12.2018
 
     ActionSelf<const char*> as_StartStopScaling;
     void StartStopScaling(const char* timeMeteringLimit);

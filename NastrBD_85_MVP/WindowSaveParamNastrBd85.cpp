@@ -82,9 +82,44 @@ void TWindowSaveParamBd85::SetDelayEnabled(bool enabled)
     this->Edit_Delay->Enabled = enabled;
 }
 //---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetButtonOkText(const char * text)
+{
+    this->Button_Ok->Caption = text;
+}
+//---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetButtonCancelEnabled(bool enabled)
+{
+    this->Button_Cancel->Enabled = enabled;
+}
+//---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetErrorText(const char * text)
+{
+    this->Edit_ErrorConnectCount->Text = text;
+}
+//---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetSummTimeText(const char * text)
+{
+    this->Edit_SummTime->Text = text;
+}
+//---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetCurrTimeText(const char * text)
+{
+    this->Edit_CurrTime->Text = text;
+}
+//---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetInfoText(const char * text)
+{
+    this->Edit_Info->Text = text;
+}
+//---------------------------------------------------------------------------
 void TWindowSaveParamBd85::WrapShow()
 {
     this->Show();
+}
+//---------------------------------------------------------------------------
+void TWindowSaveParamBd85::WrapClose()
+{
+    this->Close();
 }
 //---------------------------------------------------------------------------
 void TWindowSaveParamBd85::Destroy()
@@ -154,3 +189,24 @@ ActionEvent<const char*>& TWindowSaveParamBd85::EventEditDelayChange()
     return ev_EditDelayChange;
 }
 //---------------------------------------------------------------------------
+void __fastcall TWindowSaveParamBd85::Button_OkClick(TObject *Sender)
+{
+    ev_ButtonOkClick();
+}
+//---------------------------------------------------------------------------
+ActionEvent<>& TWindowSaveParamBd85::EventButtonOkClick()
+{
+    return ev_ButtonOkClick;
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowSaveParamBd85::Button_CancelClick(TObject *Sender)
+{
+    ev_ButtonCancelClick();
+}
+//---------------------------------------------------------------------------
+ActionEvent<>& TWindowSaveParamBd85::EventButtonCancelClick()
+{
+    return ev_ButtonCancelClick;
+}
+//---------------------------------------------------------------------------
+

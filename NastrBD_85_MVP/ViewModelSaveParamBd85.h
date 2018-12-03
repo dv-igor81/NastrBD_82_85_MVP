@@ -6,6 +6,9 @@
 #include "IWindowMainBd85.h"
 #include "IFormDispetView.h"
 #include "IPresenterWindowMainBd85.h"
+#include "ConnectBdProt.h"
+//---------------------------------------------------------------------------
+class ModelSaveParamBd85;
 //---------------------------------------------------------------------------
 class ViewModelSaveParamBd85
 {
@@ -13,13 +16,22 @@ public:
     ViewModelSaveParamBd85(
         IViewSaveParamBd85 * view,
         IFormDispetView * viewDispet,
-        IPresenterWindowMainBd85 * mainPres
-    );
+        IPresenterWindowMainBd85 * mainPres,
+        IAllProtokolS * allProtokol,
+        TaskWithParam * task,
+        ConnectBdProt * connectBdProt );
     ~ViewModelSaveParamBd85();
+    bool IsViewLoaded();
+    void DisplayErrors(const char * text);
+    void ButtonOkClick();
+    void DisplayCurrTime(int currTime);
 private:
     IViewSaveParamBd85 * _view;
     IFormDispetView * _viewDispet;
     IPresenterWindowMainBd85 * _mainPres;
+    TaskWithParam * _task;
+    bool _isViewLoaded;
+    ModelSaveParamBd85 * _model;
 
     //===>> Делегаты
     ActionSelf<> * as_FormClose;
@@ -28,6 +40,11 @@ private:
     ActionSelf<const char*> * as_EditTimeChange;
     ActionSelf<const char*> * as_EditNumberChange;
     ActionSelf<const char*> * as_EditDelayChange;
+    ActionSelf<> * as_ButtonOkClick;
+    ActionSelf<> * as_ButtonCancelClick;
+    //===
+    ActionSelf<const char*> * as_DisplayErrorsInvoke;
+    ActionSelf<int> * as_DisplayCurrTimeInvoke;
     //<<=== Делегаты
     
     void SetViewParam(); // Начальная настройка
@@ -42,7 +59,14 @@ private:
     void EditTimeChange(const char * text);
     void EditNumberChange(const char * text);
     void EditDelayChange(const char * text);
+    void ButtonCancelClick();
+    //===
+    void DisplayErrorsInvoke(const char * text);
+    void DisplayCurrTimeInvoke(int currTime);
     //<<=== Делегаты
+
+    void ControlsEnabled( bool enabled );
+    void UpdateSummTimeText();
 };
 //---------------------------------------------------------------------------
 #endif

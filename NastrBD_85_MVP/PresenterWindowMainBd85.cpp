@@ -23,6 +23,9 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_OprosEnd(this, &PresenterWindowMainBd85::OprosEnd)
         , as_OprosEndInvoke(this, &PresenterWindowMainBd85::OprosEndInvoke)
         , as_SetConnectionState(this, &PresenterWindowMainBd85::SetConnectionState)
+        //===>> Исправить перекрытие потоков 03.12.2018
+        , as_DisplayErrors(this, &PresenterWindowMainBd85::DisplayErrors)
+        //<<===  Исправить перекрытие потоков 03.12.2018
         , as_StartStopScaling(this, &PresenterWindowMainBd85::StartStopScaling)
         , as_ScalingOprosWorkInvoke(this, &PresenterWindowMainBd85::ScalingOprosWorkInvoke)
         , as_ClearScalingSumm(this, &PresenterWindowMainBd85::ClearScalingSumm)
@@ -60,7 +63,11 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
 
     *_connectBdProt->GetEventSetConnectionState() += as_SetConnectionState;
     ev_DisplayStartData += _view->GetSelfDisplayStartData();
-    *_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
+    //===>> Исправить перекрытие потоков 03.12.2018
+    //*_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
+    *_allProtokol->GetEventErrorCountIncrement() += as_DisplayErrors;
+    //<<===  Исправить перекрытие потоков 03.12.2018
+
     ev_DisplayIterData += _view->GetSelfDisplayIterData();
     ev_ScalingOpros += _view->GetSelfDisplayScalingData();
     _view->GetEventButtonClearScalingClick() += as_ClearScalingSumm;
@@ -119,6 +126,11 @@ void PresenterWindowMainBd85::ConnectIsGood() // Соединение (по ком порту или TC
     _connectBdProt->SetActionOprosEnd( & as_OprosEnd );
 }
 //---------------------------------------------------------------------------
+void PresenterWindowMainBd85::DisplayErrors(const char * text)
+{
+    _task->BeginInvoke<const char*>(_view->GetSelfDisplayErrors(), text);
+}
+//---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosStart()
 {
     _startData = new StartDataNewBd85();
@@ -160,7 +172,7 @@ void PresenterWindowMainBd85::OprosStartNotInvoke(StartDataNewBd85 *& data)
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::OprosIter()
 {
-    Sleep(10);
+    Sleep(5);
     if ( _allProtokol->GetSsp( & _ssp ) == false )
     {
         return;
@@ -834,6 +846,6 @@ void PresenterWindowMainBd85::SaveToLogFile()
     _connectBdProt->SetActionOprosStart( 0 );
     _connectBdProt->SetActionOprosIter( 0 );
     _connectBdProt->SetActionOprosEnd( 0 );
-    _loader->LoadWindowBd85SaveParam( this ); // Загрузить новое окно "Bd85SaveParam"
+    _loader->LoadWindowBd85SaveParam( this, _connectBdProt ); // Загрузить новое окно "Bd85SaveParam"
 }
 

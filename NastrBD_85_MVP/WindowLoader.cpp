@@ -60,13 +60,29 @@ void WindowLoader::LoadWindowBd85Main()
     }
 }
 //---------------------------------------------------------------------------
-void WindowLoader::LoadWindowBd85SaveParam(IPresenterWindowMainBd85 * mainPres)
+void WindowLoader::LoadWindowBd85SaveParam(
+    IPresenterWindowMainBd85 * mainPres,
+    ConnectBdProt * connectBdProt)
 {
-    TWindowSaveParamBd85 * _view = new TWindowSaveParamBd85(
-        _owner
-    );
-    _vmSaveParam = new ViewModelSaveParamBd85(
-        _view, _viewDispet, mainPres
-    );
+    bool viewIsLoaded = true;
+    if ( _vmSaveParam == 0 )
+    {
+        viewIsLoaded = false;
+    }
+    else if ( _vmSaveParam->IsViewLoaded() == false )
+    {
+        viewIsLoaded = false;
+        delete _vmSaveParam;
+    }
+    if (  viewIsLoaded == false  )
+    {
+        TWindowSaveParamBd85 * _view = new TWindowSaveParamBd85(
+            _owner
+        );
+        _vmSaveParam = new ViewModelSaveParamBd85(
+            _view, _viewDispet, mainPres,
+            _allProtokol, _task, connectBdProt
+        );
+    }
 }
 //---------------------------------------------------------------------------

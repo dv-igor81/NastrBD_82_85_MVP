@@ -18,17 +18,17 @@ class WindowLoader : public IWindowLoader
 public:
     WindowLoader(
         TForm * Owner,
-        IFormDispetView * view);
+        IFormDispetView * view);        
     ~WindowLoader();
     void LoadWindowBd85Main();
-    void LoadWindowBd85SaveParam(IPresenterWindowMainBd85 * mainPres);
+    void LoadWindowBd85SaveParam(
+        IPresenterWindowMainBd85 * mainPres,
+        ConnectBdProt * connectBdProt );
 private:
     IFormDispetView * _viewDispet;
-    //IWindowMainBd85 * _viewMain;
     TForm * _owner;
     PresenterWindowMainBd85 * _presenter;
     IAllProtokolS * _allProtokol;
-    //ITask * _task;
     TaskWithParam * _task;
     ViewModelSaveParamBd85 * _vmSaveParam;
 

@@ -19,6 +19,12 @@ public:
     virtual void SetNumberEnabled(bool enabled) = 0;
     virtual void SetDelayText(const char * text) = 0;
     virtual void SetDelayEnabled(bool enabled) = 0;
+    virtual void SetButtonOkText(const char * text) = 0;
+    virtual void SetButtonCancelEnabled(bool enabled) = 0;
+    virtual void SetErrorText(const char * text) = 0;
+    virtual void SetSummTimeText(const char * text) = 0;
+    virtual void SetCurrTimeText(const char * text) = 0;
+    virtual void SetInfoText(const char * text) = 0;
     virtual void WrapShow() = 0;
     virtual void Destroy() = 0;
     virtual ActionEvent<>& EventFormClose() = 0;
@@ -27,6 +33,9 @@ public:
     virtual ActionEvent<const char*>& EventEditTimeChange() = 0;
     virtual ActionEvent<const char*>& EventEditNumberChange() = 0;
     virtual ActionEvent<const char*>& EventEditDelayChange() = 0;
+    virtual ActionEvent<>& EventButtonOkClick() = 0;
+    virtual ActionEvent<>& EventButtonCancelClick() = 0;
+    virtual void WrapClose() = 0;
 };
 //---------------------------------------------------------------------------
 #endif
