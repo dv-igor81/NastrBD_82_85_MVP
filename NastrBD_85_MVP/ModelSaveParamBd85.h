@@ -22,12 +22,13 @@ public:
     AnsiString FileName;
     AnsiString FileHeader;
     
-    int m_nT; // Время измерения, (с)
-    int m_nN; // Количество изменений
-    int m_nZ; // Задержка (мин)
+    unsigned int m_nT; // Время измерения, (с)
+    unsigned int m_nN; // Количество изменений
+    unsigned int m_nZ; // Задержка (мин)
 
     bool StartStopWork();
-    int GetSummTime();
+    unsigned int GetSummTime();
+    void DisplayInfo();
 
 private:
     IAllProtokolS * _allProtokol;
@@ -54,12 +55,18 @@ private:
     unsigned char _ssp;
 
     unsigned short _scaling; // Счёт за подинтервал (200 мс для 9-битного, 250 для ModBus)
-    unsigned int _intervalQuantity; // Считаем количество подинтервалов, для интервала (секунды)
+    unsigned int _intervalQuantity; // Количество подинтервалов в секунде (4 или 5)
     unsigned int _intervalCounter;  // Счётчик подинтервалов (0,1,2,3 или 0,1,2,3,4) 
     unsigned int _scalingCounterTmp; // Для секундного счёта
     unsigned int _scalingCounter; // Для секундного счёта
     unsigned int _currTimeScaling; // Текущее время
-
+    unsigned int _scalingSumm; // Счёт за время измерения
+    bool _flagZad; // Флаг задержки
+    bool IsDelayTime(); // Время задержки сейчас?
+    unsigned int TimeOfMetering(); // Время для текущего измерения (или задержки)
+    unsigned int NumberOfMetering(); // Номер измерения
+    bool EndOfMetering(); // true - конец измерения
+    void WriteToFile();
 };
 //---------------------------------------------------------------------------
 #endif

@@ -112,6 +112,16 @@ void TWindowSaveParamBd85::SetInfoText(const char * text)
     this->Edit_Info->Text = text;
 }
 //---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetMiddleScalingText(const char * text)
+{
+    this->Edit_MiddleScaling->Text = text;
+}
+//---------------------------------------------------------------------------
+void TWindowSaveParamBd85::SetTotalScalingText(const char * text)
+{
+    this->Edit_TotalScaling->Text = text;
+}
+//---------------------------------------------------------------------------
 void TWindowSaveParamBd85::WrapShow()
 {
     this->Show();

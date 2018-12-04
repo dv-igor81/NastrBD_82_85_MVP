@@ -25,6 +25,8 @@ public:
     virtual void SetSummTimeText(const char * text) = 0;
     virtual void SetCurrTimeText(const char * text) = 0;
     virtual void SetInfoText(const char * text) = 0;
+    virtual void SetMiddleScalingText(const char * text) = 0;
+    virtual void SetTotalScalingText(const char * text) = 0;
     virtual void WrapShow() = 0;
     virtual void Destroy() = 0;
     virtual ActionEvent<>& EventFormClose() = 0;

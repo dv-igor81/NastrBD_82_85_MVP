@@ -297,8 +297,8 @@ object WindowMainBd85: TWindowMainBd85
           ParentFont = False
           TabOrder = 1
           object Label_TimeMetering: TLabel
-            Left = 112
-            Top = 16
+            Left = 125
+            Top = 19
             Width = 119
             Height = 15
             Caption = #1042#1088#1077#1084#1103' '#1080#1079#1084#1077#1088#1077#1085#1080#1103','#1089
@@ -310,8 +310,8 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
           end
           object Edit_TimeMeteringLimit: TEdit
-            Left = 248
-            Top = 16
+            Left = 257
+            Top = 15
             Width = 68
             Height = 23
             Color = clCream
@@ -327,7 +327,7 @@ object WindowMainBd85: TWindowMainBd85
           object Panel_MiddleSecondScaling_0: TPanel
             Left = 8
             Top = 38
-            Width = 241
+            Width = 249
             Height = 20
             Alignment = taLeftJustify
             BorderWidth = 1
@@ -343,16 +343,16 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 1
           end
           object Panel_MiddleSecondScaling_1: TPanel
-            Left = 249
+            Left = 258
             Top = 38
             Width = 68
             Height = 20
             TabOrder = 2
           end
           object Edit_MiddleSecondScaling: TEdit
-            Left = 318
+            Left = 327
             Top = 38
-            Width = 75
+            Width = 66
             Height = 21
             TabStop = False
             Color = clMoneyGreen
@@ -389,7 +389,7 @@ object WindowMainBd85: TWindowMainBd85
           object Panel_TotalScaling_0: TPanel
             Left = 8
             Top = 60
-            Width = 241
+            Width = 249
             Height = 20
             Alignment = taLeftJustify
             BorderWidth = 1
@@ -405,16 +405,16 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 5
           end
           object Panel_TotalScaling_1: TPanel
-            Left = 249
+            Left = 258
             Top = 60
             Width = 68
             Height = 20
             TabOrder = 6
           end
           object Edit_TotalScaling: TEdit
-            Left = 318
+            Left = 327
             Top = 60
-            Width = 75
+            Width = 66
             Height = 21
             TabStop = False
             Color = clMoneyGreen
@@ -451,7 +451,7 @@ object WindowMainBd85: TWindowMainBd85
           object Panel_TimeScaling_0: TPanel
             Left = 8
             Top = 82
-            Width = 241
+            Width = 249
             Height = 20
             Alignment = taLeftJustify
             BorderWidth = 1
@@ -467,16 +467,16 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 9
           end
           object Panel_TimeScaling_1: TPanel
-            Left = 249
+            Left = 258
             Top = 82
             Width = 68
             Height = 20
             TabOrder = 10
           end
           object Edit_TimeScaling: TEdit
-            Left = 318
+            Left = 327
             Top = 82
-            Width = 75
+            Width = 66
             Height = 21
             TabStop = False
             Color = clMoneyGreen

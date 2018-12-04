@@ -34,6 +34,10 @@ __published:	// IDE-managed Components
         TEdit *Edit_CurrTime;
         TPanel *Panel_Info;
         TEdit *Edit_Info;
+        TPanel *Panel_TotalScaling;
+        TEdit *Edit_TotalScaling;
+        TEdit *Edit_MiddleScaling;
+        TPanel *Panel_MiddleScaling;
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
         void __fastcall Edit_FileNameChange(TObject *Sender);
         void __fastcall Edit_FileHeaderChange(TObject *Sender);
@@ -75,6 +79,8 @@ public:		// User declarations
     void SetSummTimeText(const char * text);
     void SetCurrTimeText(const char * text);
     void SetInfoText(const char * text);
+    void SetMiddleScalingText(const char * text);
+    void SetTotalScalingText(const char * text);
     void WrapShow();
     void WrapClose();
     void Destroy();

@@ -2,13 +2,13 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
   Left = 556
   Top = 233
   Width = 525
-  Height = 205
+  Height = 245
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = #1047#1072#1087#1080#1089#1100' '#1085#1072#1089#1090#1088#1086#1077#1082' '#1041#1044' 85 '#1074' '#1092#1072#1081#1083
   Color = clBtnFace
-  Constraints.MaxHeight = 205
+  Constraints.MaxHeight = 245
   Constraints.MaxWidth = 525
-  Constraints.MinHeight = 150
+  Constraints.MinHeight = 170
   Constraints.MinWidth = 250
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,12 +24,12 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
     Left = 0
     Top = 0
     Width = 509
-    Height = 167
+    Height = 207
     Align = alClient
     TabOrder = 0
     object Label_FileName: TLabel
-      Left = 2
-      Top = 12
+      Left = 5
+      Top = 9
       Width = 71
       Height = 13
       Caption = #1048#1084#1103' '#1092#1072#1081#1083#1072':'
@@ -41,8 +41,8 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       ParentFont = False
     end
     object Label_FileHeader: TLabel
-      Left = 2
-      Top = 36
+      Left = 5
+      Top = 33
       Width = 86
       Height = 13
       Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081':'
@@ -54,8 +54,8 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       ParentFont = False
     end
     object Label_Time: TLabel
-      Left = 2
-      Top = 60
+      Left = 5
+      Top = 57
       Width = 127
       Height = 13
       Caption = #1042#1088#1077#1084#1103' '#1080#1079#1084#1077#1088#1077#1085#1080#1103'('#1089'):'
@@ -67,8 +67,8 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       ParentFont = False
     end
     object Label_Number: TLabel
-      Left = 2
-      Top = 84
+      Left = 5
+      Top = 81
       Width = 114
       Height = 13
       Caption = #1050#1086#1083'-'#1074#1086' '#1080#1079#1084#1077#1088#1077#1085#1080#1081':'
@@ -80,8 +80,8 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       ParentFont = False
     end
     object Label_Delay: TLabel
-      Left = 3
-      Top = 105
+      Left = 6
+      Top = 102
       Width = 99
       Height = 13
       Caption = #1047#1072#1076#1077#1088#1078#1082#1072' ('#1084#1080#1085'):'
@@ -189,7 +189,7 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
     object Edit_ErrorConnectCount: TEdit
       Left = 141
       Top = 133
-      Width = 54
+      Width = 68
       Height = 20
       TabStop = False
       Color = clMoneyGreen
@@ -205,13 +205,13 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       TabOrder = 8
     end
     object Panel_SummTime: TPanel
-      Left = 236
-      Top = 86
-      Width = 165
+      Left = 221
+      Top = 82
+      Width = 184
       Height = 20
       BevelInner = bvLowered
       BorderWidth = 1
-      Caption = ' '#1042#1088#1077#1084#1103' '#1080#1079#1084#1077#1088#1077#1085#1080#1103', '#1089'.'
+      Caption = ' '#1042#1088#1077#1084#1103' '#1080#1079#1084#1077#1088#1077#1085#1080#1103', ['#1089'.]'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -221,9 +221,9 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       TabOrder = 9
     end
     object Edit_SummTime: TEdit
-      Left = 407
-      Top = 86
-      Width = 54
+      Left = 408
+      Top = 82
+      Width = 95
       Height = 20
       TabStop = False
       Color = clMoneyGreen
@@ -239,13 +239,13 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       TabOrder = 10
     end
     object Panel_CurrTime: TPanel
-      Left = 236
-      Top = 110
-      Width = 165
+      Left = 221
+      Top = 105
+      Width = 184
       Height = 20
       BevelInner = bvLowered
       BorderWidth = 1
-      Caption = ' '#1042#1088#1077#1084#1103' '#1090#1077#1082#1091#1097#1077#1077', '#1089'. '
+      Caption = ' '#1042#1088#1077#1084#1103' '#1090#1077#1082#1091#1097#1077#1077', ['#1089'.] '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -255,9 +255,9 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       TabOrder = 11
     end
     object Edit_CurrTime: TEdit
-      Left = 407
-      Top = 110
-      Width = 54
+      Left = 408
+      Top = 105
+      Width = 95
       Height = 20
       TabStop = False
       Color = clMoneyGreen
@@ -273,9 +273,9 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       TabOrder = 12
     end
     object Panel_Info: TPanel
-      Left = 236
-      Top = 134
-      Width = 165
+      Left = 221
+      Top = 128
+      Width = 121
       Height = 20
       BevelInner = bvLowered
       BorderWidth = 1
@@ -289,9 +289,9 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       TabOrder = 13
     end
     object Edit_Info: TEdit
-      Left = 407
-      Top = 134
-      Width = 54
+      Left = 345
+      Top = 128
+      Width = 158
       Height = 20
       TabStop = False
       Color = clMoneyGreen
@@ -305,6 +305,74 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       ParentFont = False
       ReadOnly = True
       TabOrder = 14
+    end
+    object Panel_TotalScaling: TPanel
+      Left = 6
+      Top = 179
+      Width = 389
+      Height = 20
+      BevelInner = bvLowered
+      BorderWidth = 1
+      Caption = ' '#1057#1091#1084#1084#1072#1088#1085#1099#1081' '#1089#1095#1105#1090' '#1079#1072' '#1074#1088#1077#1084#1103' '#1080#1079#1084#1077#1088#1077#1085#1080#1103' ['#1080#1084#1087'.]'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 15
+    end
+    object Edit_TotalScaling: TEdit
+      Left = 403
+      Top = 179
+      Width = 100
+      Height = 20
+      TabStop = False
+      Color = clMoneyGreen
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Courier New'
+      Font.Style = []
+      ParentCtl3D = False
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 16
+    end
+    object Edit_MiddleScaling: TEdit
+      Left = 403
+      Top = 156
+      Width = 100
+      Height = 20
+      TabStop = False
+      Color = clMoneyGreen
+      Ctl3D = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Courier New'
+      Font.Style = []
+      ParentCtl3D = False
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 17
+    end
+    object Panel_MiddleScaling: TPanel
+      Left = 6
+      Top = 156
+      Width = 389
+      Height = 20
+      BevelInner = bvLowered
+      BorderWidth = 1
+      Caption = ' '#1057#1088'. '#1089#1095#1105#1090' '#1089' '#1041#1044' '#1079#1072' 1 '#1089#1077#1082'. ['#1080#1084#1087'./'#1089'.]'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 18
     end
   end
 end

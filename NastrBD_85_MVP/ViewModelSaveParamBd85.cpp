@@ -64,9 +64,12 @@ void ViewModelSaveParamBd85::CreateActions()
     as_EditDelayChange = new ActionSelf<const char*>(this, &ViewModelSaveParamBd85::EditDelayChange);
     as_ButtonOkClick = new ActionSelf<>(this, &ViewModelSaveParamBd85::ButtonOkClick);
     as_ButtonCancelClick = new ActionSelf<>(this, &ViewModelSaveParamBd85::ButtonCancelClick);
-    //===
-    as_DisplayErrorsInvoke = new ActionSelf<const char*>(this, &ViewModelSaveParamBd85::DisplayErrorsInvoke);
-    as_DisplayCurrTimeInvoke = new ActionSelf<int>(this, &ViewModelSaveParamBd85::DisplayCurrTimeInvoke);
+    //=== Для работы в Invoke - функциях
+    as_DisplayErrors = new ActionSelf<const char*>(this, &ViewModelSaveParamBd85::DisplayErrors);
+    as_DisplayCurrTime = new ActionSelf<int>(this, &ViewModelSaveParamBd85::DisplayCurrTime);
+    as_DisplayInfo = new ActionSelf<const char*>(this, &ViewModelSaveParamBd85::DisplayInfo);
+    as_DisplayMiddleScaling = new ActionSelf<const char*>(this, &ViewModelSaveParamBd85::DisplayMiddleScaling);
+    as_DisplayTotalScaling = new ActionSelf<const char*>(this, &ViewModelSaveParamBd85::DisplayTotalScaling);
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::ViewSubscribe() // Подписаться на события вид'а
@@ -91,9 +94,12 @@ void ViewModelSaveParamBd85::DestroyActions()
     delete as_EditDelayChange;
     delete as_ButtonOkClick;
     delete as_ButtonCancelClick;
-    //===
-    delete as_DisplayErrorsInvoke;
-    delete as_DisplayCurrTimeInvoke;
+    //=== Для работы в Invoke - функциях
+    delete as_DisplayErrors;
+    delete as_DisplayCurrTime;
+    delete as_DisplayInfo;
+    delete as_DisplayMiddleScaling;
+    delete as_DisplayTotalScaling;
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::FormClose()
@@ -114,34 +120,40 @@ void ViewModelSaveParamBd85::EditFileHeaderChange(const char * text)
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::EditTimeChange(const char * text)
 {
-    _model->m_nT = StrToInt( text );
-    UpdateSummTimeText();
+    UpdateSummTimeText( & _model->m_nT, text ); // Время измерения, (с)
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::EditNumberChange(const char * text)
 {
-    _model->m_nN = StrToInt( text );
-    UpdateSummTimeText();
+    UpdateSummTimeText( & _model->m_nN, text ); // Количество изменений
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::EditDelayChange(const char * text)
 {
-    _model->m_nZ = StrToInt( text ); // Задержка (мин)
-    UpdateSummTimeText();
+    UpdateSummTimeText( & _model->m_nZ, text ); // Задержка (мин)
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::ButtonOkClick()
 {
     bool work = _model->StartStopWork();
     ControlsEnabled( !work );
-    if (work)
+    if ( work )
     {
         _view->SetButtonOkText( "Стоп" );
+        _model->DisplayInfo();
     }
     else
     {
-        _view->SetButtonOkText( "Старт" );    
+        _view->SetButtonOkText( "Старт" );
+        _view->SetInfoText( "" );
+        _view->SetMiddleScalingText( "" );
+        _view->SetTotalScalingText( "" );
     }
+}
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::ButtonOkClickInvoke()
+{
+    _task->BeginInvoke( as_ButtonOkClick );
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::ButtonCancelClick()
@@ -164,31 +176,68 @@ void ViewModelSaveParamBd85::ControlsEnabled( bool enabled )
     _view->SetButtonCancelEnabled( enabled );
 }
 //---------------------------------------------------------------------------
-void ViewModelSaveParamBd85::UpdateSummTimeText()
+void ViewModelSaveParamBd85::UpdateSummTimeText(unsigned int * outVal, const char * inVal)
 {
-    int summTime = _model->GetSummTime();
-    AnsiString text = IntToStr( summTime );
-    _view->SetSummTimeText( text.c_str() );
-}
-//---------------------------------------------------------------------------
-void ViewModelSaveParamBd85::DisplayErrors(const char * text)
-{
-    _task->BeginInvoke<const char*>( as_DisplayErrorsInvoke, text );
+    if ( inVal != 0 )
+    {
+        if ( inVal[0] != 0 )
+        {
+            *outVal = StrToInt( inVal );
+            int summTime = _model->GetSummTime();
+            AnsiString text = IntToStr( summTime );
+            _view->SetSummTimeText( text.c_str() );
+        }
+    }
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::DisplayErrorsInvoke(const char * text)
 {
-    _view->SetErrorText(text);
+    _task->BeginInvoke<const char*>( as_DisplayErrors, text );
 }
 //---------------------------------------------------------------------------
-void ViewModelSaveParamBd85::DisplayCurrTime(int currTime)
+void ViewModelSaveParamBd85::DisplayErrors(const char * text)
 {
-    _task->BeginInvoke<int>( as_DisplayCurrTimeInvoke, currTime );
+    _view->SetErrorText(text);
 }
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::DisplayCurrTimeInvoke(int currTime)
 {
+    _task->BeginInvoke<int>( as_DisplayCurrTime, currTime );
+}
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::DisplayCurrTime(int currTime)
+{
     AnsiString text = IntToStr( currTime );
     _view->SetCurrTimeText( text.c_str() );
 }
-
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::DisplayInfoInvoke(const char * text)
+{
+    _task->BeginInvoke<const char*>( as_DisplayInfo, text );
+}
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::DisplayInfo(const char * text)
+{
+    _view->SetInfoText( text );
+}
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::DisplayMiddleScalingInvoke(const char * text)
+{
+    _task->BeginInvoke<const char*>( as_DisplayMiddleScaling, text );
+}
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::DisplayMiddleScaling(const char * text)
+{
+    _view->SetMiddleScalingText( text );
+}
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::DisplayTotalScalingInvoke(const char * text)
+{
+    _task->BeginInvoke<const char*>( as_DisplayTotalScaling, text );
+}
+//---------------------------------------------------------------------------
+void ViewModelSaveParamBd85::DisplayTotalScaling(const char * text)
+{
+    _view->SetTotalScalingText( text );
+}
+//---------------------------------------------------------------------------

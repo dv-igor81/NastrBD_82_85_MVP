@@ -22,9 +22,14 @@ public:
         ConnectBdProt * connectBdProt );
     ~ViewModelSaveParamBd85();
     bool IsViewLoaded();
-    void DisplayErrors(const char * text);
-    void ButtonOkClick();
-    void DisplayCurrTime(int currTime);
+    //===>> Invoke - функции
+    void DisplayErrorsInvoke(const char * text);
+    void DisplayCurrTimeInvoke(int currTime);
+    void ButtonOkClickInvoke();
+    void DisplayInfoInvoke(const char * text);
+    void DisplayMiddleScalingInvoke(const char * text);
+    void DisplayTotalScalingInvoke(const char * text);
+    //<<=== Invoke - функции
 private:
     IViewSaveParamBd85 * _view;
     IFormDispetView * _viewDispet;
@@ -42,9 +47,12 @@ private:
     ActionSelf<const char*> * as_EditDelayChange;
     ActionSelf<> * as_ButtonOkClick;
     ActionSelf<> * as_ButtonCancelClick;
-    //===
-    ActionSelf<const char*> * as_DisplayErrorsInvoke;
-    ActionSelf<int> * as_DisplayCurrTimeInvoke;
+    //=== Для работы в Invoke - функциях
+    ActionSelf<const char*> * as_DisplayErrors;
+    ActionSelf<int> * as_DisplayCurrTime;
+    ActionSelf<const char*> * as_DisplayInfo;
+    ActionSelf<const char*> * as_DisplayMiddleScaling;
+    ActionSelf<const char*> * as_DisplayTotalScaling;
     //<<=== Делегаты
     
     void SetViewParam(); // Начальная настройка
@@ -59,14 +67,18 @@ private:
     void EditTimeChange(const char * text);
     void EditNumberChange(const char * text);
     void EditDelayChange(const char * text);
-    void ButtonCancelClick();
-    //===
-    void DisplayErrorsInvoke(const char * text);
-    void DisplayCurrTimeInvoke(int currTime);
+    void ButtonOkClick();
+    void ButtonCancelClick();    
+    //=== Для работы в Invoke - функциях
+    void DisplayErrors(const char * text);
+    void DisplayCurrTime(int currTime);
+    void DisplayInfo(const char * text);
+    void DisplayMiddleScaling(const char * text);
+    void DisplayTotalScaling(const char * text);
     //<<=== Делегаты
 
     void ControlsEnabled( bool enabled );
-    void UpdateSummTimeText();
+    void UpdateSummTimeText(unsigned int * outVal, const char * inVal);
 };
 //---------------------------------------------------------------------------
 #endif
