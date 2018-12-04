@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
 #include "ModelSaveParamBd85.h"
+#include "ConvertHelper.h"
 #include <stdio.h>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -119,6 +120,11 @@ void ModelSaveParamBd85::ClearParam()
     _scalingCounter = 0; // Для секундного счёта
     _currTimeScaling = 0; // Текущее время
     _scalingSumm = 0; // Счёт за время измерения
+    _bFlagCommentWritten = false;
+    _temperature = 0;
+    _voltageHi = 0;
+    _widthPwm = 0;
+    _periodPwm = 0;
 }
 //---------------------------------------------------------------------------
 void ModelSaveParamBd85::Calculate()
@@ -188,7 +194,74 @@ unsigned int ModelSaveParamBd85::TimeOfMetering()
 //---------------------------------------------------------------------------
 void ModelSaveParamBd85::WriteToFile()
 {
+    int nFile1;
+    //int nFile2;
+    if ( FileExists( FileName ) )
+    {
+        nFile1 = FileOpen( FileName , fmOpenWrite );
+    }
+    else
+    {
+        nFile1 = FileCreate( FileName );
+    }
+    if ( nFile1 != -1 )
+    {
+        FileSeek( nFile1, 0, 2 ); // Переместить "указатель - курсор" в конец файла
+        if ( _bFlagCommentWritten == false )
+        {
+            TDateTime Td(Now() );
+            AnsiString sdate = Td.DateString();
+            double Vremq = (float)GetSummTime();
+            Vremq /= 60.0;
+            char acBuffer[1024] = { 0 };
+            sprintf(acBuffer, "\r\nДата:%s  Комментарий:%s\r\nИзмерений: %d по %dс (общая продолжительность:%6.2fмин) c задержкой %d мин между измерениями\r\n",
+                sdate,
+                FileHeader.c_str(),
+                m_nN,
+                m_nT,
+                Vremq,
+                m_nZ);
+            FileWrite( nFile1, (void*)acBuffer, strlen(acBuffer) );
+            sprintf(acBuffer, " Время      Темпер.  Высокое,В   длШИМ    перШИМ      Счёт\r\n");
+            FileWrite( nFile1, (void*)acBuffer, strlen(acBuffer) );
+            _bFlagCommentWritten = true;            
+        }
+        char acBuffer[1024] = { 0 };
+        //===>>
+        TDateTime T( Now() );
+        //AnsiString sdate = T.DateString();
+        AnsiString stime = T.TimeString();
+        int n = stime.AnsiPos(':');
+        if (n == 2)
+        {
+            stime.Insert(' ', 1);
+        }
+        bool flagGood = true;
+        flagGood &= _allProtokol->GetTemperature( & _temperature );
+        double temperVal = ConvertHelper::TemperatureCodeToValue( _temperature );
+        flagGood &= _allProtokol->GetVoltageHi( & _voltageHi );
+        double voltageHiVal = ConvertHelper::VoltageHiCodeToValue( _voltageHi );
+        flagGood &= _allProtokol->GetWidthPwm( & _widthPwm );
+        flagGood &= _allProtokol->GetPeriodPwm( & _periodPwm );
 
+        if ( flagGood == true )
+        {
+            sprintf(acBuffer, "%s  %8.1f  %8.1f  %8d  %8d  %8d\r\n",
+                stime.c_str(), // время
+                temperVal, // температура
+                voltageHiVal, // высокое напряжение
+                _widthPwm, // длительность ШИМ (Код)
+                _periodPwm, // период ШИМ (Код)
+                _scalingSumm); // счёт за заданное время
+            FileWrite( nFile1, (void*)acBuffer, strlen(acBuffer) );
+        }
+        //<<===
+        FileClose( nFile1 );
+    }
+    else
+    {
+        //ShowMessage( "Ошибка доступа к файлу: " + FileName );
+    }
 }
 //---------------------------------------------------------------------------
 void ModelSaveParamBd85::DisplayInfo()

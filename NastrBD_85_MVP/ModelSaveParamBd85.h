@@ -26,6 +26,13 @@ public:
     unsigned int m_nN; // Количество изменений
     unsigned int m_nZ; // Задержка (мин)
 
+    unsigned short _temperature;
+    unsigned short _voltageHi;
+    unsigned short _widthPwm;
+    unsigned short _periodPwm;
+
+    bool _bFlagCommentWritten;
+
     bool StartStopWork();
     unsigned int GetSummTime();
     void DisplayInfo();
