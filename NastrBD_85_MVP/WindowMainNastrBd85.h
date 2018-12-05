@@ -85,7 +85,7 @@ __published:	// IDE-managed Components
         TEdit *Edit_PeriodPwmZad_3;
         TButton *button_WriteToEeprom;
         TButton *button_FromFile;
-        TButton *btnPwmAuto;
+        TButton *button_PwmAuto;
         TPanel *Panel_rate_Description;
         TPanel *Panel_rate_Code;
         TPanel *Panel_rate_Value;

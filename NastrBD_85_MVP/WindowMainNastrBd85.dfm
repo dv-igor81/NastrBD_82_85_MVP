@@ -1894,7 +1894,7 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 33
             OnClick = button_FromFileClick
           end
-          object btnPwmAuto: TButton
+          object button_PwmAuto: TButton
             Left = 321
             Top = 193
             Width = 116
@@ -1908,6 +1908,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 34
+            Visible = False
           end
         end
       end

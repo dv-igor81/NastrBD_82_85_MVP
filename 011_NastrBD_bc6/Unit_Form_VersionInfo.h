@@ -12,7 +12,7 @@
 class TForm_VersionInfo : public TForm
 {
 __published:	// IDE-managed Components
-        TRichEdit *RichEdit1;
+        TRichEdit *RichEdit;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
