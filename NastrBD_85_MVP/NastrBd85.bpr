@@ -29,9 +29,9 @@
       ModBusEventContainerBd85.obj ModBusTextDataBd85.obj EepromBd85Settings.obj 
       ..\Library\Task\TaskWithParam.obj ..\Library\Task\IArgTaskWithParam.obj 
       ..\Library\Task\ArgTaskWithParam.obj EepromModBusBd85Settings.obj 
-      ..\Library\FileDirect.obj WindowSaveParamNastrBd85.obj IWindowLoader.obj 
-      ViewModelSaveParamBd85.obj IViewSaveParamBd85.obj 
-      IPresenterWindowMainBd85.obj ModelSaveParamBd85.obj"/>
+      WindowSaveParamNastrBd85.obj IWindowLoader.obj ViewModelSaveParamBd85.obj 
+      IViewSaveParamBd85.obj IPresenterWindowMainBd85.obj ModelSaveParamBd85.obj 
+      ..\Library\FileDirectExtensive.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -125,13 +125,13 @@
       <FILE FILENAME="..\Library\Task\IArgTaskWithParam.cpp" FORMNAME="" UNITNAME="IArgTaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Task\ArgTaskWithParam.cpp" FORMNAME="" UNITNAME="ArgTaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="EepromModBusBd85Settings.cpp" FORMNAME="" UNITNAME="EepromModBusBd85Settings" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\FileDirect.cpp" FORMNAME="" UNITNAME="FileDirect" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="WindowSaveParamNastrBd85.cpp" FORMNAME="WindowSaveParamBd85" UNITNAME="WindowSaveParamNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IWindowLoader.cpp" FORMNAME="" UNITNAME="IWindowLoader" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ViewModelSaveParamBd85.cpp" FORMNAME="" UNITNAME="ViewModelSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IViewSaveParamBd85.cpp" FORMNAME="" UNITNAME="IViewSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IPresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="IPresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModelSaveParamBd85.cpp" FORMNAME="" UNITNAME="ModelSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\Library\FileDirectExtensive.cpp" FORMNAME="" UNITNAME="FileDirectExtensive" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

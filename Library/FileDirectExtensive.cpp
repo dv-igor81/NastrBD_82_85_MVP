@@ -1,18 +1,18 @@
 //---------------------------------------------------------------------------
 #pragma hdrstop
-#include "FileDirect.h"
+#include "FileDirectExtensive.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 #include <classes.hpp>
 //---------------------------------------------------------------------------
-class FileDirect::impl
+class FileDirectExtensive::impl
 {
 public:
     TStringList * StrList;
 };
 //---------------------------------------------------------------------------
-FileDirect::FileDirect()
+FileDirectExtensive::FileDirectExtensive()
 {
     pImpl = new impl();
     pImpl->StrList = new TStringList();
@@ -20,7 +20,7 @@ FileDirect::FileDirect()
     _fileIsReading = false;
 }
 //---------------------------------------------------------------------------
-FileDirect::~FileDirect()
+FileDirectExtensive::~FileDirectExtensive()
 {
     if (pImpl != 0)
     {
@@ -32,7 +32,7 @@ FileDirect::~FileDirect()
     }
 }
 //---------------------------------------------------------------------------
-bool FileDirect::LoadFromFile( const char * fileName )
+bool FileDirectExtensive::LoadFromFile( const char * fileName )
 {
     if ( CheckFileName( fileName ) == false )
     {
@@ -44,7 +44,7 @@ bool FileDirect::LoadFromFile( const char * fileName )
     return true;   
 }
 //---------------------------------------------------------------------------
-bool FileDirect::SaveToFile( const char * fileName )
+bool FileDirectExtensive::SaveToFile( const char * fileName )
 {
     //if ( CheckFileName( fileName ) == false )
     //{
@@ -54,12 +54,12 @@ bool FileDirect::SaveToFile( const char * fileName )
     return true;     
 }
 //---------------------------------------------------------------------------
-bool FileDirect::DiaFileExists()
+bool FileDirectExtensive::DiaFileExists()
 {
     return _fileIsReading;
 }
 //---------------------------------------------------------------------------
-void FileDirect::ReadInteger (
+void FileDirectExtensive::ReadInteger (
     int * retVal, // [OUT]
     const char * paramName, // [IN]
     int min, int def, int max, // [IN]
@@ -91,7 +91,7 @@ void FileDirect::ReadInteger (
     *retVal = x;
 }
 //---------------------------------------------------------------------------
-void FileDirect::WriteInteger (
+void FileDirectExtensive::WriteInteger (
     int value, // [IN]
     const char * paramName) // [IN]
 {
@@ -124,7 +124,7 @@ void FileDirect::WriteInteger (
     }
 }
 //---------------------------------------------------------------------------
-void FileDirect::ReadByte (
+void FileDirectExtensive::ReadByte (
     unsigned char * retVal, // [OUT]
     const char * paramName, // [IN]
     unsigned char min, unsigned char def, unsigned char max, // [IN]
@@ -156,7 +156,7 @@ void FileDirect::ReadByte (
     *retVal = x;
 }
 //---------------------------------------------------------------------------
-void FileDirect::ReadWord (
+void FileDirectExtensive::ReadWord (
     unsigned short * retVal, // [OUT]
     const char * paramName, // [IN]
     unsigned short min, unsigned short def, unsigned short max, // [IN]
@@ -188,7 +188,7 @@ void FileDirect::ReadWord (
     *retVal = x;
 }
 //---------------------------------------------------------------------------
-void FileDirect::ReadBool(
+void FileDirectExtensive::ReadBool(
     bool * retVal, // [OUT]
     const char * paramName, // [IN]
     bool def, // [IN]
@@ -216,7 +216,7 @@ void FileDirect::ReadBool(
     }
 }
 //---------------------------------------------------------------------------
-void FileDirect::WriteBool(
+void FileDirectExtensive::WriteBool(
     bool value, // [IN]
     const char * paramName ) // [IN]
 {
@@ -255,7 +255,7 @@ void FileDirect::WriteBool(
     }
 }
 //---------------------------------------------------------------------------
-bool FileDirect::CheckFileName( const char * fileName )
+bool FileDirectExtensive::CheckFileName( const char * fileName )
 {
     if ( FileExists( fileName ) == false )
     { // если такого файла не существует

@@ -4,7 +4,7 @@
 #include "PresenterWindowMainBd85.h"
 #include "TextHelper.h"
 #include "ConvertHelper.h"
-#include "FileDirect.h"
+#include "FileDirectExtensive.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -789,7 +789,7 @@ bool PresenterWindowMainBd85::WriteEEProm()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::FromFileBd85Settings()
 {
-    FileDirect fromIni;
+    FileDirectExtensive fromIni;
     bool flagArch;
     unsigned short voltageHiZadValue;
     unsigned short voltageHiZad;

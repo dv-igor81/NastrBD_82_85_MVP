@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
-#ifndef FileDirectH
-#define FileDirectH
+#ifndef FileDirectExtensiveH
+#define FileDirectExtensiveH
 //---------------------------------------------------------------------------
-class FileDirect
+class FileDirectExtensive
 {
 public:
-    FileDirect();
-    ~FileDirect();
+    FileDirectExtensive();
+    ~FileDirectExtensive();
 
     bool LoadFromFile( const char * fileName );
 
