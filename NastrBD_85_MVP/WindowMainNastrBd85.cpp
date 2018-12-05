@@ -258,6 +258,7 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     GroupBox_ReverseLink->Enabled = isEnabled;
     BitBtn_ArchOnOffDisplay->Enabled = isEnabled;
     button_FromFile->Enabled = isEnabled;
+    button_Poisson->Enabled = isEnabled;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
@@ -467,6 +468,11 @@ ActionEvent<>& TWindowMainBd85::GetEventButtonFromFileClick()
 ActionEvent<>& TWindowMainBd85::GetEventButtonSaveToFileClick()
 {
     return ev_button_SaveToFileClick;
+}
+//---------------------------------------------------------------------------
+ActionEvent<>& TWindowMainBd85::GetEventButtonPoissonClick()
+{
+    return ev_button_PoissonClick;
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
@@ -687,6 +693,11 @@ void __fastcall TWindowMainBd85::button_FromFileClick(TObject *Sender)
 void __fastcall TWindowMainBd85::button_SaveToFileClick(TObject *Sender)
 {
     ev_button_SaveToFileClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::button_PoissonClick(TObject *Sender)
+{
+    ev_button_PoissonClick();
 }
 //---------------------------------------------------------------------------
 

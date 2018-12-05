@@ -6,6 +6,7 @@
 //---------------------------------------------------------------------------
 #include "WindowMainNastrBd85.h"
 #include "WindowSaveParamNastrBd85.h"
+#include "WindowNastrBd85Poisson.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -21,7 +22,6 @@ WindowLoader::WindowLoader(
     //_view = (IFormDispetView *)_owner; Так не работает... ошибка выполнения
     _viewDispet = view;
     _allProtokol = new AllProtokolS();
-    //_task = new Task();
     _task = new TaskWithParam( new Task() );
 }
 //---------------------------------------------------------------------------
@@ -76,12 +76,34 @@ void WindowLoader::LoadWindowBd85SaveParam(
     }
     if (  viewIsLoaded == false  )
     {
-        TWindowSaveParamBd85 * _view = new TWindowSaveParamBd85(
-            _owner
-        );
+        TWindowSaveParamBd85 * view = new TWindowSaveParamBd85( _owner );
         _vmSaveParam = new ViewModelSaveParamBd85(
-            _view, _viewDispet, mainPres,
+            view, _viewDispet, mainPres,
             _allProtokol, _task, connectBdProt
+        );
+    }
+}
+//---------------------------------------------------------------------------
+void WindowLoader::LoadWindowBd85Poisson(
+        IPresenterWindowMainBd85 * mainPres,
+        ConnectBdProt * connectBdProt )
+{
+    bool viewIsLoaded = true;
+    if ( _vmPoisson == 0 )
+    {
+        viewIsLoaded = false;
+    }
+    else if ( _vmPoisson->IsViewLoaded() == false )
+    {
+        viewIsLoaded = false;
+        delete _vmPoisson;
+    }
+    if ( viewIsLoaded == false )
+    {
+        TWindowBd85Poisson * view = new TWindowBd85Poisson( _owner );
+        _vmPoisson = new ViewModelBd85Poisson(
+            view, _viewDispet, mainPres,
+            _allProtokol, _task, connectBdProt        
         );
     }
 }

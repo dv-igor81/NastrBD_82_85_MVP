@@ -24,7 +24,7 @@ public:
         IWindowLoader * loader);
     ~PresenterWindowMainBd85();
     bool IsViewLoaded();
-    void ViewSaveParamBd85Close();
+    void ViewFilialClose(); // Закрылась дочерняя форма
 private:
     IWindowMainBd85 * _view;
     IFormDispetView * _viewDispet;
@@ -115,6 +115,9 @@ private:
     ActionSelf<> as_SaveToLogFile;
     void SaveToLogFile();
 
+    ActionSelf<> as_Poisson;
+    void Poisson();
+
     bool _isViewLoaded;
 
     ActionEvent<StartDataNewBd85*> ev_DisplayStartData;
@@ -202,6 +205,8 @@ private:
 
     ModBusParamBd85 * _mbParam;
     const AnsiString _iniFileName;
+
+    void HideSelf();
 };
 //---------------------------------------------------------------------------
 #endif

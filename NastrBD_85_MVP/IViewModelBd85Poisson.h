@@ -1,11 +1,11 @@
 //---------------------------------------------------------------------------
-#ifndef IPresenterWindowMainBd85H
-#define IPresenterWindowMainBd85H
+#ifndef IViewModelBd85PoissonH
+#define IViewModelBd85PoissonH
 //---------------------------------------------------------------------------
-class IPresenterWindowMainBd85
+class IViewModelBd85Poisson
 {
 public:
-    virtual void ViewFilialClose() = 0; // Закрылась дочерняя форма
+    virtual void FormClose() = 0;
 };
 //---------------------------------------------------------------------------
 #endif

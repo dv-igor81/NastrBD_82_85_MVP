@@ -104,7 +104,7 @@ void ViewModelSaveParamBd85::DestroyActions()
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::FormClose()
 {
-    _mainPres->ViewSaveParamBd85Close();
+    _mainPres->ViewFilialClose(); // Закрылась дочерняя форма
     _isViewLoaded = false;
 }
 //---------------------------------------------------------------------------

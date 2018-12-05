@@ -42,6 +42,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_DisplayChangeEepromData(this, &PresenterWindowMainBd85::DisplayChangeEepromData)
         , as_FromFileBd85Settings(this, &PresenterWindowMainBd85::FromFileBd85Settings)
         , as_SaveToLogFile(this, &PresenterWindowMainBd85::SaveToLogFile)
+        , as_Poisson(this, &PresenterWindowMainBd85::Poisson)
         //===
 {
     _startData = 0;
@@ -89,6 +90,9 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
 
     _view->GetEventButtonFromFileClick() += as_FromFileBd85Settings;
     _view->GetEventButtonSaveToFileClick() += as_SaveToLogFile;
+
+    _view->GetEventButtonPoissonClick() += as_Poisson;
+
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() ); // Версия программы в заголовке формы
     _loader = loader;
 
@@ -113,7 +117,7 @@ bool PresenterWindowMainBd85::IsViewLoaded()
     return _isViewLoaded;
 }
 //---------------------------------------------------------------------------
-void PresenterWindowMainBd85::ViewSaveParamBd85Close()
+void PresenterWindowMainBd85::ViewFilialClose() // Закрылась дочерняя форма
 {
     ConnectIsGood();
     _view->WrapShow();
@@ -840,12 +844,24 @@ void PresenterWindowMainBd85::FromFileBd85Settings()
     }
 }
 //---------------------------------------------------------------------------
-void PresenterWindowMainBd85::SaveToLogFile()
+void PresenterWindowMainBd85::HideSelf()
 {
     _view->WrapHide(); // Скрыть окно
     _connectBdProt->SetActionOprosStart( 0 );
     _connectBdProt->SetActionOprosIter( 0 );
     _connectBdProt->SetActionOprosEnd( 0 );
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::SaveToLogFile()
+{
+    HideSelf();
     _loader->LoadWindowBd85SaveParam( this, _connectBdProt ); // Загрузить новое окно "Bd85SaveParam"
 }
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::Poisson()
+{
+    HideSelf();
+    _loader->LoadWindowBd85Poisson( this, _connectBdProt ); // Загрузить новое окно "Bd85Poisson"
+}
+//---------------------------------------------------------------------------
 

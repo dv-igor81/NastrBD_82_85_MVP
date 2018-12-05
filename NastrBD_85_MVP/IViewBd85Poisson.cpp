@@ -1,11 +1,6 @@
 //---------------------------------------------------------------------------
-#ifndef IPresenterWindowMainBd85H
-#define IPresenterWindowMainBd85H
+#pragma hdrstop
+#include "IViewBd85Poisson.h"
 //---------------------------------------------------------------------------
-class IPresenterWindowMainBd85
-{
-public:
-    virtual void ViewFilialClose() = 0; // Закрылась дочерняя форма
-};
+#pragma package(smart_init)
 //---------------------------------------------------------------------------
-#endif

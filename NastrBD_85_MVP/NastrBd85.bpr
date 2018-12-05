@@ -31,13 +31,14 @@
       ..\Library\Task\ArgTaskWithParam.obj EepromModBusBd85Settings.obj 
       WindowSaveParamNastrBd85.obj IWindowLoader.obj ViewModelSaveParamBd85.obj 
       IViewSaveParamBd85.obj IPresenterWindowMainBd85.obj ModelSaveParamBd85.obj 
-      ..\Library\FileDirectExtensive.obj"/>
+      ..\Library\FileDirectExtensive.obj ViewModelBd85Poisson.obj 
+      WindowNastrBd85Poisson.obj IViewBd85Poisson.obj IViewModelBd85Poisson.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) WindowStartNastrBd85.dfm WindowMainNastrBd85.dfm 
-      WindowSaveParamNastrBd85.dfm"/>
+      WindowSaveParamNastrBd85.dfm WindowNastrBd85Poisson.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value="inet.lib rtl.lib vcl.lib"/>
     <SPARELIBS value="vcl.lib rtl.lib inet.lib"/>
@@ -132,6 +133,10 @@
       <FILE FILENAME="IPresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="IPresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModelSaveParamBd85.cpp" FORMNAME="" UNITNAME="ModelSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\FileDirectExtensive.cpp" FORMNAME="" UNITNAME="FileDirectExtensive" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ViewModelBd85Poisson.cpp" FORMNAME="" UNITNAME="ViewModelBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="WindowNastrBd85Poisson.cpp" FORMNAME="WindowBd85Poisson" UNITNAME="WindowNastrBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="IViewBd85Poisson.cpp" FORMNAME="" UNITNAME="IViewBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="IViewModelBd85Poisson.cpp" FORMNAME="" UNITNAME="IViewModelBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

@@ -1894,12 +1894,12 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 33
             OnClick = button_FromFileClick
           end
-          object button_PwmAuto: TButton
+          object button_Poisson: TButton
             Left = 321
             Top = 193
             Width = 116
             Height = 25
-            Caption = #1064#1048#1052' '#1072#1074#1090#1086
+            Caption = #1057#1090#1072#1090'. '#1072#1085#1072#1083#1080#1079
             Enabled = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -1908,7 +1908,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 34
-            Visible = False
+            OnClick = button_PoissonClick
           end
         end
       end

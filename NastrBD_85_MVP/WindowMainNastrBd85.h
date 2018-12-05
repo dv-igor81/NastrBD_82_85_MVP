@@ -85,7 +85,7 @@ __published:	// IDE-managed Components
         TEdit *Edit_PeriodPwmZad_3;
         TButton *button_WriteToEeprom;
         TButton *button_FromFile;
-        TButton *button_PwmAuto;
+        TButton *button_Poisson;
         TPanel *Panel_rate_Description;
         TPanel *Panel_rate_Code;
         TPanel *Panel_rate_Value;
@@ -222,6 +222,7 @@ __published:	// IDE-managed Components
         void __fastcall PageControl_WindowBd85Change(TObject *Sender);
         void __fastcall button_FromFileClick(TObject *Sender);
         void __fastcall button_SaveToFileClick(TObject *Sender);
+        void __fastcall button_PoissonClick(TObject *Sender);
 public:
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -313,6 +314,7 @@ private:	// User declarations
     //<<=== ֿאנאלוענû טח פאיכא
 
     ActionEvent<> ev_button_SaveToFileClick;
+    ActionEvent<> ev_button_PoissonClick;
 
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
@@ -359,6 +361,7 @@ public:		// User declarations
     //<<=== ֿאנאלוענû טח פאיכא
 
     ActionEvent<>& GetEventButtonSaveToFileClick();
+    ActionEvent<>& GetEventButtonPoissonClick();
 };
 //---------------------------------------------------------------------------
 #endif

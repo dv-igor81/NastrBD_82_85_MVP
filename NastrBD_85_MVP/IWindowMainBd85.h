@@ -52,7 +52,8 @@ public:
     //<<=== Параметры ModBus
 
     virtual ActionEvent<>& GetEventButtonFromFileClick() = 0; // Параметры из файла
-    virtual ActionEvent<>& GetEventButtonSaveToFileClick() = 0;
+    virtual ActionEvent<>& GetEventButtonSaveToFileClick() = 0; // Измерения в файл
+    virtual ActionEvent<>& GetEventButtonPoissonClick() = 0; // Пуассон
 };
 //---------------------------------------------------------------------------
 #endif

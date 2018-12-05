@@ -6,6 +6,7 @@
 //---------------------------------------------------------------------------
 #include "PresenterWindowMainBd85.h"
 #include "ViewModelSaveParamBd85.h"
+#include "ViewModelBd85Poisson.h"
 //---------------------------------------------------------------------------
 #include "IAllProtokolS.h"
 #include "ITask.h"
@@ -21,7 +22,12 @@ public:
         IFormDispetView * view);        
     ~WindowLoader();
     void LoadWindowBd85Main();
+
     void LoadWindowBd85SaveParam(
+        IPresenterWindowMainBd85 * mainPres,
+        ConnectBdProt * connectBdProt );
+
+    void LoadWindowBd85Poisson(
         IPresenterWindowMainBd85 * mainPres,
         ConnectBdProt * connectBdProt );
 private:
@@ -31,7 +37,7 @@ private:
     IAllProtokolS * _allProtokol;
     TaskWithParam * _task;
     ViewModelSaveParamBd85 * _vmSaveParam;
-
+    ViewModelBd85Poisson * _vmPoisson;
 };
 //---------------------------------------------------------------------------
 #endif
