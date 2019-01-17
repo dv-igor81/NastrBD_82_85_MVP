@@ -12,6 +12,7 @@
 class TWindowBd85Poisson : public TForm, public IViewBd85Poisson
 {
 __published:	// IDE-managed Components
+        TScrollBox *ScrollBox;
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
     BEGIN_MESSAGE_MAP
