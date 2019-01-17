@@ -3474,7 +3474,7 @@ bool __fastcall TForm_82_Start::IzvlechrnieDLL( void )
 //---------------------------------------------------------------------------
 void TForm_82_Start::Bd82Bd84( int BdTip )
 {
-  Form_82_Start->CheckBox_Proshivka->Checked = true;
+  Form_82_Start->CheckBox_Proshivka->Checked = /*true*/false;
   Button_Spectr->Enabled = true;
   Button_Spectr->Visible = true;
   FormCaption = FormCaption82_84;

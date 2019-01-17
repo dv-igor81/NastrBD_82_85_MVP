@@ -32,7 +32,7 @@ __fastcall TFormDispet::TFormDispet(TComponent* Owner)
   DiaGetWinHandle( Handle );
   uiFlagApp = 0;
 
-  ProgrammVersion = " v4.29.5";
+  ProgrammVersion = " v4.29.6";
   AnsiString FormCaption = "Настройка БД: 82, 84, 85";  
 
   this->Caption = FormCaption;
@@ -215,7 +215,7 @@ void __fastcall TFormDispet::FormClose(TObject *Sender,
     IniFile->WriteInteger( "DIA_Form_Dispet", "Form Top", this->Top );
     if ( RadioButton_BD82_84->Checked == true )
     {
-      iFlagVyborFormy = 5;
+      iFlagVyborFormy = 1;
     }
     if ( RadioButton_BD85New->Checked == true )
     {
