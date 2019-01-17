@@ -28,12 +28,7 @@
       ..\Library\Update_NastrBd\Unit_WriteSelf.obj 
       ..\Library\Update_NastrBd\Window_UpdateThis.obj 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Start.obj 
-      ..\Library\Unit_DIA_Global_Funk.obj ..\NastrBD_85_OLD\Unit_85Old_main.obj 
-      ..\NastrBD_85_OLD\Unit_85Old_BDInterface.obj 
-      ..\NastrBD_85_OLD\Unit_85Old_Grafik.obj 
-      ..\NastrBD_85_OLD\Unit_85Old_NastrBD85.obj 
-      ..\NastrBD_85_OLD\Unit_85Old_ProvPoisson.obj 
-      ..\NastrBD_85_OLD\Unit_85Old_RS232.obj 
+      ..\Library\Unit_DIA_Global_Funk.obj 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Log.obj 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_ComPortReadWrite.obj 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Spectr.obj 
@@ -74,9 +69,6 @@
       ..\011_NastrBD_bc6\Unit_Form_VersionInfo.dfm 
       ..\Library\Update_NastrBd\Window_UpdateThis.dfm 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Start.dfm 
-      ..\NastrBD_85_OLD\Unit_85Old_main.dfm 
-      ..\NastrBD_85_OLD\Unit_85Old_Grafik.dfm 
-      ..\NastrBD_85_OLD\Unit_85Old_ProvPoisson.dfm 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Spectr.dfm 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Puasson8BD.dfm 
       ..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_ARCH.dfm 
@@ -96,7 +88,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi"/>
-    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\Task;..\Library\Task;..\Library\Task;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP"/>
+    <PATHCPP value=".;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\Task;..\Library\Task;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\011_NastrBD_bc6;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\Library\Update_NastrBd;..\011_NastrBD_bc6\BD82SRC;..\Library;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\011_NastrBD_bc6\BD82SRC;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library\Task;..\Library\Task;..\Library\Task;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\Library;..\NastrBD_85_MVP;..\NastrBD_85_MVP;..\NastrBD_85_MVP"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -168,12 +160,6 @@
       <FILE FILENAME="..\Library\Update_NastrBd\Window_UpdateThis.cpp" FORMNAME="Window_Updater" UNITNAME="Window_UpdateThis" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Start.cpp" FORMNAME="Form_82_Start" UNITNAME="Unit_82_Form_Start" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\Library\Unit_DIA_Global_Funk.cpp" FORMNAME="" UNITNAME="Unit_DIA_Global_Funk" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_OLD\Unit_85Old_main.cpp" FORMNAME="Form_85Old_Main" UNITNAME="Unit_85Old_main" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_OLD\Unit_85Old_BDInterface.cpp" FORMNAME="" UNITNAME="Unit_85Old_BDInterface.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_OLD\Unit_85Old_Grafik.cpp" FORMNAME="Form_85Old_GrafPoisson" UNITNAME="Unit_85Old_Grafik" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_OLD\Unit_85Old_NastrBD85.cpp" FORMNAME="" UNITNAME="Unit_85Old_NastrBD85.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_OLD\Unit_85Old_ProvPoisson.cpp" FORMNAME="Form_85Old_Poisson" UNITNAME="Unit_85Old_ProvPoisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\NastrBD_85_OLD\Unit_85Old_RS232.cpp" FORMNAME="" UNITNAME="Unit_85Old_RS232.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\011_NastrBD_bc6\BD82SRC\Unit_82_Log.cpp" FORMNAME="" UNITNAME="Unit_82_Log" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\011_NastrBD_bc6\BD82SRC\Unit_82_ComPortReadWrite.cpp" FORMNAME="" UNITNAME="Unit_82_ComPortReadWrite" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\011_NastrBD_bc6\BD82SRC\Unit_82_Form_Spectr.cpp" FORMNAME="Form_82_Spectr_BD84" UNITNAME="Unit_82_Form_Spectr" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
