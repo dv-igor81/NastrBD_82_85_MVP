@@ -226,7 +226,6 @@ void TWindowMainBd85::ControlsAvailability(bool isEnabled)
 void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
 {
     button_WriteToEeprom->Enabled = isEnabled;
-    
     Edit_IndAddrZad->ReadOnly = !isEnabled;
     Edit_GroupAdrZad->ReadOnly = !isEnabled;
     Edit_DnuZad_Code->ReadOnly = !isEnabled;
@@ -259,6 +258,11 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     BitBtn_ArchOnOffDisplay->Enabled = isEnabled;
     button_FromFile->Enabled = isEnabled;
     button_Poisson->Enabled = isEnabled;
+
+    //===>> Автоподбор
+    Button_chm18->Enabled = isEnabled;
+    Button_Shift05a->Enabled = isEnabled;
+    //<<=== Автоподбор
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
@@ -698,6 +702,24 @@ void __fastcall TWindowMainBd85::button_SaveToFileClick(TObject *Sender)
 void __fastcall TWindowMainBd85::button_PoissonClick(TObject *Sender)
 {
     ev_button_PoissonClick();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Button_chm18Click(TObject *Sender)
+{
+    this->Edit_DnuZad_Code->Text = "819"; // 0.500
+    this->comboBox_VoltageHiZad_Value->Text = "1190";
+    comboBox_VoltageHiZad_ValueChange(0);
+    this->radioButton_ArchOn->Checked = true;
+    this->button_WriteToEeprom->Click();
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Button_Shift05aClick(TObject *Sender)
+{
+    this->Edit_DnuZad_Code->Text = "491"; // 0.300
+    this->comboBox_VoltageHiZad_Value->Text = "1038";
+    comboBox_VoltageHiZad_ValueChange(0);
+    this->radioButton_ArchOn->Checked = true;
+    this->button_WriteToEeprom->Click();
 }
 //---------------------------------------------------------------------------
 

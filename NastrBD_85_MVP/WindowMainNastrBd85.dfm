@@ -1,6 +1,6 @@
 object WindowMainBd85: TWindowMainBd85
-  Left = 793
-  Top = 171
+  Left = 383
+  Top = 118
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMinimize]
   BorderWidth = 1
@@ -1909,6 +1909,38 @@ object WindowMainBd85: TWindowMainBd85
             ParentFont = False
             TabOrder = 34
             OnClick = button_PoissonClick
+          end
+        end
+        object GroupBox_Automatic: TGroupBox
+          Left = 448
+          Top = 448
+          Width = 113
+          Height = 81
+          Caption = ' '#1040#1074#1090#1086' '#1087#1086#1076#1073#1086#1088' '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 5
+          object Button_Shift05a: TButton
+            Left = 8
+            Top = 48
+            Width = 97
+            Height = 25
+            Caption = #1057#1084#1077#1085#1072'-05/'#1040
+            TabOrder = 0
+            OnClick = Button_Shift05aClick
+          end
+          object Button_chm18: TButton
+            Left = 8
+            Top = 16
+            Width = 97
+            Height = 25
+            Caption = #1057#1053#1052'-18'
+            TabOrder = 1
+            OnClick = Button_chm18Click
           end
         end
       end

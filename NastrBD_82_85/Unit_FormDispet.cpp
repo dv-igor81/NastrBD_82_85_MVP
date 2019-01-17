@@ -5,9 +5,7 @@
 #pragma hdrstop
 #include "Unit_FormDispet.h"
 #include "Unit_82_Form_Start.h"
-//#include "Unit_85New_main.h"
 #include "Unit_85Old_main.h"
-//#include "Unit_NM_FormStart.h"
 #include "Unit_Form_VersionInfo.h"
 #include "Unit_82_Log.h"
 #include "Window_UpdateThis.h"
@@ -35,7 +33,7 @@ __fastcall TFormDispet::TFormDispet(TComponent* Owner)
   DiaGetWinHandle( Handle );
   uiFlagApp = 0;
 
-  ProgrammVersion = " v4.29.4";
+  ProgrammVersion = " v4.29.5";
   AnsiString FormCaption = "Программа для настройки БД: 82, 84, 85";  
 
   this->Caption = FormCaption;
@@ -91,11 +89,8 @@ void __fastcall TFormDispet::Button_InitiateClick(TObject *Sender)
 {
   bool bFlagVybor;
   if (
-        (RadioButton_BD82->Checked == true) ||
-        (RadioButton_BD85New->Checked == true) ||
-        (RadioButton_BD85Old->Checked == true) ||
-        //(RadioButton_BD_82_85->Checked == true) ||
-        (RadioButton_BD84->Checked == true)
+        (RadioButton_BD82_84->Checked == true) ||
+        (RadioButton_BD85New->Checked == true)
      )
   { // Выбран хоть один пункт
     Hide();
@@ -114,31 +109,15 @@ void __fastcall TFormDispet::Button_InitiateClick(TObject *Sender)
     iFlagTimer = 1;
   }
 
-  if ( RadioButton_BD82->Checked )
+  if ( RadioButton_BD82_84->Checked )
   {
-    //Form_82_Start->CheckBox_Proshivka->Checked = false;
-    Form_82_Start->Bd82Bd84( 82 );
-    Form_82_Start->Show();   //ShowModal
-  }
-  else if ( RadioButton_BD84->Checked )
-  {
-    //Form_82_Start->CheckBox_Proshivka->Checked = true;
     Form_82_Start->Bd82Bd84( 84 );    
     Form_82_Start->Show();   //ShowModal
   }
   else if ( RadioButton_BD85New->Checked )
   {
-    //Form_85New_Main->Show();
     viewLoader.LoadWindowBd85Main();
   }
-  else if ( RadioButton_BD85Old->Checked )
-  {
-    Form_85Old_Main->Show();
-  }
-  //else if ( RadioButton_BD_82_85->Checked )
-  //{
-    //Form_NM_Start->Show();
-  //}
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormDispet::FormCreate(TObject *Sender)
@@ -154,19 +133,10 @@ void __fastcall TFormDispet::FormCreate(TObject *Sender)
     switch ( iFlagVyborFormy )
     {
     case 1:
-      RadioButton_BD82->Checked = true;
+      RadioButton_BD82_84->Checked = true;
       break;
     case 2:
       RadioButton_BD85New->Checked = true;
-      break;
-    case 3:
-      RadioButton_BD85Old->Checked = true;
-      break;
-    //case 4:
-      //RadioButton_BD_82_85->Checked = true;
-      //break;
-    case 5:
-      RadioButton_BD84->Checked = true;
       break;
     }
     delete IniFile;
@@ -243,25 +213,13 @@ void __fastcall TFormDispet::FormClose(TObject *Sender,
   {
     IniFile->WriteInteger( "DIA_Form_Dispet", "Form Left", this->Left );
     IniFile->WriteInteger( "DIA_Form_Dispet", "Form Top", this->Top );
-    if ( RadioButton_BD82->Checked == true )
+    if ( RadioButton_BD82_84->Checked == true )
     {
-      iFlagVyborFormy = 1;
+      iFlagVyborFormy = 5;
     }
     if ( RadioButton_BD85New->Checked == true )
     {
       iFlagVyborFormy = 2;
-    }
-    if ( RadioButton_BD85Old->Checked == true )
-    {
-      iFlagVyborFormy = 3;
-    }
-    //if ( RadioButton_BD_82_85->Checked == true )
-    //{
-    //  iFlagVyborFormy = 4;
-    //}
-    if ( RadioButton_BD84->Checked == true )
-    {
-      iFlagVyborFormy = 5;
     }
     IniFile->WriteInteger( "DIA_Form_Dispet", "Form FlagVyborFormy", iFlagVyborFormy );
 
@@ -277,7 +235,7 @@ void __fastcall TFormDispet::FormClose(TObject *Sender,
 //---------------------------------------------------------------------------
 void __fastcall TFormDispet::Button_IzmeneniyaClick(TObject *Sender)
 {
-  Form_VersionInfo->Show(); //        
+  Form_VersionInfo->Show();
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormDispet::FormShow(TObject *Sender)
@@ -285,5 +243,6 @@ void __fastcall TFormDispet::FormShow(TObject *Sender)
   DiaGetWinHandle( this->Handle );
 }
 //---------------------------------------------------------------------------
+
 
 

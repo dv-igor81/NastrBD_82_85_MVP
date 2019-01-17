@@ -180,6 +180,9 @@ __published:	// IDE-managed Components
         TLabel *Label_ChangeEEPROM;
         TBitBtn *BitBtn_ArchOnOffDisplay;
         TLabel *Label_ChangeModBusEEPROM;
+        TGroupBox *GroupBox_Automatic;
+        TButton *Button_Shift05a;
+        TButton *Button_chm18;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
@@ -223,6 +226,8 @@ __published:	// IDE-managed Components
         void __fastcall button_FromFileClick(TObject *Sender);
         void __fastcall button_SaveToFileClick(TObject *Sender);
         void __fastcall button_PoissonClick(TObject *Sender);
+        void __fastcall Button_chm18Click(TObject *Sender);
+        void __fastcall Button_Shift05aClick(TObject *Sender);
 public:
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );

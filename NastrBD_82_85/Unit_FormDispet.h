@@ -19,14 +19,12 @@
 class TFormDispet : public TForm, public IFormDispetView
 {
 __published:	// IDE-managed Components
-        TRadioButton *RadioButton_BD82;
+        TRadioButton *RadioButton_BD82_84;
         TButton *Button_Initiate;
         TRadioButton *RadioButton_BD85New;
-        TRadioButton *RadioButton_BD85Old;
         TTimer *Timer_Dispet;
         TButton *Button_Izmeneniya;
         TPanel *Panel_MessageBox;
-        TRadioButton *RadioButton_BD84;
         void __fastcall Button_InitiateClick(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall Timer_DispetTimer(TObject *Sender);
