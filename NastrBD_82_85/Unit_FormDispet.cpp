@@ -5,7 +5,6 @@
 #pragma hdrstop
 #include "Unit_FormDispet.h"
 #include "Unit_82_Form_Start.h"
-//#include "Unit_85Old_main.h"
 #include "Unit_Form_VersionInfo.h"
 #include "Unit_82_Log.h"
 #include "Window_UpdateThis.h"
@@ -34,10 +33,11 @@ __fastcall TFormDispet::TFormDispet(TComponent* Owner)
   uiFlagApp = 0;
 
   ProgrammVersion = " v4.29.5";
-  AnsiString FormCaption = "Программа для настройки БД: 82, 84, 85";  
+  AnsiString FormCaption = "Настройка БД: 82, 84, 85";  
 
   this->Caption = FormCaption;
   this->Caption = this->Caption + ProgrammVersion;
+  this->RadioButton_BD82_84->Checked = true;
 }
 //---------------------------------------------------------------------------
 /*void __fastcall TFormDispet::OnWMSysCommand( TMessage& Message )

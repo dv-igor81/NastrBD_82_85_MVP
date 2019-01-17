@@ -4,7 +4,7 @@ object WindowMainBd85: TWindowMainBd85
   AutoScroll = False
   BorderIcons = [biSystemMenu, biMinimize]
   BorderWidth = 1
-  Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1044' 85'
+  Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1044'85'
   ClientHeight = 625
   ClientWidth = 662
   Color = clBtnFace

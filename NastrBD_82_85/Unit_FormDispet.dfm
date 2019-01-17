@@ -4,7 +4,7 @@ object FormDispet: TFormDispet
   BorderStyle = bsDialog
   Caption = '--- '#1085#1072#1076#1087#1080#1089#1100' '#1092#1086#1088#1084#1080#1088#1091#1077#1090#1089#1103' '#1085#1072' '#1101#1090#1072#1087#1077' '#1074#1099#1087#1086#1083#1085#1077#1085#1080#1103' ---'
   ClientHeight = 67
-  ClientWidth = 314
+  ClientWidth = 338
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -43,8 +43,8 @@ object FormDispet: TFormDispet
     TabOrder = 2
   end
   object Button_Izmeneniya: TButton
-    Left = 320
-    Top = 0
+    Left = 306
+    Top = 4
     Width = 27
     Height = 25
     Caption = '?'

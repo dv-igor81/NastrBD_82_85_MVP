@@ -32,7 +32,6 @@
   AnsiString ProgrammVersion = " v4.xx";
 #else
   extern const char * IniFileName;
-  //extern AnsiString ProgrammVersion;
 #endif
 bool flagPort = false; // Состояние порта Открыт (true) / закрыт (false)
 extern getaddrinfo_t * getaddrinfo;
@@ -40,8 +39,7 @@ extern freeaddrinfo_t * freeaddrinfo;
 HMODULE mod_ws2_32_dll = NULL;
 //---------------------------------------------------------------------------
 AnsiString FormCaption = "";
-AnsiString FormCaption82 = "Настройка БД 82";
-AnsiString FormCaption84 = "Настройка БД 84";
+AnsiString FormCaption82_84 = "Настройка БД82 и БД84";
 //---------------------------------------------------------------------------
 void __fastcall TForm_82_Start::OnWMSysCommand( TMessage& Message )
 {
@@ -3476,21 +3474,10 @@ bool __fastcall TForm_82_Start::IzvlechrnieDLL( void )
 //---------------------------------------------------------------------------
 void TForm_82_Start::Bd82Bd84( int BdTip )
 {
-  switch ( BdTip )
-  {
-    case 84:
-      Form_82_Start->CheckBox_Proshivka->Checked = true;
-      Button_Spectr->Enabled = true;
-      Button_Spectr->Visible = true;
-      FormCaption = FormCaption84;
-      break;
-    default:
-      Form_82_Start->CheckBox_Proshivka->Checked = false;
-      Button_Spectr->Enabled = false;
-      Button_Spectr->Visible = false;
-      FormCaption = FormCaption82;
-      break;
-  }
+  Form_82_Start->CheckBox_Proshivka->Checked = true;
+  Button_Spectr->Enabled = true;
+  Button_Spectr->Visible = true;
+  FormCaption = FormCaption82_84;
 #ifdef _DIA_OBEDINENIE_
   if( FormDispet != 0 )
   {
