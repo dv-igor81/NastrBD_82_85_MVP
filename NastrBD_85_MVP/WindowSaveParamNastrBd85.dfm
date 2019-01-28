@@ -375,4 +375,10 @@ object WindowSaveParamBd85: TWindowSaveParamBd85
       TabOrder = 18
     end
   end
+  object Timer_DisplayErrors: TTimer
+    Interval = 100
+    OnTimer = Timer_DisplayErrorsTimer
+    Left = 408
+    Top = 53
+  end
 end

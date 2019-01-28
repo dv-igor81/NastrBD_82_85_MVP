@@ -38,6 +38,7 @@ __published:	// IDE-managed Components
         TEdit *Edit_TotalScaling;
         TEdit *Edit_MiddleScaling;
         TPanel *Panel_MiddleScaling;
+        TTimer *Timer_DisplayErrors;
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
         void __fastcall Edit_FileNameChange(TObject *Sender);
         void __fastcall Edit_FileHeaderChange(TObject *Sender);
@@ -46,6 +47,7 @@ __published:	// IDE-managed Components
         void __fastcall Edit_DelayChange(TObject *Sender);
         void __fastcall Button_OkClick(TObject *Sender);
         void __fastcall Button_CancelClick(TObject *Sender);
+        void __fastcall Timer_DisplayErrorsTimer(TObject *Sender);
 private:	// User declarations
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -60,6 +62,13 @@ private:	// User declarations
     ActionEvent<const char*> ev_EditDelayChange;
     ActionEvent<> ev_ButtonOkClick;
     ActionEvent<> ev_ButtonCancelClick;
+
+    // Включить на время внимание к ошибкам
+    void ErrorAttention();
+    int _errAttenState; // Начальное состояние внимания к ошибкам связи
+    int _errorAttentionCount; // Счетчик циклов состояний веимания к ошибкам
+    const int _errorAttentionCountMax;
+    bool _errAttenDisplay;    
 public:		// User declarations
         __fastcall TWindowSaveParamBd85(TComponent* Owner);
     void SetVerPoText(const char * text);        

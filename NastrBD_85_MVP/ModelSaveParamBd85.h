@@ -60,6 +60,8 @@ private:
     void Calculate();
 
     unsigned char _ssp;
+    const int _omissionMax; // Максимально-допустимое количество флага готовности счёта
+    int _omission; // Количество пропусков флага готовности счёта
 
     unsigned short _scaling; // Счёт за подинтервал (200 мс для 9-битного, 250 для ModBus)
     unsigned int _intervalQuantity; // Количество подинтервалов в секунде (4 или 5)

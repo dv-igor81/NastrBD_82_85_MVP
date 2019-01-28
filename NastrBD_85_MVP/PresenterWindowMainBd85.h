@@ -86,11 +86,14 @@ private:
     ActionSelf<const char*> as_TextGroupAdrZadChange;
     void TextGroupAdrZadChange(const char* text);
 
-    ActionSelf<const char*> as_TextDnuZadCodeChange;
-    void TextDnuZadCodeChange(const char* text);
+    ActionSelf<int> as_TextDnuZadCodeChange;
+    void TextDnuZadCodeChange(int code);
 
-    ActionSelf<const char*> as_TextVoltageHiZadChange;
-    void TextVoltageHiZadChange(const char* text);
+    ActionSelf<const char*> as_TextDnuZadChange;
+    void TextDnuZadChange(const char* text);
+
+    ActionSelf<int> as_TextVoltageHiZadChange;
+    void TextVoltageHiZadChange(int code);
 
     ActionSelf<const char*> as_TextWidthPwmZadChange;
     void TextWidthPwmZadChange(const char* text);
@@ -132,7 +135,7 @@ private:
 
     ActionEvent<bool> ev_DisplayNotSaveChanges;
 
-    bool InitMkInBd();
+    //bool InitMkInBd();
     bool _isConnected;
     bool ReadEEProm();
 
@@ -154,6 +157,8 @@ private:
     
     //===>> Данные опроса БД
     unsigned char _ssp;
+    const int _omissionMax; // Максимально-допустимое количество флага готовности счёта
+    int _omission; // Количество пропусков флага готовности счёта
     unsigned char _indAddr;
     unsigned char _groupAddr;
     unsigned short _temperature;

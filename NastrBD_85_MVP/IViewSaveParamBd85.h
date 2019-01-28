@@ -3,7 +3,7 @@
 #define IViewSaveParamBd85H
 //---------------------------------------------------------------------------
 #include "ActionEvent.h"
-using namespace smartevents;
+using namespace smarteventsMin;
 //---------------------------------------------------------------------------
 class IViewSaveParamBd85
 { // Интерфейс: без данных, все методы чисто виртуальные

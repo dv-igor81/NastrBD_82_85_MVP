@@ -6,33 +6,32 @@
     <PROJECT value="NastrBd85.exe"/>
     <OBJFILES value="NastrBd85.obj WindowStartNastrBd85.obj WindowMainNastrBd85.obj 
       WindowLoader.obj IWindowMainBd85.obj PresenterWindowMainBd85.obj 
-      ..\Library\smartevents\ActionAllBase.obj 
-      ..\Library\smartevents\ActionDebugSettings.obj 
-      ..\Library\smartevents\ActionEventBase.obj 
-      ..\Library\smartevents\ActionObjectBase.obj 
-      ..\Library\smartevents\ActionSelfBase.obj 
-      ..\Library\AllProtokolS\IAllProtokolS.obj 
-      ..\Library\AllProtokolS\AllProtokolS.obj ..\Library\Task\Task.obj 
-      ..\Library\Task\ITask.obj ..\Library\AllProtokolS\modbus.obj 
-      ..\Library\AllProtokolS\modbus-data.obj 
-      ..\Library\AllProtokolS\modbus-tcp.obj 
-      ..\Library\AllProtokolS\RSProtokol.obj ..\Library\Task\SuperThread.obj 
-      ..\Library\Utilites\TextHelper.obj StartDataNewBd85.obj 
-      ..\Library\Utilites\ConvertHelper.obj IterDataNewBd85.obj 
-      ..\Library\Unit_DIA_Global_Funk.obj 
-      ..\Library\AllProtokolS\HelperNumberTextBtn.obj 
-      ..\Library\AllProtokolS\ConnectionStateInfo_t.obj 
-      ..\Library\AllProtokolS\ProtokolName_t.obj 
-      ..\Library\AllProtokolS\ConnectBdProt.obj 
-      ..\Library\AllProtokolS\HelperConnectFourBdProt.obj ScalingDataNewBd85.obj 
+      StartDataNewBd85.obj IterDataNewBd85.obj ScalingDataNewBd85.obj 
       ..\NastrBD_82_85\IFormDispetView.obj ModBusParamBd85.obj 
       ModBusEventContainerBd85.obj ModBusTextDataBd85.obj EepromBd85Settings.obj 
-      ..\Library\Task\TaskWithParam.obj ..\Library\Task\IArgTaskWithParam.obj 
-      ..\Library\Task\ArgTaskWithParam.obj EepromModBusBd85Settings.obj 
-      WindowSaveParamNastrBd85.obj IWindowLoader.obj ViewModelSaveParamBd85.obj 
-      IViewSaveParamBd85.obj IPresenterWindowMainBd85.obj ModelSaveParamBd85.obj 
-      ..\Library\FileDirectExtensive.obj ViewModelBd85Poisson.obj 
-      WindowNastrBd85Poisson.obj IViewBd85Poisson.obj IViewModelBd85Poisson.obj"/>
+      EepromModBusBd85Settings.obj WindowSaveParamNastrBd85.obj 
+      IWindowLoader.obj ViewModelSaveParamBd85.obj IViewSaveParamBd85.obj 
+      IPresenterWindowMainBd85.obj ModelSaveParamBd85.obj 
+      ViewModelBd85Poisson.obj WindowNastrBd85Poisson.obj IViewBd85Poisson.obj 
+      IViewModelBd85Poisson.obj ..\..\Library_02\AllProtokolS\AllProtokolS.obj 
+      ..\..\Library_02\AllProtokolS\ConnectBdProt.obj 
+      ..\..\Library_02\AllProtokolS\ConnectionStateInfo_t.obj 
+      ..\..\Library_02\AllProtokolS\HelperConnectFourBdProt.obj 
+      ..\..\Library_02\AllProtokolS\HelperNumberTextBtn.obj 
+      ..\..\Library_02\AllProtokolS\IAllProtokolS.obj 
+      ..\..\Library_02\AllProtokolS\modbus.obj 
+      ..\..\Library_02\AllProtokolS\modbus-data.obj 
+      ..\..\Library_02\AllProtokolS\modbus-tcp.obj 
+      ..\..\Library_02\AllProtokolS\ProtokolName_t.obj 
+      ..\..\Library_02\AllProtokolS\RSProtokol.obj 
+      ..\..\Library_02\Task\ArgTaskWithParam.obj 
+      ..\..\Library_02\Task\IArgTaskWithParam.obj 
+      ..\..\Library_02\Task\ITask.obj ..\..\Library_02\Task\SuperThread.obj 
+      ..\..\Library_02\Task\Task.obj ..\..\Library_02\Task\TaskWithParam.obj 
+      ..\..\Library_02\FileDirectExtensive.obj 
+      ..\..\Library_02\Unit_DIA_Global_Funk.obj 
+      ..\..\Library_02\Utilites\ConvertHelper.obj 
+      ..\..\Library_02\Utilites\TextHelper.obj"/>
     <RESFILES value="NastrBd85.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -49,7 +48,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi Iocomp65.bpi"/>
-    <PATHCPP value=".;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\smartevents;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Task;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\Task;..\Library\Utilites;..\Library\Utilites;..\Library;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\Library\AllProtokolS;..\NastrBD_82_85;..\Library\Task;..\Library\Task;..\Library\Task;..\Library"/>
+    <PATHCPP value=".;..\NastrBD_82_85;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\AllProtokolS;..\..\Library_02\Task;..\..\Library_02\Task;..\..\Library_02\Task;..\..\Library_02\Task;..\..\Library_02\Task;..\..\Library_02\Task;..\..\Library_02;..\..\Library_02;..\..\Library_02\Utilites;..\..\Library_02\Utilites"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -59,17 +58,16 @@
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="NastrBd85.cpp"/>
-    <INCLUDEPATH value="..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl"/>
-    <LIBPATH value="..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <INCLUDEPATH value="..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\NastrBD_82_85;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par"/>
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <IDLCFLAGS value="-I..\NastrBD_82_85 -I..\Library -I..\Library\Utilites -I..\Library\Task 
-      -I..\Library\AllProtokolS -I..\Library\smartevents -ILibrary\smartevents 
-      -I&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot; 
-      -ID:\ProjectS\BUILDER6\034_NastrBD_85_MVP -I$(BCB)\include 
-      -I$(BCB)\include\vcl -src_suffix cpp -D_DEBUG -boa"/>
+    <IDLCFLAGS value="-I..\..\Library_02\Utilites -I..\..\Library_02 -I..\..\Library_02\Task 
+      -I..\..\Library_02\AllProtokolS -I..\..\Library_02\smartevents 
+      -I..\NastrBD_82_85 -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp 
+      -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
       -tW -tWM"/>
     <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
@@ -92,39 +90,14 @@
       <FILE FILENAME="WindowLoader.cpp" FORMNAME="" UNITNAME="WindowLoader" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IWindowMainBd85.cpp" FORMNAME="" UNITNAME="IWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="PresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="PresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\smartevents\ActionAllBase.cpp" FORMNAME="" UNITNAME="ActionAllBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\smartevents\ActionDebugSettings.cpp" FORMNAME="" UNITNAME="ActionDebugSettings.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\smartevents\ActionEventBase.cpp" FORMNAME="" UNITNAME="ActionEventBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\smartevents\ActionObjectBase.cpp" FORMNAME="" UNITNAME="ActionObjectBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\smartevents\ActionSelfBase.cpp" FORMNAME="" UNITNAME="ActionSelfBase.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\IAllProtokolS.cpp" FORMNAME="" UNITNAME="IAllProtokolS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\AllProtokolS.cpp" FORMNAME="" UNITNAME="AllProtokolS" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Task\Task.cpp" FORMNAME="" UNITNAME="Task" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Task\ITask.cpp" FORMNAME="" UNITNAME="ITask" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\modbus.cpp" FORMNAME="" UNITNAME="modbus.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\modbus-data.cpp" FORMNAME="" UNITNAME="modbus-data.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\modbus-tcp.cpp" FORMNAME="" UNITNAME="modbus-tcp.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Task\SuperThread.cpp" FORMNAME="" UNITNAME="SuperThread" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Utilites\TextHelper.cpp" FORMNAME="" UNITNAME="TextHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="StartDataNewBd85.cpp" FORMNAME="" UNITNAME="StartDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Utilites\ConvertHelper.cpp" FORMNAME="" UNITNAME="ConvertHelper" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IterDataNewBd85.cpp" FORMNAME="" UNITNAME="IterDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Unit_DIA_Global_Funk.cpp" FORMNAME="" UNITNAME="Unit_DIA_Global_Funk" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\HelperNumberTextBtn.cpp" FORMNAME="" UNITNAME="HelperNumberTextBtn" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\ProtokolName_t.cpp" FORMNAME="" UNITNAME="ProtokolName_t" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\AllProtokolS\HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ScalingDataNewBd85.cpp" FORMNAME="" UNITNAME="ScalingDataNewBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="..\NastrBD_82_85\IFormDispetView.cpp" FORMNAME="" UNITNAME="IFormDispetView" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModBusParamBd85.cpp" FORMNAME="" UNITNAME="ModBusParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModBusEventContainerBd85.cpp" FORMNAME="" UNITNAME="ModBusEventContainerBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModBusTextDataBd85.cpp" FORMNAME="" UNITNAME="ModBusTextDataBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="EepromBd85Settings.cpp" FORMNAME="" UNITNAME="EepromBd85Settings" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Task\TaskWithParam.cpp" FORMNAME="" UNITNAME="TaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Task\IArgTaskWithParam.cpp" FORMNAME="" UNITNAME="IArgTaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\Task\ArgTaskWithParam.cpp" FORMNAME="" UNITNAME="ArgTaskWithParam" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="EepromModBusBd85Settings.cpp" FORMNAME="" UNITNAME="EepromModBusBd85Settings" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="WindowSaveParamNastrBd85.cpp" FORMNAME="WindowSaveParamBd85" UNITNAME="WindowSaveParamNastrBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IWindowLoader.cpp" FORMNAME="" UNITNAME="IWindowLoader" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -132,11 +105,31 @@
       <FILE FILENAME="IViewSaveParamBd85.cpp" FORMNAME="" UNITNAME="IViewSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IPresenterWindowMainBd85.cpp" FORMNAME="" UNITNAME="IPresenterWindowMainBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ModelSaveParamBd85.cpp" FORMNAME="" UNITNAME="ModelSaveParamBd85" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Library\FileDirectExtensive.cpp" FORMNAME="" UNITNAME="FileDirectExtensive" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ViewModelBd85Poisson.cpp" FORMNAME="" UNITNAME="ViewModelBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="WindowNastrBd85Poisson.cpp" FORMNAME="WindowBd85Poisson" UNITNAME="WindowNastrBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IViewBd85Poisson.cpp" FORMNAME="" UNITNAME="IViewBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="IViewModelBd85Poisson.cpp" FORMNAME="" UNITNAME="IViewModelBd85Poisson" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\AllProtokolS.cpp" FORMNAME="" UNITNAME="AllProtokolS.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\ConnectBdProt.cpp" FORMNAME="" UNITNAME="ConnectBdProt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\ConnectionStateInfo_t.cpp" FORMNAME="" UNITNAME="ConnectionStateInfo_t.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\HelperConnectFourBdProt.cpp" FORMNAME="" UNITNAME="HelperConnectFourBdProt.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\HelperNumberTextBtn.cpp" FORMNAME="" UNITNAME="HelperNumberTextBtn.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\IAllProtokolS.cpp" FORMNAME="" UNITNAME="IAllProtokolS.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\modbus.cpp" FORMNAME="" UNITNAME="modbus.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\modbus-data.cpp" FORMNAME="" UNITNAME="modbus-data.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\modbus-tcp.cpp" FORMNAME="" UNITNAME="modbus-tcp.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\ProtokolName_t.cpp" FORMNAME="" UNITNAME="ProtokolName_t.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\AllProtokolS\RSProtokol.cpp" FORMNAME="" UNITNAME="RSProtokol.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Task\ArgTaskWithParam.cpp" FORMNAME="" UNITNAME="ArgTaskWithParam.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Task\IArgTaskWithParam.cpp" FORMNAME="" UNITNAME="IArgTaskWithParam.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Task\ITask.cpp" FORMNAME="" UNITNAME="ITask.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Task\SuperThread.cpp" FORMNAME="" UNITNAME="SuperThread.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Task\Task.cpp" FORMNAME="" UNITNAME="Task.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Task\TaskWithParam.cpp" FORMNAME="" UNITNAME="TaskWithParam.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\FileDirectExtensive.cpp" FORMNAME="" UNITNAME="FileDirectExtensive.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Unit_DIA_Global_Funk.cpp" FORMNAME="" UNITNAME="Unit_DIA_Global_Funk.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Utilites\ConvertHelper.cpp" FORMNAME="" UNITNAME="ConvertHelper.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\..\Library_02\Utilites\TextHelper.cpp" FORMNAME="" UNITNAME="TextHelper.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
@@ -170,22 +163,27 @@ ProductVersion=1.0.0.0
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=7
-Item0=..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item1=..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item2=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item3=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item4=Library\smartevents;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item5=D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item6=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Count=10
+Item0=..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl
+Item2=..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item3=..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item4=..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item5=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item6=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item7=Library\smartevents;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item8=D:\ProjectS\BUILDER6\034_NastrBD_85_MVP\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item9=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
-Count=5
-Item0=..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item1=..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item2=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item3=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item4=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Count=7
+Item0=..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\NastrBD_82_85;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\NastrBD_82_85;..\Library;..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item3=..\Library\Utilites;..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item4=..\Library\Task;..\Library\AllProtokolS;..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item5=..\Library\smartevents;Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item6=Library\smartevents;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\BUILDER6\034_NastrBD_85_MVP;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1

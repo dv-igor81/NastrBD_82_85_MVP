@@ -3,7 +3,7 @@
 #define ModBusEventContainerBd85H
 //---------------------------------------------------------------------------
 #include "ActionEvent.h"
-using namespace smartevents;
+using namespace smarteventsMin;
 //---------------------------------------------------------------------------
 class ModBusEventContainerBd85
 {

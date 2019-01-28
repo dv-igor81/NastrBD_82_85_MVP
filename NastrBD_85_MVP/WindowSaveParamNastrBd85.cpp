@@ -7,9 +7,12 @@
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
 __fastcall TWindowSaveParamBd85::TWindowSaveParamBd85(TComponent* Owner)
-        : TForm(Owner)
+        : TForm(Owner), _errorAttentionCountMax (5)
 {
     this->Position = poScreenCenter;
+    _errAttenState = 1; // Начальное состояние внимания к ошибкам связи
+    _errorAttentionCount = 0; // Счетчик циклов состояний веимания к ошибкам
+    _errAttenDisplay = false;    
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowSaveParamBd85::OnWMSysCommand( TMessage& Message )
@@ -95,6 +98,10 @@ void TWindowSaveParamBd85::SetButtonCancelEnabled(bool enabled)
 void TWindowSaveParamBd85::SetErrorText(const char * text)
 {
     this->Edit_ErrorConnectCount->Text = text;
+    if (text[0] != '0')
+    {
+        ErrorAttention();
+    }    
 }
 //---------------------------------------------------------------------------
 void TWindowSaveParamBd85::SetSummTimeText(const char * text)
@@ -217,6 +224,51 @@ void __fastcall TWindowSaveParamBd85::Button_CancelClick(TObject *Sender)
 ActionEvent<>& TWindowSaveParamBd85::EventButtonCancelClick()
 {
     return ev_ButtonCancelClick;
+}
+//---------------------------------------------------------------------------
+// Включить на время внимание к ошибкам
+void TWindowSaveParamBd85::ErrorAttention()
+{
+    _errorAttentionCount = 0;
+    _errAttenDisplay = true;
+    if ( this->Timer_DisplayErrors->Enabled == false )
+    {
+        this->Timer_DisplayErrors->Interval = 100; // мс.
+        this->Timer_DisplayErrors->Enabled = true;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowSaveParamBd85::Timer_DisplayErrorsTimer(
+      TObject *Sender)
+{
+    if ( _errorAttentionCount <= _errorAttentionCountMax )
+    {
+        if ( _errAttenDisplay == true )
+        {
+            if ( _errAttenState == 1 )
+            {
+                _errAttenState = 2;
+                _errorAttentionCount++;
+
+                this->Panel_ErrorConnectCount->Color = clRed;
+            }
+            else if ( _errAttenState == 2 )
+            {
+                _errAttenState = 1;
+                this->Panel_ErrorConnectCount->Color = clBtnFace;
+            }
+        } // if (_errAttenState != 0)
+    }
+    else
+    {
+        _errorAttentionCount = 0;
+        _errAttenState = 1;
+
+        this->Panel_ErrorConnectCount->Color = clBtnFace;
+
+        _errAttenDisplay = false;
+        this->Timer_DisplayErrors->Enabled = false;
+    }
 }
 //---------------------------------------------------------------------------
 

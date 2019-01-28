@@ -19,6 +19,7 @@ public:
     unsigned short PeriodPwmZad;
     int FlagArch; // дыру Раз (1 --- true, -1 --- false)
 
+    double DnuZadValue;
     double VoltageHiZadValue;
 private:
     void MarkIfNotEqual( bool & flagEqual, int arg1, int arg2 );

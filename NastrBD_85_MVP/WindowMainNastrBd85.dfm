@@ -1548,7 +1548,7 @@ object WindowMainBd85: TWindowMainBd85
             Top = 82
             Width = 67
             Height = 20
-            Color = clCream
+            Color = clMoneyGreen
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
@@ -1557,6 +1557,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = [fsBold]
             ParentCtl3D = False
             ParentFont = False
+            ReadOnly = True
             TabOrder = 13
             OnChange = Edit_DnuZad_CodeChange
           end
@@ -1566,7 +1567,7 @@ object WindowMainBd85: TWindowMainBd85
             Width = 75
             Height = 20
             TabStop = False
-            Color = clMoneyGreen
+            Color = clCream
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -1575,8 +1576,8 @@ object WindowMainBd85: TWindowMainBd85
             Font.Style = []
             ParentCtl3D = False
             ParentFont = False
-            ReadOnly = True
             TabOrder = 14
+            OnChange = Edit_DnuZad_ValueChange
           end
           object Edit_DnuZad_3: TEdit
             Left = 394
@@ -1636,6 +1637,7 @@ object WindowMainBd85: TWindowMainBd85
             Top = 104
             Width = 73
             Height = 22
+            Color = clCream
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -1646,12 +1648,22 @@ object WindowMainBd85: TWindowMainBd85
             TabOrder = 18
             OnChange = comboBox_VoltageHiZad_ValueChange
             Items.Strings = (
+              '1000'
+              '1010'
+              '1020'
+              '1030'
+              '1040'
+              '1050'
+              '1060'
+              '1070'
+              '1080'
+              '1090'
               '1100'
               '1110'
               '1120'
               '1130'
               '1140'
-              '1100'
+              '1150'
               '1160'
               '1170'
               '1180'
@@ -2207,5 +2219,11 @@ object WindowMainBd85: TWindowMainBd85
         end
       end
     end
+  end
+  object Timer_DisplayErrors: TTimer
+    Interval = 100
+    OnTimer = Timer_DisplayErrorsTimer
+    Left = 576
+    Top = 480
   end
 end

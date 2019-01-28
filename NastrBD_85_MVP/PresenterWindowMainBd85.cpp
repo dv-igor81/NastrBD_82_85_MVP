@@ -7,6 +7,8 @@
 #include "FileDirectExtensive.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
+#pragma comment(lib, "TextBoxNumber.lib")
+#pragma comment(lib, "SmartEventsMin.lib")
 //---------------------------------------------------------------------------
 PresenterWindowMainBd85::PresenterWindowMainBd85(
     IWindowMainBd85 * view,
@@ -33,6 +35,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_TextIndAddrZadChange(this, &PresenterWindowMainBd85::TextIndAddrZadChange)
         , as_TextGroupAdrZadChange(this, &PresenterWindowMainBd85::TextGroupAdrZadChange)
         , as_TextDnuZadCodeChange(this, &PresenterWindowMainBd85::TextDnuZadCodeChange)
+        , as_TextDnuZadChange(this, &PresenterWindowMainBd85::TextDnuZadChange)
         , as_TextVoltageHiZadChange(this, &PresenterWindowMainBd85::TextVoltageHiZadChange)
         , as_TextWidthPwmZadChange(this, &PresenterWindowMainBd85::TextWidthPwmZadChange)
         , as_TextOffsetPwmZadChange(this, &PresenterWindowMainBd85::TextOffsetPwmZadChange)
@@ -43,6 +46,7 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
         , as_FromFileBd85Settings(this, &PresenterWindowMainBd85::FromFileBd85Settings)
         , as_SaveToLogFile(this, &PresenterWindowMainBd85::SaveToLogFile)
         , as_Poisson(this, &PresenterWindowMainBd85::Poisson)
+        , _omissionMax(100)
         //===
 {
     _startData = 0;
@@ -65,7 +69,6 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     *_connectBdProt->GetEventSetConnectionState() += as_SetConnectionState;
     ev_DisplayStartData += _view->GetSelfDisplayStartData();
     //===>> Исправить перекрытие потоков 03.12.2018
-    //*_allProtokol->GetEventErrorCountIncrement() += _view->GetSelfDisplayErrors();
     *_allProtokol->GetEventErrorCountIncrement() += as_DisplayErrors;
     //<<===  Исправить перекрытие потоков 03.12.2018
 
@@ -78,6 +81,8 @@ PresenterWindowMainBd85::PresenterWindowMainBd85(
     _view->GetEventTextGroupAdrZadChange() += as_TextGroupAdrZadChange;
     _view->GetEventTextVoltageHiZadChange() += as_TextVoltageHiZadChange;
     _view->GetEventTextDnuZadCodeChange() += as_TextDnuZadCodeChange;
+    _view->GetEventTextDnuZadChange() += as_TextDnuZadChange;
+    _view->GetEventTextDnuZadChange() += as_TextDnuZadChange;
     _view->GetEventTextWidthPwmZadChange() += as_TextWidthPwmZadChange;
     _view->GetEventTextOffsetPwmZadChange() += as_TextOffsetPwmZadChange;
     _view->GetEventTextPeriodPwmZadChange() += as_TextPeriodPwmZadChange;
@@ -144,7 +149,7 @@ void PresenterWindowMainBd85::OprosStart()
 
     while ( _isConnected )
     {
-        if ( InitMkInBd() ) // Инициализация МК в БД (интервал набота счета, задать колтик = 8)
+        if ( _allProtokol->InitMkInBd() ) // Инициализация МК в БД (интервал набота счета, задать колтик = 8)
         {
             break;
         }
@@ -183,8 +188,24 @@ void PresenterWindowMainBd85::OprosIter()
     }
     if ( (_ssp & 0x01) != 0x01 ) // Флаг готовности счёта НЕ получен
     {
-        return;
+        _omission++;
+        if ( _omission > _omissionMax )
+        {
+            if ( _allProtokol->InitMkInBd() == false )
+            {
+                return;
+            }
+            else
+            {
+                _omission = 0;
+            }
+        }
+        else
+        {
+            return;
+        }
     }
+    _omission = 0;
     if ( _allProtokol->GetScaling( & _scaling ) == false )
     {
         return;
@@ -363,7 +384,7 @@ void PresenterWindowMainBd85::OprosEndInvoke()
 {
 }
 //---------------------------------------------------------------------------
-bool PresenterWindowMainBd85::InitMkInBd()
+/*bool PresenterWindowMainBd85::InitMkInBd()
 {
     unsigned char timeInterval = 0;
     const unsigned char defaultTimeInterval = 8;
@@ -386,8 +407,9 @@ bool PresenterWindowMainBd85::InitMkInBd()
             return false;
         }
     }
+    _omission = 0;
     return true;
-}
+} */
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::SetConnectionState( ConnectionStateInfo state )
 {
@@ -643,42 +665,20 @@ void PresenterWindowMainBd85::TextGroupAdrZadChange(const char* text)
     ToNumber( text, & _eepromChange.GroupAddrZad, & _eepromPrev.GroupAddrZad, 247 );
 }
 //---------------------------------------------------------------------------
-void PresenterWindowMainBd85::TextDnuZadCodeChange(const char* text)
+void PresenterWindowMainBd85::TextDnuZadCodeChange(int code)
 {
-    ToNumber( text, & _eepromChange.DnuZad, & _eepromPrev.DnuZad, 4095 );
+    AnsiString text = IntToStr(code);
+    ToNumber( text.c_str(), & _eepromChange.DnuZad, & _eepromPrev.DnuZad, 4095 );
 }
 //---------------------------------------------------------------------------
-void PresenterWindowMainBd85::TextVoltageHiZadChange(const char* text)
+void PresenterWindowMainBd85::TextDnuZadChange(const char* text)
 {
-    bool flagErrorConvert;
-    _eepromChange.VoltageHiZadValue = TextHelper::ConvertTextToDouble(
-        text,
-        ConvertHelper::VoltageHiCodeToValue( _eepromPrev.VoltageHiZad ),
-        & flagErrorConvert);
-    if ( _eepromChange.VoltageHiZadValue < 0 )
-    {
-        _eepromChange.VoltageHiZadValue *= -1;    
-    }
-    if ( flagErrorConvert == false )
-    {
-        _eepromChange.VoltageHiZad = ConvertHelper::VoltageHiValueToCode( _eepromChange.VoltageHiZadValue );
-        _eepromChange.VoltageHiZadValue = ConvertHelper::VoltageHiCodeToValue( _eepromChange.VoltageHiZad );
-        _eepromChange.VoltageHiZadValue = TextHelper::Rounding(_eepromChange.VoltageHiZadValue, 2);
-        if ( _eepromChange.VoltageHiZadValue == _eepromPrev.VoltageHiZadValue )
-        {  // Не допустить печать незначущих нулей
-            flagErrorConvert = true;
-        }
-        else
-        {
-            _eepromPrev.VoltageHiZadValue = _eepromChange.VoltageHiZadValue;
-        }
-    }
-    else
-    {
-        _eepromChange.VoltageHiZad = _eepromPrev.VoltageHiZad;
-    }
-    ToNumber( & _eepromChange.VoltageHiZad, & _eepromPrev.VoltageHiZad,
-        flagErrorConvert, 4095 );
+}
+//---------------------------------------------------------------------------
+void PresenterWindowMainBd85::TextVoltageHiZadChange(int code)
+{
+    AnsiString text = IntToStr(code);
+    ToNumber( text.c_str(), & _eepromChange.VoltageHiZad, & _eepromPrev.VoltageHiZad, 4095 );
 }
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::TextWidthPwmZadChange(const char* text)
@@ -863,5 +863,11 @@ void PresenterWindowMainBd85::Poisson()
     HideSelf();
     _loader->LoadWindowBd85Poisson( this, _connectBdProt ); // Загрузить новое окно "Bd85Poisson"
 }
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
 //---------------------------------------------------------------------------
 

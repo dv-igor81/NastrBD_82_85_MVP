@@ -3,6 +3,7 @@
 #define StartDataNewBd85H
 //---------------------------------------------------------------------------
 #include "EepromBd85Settings.h"
+#include "ICodeValueTextBoxNumber.h"
 //---------------------------------------------------------------------------
 class StartDataNewBd85
 {
@@ -14,10 +15,8 @@ public:
     const char* GetVerPo();
     const char* GetIndAddrZad();
     const char* GetGroupAddrZad();
-    const char* GetDnuZad();
-    const char* GetDnuValueZad();
-    const char* GetVoltageHiZad();
-    const char* GetVoltageHiValueZad();
+    int GetDnuZad();
+    int GetVoltageHiZad();
     const char* GetWidthPwmZad();
     const char* GetOffsetPwmZad();
     const char* GetPeriodPwmZad();
@@ -31,10 +30,9 @@ private:
     char _verPo[verPoSize];
     char _indAddrZad[indAddrZadSize];
     char _groupAddrZad[indAddrZadSize];
-    char _dnuZad[uShortTextSize];
-    char _dnuValueZad[floatTextSize];
-    char _voltageHiZad[uShortTextSize];
-    char _voltageHiValueZad[floatTextSize];
+
+    int _dnuZad;
+    int _voltageHiZad;
     char _widthPwmZad[uShortTextSize]; // Длительность ШИМ заданная
     char _offsetPwmZad[uShortTextSize]; // Смешение ШИМ заданное
     char _periodPwmZad[uShortTextSize]; // Период ШИМ заданный

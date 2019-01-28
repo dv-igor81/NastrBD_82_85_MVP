@@ -14,6 +14,7 @@
 #include "ProtokolName_t.h"
 #include "ConnectionStateInfo_t.h"
 #include "IWindowMainBd85.h"
+#include "ICodeValueTextBoxNumber.h"
 //---------------------------------------------------------------------------
 class TWindowMainBd85 : public TForm, public IWindowMainBd85
 {
@@ -21,40 +22,9 @@ __published:	// IDE-managed Components
         TPageControl *PageControl_WindowBd85;
         TTabSheet *TabSheet_MainParam;
         TTabSheet *TabSheet_ModBusParam;
-        TPanel *panel_Connect;
-        TLabel *label_Protocol;
-        TComboBox *comboBox_Protocol;
-        TPanel *panel_helperNumTxtBtn;
-        TLabel *label_AddrBd;
-        TEdit *textBox_AddrBd;
-        TButton *button_AddrBd_Dec;
-        TButton *button_AddrBd_Inc;
-        TPanel *panel_comPort_TcpIp;
-        TGroupBox *groupBox_ComPort;
-        TLabel *label_ComPortS;
-        TComboBox *comboBox_ComPorts;
-        TButton *button_UpdateNumberOfComPortS;
-        TEdit *label_ComPortsCount;
-        TGroupBox *groupBox_TcpIp;
-        TLabel *label_IP_Addr;
-        TLabel *label_TCP_Port;
-        TEdit *textBox_IP_Addr;
-        TEdit *textBox_TCP_Port;
-        TButton *button_StartStop;
-        TPanel *label_Hint;
         TGroupBox *GroupBox_Rate;
-        TGroupBox *GroupBox_Scaling;
         TGroupBox *GroupBox_EEPROM;
-        TGroupBox *GroupBox_VerPo;
-        TEdit *Edit_VerPo0;
-        TEdit *Edit_VerPo1;
-        TEdit *Edit_VerPo2;
-        TEdit *Edit_VerPo3;
         TScrollBox *ScrollBox_MainParam;
-        TPanel *Panel_EEPROM_Description;
-        TPanel *Panel_EEPROM_Code;
-        TPanel *Panel_EEPROM_Value;
-        TPanel *Panel_EEPROM_Unit;
         TPanel *Panel_IndAddrZad_0;
         TPanel *Panel_IndAddrZad_1;
         TEdit *Edit_IndAddrZad;
@@ -63,14 +33,8 @@ __published:	// IDE-managed Components
         TPanel *Panel_GroupAdrZad_1;
         TEdit *Edit_GroupAdrZad;
         TPanel *Panel_GroupAdrZad_3;
-        TPanel *Panel_DnuZad_0;
         TEdit *Edit_DnuZad_Code;
-        TMaskEdit *Edit_DnuZad_Value;
-        TEdit *Edit_DnuZad_3;
-        TPanel *Panel_VoltageHiZad_0;
         TEdit *Edit_VoltageHiZad_Code;
-        TComboBox *comboBox_VoltageHiZad_Value;
-        TEdit *Edit_VoltageHiZad_3;
         TPanel *Panel_WidthPwmZad_0;
         TEdit *Edit_WidthPwmZad;
         TPanel *Panel_WidthPwmZad_2;
@@ -83,7 +47,6 @@ __published:	// IDE-managed Components
         TEdit *Edit_PeriodPwmZad;
         TPanel *Panel_PeriodPwmZad_2;
         TEdit *Edit_PeriodPwmZad_3;
-        TButton *button_WriteToEeprom;
         TButton *button_FromFile;
         TButton *button_Poisson;
         TPanel *Panel_rate_Description;
@@ -102,14 +65,8 @@ __published:	// IDE-managed Components
         TEdit *Edit_Temperature_Code;
         TEdit *Edit_Temperature_Value;
         TEdit *Edit_Temperature_3;
-        TPanel *Panel_DNU_0;
         TEdit *Edit_DNU_Code;
-        TEdit *Edit_DNU_Value;
-        TEdit *Edit_DNU_3;
-        TPanel *Panel_VoltageHi_0;
         TEdit *Edit_VoltageHi_Code;
-        TEdit *Edit_VoltageHi_Value;
-        TEdit *Edit_VoltageHi_3;
         TPanel *Panel_WidthPwm_0;
         TEdit *Edit_WidthPwm_Code;
         TEdit *Edit_WidthPwm_Value;
@@ -118,29 +75,6 @@ __published:	// IDE-managed Components
         TEdit *Edit_PeriodPwm_Code;
         TEdit *Edit_PeriodPwm_Value;
         TEdit *Edit_PeriodPwm_3;
-        TPanel *Panel_ErrorConnectCount;
-        TEdit *Edit_ErrorConnectCount;
-        TGroupBox *GroupBox_ReverseLink;
-        TRadioButton *radioButton_ArchOn;
-        TRadioButton *radioButton_ArchOff;
-        TLabel *Label_TimeMetering;
-        TEdit *Edit_TimeMeteringLimit;
-        TPanel *Panel_MiddleSecondScaling_0;
-        TPanel *Panel_MiddleSecondScaling_1;
-        TEdit *Edit_MiddleSecondScaling;
-        TEdit *Edit_MiddleSecondScaling_3;
-        TPanel *Panel_TotalScaling_0;
-        TPanel *Panel_TotalScaling_1;
-        TEdit *Edit_TotalScaling;
-        TEdit *Edit_TotalScaling_3;
-        TPanel *Panel_TimeScaling_0;
-        TPanel *Panel_TimeScaling_1;
-        TEdit *Edit_TimeScaling;
-        TEdit *Edit_TimeScaling_3;
-        TButton *button_ClearScaling;
-        TButton *button_StartStopScaling;
-        TButton *button_SaveToFile;
-        TLabel *Label_VerPo;
         TScrollBox *ScrollBox_SettingsForModBus;
         TGroupBox *GroupBox_SettingsForModbus;
         TLabel *Label_NumberOfBd;
@@ -173,16 +107,82 @@ __published:	// IDE-managed Components
         TEdit *Edit_DurationOfVideo;
         TButton *Button_ModBus_Write;
         TButton *Button_ModBus_SetDef;
-        TPanel *Panel_Scaling_0;
         TPanel *Panel_Scaling_1;
-        TEdit *Edit_Scaling;
-        TEdit *Edit_Scaling_3;
         TLabel *Label_ChangeEEPROM;
-        TBitBtn *BitBtn_ArchOnOffDisplay;
         TLabel *Label_ChangeModBusEEPROM;
         TGroupBox *GroupBox_Automatic;
         TButton *Button_Shift05a;
         TButton *Button_chm18;
+        //TScrollBox *ScrollBox_HideFewControls;
+        TPanel *panel_Connect;
+        TPanel *panel_comPort_TcpIp;
+        TGroupBox *groupBox_ComPort;
+        TLabel *label_ComPortS;
+        TComboBox *comboBox_ComPorts;
+        TButton *button_UpdateNumberOfComPortS;
+        TEdit *label_ComPortsCount;
+        TButton *button_StartStop;
+        TPanel *label_Hint;
+        TComboBox *comboBox_Protocol;
+        TLabel *label_Protocol;
+        TGroupBox *groupBox_TcpIp;
+        TLabel *label_IP_Addr;
+        TLabel *label_TCP_Port;
+        TEdit *textBox_IP_Addr;
+        TEdit *textBox_TCP_Port;
+        TPanel *panel_helperNumTxtBtn;
+        TLabel *label_AddrBd;
+        TEdit *textBox_AddrBd;
+        TButton *button_AddrBd_Dec;
+        TButton *button_AddrBd_Inc;
+        TGroupBox *GroupBox_VerPo;
+        TPanel *Panel_ErrorConnectCount;
+        TEdit *Edit_ErrorConnectCount;
+        TGroupBox *GroupBox_ReverseLink;
+        TRadioButton *radioButton_ArchOn;
+        TRadioButton *radioButton_ArchOff;
+        TBitBtn *BitBtn_ArchOnOffDisplay;
+        TEdit *Edit_VerPo0;
+        TEdit *Edit_VerPo1;
+        TEdit *Edit_VerPo2;
+        TEdit *Edit_VerPo3;
+        TLabel *Label_VerPo;
+        TPanel *Panel_EEPROM_Description;
+        TPanel *Panel_EEPROM_Value;
+        TPanel *Panel_EEPROM_Unit;
+        TPanel *Panel_EEPROM_Code;
+        TPanel *Panel_DnuZad_0;
+        TPanel *Panel_VoltageHiZad_0;
+        TMaskEdit *Edit_DnuZad_Value;
+        TComboBox *comboBox_VoltageHiZad_Value;
+        TEdit *Edit_DnuZad_3;
+        TEdit *Edit_VoltageHiZad_3;
+        TEdit *Edit_Scaling;
+        TPanel *Panel_Scaling_0;
+        TEdit *Edit_Scaling_3;
+        TGroupBox *GroupBox_Scaling;
+        TLabel *Label_TimeMetering;
+        TEdit *Edit_TimeMeteringLimit;
+        TPanel *Panel_MiddleSecondScaling_0;
+        TEdit *Edit_MiddleSecondScaling;
+        TEdit *Edit_MiddleSecondScaling_3;
+        TPanel *Panel_TotalScaling_0;
+        TEdit *Edit_TotalScaling;
+        TEdit *Edit_TotalScaling_3;
+        TPanel *Panel_TimeScaling_0;
+        TEdit *Edit_TimeScaling;
+        TEdit *Edit_TimeScaling_3;
+        TButton *button_ClearScaling;
+        TButton *button_StartStopScaling;
+        TButton *button_SaveToFile;
+        TButton *button_WriteToEeprom;
+        TPanel *Panel_DNU_0;
+        TEdit *Edit_DNU_Value;
+        TEdit *Edit_DNU_3;
+        TPanel *Panel_VoltageHi_0;
+        TEdit *Edit_VoltageHi_Value;
+        TEdit *Edit_VoltageHi_3;
+        TTimer *Timer_DisplayErrors;
         void __fastcall button_StartStopClick(TObject *Sender);
         void __fastcall button_AddrBd_DecClick(TObject *Sender);
         void __fastcall button_AddrBd_IncClick(TObject *Sender);
@@ -228,6 +228,9 @@ __published:	// IDE-managed Components
         void __fastcall button_PoissonClick(TObject *Sender);
         void __fastcall Button_chm18Click(TObject *Sender);
         void __fastcall Button_Shift05aClick(TObject *Sender);
+        void __fastcall Edit_DnuZad_ValueChange(TObject *Sender);
+        void __fastcall Edit_VoltageHiZad_CodeChange(TObject *Sender);
+        void __fastcall Timer_DisplayErrorsTimer(TObject *Sender);
 public:
     BEGIN_MESSAGE_MAP
         MESSAGE_HANDLER( WM_SYSCOMMAND, TMessage, OnWMSysCommand );
@@ -301,8 +304,12 @@ private:	// User declarations
     ActionEvent<> ev_button_WriteToEepromClick;
     ActionEvent<const char*> ev_Text_IndAddrZadChange;
     ActionEvent<const char*> ev_Text_GroupAdrZadChange;
-    ActionEvent<const char*> ev_Text_DnuZadCodeChange;
-    ActionEvent<const char*> ev_Text_VoltageHiZadChange;
+
+
+    ActionEvent<int> ev_Text_DnuZadCodeChange;
+    ActionEvent<const char*> ev_Text_DnuZadChange;
+
+    ActionEvent<int> ev_Text_VoltageHiZadChange;
     ActionEvent<const char*> ev_Text_WidthPwmZadChange;
     ActionEvent<const char*> ev_Text_OffsetPwmZadChange;
     ActionEvent<const char*> ev_Text_PeriodPwmZadChange;
@@ -320,6 +327,13 @@ private:	// User declarations
 
     ActionEvent<> ev_button_SaveToFileClick;
     ActionEvent<> ev_button_PoissonClick;
+
+    // Включить на время внимание к ошибкам
+    void ErrorAttention();
+    int _errAttenState; // Начальное состояние внимания к ошибкам связи
+    int _errorAttentionCount; // Счетчик циклов состояний веимания к ошибкам
+    const int _errorAttentionCountMax;
+    bool _errAttenDisplay;
 
 public:		// User declarations
         __fastcall TWindowMainBd85(TComponent* Owner);
@@ -345,8 +359,9 @@ public:		// User declarations
     ActionEvent<>& GetEventButtonWriteToEepromClick();
     ActionEvent<const char*>& GetEventTextIndAddrZadChange();
     ActionEvent<const char*>& GetEventTextGroupAdrZadChange();
-    ActionEvent<const char*>& GetEventTextDnuZadCodeChange();
-    ActionEvent<const char*>& GetEventTextVoltageHiZadChange();
+    ActionEvent<int>& GetEventTextDnuZadCodeChange();
+    ActionEvent<const char*>& GetEventTextDnuZadChange();
+    ActionEvent<int>& GetEventTextVoltageHiZadChange();
     ActionEvent<const char*>& GetEventTextWidthPwmZadChange();
     ActionEvent<const char*>& GetEventTextOffsetPwmZadChange();
     ActionEvent<const char*>& GetEventTextPeriodPwmZadChange();
@@ -367,6 +382,35 @@ public:		// User declarations
 
     ActionEvent<>& GetEventButtonSaveToFileClick();
     ActionEvent<>& GetEventButtonPoissonClick();
+
+    ICodeValueTextBoxNumber * _tbnDnuZad;
+    // asp - Action Self Pointer
+    ActionSelf<const char*> * asp_SetTextCodeDnuZad;
+    ActionSelf<const char*> * asp_SetTextValueDnuZad;
+    ActionSelf<int> * asp_SetCursorCodeDnuZad;
+    ActionSelf<int> * asp_SetCursorValueDnuZad;
+
+    void CreateAsp();
+    void DestroyAsp();
+    
+    void SetTextCodeDnuZad(const char * txt);
+    void SetTextValueDnuZad(const char * txt);
+    void SetCursorCodeDnuZad(int pos);
+    void SetCursorValueDnuZad(int pos);
+
+    bool _notSetDnu;
+
+    ICodeValueTextBoxNumber * _tbnVoltageHiZad;
+    ActionSelf<const char*> * asp_SetTextCodeVoltageHiZad;
+    ActionSelf<const char*> * asp_SetTextValueVoltageHiZad;
+    ActionSelf<int> * asp_SetCursorCodeVoltageHiZad;
+    ActionSelf<int> * asp_SetCursorValueVoltageHiZad;
+
+    void SetTextCodeVoltageHiZad(const char * txt);
+    void SetTextValueVoltageHiZad(const char * txt);
+    void SetCursorCodeVoltageHiZad(int pos);
+    void SetCursorValueVoltageHiZad(int pos);
+    bool _notSetVoltageHi;
 };
 //---------------------------------------------------------------------------
 #endif

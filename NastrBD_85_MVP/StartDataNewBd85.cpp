@@ -7,19 +7,15 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
-StartDataNewBd85::StartDataNewBd85( EepromBd85Settings * data  )
+StartDataNewBd85::StartDataNewBd85( EepromBd85Settings * data )
 {
     InsteadOfConstructor(); // Вместо конструктора
 
     TextHelper::CopyText( _verPo, data->VerPo, verPoSize );
     sprintf( _indAddrZad, "%d", data->IndAddrZad );
     sprintf( _groupAddrZad, "%d", data->GroupAddrZad );
-    double dnuValueZad = ConvertHelper::CodeToValue( data->DnuZad );
-    sprintf( _dnuZad, "%d", data->DnuZad );
-    sprintf( _dnuValueZad, "%0.3f", dnuValueZad );
-    double voltageValueZad = ConvertHelper::VoltageHiCodeToValue( data->VoltageHiZad );
-    sprintf( _voltageHiZad, "%d", data->VoltageHiZad );
-    sprintf( _voltageHiValueZad, "%0.2f", voltageValueZad );
+    _dnuZad = data->DnuZad;
+    _voltageHiZad = data->VoltageHiZad;
     sprintf( _widthPwmZad, "%d", data->WidthPwmZad );
     sprintf( _offsetPwmZad, "%d", data->OffsetPwmZad );
     sprintf( _periodPwmZad, "%d", data->PeriodPwmZad );
@@ -37,10 +33,8 @@ void StartDataNewBd85::InsteadOfConstructor() // Вместо конструктора
     TextHelper::SetCharInText(_verPo, 0, verPoSize);
     TextHelper::SetCharInText(_indAddrZad, 0, indAddrZadSize);
     TextHelper::SetCharInText(_groupAddrZad, 0, indAddrZadSize);
-    TextHelper::SetCharInText(_dnuZad, 0, uShortTextSize);
-    TextHelper::SetCharInText(_dnuValueZad, 0, floatTextSize);
-    TextHelper::SetCharInText(_voltageHiZad, 0, uShortTextSize);
-    TextHelper::SetCharInText(_voltageHiValueZad, 0, floatTextSize);
+    _dnuZad = -1;
+    _voltageHiZad = -1;
     TextHelper::SetCharInText(_widthPwmZad, 0, uShortTextSize);
     TextHelper::SetCharInText(_offsetPwmZad, 0, uShortTextSize);
     TextHelper::SetCharInText(_periodPwmZad, 0, uShortTextSize);
@@ -62,24 +56,14 @@ const char* StartDataNewBd85::GetGroupAddrZad()
     return _groupAddrZad;
 }
 //---------------------------------------------------------------------------
-const char* StartDataNewBd85::GetDnuZad()
+int StartDataNewBd85::GetDnuZad()
 {
     return _dnuZad;
 }
 //---------------------------------------------------------------------------
-const char* StartDataNewBd85::GetDnuValueZad()
-{
-    return _dnuValueZad;
-}
-//---------------------------------------------------------------------------
-const char* StartDataNewBd85::GetVoltageHiZad()
+int StartDataNewBd85::GetVoltageHiZad()
 {
     return _voltageHiZad;
-}
-//---------------------------------------------------------------------------
-const char* StartDataNewBd85::GetVoltageHiValueZad()
-{
-    return _voltageHiValueZad;
 }
 //---------------------------------------------------------------------------
 const char* StartDataNewBd85::GetWidthPwmZad()

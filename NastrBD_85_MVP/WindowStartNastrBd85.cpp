@@ -41,8 +41,15 @@ const char * TWindowStart::GetProgrammVersion()
 //---------------------------------------------------------------------------
 void TWindowStart::WrapShow()
 {
-    this->Show();
+    //this->Show();
+    this->Close();
 }
 //---------------------------------------------------------------------------
-
+void __fastcall TWindowStart::FormCreate(TObject *Sender)
+{
+  Visible = false;
+  Application->ShowMainForm = false;
+  viewLoader.LoadWindowBd85Main();
+}
+//---------------------------------------------------------------------------
 

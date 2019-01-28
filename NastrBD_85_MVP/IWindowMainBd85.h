@@ -3,7 +3,7 @@
 #define IWindowMainBd85H
 //---------------------------------------------------------------------------
 #include "ActionEvent.h"
-using namespace smartevents;
+using namespace smarteventsMin;
 //---------------------------------------------------------------------------
 #include "HelperConnectFourBdProt.h"
 #include "StartDataNewBd85.h"
@@ -35,8 +35,9 @@ public:
     virtual ActionEvent<>& GetEventButtonWriteToEepromClick() = 0;
     virtual ActionEvent<const char*>& GetEventTextIndAddrZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextGroupAdrZadChange() = 0;
-    virtual ActionEvent<const char*>& GetEventTextDnuZadCodeChange() = 0;
-    virtual ActionEvent<const char*>& GetEventTextVoltageHiZadChange() = 0;
+    virtual ActionEvent<int>& GetEventTextDnuZadCodeChange() = 0;
+    virtual ActionEvent<const char*>& GetEventTextDnuZadChange() = 0;
+    virtual ActionEvent<int>& GetEventTextVoltageHiZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextWidthPwmZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextOffsetPwmZadChange() = 0;
     virtual ActionEvent<const char*>& GetEventTextPeriodPwmZadChange() = 0;

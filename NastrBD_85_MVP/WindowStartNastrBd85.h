@@ -15,6 +15,7 @@ __published:	// IDE-managed Components
         TButton *Button_Start;
         void __fastcall Button_StartClick(TObject *Sender);
         void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
+        void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
     AnsiString ProgrammVersion;
     WindowLoader viewLoader;

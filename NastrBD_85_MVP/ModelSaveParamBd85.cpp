@@ -9,7 +9,7 @@
 ModelSaveParamBd85::ModelSaveParamBd85(
     IAllProtokolS * allProtokol,
     ViewModelSaveParamBd85 * vmSaveParam,
-    ConnectBdProt * connectBdProt)
+    ConnectBdProt * connectBdProt) : _omissionMax(100)
 {
     _allProtokol = allProtokol;
     _vmSaveParam = vmSaveParam;
@@ -56,19 +56,30 @@ void ModelSaveParamBd85::DestroyActions() // Освободить память, от делегатов
 void ModelSaveParamBd85::OprosIter()
 {
     Sleep(5);
-    if ( _allProtokol->GetSsp( & _ssp ) == false )
+    bool flag = _allProtokol->GetSsp( & _ssp );
+    if ( flag == true )
     {
-        return;
+        if ( (_ssp & 0x01) == 0x01 ) // Флаг готовности счёта получен
+        {
+            _omission = 0;
+            flag = _allProtokol->GetScaling( & _scaling );
+            if ( flag == true )
+            {
+                Calculate();
+            }
+        }
+        else
+        {
+            _omission++;
+            if ( _omission > _omissionMax )
+            {
+                if ( _allProtokol->InitMkInBd() == true )
+                {
+                    _omission = 0;
+                }
+            }
+        }
     }
-    if ( (_ssp & 0x01) != 0x01 ) // Флаг готовности счёта НЕ получен
-    {
-        return;
-    }
-    if ( _allProtokol->GetScaling( & _scaling ) == false )
-    {
-        return;
-    }
-    Calculate();
 }
 //---------------------------------------------------------------------------
 void ModelSaveParamBd85::DisplayErrors(const char * text)

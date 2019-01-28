@@ -47,12 +47,14 @@ __fastcall TWindowMainBd85::TWindowMainBd85(TComponent* Owner)
             &ev_button_StartStopClick, // Запустить/Остановить обмен данными с БД
             &as_SetConnectionState,
             &addrBdHelper)
+        , _errorAttentionCountMax (5)
 {
     InitComponrnts();
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::Destroy()
 {
+    DestroyAsp();
     delete this;
 }
 //---------------------------------------------------------------------------
@@ -66,11 +68,13 @@ void TWindowMainBd85::SetVerPoText(const char * text)
 void TWindowMainBd85::WrapShow()
 {
     this->Show();
+    this->PageControl_WindowBd85->Enabled = true;
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::WrapHide()
 {
-    this->Hide();
+    //this->Hide();
+    this->PageControl_WindowBd85->Enabled = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::OnWMSysCommand( TMessage& Message )
@@ -98,6 +102,34 @@ void TWindowMainBd85::InitComponrnts()
     comboBox_Protocol->ItemIndex = 0;
     comboBox_Protocol->Text = "ModBus RTU (TCP/IP)";
     comboBox_ComPorts->Style = csDropDownList; // Недоступно для редактирования
+    //================================================================================
+    CreateAsp();
+    _tbnDnuZad  = CreateTextBoxNumber(
+        0 , // Минимально-возможное значение "кода"
+        0xFFF, // Максимально-возможное значение "кода"
+        0,  // Значение "кода" по умолчанию
+        3, // Нужное нам кол-во знаков, после запятой в поле "величина"
+        2.5 / 4095,  // Коэффициент пересчёта "кода" в "величину"
+        asp_SetTextCodeDnuZad, // Функция установки текста поля "код"
+        asp_SetTextValueDnuZad, // Функция установки текста поля "величина"
+        asp_SetCursorCodeDnuZad, // Функция установки курсора в поле "код"
+        asp_SetCursorValueDnuZad); // Функция установки курсора в поле "величина"
+    _notSetDnu = false;
+
+    _tbnVoltageHiZad  = CreateTextBoxNumber(
+        0 , // Минимально-возможное значение "кода"
+        0xFFF, // Максимально-возможное значение "кода"
+        0,  // Значение "кода" по умолчанию
+        1, // Нужное нам кол-во знаков, после запятой в поле "величина"
+        2500.0 / 4096.0,  // Коэффициент пересчёта "кода" в "величину"
+        asp_SetTextCodeVoltageHiZad, // Функция установки текста поля "код"
+        asp_SetTextValueVoltageHiZad, // Функция установки текста поля "величина"
+        asp_SetCursorCodeVoltageHiZad, // Функция установки курсора в поле "код"
+        asp_SetCursorValueVoltageHiZad); // Функция установки курсора в поле "величина"
+    _notSetVoltageHi = false;
+    _errAttenState = 1; // Начальное состояние внимания к ошибкам связи
+    _errorAttentionCount = 0; // Счетчик циклов состояний веимания к ошибкам
+    _errAttenDisplay = false;
 }
 //---------------------------------------------------------------------------
 ActionEvent<>* TWindowMainBd85::GetEventFormClose()
@@ -209,6 +241,7 @@ void TWindowMainBd85::SetConnectionState(ConnectionStateInfo state)
         ControlsAvailabilityInvert(false);
         break;
     }
+
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::ControlsAvailability(bool isEnabled)
@@ -228,7 +261,8 @@ void TWindowMainBd85::ControlsAvailabilityInvert(bool isEnabled)
     button_WriteToEeprom->Enabled = isEnabled;
     Edit_IndAddrZad->ReadOnly = !isEnabled;
     Edit_GroupAdrZad->ReadOnly = !isEnabled;
-    Edit_DnuZad_Code->ReadOnly = !isEnabled;
+    //Edit_DnuZad_Code->ReadOnly = !isEnabled;
+    Edit_DnuZad_Value->ReadOnly = !isEnabled;
     //comboBox_VoltageHiZad_Value->Style = csDropDownList;
     comboBox_VoltageHiZad_Value->Enabled = isEnabled;
     Edit_WidthPwmZad->ReadOnly = !isEnabled;
@@ -274,10 +308,46 @@ void TWindowMainBd85::DisplayStartData( StartDataNewBd85* data )
     Edit_VerPo3->Text = verPo[3];
     Edit_IndAddrZad->Text = data->GetIndAddrZad();
     Edit_GroupAdrZad->Text = data->GetGroupAddrZad();
-    Edit_DnuZad_Code->Text = data->GetDnuZad();
-    Edit_DnuZad_Value->Text = data->GetDnuValueZad();
-    Edit_VoltageHiZad_Code->Text = data->GetVoltageHiZad();
-    comboBox_VoltageHiZad_Value->Text = data->GetVoltageHiValueZad();
+
+    //===>>
+    if (_notSetDnu == false)
+    {
+        int dnuZad = data->GetDnuZad();
+        if ( dnuZad != -1 )
+        {
+            _tbnDnuZad->SetCode( data->GetDnuZad() );
+        }
+        else
+        {
+            //_tbnDnuZad->Clear();
+            this->Edit_DnuZad_Code->Text = "";
+            this->Edit_DnuZad_Value->Text = "";
+        }
+    }
+    else
+    {
+        _notSetDnu = false;
+    }
+    if (_notSetVoltageHi == false)
+    {
+        int volHiZad = data->GetVoltageHiZad();
+        if ( volHiZad != -1 )
+        {
+            _tbnVoltageHiZad->SetCode( data->GetVoltageHiZad() );
+        }
+        else
+        {
+            //_tbnVoltageHiZad->Clear();
+            this->Edit_VoltageHiZad_Code->Text = "";
+            this->comboBox_VoltageHiZad_Value->Text = "";
+        }
+    }
+    else
+    {
+        _notSetVoltageHi = false;
+    }
+    //<<===
+    
     Edit_WidthPwmZad->Text = data->GetWidthPwmZad();
     Edit_OffsetPwmZad->Text = data->GetOffsetPwmZad();
     Edit_PeriodPwmZad->Text = data->GetPeriodPwmZad();
@@ -323,6 +393,7 @@ void TWindowMainBd85::DisplayIterData( IterDataNewBd85* data )
     {
         Edit_Scaling->Text = data->GetScaling();
     }
+
 }
 //---------------------------------------------------------------------------
 void TWindowMainBd85::DisplayScalingData( ScalingDataNewBd85* data )
@@ -367,6 +438,10 @@ void TWindowMainBd85::DisplayModBusParamData( ModBusTextDataBd85 * data )
 void TWindowMainBd85::DisplayCountConnectError(const char* text)
 {
     Edit_ErrorConnectCount->Text = text;
+    if (text[0] != '0')
+    {
+        ErrorAttention();
+    }
 }
 //---------------------------------------------------------------------------
 ActionSelf<StartDataNewBd85*>* TWindowMainBd85::GetSelfDisplayStartData()
@@ -414,12 +489,17 @@ ActionEvent<const char*>& TWindowMainBd85::GetEventTextGroupAdrZadChange()
     return ev_Text_GroupAdrZadChange;
 }
 //---------------------------------------------------------------------------
-ActionEvent<const char*>& TWindowMainBd85::GetEventTextDnuZadCodeChange()
+ActionEvent<int>& TWindowMainBd85::GetEventTextDnuZadCodeChange()
 {
     return ev_Text_DnuZadCodeChange;
 }
 //---------------------------------------------------------------------------
-ActionEvent<const char*>& TWindowMainBd85::GetEventTextVoltageHiZadChange()
+ActionEvent<const char*>& TWindowMainBd85::GetEventTextDnuZadChange()
+{
+    return ev_Text_DnuZadChange;
+}
+//---------------------------------------------------------------------------
+ActionEvent<int>& TWindowMainBd85::GetEventTextVoltageHiZadChange()
 {
     return ev_Text_VoltageHiZadChange;
 }
@@ -556,17 +636,6 @@ void __fastcall TWindowMainBd85::Edit_IndAddrZadChange(TObject *Sender)
 void __fastcall TWindowMainBd85::Edit_GroupAdrZadChange(TObject *Sender)
 {
     ev_Text_GroupAdrZadChange( Edit_GroupAdrZad->Text.c_str() );
-}
-//---------------------------------------------------------------------------
-void __fastcall TWindowMainBd85::Edit_DnuZad_CodeChange(TObject *Sender)
-{
-    ev_Text_DnuZadCodeChange( Edit_DnuZad_Code->Text.c_str() );
-}
-//---------------------------------------------------------------------------
-void __fastcall TWindowMainBd85::comboBox_VoltageHiZad_ValueChange(
-      TObject *Sender)
-{
-    ev_Text_VoltageHiZadChange( comboBox_VoltageHiZad_Value->Text.c_str() );
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::Edit_WidthPwmZadChange(TObject *Sender)
@@ -708,6 +777,10 @@ void __fastcall TWindowMainBd85::Button_chm18Click(TObject *Sender)
 {
     this->Edit_DnuZad_Code->Text = "819"; // 0.500
     this->comboBox_VoltageHiZad_Value->Text = "1190";
+    _notSetDnu = true;
+    _notSetVoltageHi = true;
+    //_tbnDnuZad->SetValue(0.5);
+    //_tbnVoltageHiZad->SetValue(1190.0);
     comboBox_VoltageHiZad_ValueChange(0);
     this->radioButton_ArchOn->Checked = true;
     this->button_WriteToEeprom->Click();
@@ -717,9 +790,159 @@ void __fastcall TWindowMainBd85::Button_Shift05aClick(TObject *Sender)
 {
     this->Edit_DnuZad_Code->Text = "491"; // 0.300
     this->comboBox_VoltageHiZad_Value->Text = "1038";
+    _notSetDnu = true;
+    _notSetVoltageHi = true;
+    //_tbnDnuZad->SetValue(0.3);
+    //_tbnVoltageHiZad->SetValue(1030.0);
     comboBox_VoltageHiZad_ValueChange(0);
     this->radioButton_ArchOn->Checked = true;
     this->button_WriteToEeprom->Click();
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::CreateAsp()
+{
+  asp_SetTextCodeDnuZad = new ActionSelf<const char*>(this, &TWindowMainBd85::SetTextCodeDnuZad);
+  asp_SetTextValueDnuZad = new ActionSelf<const char*>(this, &TWindowMainBd85::SetTextValueDnuZad);
+  asp_SetCursorCodeDnuZad = new ActionSelf<int>(this, &TWindowMainBd85::SetCursorCodeDnuZad);
+  asp_SetCursorValueDnuZad = new ActionSelf<int>(this, &TWindowMainBd85::SetCursorValueDnuZad);
+
+  asp_SetTextCodeVoltageHiZad = new ActionSelf<const char*>(this, &TWindowMainBd85::SetTextCodeVoltageHiZad);
+  asp_SetTextValueVoltageHiZad = new ActionSelf<const char*>(this, &TWindowMainBd85::SetTextValueVoltageHiZad);
+  asp_SetCursorCodeVoltageHiZad = new ActionSelf<int>(this, &TWindowMainBd85::SetCursorCodeVoltageHiZad);
+  asp_SetCursorValueVoltageHiZad = new ActionSelf<int>(this, &TWindowMainBd85::SetCursorValueVoltageHiZad);
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::DestroyAsp()
+{
+  delete asp_SetTextCodeDnuZad;
+  delete asp_SetTextValueDnuZad;
+  delete asp_SetCursorCodeDnuZad;
+  delete asp_SetCursorValueDnuZad;
+
+  delete asp_SetTextCodeVoltageHiZad;
+  delete asp_SetTextValueVoltageHiZad;
+  delete asp_SetCursorCodeVoltageHiZad;
+  delete asp_SetCursorValueVoltageHiZad;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetTextCodeDnuZad(const char * txt)
+{
+  this->Edit_DnuZad_Code->Text = txt;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetTextValueDnuZad(const char * txt)
+{
+  this->Edit_DnuZad_Value->Text = txt;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetCursorCodeDnuZad(int pos)
+{
+  this->Edit_DnuZad_Code->SelStart = pos;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetCursorValueDnuZad(int pos)
+{
+  this->Edit_DnuZad_Value->SelStart = pos;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetTextCodeVoltageHiZad(const char * txt)
+{
+  this->Edit_VoltageHiZad_Code->Text = txt;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetTextValueVoltageHiZad(const char * txt)
+{
+  this->comboBox_VoltageHiZad_Value->Text = txt;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetCursorCodeVoltageHiZad(int pos)
+{
+  this->Edit_VoltageHi_Code->SelStart = pos;
+}
+//---------------------------------------------------------------------------
+void TWindowMainBd85::SetCursorValueVoltageHiZad(int pos)
+{
+  this->comboBox_VoltageHiZad_Value->SelStart = pos;
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_DnuZad_CodeChange(TObject *Sender)
+{
+  _tbnDnuZad->TextBoxCodeChange( Edit_DnuZad_Code->Text.c_str(), Edit_DnuZad_Code->SelStart );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_DnuZad_ValueChange(TObject *Sender)
+{
+  _tbnDnuZad->TextBoxValueChange( Edit_DnuZad_Value->Text.c_str(), Edit_DnuZad_Value->SelStart );
+  if ( _tbnDnuZad->IsNumber() )
+  {
+    int code = _tbnDnuZad->GetCode();
+    _notSetDnu = true;
+    ev_Text_DnuZadCodeChange( code );
+  }
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Edit_VoltageHiZad_CodeChange(
+      TObject *Sender)
+{
+    _tbnVoltageHiZad->TextBoxCodeChange( Edit_VoltageHiZad_Code->Text.c_str(), Edit_VoltageHiZad_Code->SelStart );
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::comboBox_VoltageHiZad_ValueChange(
+      TObject *Sender)
+{
+  _tbnVoltageHiZad->TextBoxValueChange(
+    comboBox_VoltageHiZad_Value->Text.c_str(),
+    comboBox_VoltageHiZad_Value->SelStart );
+  if ( _tbnVoltageHiZad->IsNumber() )
+  {
+    int code = _tbnVoltageHiZad->GetCode();
+    _notSetVoltageHi = true;
+    ev_Text_VoltageHiZadChange( code );
+  }
+}
+//---------------------------------------------------------------------------
+// Включить на время внимание к ошибкам
+void TWindowMainBd85::ErrorAttention()
+{
+    _errorAttentionCount = 0;
+    _errAttenDisplay = true;
+    if ( this->Timer_DisplayErrors->Enabled == false )
+    {
+        this->Timer_DisplayErrors->Interval = 100; // мс.
+        this->Timer_DisplayErrors->Enabled = true;
+    }
+}
+//---------------------------------------------------------------------------
+void __fastcall TWindowMainBd85::Timer_DisplayErrorsTimer(TObject *Sender)
+{
+    if ( _errorAttentionCount <= _errorAttentionCountMax )
+    {
+        if ( _errAttenDisplay == true )
+        {
+            if ( _errAttenState == 1 )
+            {
+                _errAttenState = 2;
+                _errorAttentionCount++;
+
+                this->Panel_ErrorConnectCount->Color = clRed;
+            }
+            else if ( _errAttenState == 2 )
+            {
+                _errAttenState = 1;
+                this->Panel_ErrorConnectCount->Color = clBtnFace;
+            }
+        } // if (_errAttenState != 0)
+    }
+    else
+    {
+        _errorAttentionCount = 0;
+        _errAttenState = 1;
+
+        this->Panel_ErrorConnectCount->Color = clBtnFace;
+
+        _errAttenDisplay = false;
+        this->Timer_DisplayErrors->Enabled = false;
+    }
 }
 //---------------------------------------------------------------------------
 
