@@ -37,7 +37,7 @@ private:
     TaskWithParam * _task;
     bool _isViewLoaded;
     ModelSaveParamBd85 * _model;
-
+    const AnsiString _iniFileName;
     //===>> Делегаты
     ActionSelf<> * as_FormClose;
     ActionSelf<const char*> * as_EditFileNameChange;

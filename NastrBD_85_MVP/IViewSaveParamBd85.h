@@ -10,6 +10,7 @@ class IViewSaveParamBd85
 public:
     virtual void SetVerPoText(const char * text) = 0;
     virtual void SetFileName(const char * fileName) = 0;
+    virtual char * GetFileName() = 0;
     virtual void SetFileNameEnabled(bool enabled) = 0;    
     virtual void SetFileHeader(const char * fileHeader) = 0;
     virtual void SetFileHeaderEnabled(bool enabled) = 0;

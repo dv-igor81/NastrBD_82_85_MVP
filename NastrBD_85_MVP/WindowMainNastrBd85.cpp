@@ -223,7 +223,7 @@ void TWindowMainBd85::SetConnectionState(ConnectionStateInfo state)
         ControlsAvailabilityInvert(false);
         break;
     case ConnectionStateInfo_t::IsConnected:
-        button_StartStop->Caption = "Прервать";
+        button_StartStop->Caption = "Закрыть";
         button_StartStop->Enabled = true;
         ControlsAvailability(false);
         ControlsAvailabilityInvert(true);
@@ -235,7 +235,7 @@ void TWindowMainBd85::SetConnectionState(ConnectionStateInfo state)
         ControlsAvailabilityInvert(false);
         break;
     case ConnectionStateInfo_t::IsDisconnect:
-        button_StartStop->Caption = "Начать";
+        button_StartStop->Caption = "Открыть";
         button_StartStop->Enabled = true;
         ControlsAvailability(true);
         ControlsAvailabilityInvert(false);
@@ -400,14 +400,14 @@ void TWindowMainBd85::DisplayScalingData( ScalingDataNewBd85* data )
 {
     if ( data->GetStartWorkScalingSumm() ) // Начать работу
     {
-        button_ClearScaling->Enabled = true;
+        //button_ClearScaling->Enabled = true;
         Edit_TimeMeteringLimit->Enabled = false;
         button_StartStopScaling->Caption = "Стоп";
         Edit_TimeMeteringLimit->Text = data->GetTimeMeteringLimit();
     }
     if ( data->GetWorkScalingSumm() == false ) // Завершить работу
     {
-        button_ClearScaling->Enabled = false;
+        //button_ClearScaling->Enabled = false;
         Edit_TimeMeteringLimit->Enabled = true;
         button_StartStopScaling->Caption = "Старт";
         Edit_TimeMeteringLimit->Enabled = true;
@@ -621,6 +621,9 @@ void __fastcall TWindowMainBd85::button_StartStopScalingClick(
 void __fastcall TWindowMainBd85::button_ClearScalingClick(TObject *Sender)
 {
     ev_button_ClearScalingClick();
+    this->Edit_MiddleSecondScaling->Text = "";
+    this->Edit_TotalScaling->Text = "";
+    this->Edit_TimeScaling->Text = "";       
 }
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::button_WriteToEepromClick(TObject *Sender)
@@ -765,6 +768,10 @@ void __fastcall TWindowMainBd85::button_FromFileClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TWindowMainBd85::button_SaveToFileClick(TObject *Sender)
 {
+    ev_button_ClearScalingClick(); // Сброс
+    this->Edit_MiddleSecondScaling->Text = "";
+    this->Edit_TotalScaling->Text = "";
+    this->Edit_TimeScaling->Text = "";
     ev_button_SaveToFileClick();
 }
 //---------------------------------------------------------------------------

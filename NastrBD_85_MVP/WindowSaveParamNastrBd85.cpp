@@ -2,6 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "WindowSaveParamNastrBd85.h"
+#include <stdio.h>
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -38,6 +39,12 @@ void TWindowSaveParamBd85::SetVerPoText(const char * text)
 void TWindowSaveParamBd85::SetFileName(const char * fileName)
 {
     this->Edit_FileName->Text = fileName;
+}
+//---------------------------------------------------------------------------
+char * TWindowSaveParamBd85::GetFileName()
+{
+    sprintf(_logFileName, "%s", this->Edit_FileName->Text.c_str());
+    return _logFileName;
 }
 //---------------------------------------------------------------------------
 void TWindowSaveParamBd85::SetFileNameEnabled(bool enabled)

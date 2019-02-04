@@ -199,7 +199,7 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=4
 MinorVer=29
-Release=6
+Release=7
 Build=0
 Debug=0
 PreRelease=0
@@ -212,7 +212,7 @@ CodePage=1251
 [Version Info Keys]
 CompanyName=VNIIA
 FileDescription=ТСРМ82, ТСРМ84, ТСРМ85
-FileVersion=4.29.6.0
+FileVersion=4.29.7.0
 InternalName=
 LegalCopyright=Дорофеев Игорь Александрович (подр. 561)
 LegalTrademarks=

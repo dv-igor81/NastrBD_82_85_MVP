@@ -305,8 +305,8 @@ void PresenterWindowMainBd85::StartStopScaling(const char* timeMeteringLimit)
         _timeLimitScaling = TextHelper::ConvertTextToNumber(
             timeMeteringLimit, // Текст
             60); // 60 секунд по умолчанию
-        _currTimeScaling = 0; // Текущее время набора счета
-        _scalingCounterSumm = 0; // Суммарный счет за время набора
+        //_currTimeScaling = 0; // Текущее время набора счета
+        //_scalingCounterSumm = 0; // Суммарный счет за время набора
         _bfClearScaling = false;
 
         // Проверить ошибку ввода, устранить если есть, очистить поля
@@ -371,7 +371,15 @@ void PresenterWindowMainBd85::ScalingOprosWorkInvoke()
 //---------------------------------------------------------------------------
 void PresenterWindowMainBd85::ClearScalingSumm()
 {
-    _bfClearScaling = true;
+    if( _isScalingWork ) // Идет набор счета
+    {
+        _bfClearScaling = true;
+    }
+    else
+    {
+        _currTimeScaling = 0; // Текущее время набора счета
+        _scalingCounterSumm = 0; // Суммарный счет за время набора
+    }
 }
 //---------------------------------------------------------------------------
 //---------------------------------------------------------------------------

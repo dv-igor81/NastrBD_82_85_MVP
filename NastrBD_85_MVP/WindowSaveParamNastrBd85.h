@@ -68,11 +68,13 @@ private:	// User declarations
     int _errAttenState; // Начальное состояние внимания к ошибкам связи
     int _errorAttentionCount; // Счетчик циклов состояний веимания к ошибкам
     const int _errorAttentionCountMax;
-    bool _errAttenDisplay;    
+    bool _errAttenDisplay;
+    char _logFileName[255]; 
 public:		// User declarations
         __fastcall TWindowSaveParamBd85(TComponent* Owner);
     void SetVerPoText(const char * text);        
     void SetFileName(const char * fileName);
+    char * GetFileName();
     void SetFileNameEnabled(bool enabled);
     void SetFileHeader(const char * fileHeader);
     void SetFileHeaderEnabled(bool enabled);

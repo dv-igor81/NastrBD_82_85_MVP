@@ -2,6 +2,7 @@
 #pragma hdrstop
 #include "ViewModelSaveParamBd85.h"
 #include "ModelSaveParamBd85.h"
+#include "FileDirectExtensive.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
@@ -12,7 +13,7 @@ ViewModelSaveParamBd85::ViewModelSaveParamBd85(
     IAllProtokolS * allProtokol,
     TaskWithParam * task,
     ConnectBdProt * connectBdProt
-)
+) : _iniFileName( "BD85.dat" )
 {
     _view = view;
     _viewDispet = viewDispet;
@@ -35,9 +36,17 @@ ViewModelSaveParamBd85::~ViewModelSaveParamBd85()
 //---------------------------------------------------------------------------
 void ViewModelSaveParamBd85::SetViewParam()
 { // Начальная настройка
+    FileDirectExtensive fromIni;
+    char * text;
+    bool flagError;
+
     _view->SetSummTimeText("---");
     _view->SetVerPoText( _viewDispet->GetProgrammVersion() );
-    _view->SetFileName( "bd85.log" );
+
+    fromIni.LoadFromFile( _iniFileName.c_str() );
+    fromIni.ReadString(text, "logFileName", "bd85.log", & flagError);
+    _view->SetFileName( text );
+
     _view->SetFileNameEnabled(true);
     _view->SetFileHeader("");
     _view->SetFileHeaderEnabled(true);
@@ -139,7 +148,12 @@ void ViewModelSaveParamBd85::ButtonOkClick()
     ControlsEnabled( !work );
     if ( work )
     {
+        FileDirectExtensive fromIni;
         _view->SetButtonOkText( "Стоп" );
+        fromIni.LoadFromFile( _iniFileName.c_str() );
+        char * text = _view->GetFileName();
+        fromIni.WriteString(text, "logFileName");
+        fromIni.SaveToFile( _iniFileName.c_str() );
         _model->DisplayInfo();
     }
     else

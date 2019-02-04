@@ -2,14 +2,11 @@ object WindowMainBd85: TWindowMainBd85
   Left = 383
   Top = 118
   AutoScroll = False
-  BorderIcons = [biSystemMenu, biMinimize]
   BorderWidth = 1
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1044'85'
   ClientHeight = 625
   ClientWidth = 662
   Color = clBtnFace
-  Constraints.MaxHeight = 665
-  Constraints.MaxWidth = 680
   Constraints.MinHeight = 350
   Constraints.MinWidth = 385
   Font.Charset = DEFAULT_CHARSET
@@ -262,7 +259,7 @@ object WindowMainBd85: TWindowMainBd85
             Top = 204
             Width = 121
             Height = 23
-            Caption = #1053#1072#1095#1072#1090#1100
+            Caption = #1054#1090#1082#1088#1099#1090#1100
             TabOrder = 3
             OnClick = button_StartStopClick
           end
@@ -516,7 +513,6 @@ object WindowMainBd85: TWindowMainBd85
             Width = 120
             Height = 25
             Caption = #1057#1073#1088#1086#1089
-            Enabled = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -12
