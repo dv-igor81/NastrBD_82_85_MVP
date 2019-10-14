@@ -25,10 +25,6 @@ __published:	// IDE-managed Components
         TLabel *Label_Kanal_MAX;
         TEdit *Edit_Integral;
         TLabel *Label_Integral;
-        TEdit *Edit_Xm1;
-        TLabel *Label_Xm1;
-        TEdit *Edit_Xm2;
-        TLabel *Label_Xm2;
         TEdit *Edit_Intensivnost;
         TLabel *Label_Intensivnost;
         TEdit *Edit_TimeSumm;
@@ -56,14 +52,14 @@ __published:	// IDE-managed Components
         TCSpinEdit *SpinEdit_TimeSpektr;
         TLabel *Label_TimeSpektrSek;
         TButton *Button_WriteTimeSpektr;
+        TEdit *Edit_Xm1;
+        TLabel *Label_Xm1;
+        TEdit *Edit_Max_Xm1;
+        TLabel *Label_Max_Xm1;
         void __fastcall Timer_Obnovleniya_SpectraTimer(TObject *Sender);
         void __fastcall Button_SpectrClick(TObject *Sender);
         void __fastcall Button_ClearSpektrClick(TObject *Sender);
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
-        void __fastcall Image_Graph_Spektr_1MouseUp(TObject *Sender,
-          TMouseButton Button, TShiftState Shift, int X, int Y);
-        void __fastcall Image_Graph_Spektr_1MouseDown(TObject *Sender,
-          TMouseButton Button, TShiftState Shift, int X, int Y);
         void __fastcall Button_MashtabClick(TObject *Sender);
         void __fastcall Image_GraphMouseUp(TObject *Sender,
           TMouseButton Button, TShiftState Shift, int X, int Y);
@@ -98,6 +94,8 @@ private:	// User declarations
   Graphics::TBitmap * BitMapMain;
   Graphics::TBitmap * BitMapMarker1;
   Graphics::TBitmap * BitMapMarker2;
+  Graphics::TBitmap * BitMapMarkerMax;
+  Graphics::TBitmap * CreateDefaultBitMap(void);
 
   // Число точек графика
   int Npoints;
@@ -140,7 +138,7 @@ private:	// User declarations
   Point_t * point_2;
   char msg[MaxLength];
   int X_MarkerArr[3];
-  float X_MarkerArr_ToX[3];
+  int X_MarkerArr_ToX[3];
 
   float y_point_end;
   float y_point_end_pix;
@@ -160,10 +158,6 @@ private:	// User declarations
   float iIntensivnost;
   int SpZapCount; // Количество тех интервалов, за которые был получен спектр
   int SpZapCountOld; // Количество тех интервалов, за которые был получен спектр
-
-  TImage ** ImageArray;
-  bool bf_ImageArray;
-  enum { const_ImageArray_Size = 900, const_Delta = 30 };
 
   bool bf_RadioButton_Graph;
   bool bf_RadioButton_Kanal;
@@ -202,7 +196,7 @@ private:	// User declarations
   int i_Diapazon(int MinVal, int MaxVal, int NormVal, int ErrorVal);
   float Convert_Y_ToPix(float Y);
   float Convert_X_ToPix(float X);
-  float Convert_Pix_ToX(float x_pix);
+  int Convert_Pix_ToX(float x_pix);
   bool bfFirctVhod; // false - Первый заход в таймер.
 public:		// User declarations
   // Конструктор
@@ -223,8 +217,6 @@ public:		// User declarations
   void SetSpectrSNakopleniem(unsigned char * SpArr_Data);
   // Сумма элементов массива
   int ArrSum(int iStart, int iBegin, int * iArr);
-  void InitGraphic(void);
-  void DeInitGraphic(void);
   bool GetStartStopSpectr( void ) // true - идёт набор спектра
   {
     return this->bf_Button_Spectr;

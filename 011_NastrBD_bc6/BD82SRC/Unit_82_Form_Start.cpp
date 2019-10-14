@@ -1,6 +1,13 @@
 //---------------------------------------------------------------------------
 #include <vcl.h>
+// ===>> ===>> }{ ===>> ===>>
+//    Применения директивы #pragma hdrstop указывает компилятору, что
+//    в данном месте модуля нужно прекратить генерацию предварительно
+//    скомпилированных заголовочных файлов. Расположенные после директивы
+//    #pragma hdrstop заголовочные файлы будут компилироваться при каждой
+//    компиляции данного модуля.
 #pragma hdrstop
+// <<=== <<=== }{ <<=== <<===
 //---------------------------------------------------------------------------
 #include <stdio.h>
 #include <Inifiles.hpp>
@@ -23,7 +30,17 @@
 #include "inpout32.h"
 #include "Unit_DIA_Global_Funk.h"
 //---------------------------------------------------------------------------
+
+// ===>> ===>> }{ ===>> ===>>
+//    чтобы корректно импортировать и экспортировать функции и данные
+//    из содержащегося в пакете модуля, в файле с его исходным кодом
+//    после директивы #include перед самим кодом следует разместить
+//    строку #pragma package(smart_init). В противном случае компиляция
+//    этого модуля все же будет выполнена, но пакет не удастся
+//    скомпоновать статически.
 #pragma package(smart_init)
+// <<=== <<=== }{ <<=== <<===
+
 #pragma link "CSPIN"
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
@@ -3340,8 +3357,6 @@ void __fastcall TForm_82_Start::ErrorZvyaziByla(void)
 // Управление доступностью некоторых элементов управления
 void __fastcall TForm_82_Start::YpravlenieDostupnostu(bool bFlag)
 {
-  //this->Button_2_Col4_Row4_5->Enabled = bFlag;
-  //this->Button_2_Col4_Row6_10->Enabled = bFlag;
   Form_82_Spectr_BD84->Button_Spectr->Enabled = bFlag;
   Form_82_Spectr_BD84->Button_Spectr;
 
@@ -3351,7 +3366,7 @@ void __fastcall TForm_82_Start::YpravlenieDostupnostu(bool bFlag)
     {
       Form_82_Spectr_BD84->Button_Spectr->Caption = "Начать набор спектра"; // "Спектр (Off)";
       Form_82_Spectr_BD84->Timer_Obnovleniya_Spectra->Enabled = false;
-      Prot->OprosSpectra( false );
+      Prot->OprosSpectra( false, Form_82_Spectr_BD84->SpinEdit_TimeSpektr->Value );
       Form_82_Spectr_BD84->SetStartStopSpectr( false );
     }
   }

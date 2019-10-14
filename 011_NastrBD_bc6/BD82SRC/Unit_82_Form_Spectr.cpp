@@ -24,10 +24,11 @@ __fastcall TForm_82_Spectr_BD84::TForm_82_Spectr_BD84(TComponent* Owner)
   Edit_TimeSumm->Text = "0.000";
   Edit_TimeNaborSpektra->Text = "0";
   Edit_TimeReadySpektra->Text = "0";
+
     
   this->bf_Button_Mashtab_Nazata = false; // Кнопка в состоянии 1
-  this->bf_RadioButton_Graph = true;
-  this->bf_RadioButton_Kanal = true;
+  this->bf_RadioButton_Graph = this->RadioButton_Graph->Checked;
+  this->bf_RadioButton_Kanal = this->RadioButton_Kanal->Checked;
   this->bf_Button_Spectr = false; // true - идёт набор спектра
   this->x_min = 0;
 
@@ -39,32 +40,19 @@ __fastcall TForm_82_Spectr_BD84::TForm_82_Spectr_BD84(TComponent* Owner)
   this->iIntensivnost = 0;
   this->SpZapCount = 0;
   this->SpZapCountOld = 0;
-  this->bf_ImageArray = 0;
+  //this->bf_ImageArray = 0;
   this->iTime_0 = 0;
   this->iTime_1 = 0;
   this->bfFirctVhod = false;
   //
 
-  BitMapMain = new Graphics::TBitmap;
-  BitMapMarker1 = new Graphics::TBitmap;
-  BitMapMarker2 = new Graphics::TBitmap;
+  BitMapMain = CreateDefaultBitMap();
+  BitMapMarker1 = CreateDefaultBitMap();
+  BitMapMarker2 = CreateDefaultBitMap();
 
-
-  //BitMapMain->Height = Image_Graph_Spektr_1->Height;
-  //BitMapMain->Width = Image_Graph_Spektr_1->Width;
-  //BitMapMarker1->Height = Image_Graph_Spektr_1->Height;
-  //BitMapMarker1->Width = Image_Graph_Spektr_1->Width;
-  //BitMapMarker2->Height = Image_Graph_Spektr_1->Height;
-  //BitMapMarker2->Width = Image_Graph_Spektr_1->Width;
-
-  //this->Panel_Graph->Height
-
-  BitMapMain->Height = Panel_Graph->Height;
-  BitMapMain->Width = Panel_Graph->Width;
-  BitMapMarker1->Height = Panel_Graph->Height;
-  BitMapMarker1->Width = Panel_Graph->Width;;
-  BitMapMarker2->Height = Panel_Graph->Height;
-  BitMapMarker2->Width = Panel_Graph->Width;
+  // ===>> ===>> ===>> ===>> 12.10.2019 ===>> ===>> ===>> ===>>
+  BitMapMarkerMax = CreateDefaultBitMap();
+  // <<=== <<=== <<=== <<=== 12.10.2019 <<=== <<=== <<=== <<===
 
   GreenPen_2 = CreatePen( PS_SOLID, 2, clGreen );
   RedPen_1 = CreatePen( PS_SOLID, 1, clRed );
@@ -89,7 +77,15 @@ __fastcall TForm_82_Spectr_BD84::~TForm_82_Spectr_BD84()
   delete BitMapMain;
   delete BitMapMarker1;
   delete BitMapMarker2;
-  DeInitGraphic();
+  delete BitMapMarkerMax;
+}
+//---------------------------------------------------------------------------
+Graphics::TBitmap * TForm_82_Spectr_BD84::CreateDefaultBitMap(void)
+{
+  Graphics::TBitmap * DefaultBitMap = new Graphics::TBitmap();
+  DefaultBitMap->Height = Panel_Graph->Height;
+  DefaultBitMap->Width = Panel_Graph->Width;
+  return DefaultBitMap;
 }
 //---------------------------------------------------------------------------
 void TForm_82_Spectr_BD84::InitParam(void)
@@ -97,8 +93,8 @@ void TForm_82_Spectr_BD84::InitParam(void)
   // Величины (в пикселах) для параллельного переноса
   // осей "X" и "Y" новой системы координат (по сравнению
   // со старой системой в верхнем левом углу)
-  this->O_x_pix = /*500*/50;
-  this->O_y_pix = /*350*/50;
+  this->O_x_pix = 50;
+  this->O_y_pix = 50;
   // Масштабы по осям "X" и "Y" для перехода от действительных
   // значений к пикселам  
   this->M_x = 450 * 2;
@@ -180,8 +176,6 @@ void TForm_82_Spectr_BD84::PostroenieGraphNormir(void)
   x_point_begin = 0;
   x_point_end_pix = x_point_end * M_x + O_x_pix;
   x_point_begin_pix = x_point_begin * M_x + O_x_pix;
-
-
 
   // Выбираем перо для оси координат
   SelectObject( BitMapMain->Canvas->Handle, OsiKoordPen );
@@ -853,12 +847,11 @@ float TForm_82_Spectr_BD84::Convert_X_ToPix(float X)
   return x_pix;
 }
 //---------------------------------------------------------------------------
-float TForm_82_Spectr_BD84::Convert_Pix_ToX(float x_pix)
+int TForm_82_Spectr_BD84::Convert_Pix_ToX(float x_pix)
 {
   float X;
   X = (x_pix - this->O_x_pix) * this->x_max_abs / this->M_x;
-  //==\\X = (x_pix * this->x_max_abs) / this->M_x - this->O_x_pix;
-  return X;
+  return static_cast<int>(X + 0.5);
 }
 //---------------------------------------------------------------------------
 void TForm_82_Spectr_BD84::ProrisovkaGraph(void)
@@ -868,6 +861,7 @@ void TForm_82_Spectr_BD84::ProrisovkaGraph(void)
   PostroenieGraphNormir(); // Формирует график на холсте BitMapMain
   DrawPlus(BitMapMain, BitMapMarker1); // Добавляет на холст BitMapMain изображение холста BitMapMarker1
   DrawPlus(BitMapMain, BitMapMarker2); // Добавляет на холст BitMapMain изображение холста BitMapMarker2
+  DrawPlus(BitMapMain, BitMapMarkerMax); // Добавляет на холст BitMapMain изображение холста BitMapMarkerMax  
   DrawBitMap( BitMapMain ); // Изображение холста BitMapMain переносит (рисует) на форме (на компоненте формы)
 }
 //---------------------------------------------------------------------------
@@ -915,13 +909,21 @@ void __fastcall TForm_82_Spectr_BD84::Timer_Obnovleniya_SpectraTimer(
     }
     else
     {
+      double kNineBit = 0;
+      double kModBus = 0;
       if ( Form_82_Start->Prot->flagModbusProtokol == 0 ) // Протокол: "9-ти битный"
       {
-        this->iIntensivnost = (float)this->iIntegral / (SpZapCount * 25 * Form_82_Start->Prot->Data.KolTikSpectr / 1000.0); //==\\
+        // 8 ---> 0.2 (сек)
+        kNineBit = 25 * Form_82_Start->Prot->Data.KolTikSpectr / 1000.0;
+        // СУММАРНЫЙ_СЧЁТ / КОЛИЧЕСТВО_ИНТЕРВАЛОВ * ДЛИТЕЛЬНОСТЬ_ИНТЕРВАЛА
+        this->iIntensivnost = (float)this->iIntegral / (SpZapCount * kNineBit);
       }
       else // Протокол: НЕ "9-ти битный"
       {
-        this->iIntensivnost = (float)this->iIntegral / (SpZapCount * 31.25 * Form_82_Start->Prot->Data.KolTikSpectr / 1000.0); //==\\
+        // 8 ---> 0.25 (сек)
+        kModBus = 31.25 * Form_82_Start->Prot->Data.KolTikSpectr / 1000.0;
+        // СУММАРНЫЙ_СЧЁТ / КОЛИЧЕСТВО_ИНТЕРВАЛОВ * ДЛИТЕЛЬНОСТЬ_ИНТЕРВАЛА
+        this->iIntensivnost = (float)this->iIntegral / (SpZapCount * kModBus);
       }
 
       ProrisovkaGraph(); // Нарисовать график
@@ -930,31 +932,43 @@ void __fastcall TForm_82_Spectr_BD84::Timer_Obnovleniya_SpectraTimer(
       this->iTimeSys += iDeltaTime;
       iTime_0 = iTime_1;
 
-    sprintf( chText, "%0.3f", this->iTimeSys / 1000.0 ); // Время системное в милисекундах
-    Edit_TimeSys->Text = chText;
+      sprintf( chText, "%0.3f", this->iTimeSys / 1000.0 ); // Время системное в милисекундах
+      Edit_TimeSys->Text = chText;
 
-    if ( Form_82_Start->Prot->flagModbusProtokol == 0 ) // Протокол: НЕ "9-ти битный"
-    {
-      sprintf(chText, "%0.3f", (SpZapCount * 25 * Form_82_Start->Prot->Data.KolTikSpectr / 1000.0 )); //==\\
-    }
-    else
-    {
-      sprintf(chText, "%0.3f", (SpZapCount * 31.25 * Form_82_Start->Prot->Data.KolTikSpectr / 1000.0 )); //==\\
-    }
 
-    Edit_TimeSumm->Text = chText; // Время суммарное      
-    sprintf(chText, "%d", this->iZnachenieMax);
-    Edit_Znachenie_MAX->Text = chText;
-    sprintf(chText, "%d", this->iKanalMax);
-    Edit_Kanal_MAX->Text = chText;
-    sprintf(chText, "%d", this->iIntegral);
-    Edit_Integral->Text = chText;
-    sprintf(chText, "%0.02f", this->iIntensivnost);
-    Edit_Intensivnost->Text = chText;
-    sprintf(chText, "%d", this->TimeNaboraSpektra);
-    Edit_TimeNaborSpektra->Text = chText;
-    sprintf(chText, "%d", this->TimeGotovSpectr);
-    Edit_TimeReadySpektra->Text = chText;
+
+      sprintf(chText, "%d", this->iZnachenieMax);
+      Edit_Znachenie_MAX->Text = chText;
+      sprintf(chText, "%d", this->iKanalMax);
+      Edit_Kanal_MAX->Text = chText;
+      sprintf(chText, "%d", this->iIntegral);
+      Edit_Integral->Text = chText;
+
+      // ===>> ===>> ===>> ===>> 12.10.2019 ===>> ===>> ===>> ===>>
+      // Из БД удалена возможность изменять интервал набора спектра
+      // поэтому код ниже будет закоментирован
+
+      //if ( Form_82_Start->Prot->flagModbusProtokol == 0 ) // Протокол: НЕ "9-ти битный"
+      //{
+      //  // СУММАРНОЕ_ВРЕМЯ = КОЛИЧЕСТВО_ИНТЕРВАЛОВ * ДЛИТЕЛЬНОСТЬ_ИНТЕРВАЛА
+      //  sprintf(chText, "%0.3f", SpZapCount * kNineBit);
+      //}
+      //else
+      //{
+      //  // СУММАРНОЕ_ВРЕМЯ = КОЛИЧЕСТВО_ИНТЕРВАЛОВ * ДЛИТЕЛЬНОСТЬ_ИНТЕРВАЛА
+      //  sprintf(chText, "%0.3f", SpZapCount * kModBus);
+      //}
+      //Edit_TimeSumm->Text = chText; // Время суммарное
+
+      // sprintf(chText, "%0.02f", this->iIntensivnost);
+      // Edit_Intensivnost->Text = chText;
+
+      // sprintf(chText, "%d", this->TimeNaboraSpektra);
+      // Edit_TimeNaborSpektra->Text = chText;
+
+      // sprintf(chText, "%d", this->TimeGotovSpectr);
+      // Edit_TimeReadySpektra->Text = chText;
+      // <<=== <<=== <<=== <<=== 12.10.2019 <<=== <<=== <<=== <<===
     }
   }
 
@@ -974,7 +988,7 @@ void __fastcall TForm_82_Spectr_BD84::Button_SpectrClick(TObject *Sender)
     this->Timer_Obnovleniya_Spectra->Enabled = true;
     this->Button_WriteTimeSpektr->Enabled = true;
     this->Button_ClearSpektr->Enabled = false;
-    Form_82_Start->Prot->OprosSpectra( true );
+    Form_82_Start->Prot->OprosSpectra( true, SpinEdit_TimeSpektr->Value );
 
     //==\\ Form_82_Start->Prot->SpectrStart(); // Так нельзя: Ошибка связи
     // имеет большую вероятность, т.к.
@@ -992,7 +1006,7 @@ void __fastcall TForm_82_Spectr_BD84::Button_SpectrClick(TObject *Sender)
     this->Timer_Obnovleniya_Spectra->Enabled = false;
     this->Button_WriteTimeSpektr->Enabled = false;
     this->Button_ClearSpektr->Enabled = true;
-    Form_82_Start->Prot->OprosSpectra( false );
+    Form_82_Start->Prot->OprosSpectra( false, SpinEdit_TimeSpektr->Value );
   }
 }
 //---------------------------------------------------------------------------
@@ -1034,77 +1048,12 @@ void __fastcall TForm_82_Spectr_BD84::FormClose(TObject *Sender,
   Form_82_Start->RadioGroup_VyborProtokola->Enabled = true;
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm_82_Spectr_BD84::Image_Graph_Spektr_1MouseUp(
-      TObject *Sender, TMouseButton Button, TShiftState Shift, int X,
-      int Y)
-{ // при отпускании ПКМ
-  char chText[MaxLength];
-
-  if (Button == mbRight)
-  {
-    if(Button_Mashtab->Enabled == true)
-    {
-      Button_Mashtab->OnClick(Sender);
-    }
-  }
-  if (Button == mbLeft)
-  {
-    if(bf_Button_Mashtab_Nazata == false) // Если кнопка не увеличила масштаб (находится в первом состоянии)
-    {
-      if ((x_point_begin_pix < X) && (X < x_point_end_pix))
-      {
-        NomerMarkera++;
-        NomerMarkera %= 3;
-      }
-      else
-      {
-        return;
-      }
-
-      switch(NomerMarkera)
-      {
-      case 0: // Стереть оба маркера
-        DrawClear(BitMapMarker1);
-        DrawClear(BitMapMarker2);
-        Edit_Xm1->Text = "";
-        Edit_Xm2->Text = "";
-        Button_Mashtab->Enabled = false;
-        break;
-      case 1: // Нарисовать маркер1
-        X_MarkerArr[1] = X;
-        X_MarkerArr_ToX[1] = Convert_Pix_ToX(X_MarkerArr[1]);
-        sprintf(chText, "%0.0f", X_MarkerArr_ToX[1]);
-        Edit_Xm1->Text = chText;
-        DrawClear(BitMapMarker1);
-        DrawVertLine(BitMapMarker1);
-        Button_Mashtab->Enabled = false;
-        break;
-      case 2: // Нарисовать маркер2
-        X_MarkerArr[2] = X;
-        X_MarkerArr_ToX[2] = Convert_Pix_ToX(X_MarkerArr[2]);
-        if ( Math_Abs(X_MarkerArr_ToX[2] - X_MarkerArr_ToX[1]) < 21 )
-        {
-          NomerMarkera = 1;
-          return;
-        }
-        Button_Mashtab->Enabled = true;
-        sprintf(chText, "%0.0f", X_MarkerArr_ToX[2]);
-        Edit_Xm2->Text = chText;
-        DrawClear(BitMapMarker2);
-        DrawVertLine(BitMapMarker2);
-        break;
-      }
-    }
-    ProrisovkaGraph();
-  }
-}
-//---------------------------------------------------------------------------
-void __fastcall TForm_82_Spectr_BD84::Image_Graph_Spektr_1MouseDown(
-      TObject *Sender, TMouseButton Button, TShiftState Shift, int X,
-      int Y)
-{ // При нажатии на ПКМ
-  O_x_pix = O_x_pix;
-}
+//void __fastcall TForm_82_Spectr_BD84::Image_Graph_Spektr_1MouseDown(
+//      TObject *Sender, TMouseButton Button, TShiftState Shift, int X,
+//      int Y)
+//{ // При нажатии на ПКМ
+//  O_x_pix = O_x_pix;
+//} /
 //---------------------------------------------------------------------------
 void TForm_82_Spectr_BD84::DrawClear
 (
@@ -1148,6 +1097,12 @@ void TForm_82_Spectr_BD84::DrawVertLine(Graphics::TBitmap * BitmapVar)
   {
     NM = 2;
   }
+  // ===>> ===>> ===>> ===>> 12.10.2019 ===>> ===>> ===>> ===>>
+  if (BitmapVar == BitMapMarkerMax)
+  {
+    NM = 0;
+  }
+  // <<=== <<=== <<=== <<=== 12.10.2019 <<=== <<=== <<=== <<===
   // Выбираем перо для оси координат
   SelectObject( BitmapVar->Canvas->Handle, MarkerPen );
   // Задаём координаты двух граничных точек оси "X"
@@ -1213,65 +1168,6 @@ int TForm_82_Spectr_BD84::ArrSum(int iStart, int iBegin, int * iArr)
   this->iKanalMax = MaxKanal;
   this->iZnachenieMax = MaxSpectr;
   return iSumm;
-}
-//---------------------------------------------------------------------------
-void TForm_82_Spectr_BD84::InitGraphic(void)
-{
-  //ptrDiaDisplay = new diaDisplay_t *[ciNDisplay];
-  int Left;
-  int Top;
-  int Width;
-  int Height;
-  int DeltaWidth;
-  int DeltaHeight;
-  
-  if (bf_ImageArray == true)
-  {
-    return;
-  }
-
-  DeltaWidth = Panel_Graph->Width / const_Delta;
-  DeltaHeight = Panel_Graph->Height / const_Delta;
-  Width = DeltaWidth;
-  Height = DeltaHeight;
-  Left = 0;
-  Top = -DeltaHeight;
-
-  ImageArray = new TImage * [const_Delta * const_Delta];
-  for (int i = 0; i < const_Delta * const_Delta; i++)
-  {
-    if ( ( i % const_Delta ) == 0 )
-    {
-      Top += DeltaHeight;
-      Left = 0;
-    }
-    else
-    {
-      Left += DeltaWidth;
-    }
-
-    ImageArray[i] = new TImage( this );
-    //==\\ImageArray[i]->Parent = Panel_Graph;
-    ImageArray[i]->SetBounds( Left, Top, Width, Height );
-    Panel_Graph->InsertControl( ImageArray[i] );
-    ImageArray[i]->Visible = true;
-    ImageArray[i]->OnMouseUp = Image_Graph_Spektr_1MouseUp;
-  }
-  bf_ImageArray = true;
-}
-//---------------------------------------------------------------------------
-void TForm_82_Spectr_BD84::DeInitGraphic(void)
-{
-  if (bf_ImageArray == false)
-  {
-    return;
-  }
-  for (int i = 0; i < const_Delta * const_Delta; i++)
-  {
-    delete ImageArray[i];
-  }
-  delete [] ImageArray;
-  bf_ImageArray = false;
 }
 //---------------------------------------------------------------------------
 void TForm_82_Spectr_BD84::DrawBitMap( Graphics::TBitmap * BMP )
@@ -1342,61 +1238,48 @@ void __fastcall TForm_82_Spectr_BD84::Image_GraphMouseUp(TObject *Sender,
 
   if (Button == mbRight)
   {
-    if(Button_Mashtab->Enabled == true)
-    {
-      Button_Mashtab->OnClick(Sender);
-    }
+    // ===>> ===>> ===>> ===>> 12.10.2019 ===>> ===>> ===>> ===>>
+    //if(Button_Mashtab->Enabled == true)
+    //{
+    //  Button_Mashtab->OnClick(Sender);
+    //}
+    NomerMarkera = 0;
+    DrawClear(BitMapMarker1);
+    DrawClear(BitMapMarker2);
+    Edit_Xm1->Text = "";
+    Edit_Max_Xm1->Text = "";
+    // <<=== <<=== <<=== <<=== 12.10.2019 <<=== <<=== <<=== <<===
   }
+
   if (Button == mbLeft)
   {
     if(bf_Button_Mashtab_Nazata == false) // Если кнопка не увеличила масштаб (находится в первом состоянии)
     {
       if ((x_point_begin_pix < X) && (X < x_point_end_pix))
       {
-        NomerMarkera++;
-        NomerMarkera %= 3;
+        // ===>> ===>> ===>> ===>> 12.10.2019 ===>> ===>> ===>> ===>>
+        NomerMarkera = 1;
+        // <<=== <<=== <<=== <<=== 12.10.2019 <<=== <<=== <<=== <<===
       }
       else
       {
         return;
       }
+      X_MarkerArr[1] = X;
+      X_MarkerArr_ToX[1] = Convert_Pix_ToX(X_MarkerArr[1]);
 
-      switch(NomerMarkera)
-      {
-      case 0: // Стереть оба маркера
-        DrawClear(BitMapMarker1);
-        DrawClear(BitMapMarker2);
-        Edit_Xm1->Text = "";
-        Edit_Xm2->Text = "";
-        Button_Mashtab->Enabled = false;
-        break;
-      case 1: // Нарисовать маркер1
-        X_MarkerArr[1] = X;
-        X_MarkerArr_ToX[1] = Convert_Pix_ToX(X_MarkerArr[1]);
-        sprintf(chText, "%0.0f", X_MarkerArr_ToX[1]);
-        Edit_Xm1->Text = chText;
-        DrawClear(BitMapMarker1);
-        DrawVertLine(BitMapMarker1);
-        Button_Mashtab->Enabled = false;
-        break;
-      case 2: // Нарисовать маркер2
-        X_MarkerArr[2] = X;
-        X_MarkerArr_ToX[2] = Convert_Pix_ToX(X_MarkerArr[2]);
-        if ( Math_Abs(X_MarkerArr_ToX[2] - X_MarkerArr_ToX[1]) < 21 )
-        {
-          NomerMarkera = 1;
-          return;
-        }
-        Button_Mashtab->Enabled = true;
-        sprintf(chText, "%0.0f", X_MarkerArr_ToX[2]);
-        Edit_Xm2->Text = chText;
-        DrawClear(BitMapMarker2);
-        DrawVertLine(BitMapMarker2);
-        break;
-      }
+      sprintf(chText, "%d", X_MarkerArr_ToX[1]);
+      Edit_Xm1->Text = chText;
+
+      sprintf(chText, "%d", ArrSpectr[X_MarkerArr_ToX[1]]);
+      Edit_Max_Xm1->Text = chText;
+
+      DrawClear(BitMapMarker1);
+      DrawVertLine(BitMapMarker1);
+      Button_Mashtab->Enabled = false;
     }
-    ProrisovkaGraph();
   }
+  ProrisovkaGraph();
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm_82_Spectr_BD84::FormShow(TObject *Sender)
@@ -1477,7 +1360,9 @@ void __fastcall TForm_82_Spectr_BD84::SpinEdit_TimeSpektrChange(
 void __fastcall TForm_82_Spectr_BD84::Button_WriteTimeSpektrClick(
       TObject *Sender)
 {
+  Form_82_Start->Prot->OprosSpectra( true, SpinEdit_TimeSpektr->Value );
   Form_82_Start->Prot->Data.FlagWriteKolTikSpektr = true;
 }
 //---------------------------------------------------------------------------
+
 

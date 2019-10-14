@@ -28,7 +28,6 @@ object Form_82_Start: TForm_82_Start
     Style = tsButtons
     TabIndex = 0
     TabOrder = 0
-    OnChange = PageControl_ModBus_SettingsChange
     object TabSheet_Main: TTabSheet
       Caption = '  '#1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1089' '#1041#1044'  '
       object ScrollBox_Tab1_Scrolling: TScrollBox

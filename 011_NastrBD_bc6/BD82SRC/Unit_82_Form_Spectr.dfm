@@ -1,6 +1,6 @@
 object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
-  Left = 202
-  Top = 99
+  Left = 179
+  Top = 100
   BorderStyle = bsDialog
   Caption = #1057#1087#1077#1082#1090#1088' ('#1041#1044' 84) '
   ClientHeight = 804
@@ -177,6 +177,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
       Top = 18
       Width = 126
       Height = 21
+      ReadOnly = True
       TabOrder = 5
       Text = '0'
     end
@@ -193,9 +194,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
         Width = 73
         Height = 17
         Caption = #1043#1088#1072#1092#1080#1082
-        Checked = True
         TabOrder = 0
-        TabStop = True
         OnClick = RadioButton_GraphClick
       end
       object RadioButton_Gistogramma: TRadioButton
@@ -204,7 +203,9 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
         Width = 91
         Height = 17
         Caption = #1043#1080#1089#1090#1086#1075#1088#1072#1084#1084#1072
+        Checked = True
         TabOrder = 1
+        TabStop = True
         OnClick = RadioButton_GistogrammaClick
       end
     end
@@ -250,6 +251,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
       Top = 59
       Width = 126
       Height = 21
+      ReadOnly = True
       TabOrder = 9
       Text = '0'
     end
@@ -261,37 +263,6 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
     Height = 41
     Align = alTop
     TabOrder = 1
-    object Label_Xm1: TLabel
-      Left = 82
-      Top = 2
-      Width = 47
-      Height = 13
-      Caption = #1084#1072#1088#1082#1077#1088' 1'
-    end
-    object Label_Xm2: TLabel
-      Left = 165
-      Top = 2
-      Width = 47
-      Height = 13
-      Caption = #1084#1072#1088#1082#1077#1088' 2'
-    end
-    object Edit_Xm1: TEdit
-      Left = 81
-      Top = 16
-      Width = 73
-      Height = 21
-      ReadOnly = True
-      TabOrder = 0
-      Text = '200'
-    end
-    object Edit_Xm2: TEdit
-      Left = 165
-      Top = 16
-      Width = 74
-      Height = 21
-      TabOrder = 1
-      Text = '100'
-    end
     object Button_Spectr: TButton
       Left = 256
       Top = 8
@@ -299,7 +270,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
       Height = 25
       Caption = #1053#1072#1095#1072#1090#1100' '#1085#1072#1073#1086#1088' '#1089#1087#1077#1082#1090#1088#1072
       Enabled = False
-      TabOrder = 2
+      TabOrder = 0
       OnClick = Button_SpectrClick
     end
     object Button_ClearSpektr: TButton
@@ -308,7 +279,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
       Width = 105
       Height = 25
       Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1089#1087#1077#1082#1090#1088
-      TabOrder = 3
+      TabOrder = 1
       OnClick = Button_ClearSpektrClick
     end
     object Button_Mashtab: TButton
@@ -317,7 +288,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
       Width = 75
       Height = 25
       Caption = #1056#1072#1089#1090#1103#1085#1091#1090#1100
-      TabOrder = 4
+      TabOrder = 2
       OnClick = Button_MashtabClick
     end
     object Panel_TimeSpektr: TPanel
@@ -327,7 +298,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
       Height = 34
       BevelInner = bvLowered
       Color = clMedGray
-      TabOrder = 5
+      TabOrder = 3
       object Label_TimeSpektr: TLabel
         Left = 10
         Top = 9
@@ -392,6 +363,48 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
     Height = 680
     Align = alLeft
     TabOrder = 2
+    object Label_Xm1: TLabel
+      Left = 8
+      Top = 9
+      Width = 48
+      Height = 13
+      Caption = #1050#1072#1085#1072#1083' 1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label_Max_Xm1: TLabel
+      Left = 7
+      Top = 48
+      Width = 74
+      Height = 13
+      Caption = #1052#1072#1082#1089#1080#1084#1091#1084' 1'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Edit_Xm1: TEdit
+      Left = 6
+      Top = 23
+      Width = 73
+      Height = 21
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Edit_Max_Xm1: TEdit
+      Left = 6
+      Top = 63
+      Width = 73
+      Height = 21
+      ReadOnly = True
+      TabOrder = 1
+    end
   end
   object Panel_Right: TPanel
     Left = 1070
@@ -407,7 +420,6 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
     Width = 973
     Height = 680
     Align = alClient
-    Caption = 'Panel_Graph'
     Color = clWhite
     TabOrder = 4
     object PaintBox_Graph: TPaintBox
