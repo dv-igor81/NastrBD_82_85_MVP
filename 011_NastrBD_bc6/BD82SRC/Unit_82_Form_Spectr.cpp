@@ -990,11 +990,6 @@ void __fastcall TForm_82_Spectr_BD84::Button_SpectrClick(TObject *Sender)
     this->Button_ClearSpektr->Enabled = false;
     Form_82_Start->Prot->OprosSpectra( true, SpinEdit_TimeSpektr->Value );
 
-    //==\\ Form_82_Start->Prot->SpectrStart(); // “ак нельз€: ќшибка св€зи
-    // имеет большую веро€тность, т.к.
-    // общий ресурс (ком порт) предоставл€ет доступ к более чем 1-му
-    // потоку!!!!!!!!!!!!!!!!!!!
-
     // запустим заново набор спектра
     Form_82_Start->Prot->Data.bf_SpectrStart = true;
     iTime_0 = Form_82_Start->Prot->DiaGetTime();

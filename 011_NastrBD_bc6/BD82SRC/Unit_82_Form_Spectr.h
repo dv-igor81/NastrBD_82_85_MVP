@@ -86,7 +86,7 @@ private:	// User declarations
   
   // Данные класса
 
-  enum DIA_CONST { DVU = 1023, DNU = 5, MaxLength = 50 };
+  enum DIA_CONST { DVU = 511, DNU = 5, MaxLength = 50 };
 
   int NomerMarkera; // 0 - нет, 1 - маркер1, 2 - маркер2
 
