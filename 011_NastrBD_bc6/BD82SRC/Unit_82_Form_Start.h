@@ -323,6 +323,10 @@ __published:	// IDE-managed Components
         TCheckBox *CheckBox_DAuto_Standart;
         TCheckBox *CheckBox_DAuto_Shirokie;
         TCheckBox *CheckBox_DAuto_Rengen;
+        TPanel *Panel_Col1_Row14;
+        TPanel *Panel_Col2_Row14;
+        TEdit *Edit_Col3_Row14;
+        TEdit *Edit_Col4_Row14;
 
 
         void __fastcall FormClose(TObject *Sender, TCloseAction &Action);

@@ -3,7 +3,7 @@ object Form_82_Start: TForm_82_Start
   Top = 114
   AutoScroll = False
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1044' 82 / '#1041#1044' 84 vX.XX'
-  ClientHeight = 729
+  ClientHeight = 783
   ClientWidth = 889
   Color = clBtnFace
   Constraints.MinHeight = 240
@@ -22,7 +22,7 @@ object Form_82_Start: TForm_82_Start
     Left = 0
     Top = 0
     Width = 889
-    Height = 710
+    Height = 764
     ActivePage = TabSheet_Main
     Align = alClient
     Style = tsButtons
@@ -34,7 +34,7 @@ object Form_82_Start: TForm_82_Start
         Left = 0
         Top = 0
         Width = 881
-        Height = 679
+        Height = 733
         Align = alClient
         TabOrder = 0
         object Label_bit7: TLabel
@@ -55,7 +55,7 @@ object Form_82_Start: TForm_82_Start
           Left = 4
           Top = 4
           Width = 448
-          Height = 296
+          Height = 325
           Caption = '  '#1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1089' '#1041#1044'  '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -788,12 +788,66 @@ object Form_82_Start: TForm_82_Start
             ReadOnly = True
             TabOrder = 51
           end
+          object Panel_Col1_Row14: TPanel
+            Left = 3
+            Top = 288
+            Width = 206
+            Height = 20
+            BevelInner = bvLowered
+            Caption = #1044#1086#1079#1072
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 52
+          end
+          object Panel_Col2_Row14: TPanel
+            Left = 211
+            Top = 288
+            Width = 77
+            Height = 20
+            BevelInner = bvLowered
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 53
+          end
+          object Edit_Col3_Row14: TEdit
+            Left = 290
+            Top = 288
+            Width = 80
+            Height = 21
+            Color = clMoneyGreen
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 54
+          end
+          object Edit_Col4_Row14: TEdit
+            Left = 371
+            Top = 288
+            Width = 72
+            Height = 21
+            Color = clMoneyGreen
+            ReadOnly = True
+            TabOrder = 55
+            Text = '     '#1084#1082#1047#1080#1074
+          end
         end
         object GroupBox_WriteSettings: TGroupBox
           Left = 4
-          Top = 301
+          Top = 330
           Width = 448
-          Height = 372
+          Height = 374
           Caption = '  '#1059#1089#1090#1072#1085#1086#1074#1082#1072' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074' '#1041#1044'  '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -2198,7 +2252,7 @@ object Form_82_Start: TForm_82_Start
         end
         object CheckBox_DAuto_Standart: TCheckBox
           Left = 359
-          Top = 380
+          Top = 409
           Width = 82
           Height = 14
           Caption = #1057#1090#1072#1085#1076#1072#1088#1090
@@ -2215,7 +2269,7 @@ object Form_82_Start: TForm_82_Start
         end
         object CheckBox_DAuto_Shirokie: TCheckBox
           Left = 359
-          Top = 393
+          Top = 422
           Width = 82
           Height = 13
           Caption = #1064#1080#1088#1086#1082#1080#1077
@@ -2232,7 +2286,7 @@ object Form_82_Start: TForm_82_Start
         end
         object CheckBox_DAuto_Rengen: TCheckBox
           Left = 359
-          Top = 406
+          Top = 435
           Width = 82
           Height = 14
           Caption = #1056#1077#1085#1075#1077#1085
@@ -2546,7 +2600,7 @@ object Form_82_Start: TForm_82_Start
         Left = 0
         Top = 0
         Width = 881
-        Height = 679
+        Height = 733
         Align = alClient
         TabOrder = 0
         object Label_sek: TLabel
@@ -3332,7 +3386,7 @@ object Form_82_Start: TForm_82_Start
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 710
+    Top = 764
     Width = 889
     Height = 19
     Panels = <

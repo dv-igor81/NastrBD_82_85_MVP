@@ -1593,6 +1593,7 @@ void __fastcall TForm_82_Start::ClearEdit_1(void)
   Edit_Col3_Row11->Clear();
   Edit_Col3_Row12->Clear();
   Edit_Col3_Row13->Clear();
+  Edit_Col3_Row14->Clear();
   Edit_Ver01->Clear();
   Edit_Ver02->Clear();
   Edit_Ver03->Clear();
@@ -1878,6 +1879,28 @@ int __fastcall TForm_82_Start::OprosBD(void)
       {
         Edit_Col3_Row13->Text = IntToStr((int)Prot->Data.TSchet);
       }
+
+      // ===>> ===>> ===>> 15.10.2019 ===>> ===>> ===>>
+
+      if ( Prot->Data.DoseSupport == IsSupport )
+      {
+        const int txtSize = 100;
+        char text[txtSize];
+        double dblDose = static_cast<double>(Prot->Data.Dose);
+        dblDose /= 100;
+        sprintf(text, "%0.3f", dblDose);
+        for (int i = 0; i < txtSize; i++)
+        {
+          if (text[i] == '.')
+          {
+            text[i] = ',';          
+          }
+        }
+        Edit_Col3_Row14->Text = text;
+      }
+
+      // <<=== <<=== <<=== 15.10.2019 <<=== <<=== <<===
+
       if (Prot->ErrorCode != 0 && Prot->ErrorCode != 38) // 38 - не готов флаг счёта
       {
         Prot->NullsToStr_err(); //
