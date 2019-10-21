@@ -29,7 +29,7 @@ __fastcall TForm_82_Spectr_BD84::TForm_82_Spectr_BD84(TComponent* Owner)
   this->bf_Button_Mashtab_Nazata = false; // Кнопка в состоянии 1
   this->bf_RadioButton_Graph = this->RadioButton_Graph->Checked;
   this->bf_RadioButton_Kanal = this->RadioButton_Kanal->Checked;
-  this->bf_Button_Spectr = false; // true - идёт набор спектра
+  this->SpectrExecutionStatus = TaskNotCompleted; //this->bf_Button_Spectr = false;
   this->x_min = 0;
 
   this->x_max = 512; //==\\
@@ -61,11 +61,14 @@ __fastcall TForm_82_Spectr_BD84::TForm_82_Spectr_BD84(TComponent* Owner)
   OsiKoordPen = CreatePen( PS_SOLID, 2, clRed ); // Перо для осей координат
   SetkaKoorPen = CreatePen( PS_SOLID, 1, clGreen ); // Перо для координатной сетки
   GraphPen = CreatePen( PS_SOLID, 2, clBlack ); // Перо для графика
-  MarkerPen = CreatePen( PS_SOLID, 2, clBlue ); // Перо для маркера
+
+  MarkerPen_White = CreatePen( PS_SOLID, 2, clWhite ); // Перо для маркера Белое
+  MarkerPen_Blue = CreatePen( PS_SOLID, 2, clBlue ); // Перо для маркера Голубое
+
   //
-  DrawClear(BitMapMain);
-  DrawClear(BitMapMarker1);
-  DrawClear(BitMapMarker2);
+  DrawClear_White(BitMapMain);
+  DrawClear_Black(BitMapMarker1);
+  DrawClear_White(BitMapMarker2);
   //
   InitParam();
 
@@ -286,7 +289,6 @@ void TForm_82_Spectr_BD84::PostroenieGraphNormir(void)
 
   // Записываем числа по оси "O", "+Y"
   p1 = 0;
-  //for (n = 1; n <= 10; n++)
   for (n = 0; n <= 20; n++)
   {
     int len;
@@ -856,12 +858,22 @@ int TForm_82_Spectr_BD84::Convert_Pix_ToX(float x_pix)
 //---------------------------------------------------------------------------
 void TForm_82_Spectr_BD84::ProrisovkaGraph(void)
 {
-  DrawClear(BitMapMain); // Очищает холст BitMapMain
+  DrawClear_White(BitMapMain); // Очищает холст BitMapMain
   // Построение графика нормированного от 0 до 1 по осям "X" и "Y"
   PostroenieGraphNormir(); // Формирует график на холсте BitMapMain
-  DrawPlus(BitMapMain, BitMapMarker1); // Добавляет на холст BitMapMain изображение холста BitMapMarker1
+
+  DrawPlus(BitMapMain, BitMapMarker1, SRCPAINT); // Добавляет на холст BitMapMain изображение холста BitMapMarker1
   DrawPlus(BitMapMain, BitMapMarker2); // Добавляет на холст BitMapMain изображение холста BitMapMarker2
-  DrawPlus(BitMapMain, BitMapMarkerMax); // Добавляет на холст BitMapMain изображение холста BitMapMarkerMax  
+
+  // MERGEPAINT
+
+  // SRCAND - Комбинирует цвета исходных и целевых прямоугольников при помощи использования булева оператора И (AND).
+  // SRCINVERT - Комбинирует цвета источникового и целевого прямоугольников при помощи использования булева оператора исключающее ИЛИ (XOR).
+  // SRCPAINT -	Комбинирует цвета источникового и целевого прямоугольников при помощи использования булева оператора ИЛИ (OR).
+
+  //DrawPlus(BitMapMarker1, BitMapMain);
+  //DrawPlus(BitMapMain, BitMapMarker2); // Добавляет на холст BitMapMain изображение холста BitMapMarker2
+  //DrawPlus(BitMapMain, BitMapMarkerMax); // Добавляет на холст BitMapMain изображение холста BitMapMarkerMax
   DrawBitMap( BitMapMain ); // Изображение холста BitMapMain переносит (рисует) на форме (на компоненте формы)
 }
 //---------------------------------------------------------------------------
@@ -875,6 +887,11 @@ void __fastcall TForm_82_Spectr_BD84::Timer_Obnovleniya_SpectraTimer(
   if (Rekursiya_max < Rekursiya)
   {
     Rekursiya_max = Rekursiya;
+  }
+
+  if (this->SpectrExecutionStatus == PreparingForTaskCompletion) // 3. Подготовка к завершению задачи
+  {
+    this->SpectrExecutionStatus = TaskNotCompleted; // 1. Задача не выполняется
   }
 
   // Form_82_Start->Prot->Data.ArrSpectrSumm - проблема одновременного доступа к объекту ...
@@ -935,8 +952,6 @@ void __fastcall TForm_82_Spectr_BD84::Timer_Obnovleniya_SpectraTimer(
       sprintf( chText, "%0.3f", this->iTimeSys / 1000.0 ); // Время системное в милисекундах
       Edit_TimeSys->Text = chText;
 
-
-
       sprintf(chText, "%d", this->iZnachenieMax);
       Edit_Znachenie_MAX->Text = chText;
       sprintf(chText, "%d", this->iKanalMax);
@@ -981,26 +996,27 @@ void __fastcall TForm_82_Spectr_BD84::Timer_Obnovleniya_SpectraTimer(
 //---------------------------------------------------------------------------
 void __fastcall TForm_82_Spectr_BD84::Button_SpectrClick(TObject *Sender)
 {
-  if ( this->bf_Button_Spectr == false )
+  if ( this->SpectrExecutionStatus == TaskNotCompleted ) // 1. Задача не выполняется //if ( this->bf_Button_Spectr == false )
   {
-    this->bf_Button_Spectr = true;
+    this->SpectrExecutionStatus = TaskRunsInLoop;  // 2. Задача выполняется в цикле //this->bf_Button_Spectr = true;
     this->Button_Spectr->Caption = "Остановить набор спектра"; // (On)";
     this->Timer_Obnovleniya_Spectra->Enabled = true;
     this->Button_WriteTimeSpektr->Enabled = true;
     this->Button_ClearSpektr->Enabled = false;
+    Form_82_Start->Prot->OprosSpectraStatus( this->SpectrExecutionStatus );
     Form_82_Start->Prot->OprosSpectra( true, SpinEdit_TimeSpektr->Value );
-
     // запустим заново набор спектра
     Form_82_Start->Prot->Data.bf_SpectrStart = true;
     iTime_0 = Form_82_Start->Prot->DiaGetTime();
   }
-  else // if ( this->bf_Button_Spectr == true )
+  else if (this->SpectrExecutionStatus == TaskRunsInLoop) // 2. Задача выполняется в цикле // if ( this->bf_Button_Spectr == true )
   {
-    this->bf_Button_Spectr = false;
+    this->SpectrExecutionStatus = PreparingForTaskCompletion; // 3. Подготовка к завершению задачи //this->bf_Button_Spectr = false;
     this->Button_Spectr->Caption = "Начать набор спектра"; // (Off)";
-    this->Timer_Obnovleniya_Spectra->Enabled = false;
+    //this->Timer_Obnovleniya_Spectra->Enabled = false;
     this->Button_WriteTimeSpektr->Enabled = false;
     this->Button_ClearSpektr->Enabled = true;
+    Form_82_Start->Prot->OprosSpectraStatus( this->SpectrExecutionStatus );
     Form_82_Start->Prot->OprosSpectra( false, SpinEdit_TimeSpektr->Value );
   }
 }
@@ -1050,7 +1066,7 @@ void __fastcall TForm_82_Spectr_BD84::FormClose(TObject *Sender,
 //  O_x_pix = O_x_pix;
 //} /
 //---------------------------------------------------------------------------
-void TForm_82_Spectr_BD84::DrawClear
+void TForm_82_Spectr_BD84::DrawClear_White
 (
     Graphics::TBitmap * BitmapVar
 )
@@ -1065,10 +1081,26 @@ void TForm_82_Spectr_BD84::DrawClear
   ); // Очистить область графика
 }
 //---------------------------------------------------------------------------
+void TForm_82_Spectr_BD84::DrawClear_Black
+(
+  Graphics::TBitmap * BitmapVar
+)
+{
+  BitBlt
+  (
+    BitmapVar->Canvas->Handle,
+    0, 0, Panel_Graph->Width,
+    Panel_Graph->Height,
+    NULL, 0, 0,
+    BLACKNESS
+  ); // Очистить область графика
+}
+//---------------------------------------------------------------------------
 void TForm_82_Spectr_BD84::DrawPlus
 (
     Graphics::TBitmap * BitmapVar, // Поверх накладывается BitmapConst
-    Graphics::TBitmap * BitmapConst // Не изменяется
+    Graphics::TBitmap * BitmapConst, // Не изменяется
+    DWORD mode
 )
 {
   BitBlt
@@ -1077,11 +1109,13 @@ void TForm_82_Spectr_BD84::DrawPlus
     0, 0, Panel_Graph->Width,
     Panel_Graph->Height,
     BitmapConst->Canvas->Handle, 0, 0,
-    SRCAND
+    mode // SRCAND
   ); // Скопировать область графика
 }
 //---------------------------------------------------------------------------
-void TForm_82_Spectr_BD84::DrawVertLine(Graphics::TBitmap * BitmapVar)
+void TForm_82_Spectr_BD84::DrawVertLine(
+  Graphics::TBitmap * BitmapVar,
+  HPEN markerPen)
 {
   int NM; // Номер маркера
   if (BitmapVar == BitMapMarker1)
@@ -1099,7 +1133,7 @@ void TForm_82_Spectr_BD84::DrawVertLine(Graphics::TBitmap * BitmapVar)
   }
   // <<=== <<=== <<=== <<=== 12.10.2019 <<=== <<=== <<=== <<===
   // Выбираем перо для оси координат
-  SelectObject( BitmapVar->Canvas->Handle, MarkerPen );
+  SelectObject( BitmapVar->Canvas->Handle, markerPen );
   // Задаём координаты двух граничных точек оси "X"
   point_1 = new Point_t(X_MarkerArr[NM], y_point_end_pix);
   point_2 = new Point_t(X_MarkerArr[NM], y_point_begin_pix);
@@ -1122,8 +1156,8 @@ void __fastcall TForm_82_Spectr_BD84::Button_MashtabClick(TObject *Sender)
       this->x_max = temp;
     }
     // Стереть оба маркера
-    DrawClear(BitMapMarker1);
-    DrawClear(BitMapMarker2);
+    DrawClear_White(BitMapMarker1);
+    DrawClear_White(BitMapMarker2);
     bf_Button_Mashtab_Nazata = true;
   }
   else
@@ -1133,8 +1167,8 @@ void __fastcall TForm_82_Spectr_BD84::Button_MashtabClick(TObject *Sender)
     //==\\this->x_max = 1024;
     this->x_max = 512;
     // Нарисовать оба маркера
-    DrawVertLine(BitMapMarker1);
-    DrawVertLine(BitMapMarker2);
+    DrawVertLine(BitMapMarker1, MarkerPen_White);
+    DrawVertLine(BitMapMarker2, MarkerPen_Blue);
     bf_Button_Mashtab_Nazata = false;
   }
   InitParam();
@@ -1239,8 +1273,8 @@ void __fastcall TForm_82_Spectr_BD84::Image_GraphMouseUp(TObject *Sender,
     //  Button_Mashtab->OnClick(Sender);
     //}
     NomerMarkera = 0;
-    DrawClear(BitMapMarker1);
-    DrawClear(BitMapMarker2);
+    DrawClear_Black(BitMapMarker1);
+    DrawClear_White(BitMapMarker2);
     Edit_Xm1->Text = "";
     Edit_Max_Xm1->Text = "";
     // <<=== <<=== <<=== <<=== 12.10.2019 <<=== <<=== <<=== <<===
@@ -1261,6 +1295,7 @@ void __fastcall TForm_82_Spectr_BD84::Image_GraphMouseUp(TObject *Sender,
         return;
       }
       X_MarkerArr[1] = X;
+      X_MarkerArr[2] = X; // 21.10.2019      
       X_MarkerArr_ToX[1] = Convert_Pix_ToX(X_MarkerArr[1]);
 
       sprintf(chText, "%d", X_MarkerArr_ToX[1]);
@@ -1269,8 +1304,17 @@ void __fastcall TForm_82_Spectr_BD84::Image_GraphMouseUp(TObject *Sender,
       sprintf(chText, "%d", ArrSpectr[X_MarkerArr_ToX[1]]);
       Edit_Max_Xm1->Text = chText;
 
-      DrawClear(BitMapMarker1);
-      DrawVertLine(BitMapMarker1);
+      //DrawClear(BitMapMarker1);
+      
+      // Стереть оба маркера
+      DrawClear_Black(BitMapMarker1);
+      DrawClear_White(BitMapMarker2);
+
+      //DrawVertLine(BitMapMarker1);
+
+      DrawVertLine(BitMapMarker1, MarkerPen_White);  // _White
+      DrawVertLine(BitMapMarker2, MarkerPen_Blue); // _Blue
+
       Button_Mashtab->Enabled = false;
     }
   }
@@ -1280,7 +1324,7 @@ void __fastcall TForm_82_Spectr_BD84::Image_GraphMouseUp(TObject *Sender,
 void __fastcall TForm_82_Spectr_BD84::FormShow(TObject *Sender)
 {
   ProrisovkaGraph(); // Нарисовать график
-  if ( this->bf_Button_Spectr == true )
+  if ( this->SpectrExecutionStatus == TaskRunsInLoop ) // 2. Задача выполняется в цикле //if ( this->bf_Button_Spectr == true )
   {
     Timer_Obnovleniya_Spectra->Enabled = true;
   }

@@ -11,6 +11,9 @@
 #include <ImgList.hpp>
 #include "CSPIN.h"
 //---------------------------------------------------------------------------
+//---------------------------------------------------------------------------
+#include "SharedEnumTypes.h"
+//---------------------------------------------------------------------------
 class TForm_82_Spectr_BD84 : public TForm
 {
 __published:	// IDE-managed Components
@@ -124,12 +127,17 @@ private:	// User declarations
   HPEN OsiKoordPen; // Перо для осей координат
   HPEN SetkaKoorPen; // Перо для координатной сетки
   HPEN GraphPen; // Перо для графика
-  HPEN MarkerPen; // Перо для маркера
+
+  HPEN MarkerPen_White; // Перо для маркера Белое
+  HPEN MarkerPen_Blue; // Перо для маркера Голубое
+
 
   //==\\int ArrSpectr[1024];
   int ArrSpectr[512];
   bool bfUpdateSpector;
-  bool bf_Button_Spectr; // true - идёт набор спектра
+
+  TaskExecutionStatus SpectrExecutionStatus; //bool bf_Button_Spectr; // true - идёт набор спектра
+
   bool bf_Button_Mashtab_Nazata;
 
   int Rekursiya;
@@ -182,16 +190,27 @@ private:	// User declarations
     char * chArrSimvols,
     Point_t * Pt
   );
-  void DrawClear
+  void DrawClear_White
+  (
+    Graphics::TBitmap * BitmapVar
+  );
+  void DrawClear_Black
   (
     Graphics::TBitmap * BitmapVar
   );
   void DrawPlus
   (
     Graphics::TBitmap * BitmapVar, // Поверх накладывается BitmapConst
-    Graphics::TBitmap * BitmapConst // Не изменяется
+    Graphics::TBitmap * BitmapConst, // Не изменяется
+    DWORD mode = SRCAND
   );
-  void DrawVertLine(Graphics::TBitmap * BitmapVar);
+  void DrawVertLine
+  (
+    Graphics::TBitmap * BitmapVar,
+    HPEN markerPen
+  );
+
+
   float f_Diapazon(float MinVal, float MaxVal, float NormVal, float ErrorVal);
   int i_Diapazon(int MinVal, int MaxVal, int NormVal, int ErrorVal);
   float Convert_Y_ToPix(float Y);
@@ -217,17 +236,31 @@ public:		// User declarations
   void SetSpectrSNakopleniem(unsigned char * SpArr_Data);
   // Сумма элементов массива
   int ArrSum(int iStart, int iBegin, int * iArr);
+
   bool GetStartStopSpectr( void ) // true - идёт набор спектра
   {
-    return this->bf_Button_Spectr;
+    //return this->bf_Button_Spectr;
+    if (SpectrExecutionStatus == TaskRunsInLoop) // 2. Задача выполняется в цикле
+    {
+      return true;
+    }
+    return false;
   }
-  void SetStartStopSpectr( bool bf ) // true - идёт набор спектра
+
+  void SetStartStopSpectr( bool flagEnabled )
   {
-    this->bf_Button_Spectr = bf;
+    //this->bf_Button_Spectr = bf;
+    if (flagEnabled == false)
+    {
+      SpectrExecutionStatus = PreparingForTaskCompletion; // 3. Подготовка к завершению задачи
+    }
+    else
+    {
+      SpectrExecutionStatus = TaskRunsInLoop; // 2. Задача выполняется в цикле
+    }
   }
 };
 //---------------------------------------------------------------------------
-//const int MaxLength = 50;
 extern PACKAGE TForm_82_Spectr_BD84 *Form_82_Spectr_BD84;
 //---------------------------------------------------------------------------
 #endif

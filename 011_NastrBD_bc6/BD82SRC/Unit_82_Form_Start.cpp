@@ -1888,7 +1888,7 @@ int __fastcall TForm_82_Start::OprosBD(void)
         char text[txtSize];
         double dblDose = static_cast<double>(Prot->Data.Dose);
         dblDose /= 100;
-        sprintf(text, "%0.3f", dblDose);
+        sprintf(text, "%0.2f", dblDose);
         for (int i = 0; i < txtSize; i++)
         {
           if (text[i] == '.')
@@ -3368,7 +3368,7 @@ void __fastcall TForm_82_Start::Button_OpenBDClick(TObject *Sender)
 // Ошибка связи сейчас
 void __fastcall TForm_82_Start::ErrorZvyazi(void)
 {
-  this->YpravlenieDostupnostu( false );  
+  this->YpravlenieDostupnostu( false );
 }
 //---------------------------------------------------------------------------
 // Ошибка связи была, но связь восстановилась
@@ -3381,8 +3381,6 @@ void __fastcall TForm_82_Start::ErrorZvyaziByla(void)
 void __fastcall TForm_82_Start::YpravlenieDostupnostu(bool bFlag)
 {
   Form_82_Spectr_BD84->Button_Spectr->Enabled = bFlag;
-  Form_82_Spectr_BD84->Button_Spectr;
-
   if ( bFlag == false )
   {
     if ( Form_82_Spectr_BD84->GetStartStopSpectr() == true )

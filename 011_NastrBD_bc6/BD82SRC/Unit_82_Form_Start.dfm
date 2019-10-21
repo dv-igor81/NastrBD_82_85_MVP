@@ -3,7 +3,7 @@ object Form_82_Start: TForm_82_Start
   Top = 114
   AutoScroll = False
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1044' 82 / '#1041#1044' 84 vX.XX'
-  ClientHeight = 783
+  ClientHeight = 739
   ClientWidth = 889
   Color = clBtnFace
   Constraints.MinHeight = 240
@@ -22,7 +22,7 @@ object Form_82_Start: TForm_82_Start
     Left = 0
     Top = 0
     Width = 889
-    Height = 764
+    Height = 720
     ActivePage = TabSheet_Main
     Align = alClient
     Style = tsButtons
@@ -34,7 +34,7 @@ object Form_82_Start: TForm_82_Start
         Left = 0
         Top = 0
         Width = 881
-        Height = 733
+        Height = 689
         Align = alClient
         TabOrder = 0
         object Label_bit7: TLabel
@@ -54,8 +54,8 @@ object Form_82_Start: TForm_82_Start
         object GroupBox_InfoFromBD_Display: TGroupBox
           Left = 4
           Top = 4
-          Width = 448
-          Height = 325
+          Width = 449
+          Height = 313
           Caption = '  '#1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1089' '#1041#1044'  '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -840,14 +840,14 @@ object Form_82_Start: TForm_82_Start
             Color = clMoneyGreen
             ReadOnly = True
             TabOrder = 55
-            Text = '     '#1084#1082#1047#1080#1074
+            Text = '     '#1084#1082#1047#1074'/'#1095
           end
         end
         object GroupBox_WriteSettings: TGroupBox
           Left = 4
-          Top = 330
+          Top = 322
           Width = 448
-          Height = 374
+          Height = 358
           Caption = '  '#1059#1089#1090#1072#1085#1086#1074#1082#1072' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074' '#1041#1044'  '
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -2210,7 +2210,7 @@ object Form_82_Start: TForm_82_Start
         end
         object Panel_2_Col2_Row12: TPanel
           Left = 214
-          Top = 547
+          Top = 568
           Width = 67
           Height = 20
           BevelInner = bvLowered
@@ -2224,7 +2224,7 @@ object Form_82_Start: TForm_82_Start
         end
         object Panel_2_Col2_Row13: TPanel
           Left = 214
-          Top = 568
+          Top = 589
           Width = 67
           Height = 20
           BevelInner = bvLowered
@@ -2600,7 +2600,7 @@ object Form_82_Start: TForm_82_Start
         Left = 0
         Top = 0
         Width = 881
-        Height = 733
+        Height = 689
         Align = alClient
         TabOrder = 0
         object Label_sek: TLabel
@@ -3386,7 +3386,7 @@ object Form_82_Start: TForm_82_Start
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 764
+    Top = 720
     Width = 889
     Height = 19
     Panels = <
