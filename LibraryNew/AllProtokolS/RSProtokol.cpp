@@ -1524,15 +1524,51 @@ int RSProtokol_t::SpectrClear(void)
 //---------------------------------------------------------------------------
 int RSProtokol_t::SpectrStart(void)
 {
-  this->buf_write[0] = 0x21;
-  this->CodeRet = CommandExec(0, 1);
+  switch (flagModbusProtokol)
+  {
+  case 0: // 0 - "9-ти битный"
+    this->buf_write[0] = 0x21;
+    this->CodeRet = CommandExec(0, 1);
+    break;
+  case 1: // 1 - ModBus RTU
+  case 2: // 2 - ModBus TCP
+  case 3: // 3 - ModBus RTU (TCP/IP)
+    DestStartStopSpectr[0] = 0xFFFF;
+    int len = write_registers(AddrBD, 162, 1, DestStartStopSpectr);
+    this->CodeRet = len - 1;
+    if (this->CodeRet != 0)
+    {
+      return this->CodeRet;
+    }
+    len = this->read_registers(AddrBD, 162, 1, DestStartStopSpectr);
+    this->CodeRet = len - 1;
+    break;
+  }
   return this->CodeRet;
 }
 //---------------------------------------------------------------------------
 int RSProtokol_t::SpectrStop(void)
 {
-  this->buf_write[0] = 0x22;
-  this->CodeRet = CommandExec(0, 1);
+  switch (flagModbusProtokol)
+  {
+  case 0: // 0 - "9-ти битный"
+    this->buf_write[0] = 0x22;
+    this->CodeRet = CommandExec(0, 1);
+    break;
+  case 1: // 1 - ModBus RTU
+  case 2: // 2 - ModBus TCP
+  case 3: // 3 - ModBus RTU (TCP/IP)
+    DestStartStopSpectr[0] = 0x00;
+    int len = write_registers(AddrBD, 162, 1, DestStartStopSpectr);
+    this->CodeRet = len - 1;
+    if (this->CodeRet != 0)
+    {
+      return this->CodeRet;
+    }
+    len = this->read_registers(AddrBD, 162, 1, DestStartStopSpectr);
+    this->CodeRet = len - 1;
+    break;
+  }
   return this->CodeRet;
 }
 //---------------------------------------------------------------------------
@@ -2022,17 +2058,13 @@ int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
           case 1: // 1 - ModBus RTU
           case 2: // 2 - ModBus TCP
           case 3: // 3 - ModBus RTU (TCP/IP)
-            for(int i = 0; i < 10; i++)
-            {
-              DestFindDose[i] = 0;
-            }
-            //Data.DoseSupport = IsSupport;
-            /*read_registers(
+            Data.DoseSupport = IsSupport;
+            read_registers(
               AddrBD, // Адрес БД
-              98, // Адрес регистра
+              117, // Адрес регистра
               1, // Число регистров
-              DestFindDose); // Массив */
-            Data.Dose = DestFindDose[0];
+              DestFindDose); // Массив
+            Data.Dose = DestFindDose[0] & 0x3F;
             break;
           }
           // <<=== <<=== <<=== 15.10.2019 <<=== <<=== <<===
@@ -2619,7 +2651,7 @@ int RSProtokol_t::OprosBDSpektr_New(
       if ( this->Data.bfSetTimeSpektr == false )
       {
         // Запустить набор спектра
-        ObnulenieArr(Data.ArrSpectr, 512, 0);
+        ObnulenieArr(Data.ArrSpectr, 512);
         iRet = SpectrStart();
         if (iRet != 0)
         {
@@ -2629,7 +2661,6 @@ int RSProtokol_t::OprosBDSpektr_New(
         this->Data.bfSetTimeSpektr = true;
       }
     }
-
     if( bfStartStop == false )
     {
       this->Data.bfSetTimeSpektr = false;
@@ -2656,20 +2687,13 @@ int RSProtokol_t::OprosBDSpektr_New(
           this->Data.ArrSpectr[nomBlock * 8 + i/2] += this->Data.ArrSpectrBlock[i] * 256;
           this->Data.ArrSpectr[nomBlock * 8 + i/2] += this->Data.ArrSpectrBlock[i + 1];
         }
-
-        if ( iRet != 0 )
-        {
-          return -1;
-        }
       }
-
       // Очистить набранный спектр внутри МК
       iRet = SpectrClear();
       if (iRet != 0)
       {
         return -1;
       }
-
       // Просуммировать набранный спектр
       for (i = 0; i < 512; i++)
       {
@@ -2681,13 +2705,61 @@ int RSProtokol_t::OprosBDSpektr_New(
   case 1: // 1 - ModBus RTU
   case 2: // 2 - ModBus TCP
   case 3: // 3 - ModBus RTU (TCP/IP)
-
-
+    if( bfStartStop == true )
+    {
+      // Первый запуск набора спектра
+      if ( this->Data.bfSetTimeSpektr == false )
+      {
+        // Запустить набор спектра
+        ObnulenieArr(Data.ArrSpectr, 512);
+        iRet = SpectrStart();
+        if (iRet != 0)
+        {
+          return -1;
+        }
+        Data.KolTikSpectr = _kolTikSpectr;
+        this->Data.bfSetTimeSpektr = true;
+      }
+    }
+    if( bfStartStop == false )
+    {
+      this->Data.bfSetTimeSpektr = false;
+      // Остановить набор спектра
+      iRet = SpectrStop();
+      if (iRet != 0)
+      {
+        return -1;
+      }
+      // Прочитать набранный спектр
+      ObnulenieArr(Data.ArrSpectr, 512);
+      for (int nomBlock = 0; nomBlock < 32; nomBlock++) //==\\
+      {
+        //iRet = SpectrReadBuf( nomBlock, &Data.ArrSpectrBlock[0] );
+        iRet = read_registers(AddrBD, 163 + nomBlock * 16, 16, & Data.ArrSpectr[nomBlock * 16]) - 16;
+        if ( iRet != 0 )
+        {
+          return -1;
+        }
+      }
+      // Просуммировать набранный спектр
+      for (i = 0; i < 512; i++)
+      {
+        this->Data.ArrSpectrSumm[i] += (int)this->Data.ArrSpectr[i];
+      }
+      // Очистить набранный спектр внутри МК
+      ObnulenieArr(Data.ArrSpectr, 512);
+      for (int nomBlock = 0; nomBlock < 32; nomBlock++)
+      {
+        iRet = this->write_registers(AddrBD,  163 + nomBlock * 16, 16, Data.ArrSpectr) - 16;
+        if (iRet != 0)
+        {
+          return -1;
+        }
+      }
+      this->Data.iSpektrZaprosCount++; // Количество удачных обменов спектром
+    }
     break;
   }
-
-
-
 }
 //---------------------------------------------------------------------------
 // Возврат: -1 - ошибка связи, 0 - звязь работает нормально
@@ -2876,6 +2948,14 @@ int RSProtokol_t::OprosBDSpektr(
 }
 //---------------------------------------------------------------------------
 void RSProtokol_t::ObnulenieArr(unsigned char Arr[], int N, unsigned char uchVal)
+{
+  for (int i = 0; i < N; i++)
+  {
+    Arr[i] = uchVal;
+  }
+}
+//---------------------------------------------------------------------------
+void RSProtokol_t::ObnulenieArr(unsigned short Arr[], int N, unsigned char uchVal)
 {
   for (int i = 0; i < N; i++)
   {
@@ -3592,10 +3672,6 @@ int RSProtokol_t::read_registers(
     _STEP_META,
     _STEP_DATA
   } _step_t;
-
-  //const int MODBUS_MAX_READ_REGISTERS = 125;
-  //const int _MIN_REQ_LENGTH = 12;
-  //const int MAX_MESSAGE_LENGTH = 260;
 
   //! if ( flagTCP == true ) //! 18.07.2017
   if ( flagModbusProtokol == 2 )  //! ModBus TCP 18.07.2017

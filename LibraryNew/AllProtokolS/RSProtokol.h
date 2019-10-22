@@ -149,8 +149,8 @@ public:
   bool bFlag_TCP_Connect;
   // 20.08.2015
   unsigned char ArrSpectrBlock[16];
-  int ArrSpectr[512];
-  int ArrSpectrSumm[512];
+  unsigned short ArrSpectr[512];
+  unsigned short ArrSpectrSumm[512];
   int iSpektrZaprosCount; // Количество удачных обменов спектром
   int TimeNaboraSpectr; // Время чтения спектра
   int TimeGotovSpectr; // Время готовности спектра
@@ -220,6 +220,7 @@ private:
   int WriteToPort(unsigned char * buf, int count, int parity);
   int ReadFromPort(unsigned char * buf, int count, int parity);
   void ObnulenieArr(unsigned char Arr[], int N, unsigned char uchVal = 0);
+  void ObnulenieArr(unsigned short Arr[], int N, unsigned char uchVal = 0);  
   void ObnulenieArr(int Arr[], int N, unsigned char uchVal = 0);
 
   bool bfOprosSpectra;
@@ -298,7 +299,8 @@ public:
   // 3 - ModBus RTU (TCP/IP)
   // <<=== 17.07.2017
 
-  uint16_t DestFindDose[20];
+  uint16_t DestFindDose[1];
+  uint16_t DestStartStopSpectr[1];
 
   // Отменил flagFirstAddr 23.10.2014
   bool flagFirstAddr; // true - при первом обращении к БД или при сбое передачи
