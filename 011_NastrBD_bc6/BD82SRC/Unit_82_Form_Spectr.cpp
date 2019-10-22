@@ -779,8 +779,7 @@ int TForm_82_Spectr_BD84::i_Diapazon(int MinVal, int MaxVal, int NormVal, int Er
   return NormVal;
 }
 //---------------------------------------------------------------------------
-//==\\void TForm_82_Spectr_BD84::SetSpectr(int SpArr[1024])
-void TForm_82_Spectr_BD84::SetSpectr(int * SpArr) //==\\
+void TForm_82_Spectr_BD84::SetSpectr(int * SpArr)
 {
   // Пока не обновился спектр, не строить график
   bfUpdateSpector = true; // Спектор обновляется
@@ -788,12 +787,33 @@ void TForm_82_Spectr_BD84::SetSpectr(int * SpArr) //==\\
   {
     return;
   }
-  //==\\for (int i = 0; i < 1024; i++)
-  for (int i = 0; i < 512; i++) //==\\
+  for (int i = 0; i < 512; i++)
   {
     if ( ( DNU <= i ) && ( i <= DVU ) )
     {
-      ArrSpectr[i] = (int)SpArr[i];
+      ArrSpectr[i] = SpArr[i];
+    }
+    else
+    {
+      ArrSpectr[i] = 0;
+    }
+  }
+  bfUpdateSpector = false; // Спектор обновился
+}
+//---------------------------------------------------------------------------
+void TForm_82_Spectr_BD84::SetSpectr(unsigned short * SpArr)
+{
+  // Пока не обновился спектр, не строить график
+  bfUpdateSpector = true; // Спектор обновляется
+  if (SpArr == 0)
+  {
+    return;
+  }
+  for (int i = 0; i < 512; i++)
+  {
+    if ( ( DNU <= i ) && ( i <= DVU ) )
+    {
+      ArrSpectr[i] = static_cast<int>(SpArr[i]);
     }
     else
     {

@@ -55,7 +55,7 @@
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="NastrBD.cpp"/>
-    <INCLUDEPATH value="..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB"/>
+    <INCLUDEPATH value="..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB;C:\ProgDIA\Builder6\034_NastrBD_82_85_MVP\NastrBD_82_85"/>
     <LIBPATH value="..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par"/>
     <OTHERFILES value=""/>
@@ -65,7 +65,8 @@
       -I..\Library\AllProtokolS 
       -I&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot; -IBD82SRC\lmb 
       -IBD82SRC -I$(BCB)\include -I$(BCB)\include\vcl -I..\DIA_SRC_LIB 
-      -src_suffix cpp -D_DEBUG -boa"/>
+      -IC:\ProgDIA\Builder6\034_NastrBD_82_85_MVP\NastrBD_82_85 -src_suffix cpp 
+      -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
       -tW -tWM"/>
     <PFLAGS value="-$Y+ -$W -$O- -$A8 -v -JPHNE -M"/>
@@ -146,31 +147,34 @@ ProductVersion=4.0
 Comments=Программа для настройки БД ТСРМ82.100
 
 [HistoryLists\hlIncludePath]
-Count=10
-Item0=BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB
-Item1=D:\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;D:\ProjectS\BUILDER6\031_NastrBD_82_85\DIA_SRC_LIB
-Item2=BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;D:\ProjectS\BUILDER6\031_NastrBD_82_85\DIA_SRC_LIB
-Item3=..\..\..\..\..\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;..\..\..\..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl;D:\ВНИИА\02. Игорь Дорофеев\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB
-Item4=lmb;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl;D:\ВНИИА\02. Игорь Дорофеев\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB
-Item5=..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
-Item6=..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
-Item7=BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
-Item8=..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
-Item9=E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Count=12
+Item0=..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;C:\Program Files (x86)\Borland\CBuilder6\Projects;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB;C:\ProgDIA\Builder6\034_NastrBD_82_85_MVP\NastrBD_82_85
+Item1=..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;C:\Program Files (x86)\Borland\CBuilder6\Projects;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB
+Item2=BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;..\DIA_SRC_LIB
+Item3=D:\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;D:\ProjectS\BUILDER6\031_NastrBD_82_85\DIA_SRC_LIB
+Item4=BD82SRC\lmb;BD82SRC;$(BCB)\include;$(BCB)\include\vcl;D:\ProjectS\BUILDER6\031_NastrBD_82_85\DIA_SRC_LIB
+Item5=..\..\..\..\..\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;..\..\..\..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl;D:\ВНИИА\02. Игорь Дорофеев\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB
+Item6=lmb;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl;D:\ВНИИА\02. Игорь Дорофеев\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB
+Item7=..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item8=..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item9=BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item10=..\014_PoissonMetro;E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
+Item11=E:\011_NastrBD_bc6;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
-Count=11
-Item0=..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item1=..\DIA_SRC_LIB;D:\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item2=BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
-Item3=..\..\..\..\..\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
-Item4=..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
-Item5=..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
-Item6=BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
-Item7=..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
-Item8=$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
-Item9=E:\011_NastrBD_bc6;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
-Item10=E:\011_NastrBD_bc6;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib
+Count=12
+Item0=..\Library\Utilites;..\Library\smartevents;..\Library;..\Library\AllProtokolS;C:\Program Files (x86)\Borland\CBuilder6\Projects;..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\DIA_SRC_LIB;D:\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item3=BD82SRC\lmb;BD82SRC;$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib
+Item4=..\..\..\..\..\DIA_SRC_LIB\BUILDER6\Текущая версия ПО\DIA_SRC_LIB;..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item5=..\..\..\..\..\DIA_SRC_LIB;..\..\..\..\C#2008\Текущие версии ПО\PG WFA &amp; SDP TCRM84;..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item6=..\..\DIA_SRC_LIB;BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item7=BD82SRC\lmb;BD82SRC;lmb;..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item8=..\014_PoissonMetro;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item9=$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item10=E:\011_NastrBD_bc6;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib;C:\Projects\011_NastrBD_bc6
+Item11=E:\011_NastrBD_bc6;$(BCB)\Projects\Lib;C:\Program Files\Borland\CBuilder6\Projects;C:\Projects\2014_05_09_tmp_proj;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1

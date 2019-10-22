@@ -232,6 +232,7 @@ public:		// User declarations
   
   // Забрать накопленный спектр
   void SetSpectr(int * SpArr);
+  void SetSpectr(unsigned short * SpArr);  
   // Прибавить полученный спектр к накопленному
   void SetSpectrSNakopleniem(unsigned char * SpArr_Data);
   // Сумма элементов массива
@@ -239,17 +240,14 @@ public:		// User declarations
 
   bool GetStartStopSpectr( void ) // true - идёт набор спектра
   {
-    //return this->bf_Button_Spectr;
     if (SpectrExecutionStatus == TaskRunsInLoop) // 2. Задача выполняется в цикле
     {
       return true;
     }
     return false;
   }
-
   void SetStartStopSpectr( bool flagEnabled )
   {
-    //this->bf_Button_Spectr = bf;
     if (flagEnabled == false)
     {
       SpectrExecutionStatus = PreparingForTaskCompletion; // 3. Подготовка к завершению задачи
@@ -265,32 +263,4 @@ extern PACKAGE TForm_82_Spectr_BD84 *Form_82_Spectr_BD84;
 //---------------------------------------------------------------------------
 #endif
 
-
-/*
-void TMyWindow::Paint(TDC& PaintDC, bool erase, TRect& rect)
-
-{
-  HPEN PenHandle, OldPenHandle;
-  HBRUSH BrushHandle, OldBrushHandle;
-  PenHandle = CreatePen(PS_SOLID, 1, RGB(0, 0, 255));
-  OldPenHandle = SelectObject(PaintDC, PenHandle);
-  BrushHandle = CreateSolidBrush(RGB(255, 255, 0));
-  OldBrushHandle = SelectObject(PaintDC, BrushHandle);
-  Ellipse(10, 20, 50, 50);
-  SelectObject(OldBrushHandle);
-  DeleteObject(BrushHandle);
-  SelectObject(OldPenHandle);
-  DeleteObject(PenHandle);
-)
-
-This C++Builder code accomplishes the same thing:
-
-void __fastcall TForm1::FormPaint(TObject *Sender)
-
-{
-  Canvas->Pen->Color = clBlue;
-  Canvas->Brush->Color = clYellow;
-  Canvas->Ellipse(10, 20, 50, 50);
-}
-*/
 
