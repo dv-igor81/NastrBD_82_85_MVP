@@ -197,7 +197,7 @@ IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=4
 MinorVer=29
-Release=7
+Release=8
 Build=0
 Debug=0
 PreRelease=0
@@ -210,7 +210,7 @@ CodePage=1251
 [Version Info Keys]
 CompanyName=VNIIA
 FileDescription=ТСРМ82, ТСРМ84, ТСРМ85
-FileVersion=4.29.7.0
+FileVersion=4.29.8.0
 InternalName=
 LegalCopyright=Дорофеев Игорь Александрович (подр. 561)
 LegalTrademarks=
@@ -220,20 +220,21 @@ ProductVersion=4.29
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=13
-Item0=..\LibraryNew;..\LibraryNew\smartevents\;..\LibraryNew\Task;..\LibraryNew\Utilites;..\LibraryNew\AllProtokolS;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item1=..\LibraryNew\Utilites;..\LibraryNew;..\LibraryNew\Task;..\LibraryNew\AllProtokolS;..\..\Library_02;..\..\Library_02\Utilites;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item2=..\..\Library_02;..\..\Library_02\Utilites;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
-Item3=..\..\Library_02;..\..\Library_02\Utilites;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl
-Item4=..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;C:\Program Files (x86)\Borland\CBuilder6\Projects;..\Library;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\Library\Utilites;..\Library\Task;..\Library\smartevents;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
-Item5=C:\Program Files (x86)\Borland\CBuilder6\Projects;..\Library;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\Library\Utilites;..\Library\Task;..\Library\smartevents;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
-Item6=..\Library;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\Library\Utilites;..\Library\Task;..\Library\smartevents;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
-Item7=Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
-Item8=011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
-Item9=NastrBD_82_85;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
-Item10=DIA_SRC_LIB;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC\lmb;011_NastrBD_bc6\BD82SRC;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl;NastrBD_82_85
-Item11=DIA_SRC_LIB;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC\lmb;011_NastrBD_bc6\BD82SRC;NastrMetro;BD85\OLD;BD85\NEW;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\AllTestGitProj\NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl;NastrBD_82_85
-Item12=DIA_SRC_LIB;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC\lmb;011_NastrBD_bc6\BD82SRC;NastrMetro;BD85\OLD;BD85\NEW;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\AllTestGitProj\NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl
+Count=14
+Item0=..\LibraryNew;..\LibraryNew\smartevents;..\LibraryNew\Task;..\LibraryNew\Utilites;..\LibraryNew\AllProtokolS;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\LibraryNew;..\LibraryNew\smartevents\;..\LibraryNew\Task;..\LibraryNew\Utilites;..\LibraryNew\AllProtokolS;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item2=..\LibraryNew\Utilites;..\LibraryNew;..\LibraryNew\Task;..\LibraryNew\AllProtokolS;..\..\Library_02;..\..\Library_02\Utilites;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item3=..\..\Library_02;..\..\Library_02\Utilites;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl
+Item4=..\..\Library_02;..\..\Library_02\Utilites;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;..\..\Library_02\smartevents;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl
+Item5=..\..\Library_02\Utilites;..\..\Library_02;..\..\Library_02\Task;..\..\Library_02\AllProtokolS;C:\Program Files (x86)\Borland\CBuilder6\Projects;..\Library;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\Library\Utilites;..\Library\Task;..\Library\smartevents;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
+Item6=C:\Program Files (x86)\Borland\CBuilder6\Projects;..\Library;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\Library\Utilites;..\Library\Task;..\Library\smartevents;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
+Item7=..\Library;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\NastrBD_85_OLD;..\011_NastrBD_bc6\BD82SRC;..\Library\Utilites;..\Library\Task;..\Library\smartevents;..\Library\AllProtokolS;..\NastrBD_85_MVP;..\..\031_NastrBD_82_85;Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
+Item8=Update_NastrBd;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
+Item9=011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
+Item10=NastrBD_82_85;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC;011_NastrBD_bc6\BD82SRC\lmb;DIA_SRC_LIB;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl
+Item11=DIA_SRC_LIB;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC\lmb;011_NastrBD_bc6\BD82SRC;NastrMetro;BD85\OLD;BD85\NEW;$(BCB)\include;$(BCB)\include\vcl;NastrBD_82_85
+Item12=DIA_SRC_LIB;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC\lmb;011_NastrBD_bc6\BD82SRC;NastrMetro;BD85\OLD;BD85\NEW;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\AllTestGitProj\NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl;NastrBD_82_85
+Item13=DIA_SRC_LIB;011_NastrBD_bc6;011_NastrBD_bc6\BD82SRC\lmb;011_NastrBD_bc6\BD82SRC;NastrMetro;BD85\OLD;BD85\NEW;C:\Program Files (x86)\Borland\CBuilder6\Projects;D:\ProjectS\AllTestGitProj\NastrBD_82_85;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
 Count=9

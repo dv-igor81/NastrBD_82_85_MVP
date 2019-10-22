@@ -10,7 +10,7 @@ TWindowStart *WindowStart;
 __fastcall TWindowStart::TWindowStart(TComponent* Owner)
         : TForm(Owner), viewLoader(this, this)
 {
-    ProgrammVersion = " v4.29.7";
+    ProgrammVersion = " v4.29.8";
     SetVerPoText( ProgrammVersion.c_str() );
 }
 //---------------------------------------------------------------------------
