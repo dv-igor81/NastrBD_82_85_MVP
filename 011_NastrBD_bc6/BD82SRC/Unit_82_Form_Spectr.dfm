@@ -1,9 +1,9 @@
 object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
-  Left = 179
-  Top = 122
+  Left = 183
+  Top = 51
   BorderStyle = bsDialog
   Caption = #1057#1087#1077#1082#1090#1088' ('#1041#1044' 84) '
-  ClientHeight = 782
+  ClientHeight = 819
   ClientWidth = 1173
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
   TextHeight = 13
   object Panel_Bottom: TPanel
     Left = 0
-    Top = 699
+    Top = 736
     Width = 1173
     Height = 83
     Align = alBottom
@@ -360,7 +360,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
     Left = 0
     Top = 41
     Width = 97
-    Height = 658
+    Height = 695
     Align = alLeft
     TabOrder = 2
     object Label_Xm1: TLabel
@@ -410,7 +410,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
     Left = 1070
     Top = 41
     Width = 103
-    Height = 658
+    Height = 695
     Align = alRight
     TabOrder = 3
   end
@@ -418,7 +418,7 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
     Left = 97
     Top = 41
     Width = 973
-    Height = 658
+    Height = 695
     Align = alClient
     Color = clWhite
     TabOrder = 4
@@ -426,14 +426,14 @@ object Form_82_Spectr_BD84: TForm_82_Spectr_BD84
       Left = 1
       Top = 1
       Width = 971
-      Height = 656
+      Height = 693
       Align = alClient
     end
     object Image_Graph: TImage
       Left = 1
       Top = 1
       Width = 971
-      Height = 656
+      Height = 693
       Align = alClient
       OnMouseUp = Image_GraphMouseUp
     end

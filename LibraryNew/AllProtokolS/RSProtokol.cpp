@@ -2064,7 +2064,7 @@ int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
               117, // Адрес регистра
               1, // Число регистров
               DestFindDose); // Массив
-            Data.Dose = DestFindDose[0] & 0x3F;
+            Data.Dose = DestFindDose[0] & 0x3FFF;
             break;
           }
           // <<=== <<=== <<=== 15.10.2019 <<=== <<=== <<===

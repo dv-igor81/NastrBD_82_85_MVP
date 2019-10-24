@@ -2252,8 +2252,8 @@ object Form_82_Start: TForm_82_Start
           TabOrder = 19
         end
         object CheckBox_DAuto_Standart: TCheckBox
-          Left = 359
-          Top = 409
+          Left = 357
+          Top = 401
           Width = 82
           Height = 14
           Caption = #1057#1090#1072#1085#1076#1072#1088#1090
@@ -2269,8 +2269,8 @@ object Form_82_Start: TForm_82_Start
           OnClick = CheckBox_DAuto_StandartClick
         end
         object CheckBox_DAuto_Shirokie: TCheckBox
-          Left = 359
-          Top = 422
+          Left = 357
+          Top = 414
           Width = 82
           Height = 13
           Caption = #1064#1080#1088#1086#1082#1080#1077
@@ -2286,8 +2286,8 @@ object Form_82_Start: TForm_82_Start
           OnClick = CheckBox_DAuto_ShirokieClick
         end
         object CheckBox_DAuto_Rengen: TCheckBox
-          Left = 359
-          Top = 435
+          Left = 357
+          Top = 427
           Width = 82
           Height = 14
           Caption = #1056#1077#1085#1075#1077#1085
