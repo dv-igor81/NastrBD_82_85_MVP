@@ -1303,12 +1303,13 @@ int RSProtokol_t::GetSIM2(unsigned int * SIM)
 // Считать отклик светодиода
 int RSProtokol_t::GetLEDAmp(unsigned int * Ampl)
 {
-  //unsigned int data;
+  unsigned int data;
   this->buf_write[0] = 0x10;
   this->CodeRet = CommandExec(0, 2);
   if (this->CodeRet == 0) // Нет ошибки обмена
   {
-    *Ampl = this->buf_read[0];
+    data = this->buf_read[1];
+    *Ampl = data * 256 + this->buf_read[0];
   }
   else // Ошибка обмена
   {
@@ -1320,12 +1321,13 @@ int RSProtokol_t::GetLEDAmp(unsigned int * Ampl)
 // Считать амплитуду импульса от светодиода РЕАЛЬНУЮ
 int RSProtokol_t::GetLEDAmpR(int * AmplR)
 {
-  //unsigned int data;
+  unsigned int data;
   this->buf_write[0] = 0x1d;
   this->CodeRet = CommandExec(0, 2);
   if (this->CodeRet == 0) // Нет ошибки обмена
   {
-    *AmplR = this->buf_read[0];
+    data = this->buf_read[1];
+    *AmplR = data * 256 + this->buf_read[0];
   }
   else // Ошибка обмена
   {
