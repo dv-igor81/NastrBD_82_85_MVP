@@ -12,4 +12,9 @@
 *.log
 *.ini
 *.str
+*.dsk
 
+!/LibraryNew/*.lib
+!/011_NastrBD_bc6/DllInpout32.res
+!/NastrBD_82_85/NastrBD82_85.ico
+!/NastrBD_82_85/NastrBD_82_85.res

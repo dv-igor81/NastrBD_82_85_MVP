@@ -9,7 +9,7 @@ object FormDispet: TFormDispet
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
   OnClose = FormClose
@@ -51,7 +51,7 @@ object FormDispet: TFormDispet
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
-    Font.Name = 'MS Sans Serif'
+    Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 3
@@ -67,7 +67,7 @@ object FormDispet: TFormDispet
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
     Font.Height = -33
-    Font.Name = 'MS Sans Serif'
+    Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
     TabOrder = 4

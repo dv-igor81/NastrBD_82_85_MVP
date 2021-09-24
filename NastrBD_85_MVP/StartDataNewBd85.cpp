@@ -10,7 +10,6 @@
 StartDataNewBd85::StartDataNewBd85( EepromBd85Settings * data )
 {
     InsteadOfConstructor(); // Вместо конструктора
-
     TextHelper::CopyText( _verPo, data->VerPo, verPoSize );
     sprintf( _indAddrZad, "%d", data->IndAddrZad );
     sprintf( _groupAddrZad, "%d", data->GroupAddrZad );

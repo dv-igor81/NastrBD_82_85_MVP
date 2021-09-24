@@ -224,7 +224,7 @@ __fastcall TForm_82_Start::TForm_82_Start(TComponent* Owner)
   bFlagDE = true; // Флаг доступности кнопок (в зависимости от найденых ком-портов)
   // <<=== 28.02.2015
   // Перенёс из обработчика события "FormShow"
-  this->Prot = new RSProtokol_t; // Создать в "куче" экземпляр объекта протокола
+  this->Prot = new RSProtokol_t(); // Создать в "куче" экземпляр объекта протокола
 
   Prot->ev_ZvukOnOff += as_ZvukOnOff;
 

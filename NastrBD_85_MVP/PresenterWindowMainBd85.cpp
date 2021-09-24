@@ -481,9 +481,19 @@ bool PresenterWindowMainBd85::ReadEEProm()
     }
     if ( _readParamIndex == 1 )
     {
-        if ( _allProtokol->GetIndAdrZ( & _eepromSaved.IndAddrZad ) == false )
+        if(_eepromSaved.VerPo[0] == '6') // ver = 6.xx
         {
-            return false;
+            if ( _allProtokol->GetIndAdrZ/*_Bd85*/( & _eepromSaved.IndAddrZad ) == false )
+            {
+                return false;
+            }
+        }
+        else
+        {
+            if ( _allProtokol->GetIndAdrZ( & _eepromSaved.IndAddrZad ) == false )
+            {
+                return false;
+            }
         }
         _readParamIndex++;
     }

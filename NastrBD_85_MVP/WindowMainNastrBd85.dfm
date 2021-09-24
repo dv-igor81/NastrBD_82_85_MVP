@@ -26,6 +26,12 @@ object WindowMainBd85: TWindowMainBd85
     Height = 625
     ActivePage = TabSheet_MainParam
     Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     Style = tsFlatButtons
     TabIndex = 0
     TabOrder = 0
@@ -63,7 +69,7 @@ object WindowMainBd85: TWindowMainBd85
           object label_Protocol: TLabel
             Left = 8
             Top = 4
-            Width = 90
+            Width = 88
             Height = 13
             Caption = #1055#1088#1086#1090#1086#1082#1086#1083' '#1086#1073#1084#1077#1085#1072
           end
@@ -86,7 +92,7 @@ object WindowMainBd85: TWindowMainBd85
             object label_AddrBd: TLabel
               Left = 9
               Top = 5
-              Width = 98
+              Width = 101
               Height = 13
               Caption = #1040#1076#1088#1077#1089' '#1041#1044' [1 ... 247]'
             end
@@ -214,7 +220,7 @@ object WindowMainBd85: TWindowMainBd85
               object label_TCP_Port: TLabel
                 Left = 10
                 Top = 55
-                Width = 49
+                Width = 47
                 Height = 13
                 Caption = 'TCP '#1055#1086#1088#1090
               end
@@ -1361,7 +1367,7 @@ object WindowMainBd85: TWindowMainBd85
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clNavy
           Font.Height = -12
-          Font.Name = 'Courier New'
+          Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 4
@@ -1503,13 +1509,13 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 60
             Width = 75
-            Height = 20
+            Height = 19
             Color = clCream
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = []
             ParentCtl3D = False
             ParentFont = False
@@ -1543,13 +1549,13 @@ object WindowMainBd85: TWindowMainBd85
             Left = 250
             Top = 82
             Width = 67
-            Height = 20
+            Height = 19
             Color = clMoneyGreen
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentCtl3D = False
             ParentFont = False
@@ -1561,14 +1567,14 @@ object WindowMainBd85: TWindowMainBd85
             Left = 318
             Top = 82
             Width = 75
-            Height = 20
+            Height = 19
             TabStop = False
             Color = clCream
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = []
             ParentCtl3D = False
             ParentFont = False
@@ -1579,14 +1585,14 @@ object WindowMainBd85: TWindowMainBd85
             Left = 394
             Top = 82
             Width = 43
-            Height = 21
+            Height = 20
             TabStop = False
             Color = clMoneyGreen
             Ctl3D = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = []
             ParentCtl3D = False
             ParentFont = False
@@ -1632,14 +1638,14 @@ object WindowMainBd85: TWindowMainBd85
             Left = 320
             Top = 104
             Width = 73
-            Height = 22
+            Height = 21
             Color = clCream
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ItemHeight = 14
+            ItemHeight = 13
             ParentFont = False
             TabOrder = 18
             OnChange = comboBox_VoltageHiZad_ValueChange
@@ -1881,7 +1887,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -12
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 32
@@ -1896,7 +1902,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -12
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 33
@@ -1912,7 +1918,7 @@ object WindowMainBd85: TWindowMainBd85
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -12
-            Font.Name = 'Courier New'
+            Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 34
@@ -1928,7 +1934,7 @@ object WindowMainBd85: TWindowMainBd85
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
-          Font.Name = 'MS Sans Serif'
+          Font.Name = 'Tahoma'
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 5
@@ -1987,42 +1993,42 @@ object WindowMainBd85: TWindowMainBd85
           object Label_NumberOfBd: TLabel
             Left = 24
             Top = 24
-            Width = 67
+            Width = 64
             Height = 13
             Caption = #1053#1086#1084#1077#1088' '#1073#1083#1086#1082#1072
           end
           object Label_Exposition: TLabel
             Left = 24
             Top = 73
-            Width = 81
+            Width = 77
             Height = 13
             Caption = #1069#1082#1089#1087#1086#1079#1080#1094#1080#1103', '#1084#1089
           end
           object Label_MinimumCount: TLabel
             Left = 23
             Top = 123
-            Width = 98
+            Width = 96
             Height = 13
             Caption = #1052#1080#1085#1080#1084#1072#1083#1100#1085#1099#1081' '#1089#1095#1105#1090
           end
           object Label_MaximumCount: TLabel
             Left = 24
             Top = 173
-            Width = 104
+            Width = 101
             Height = 13
             Caption = #1052#1072#1082#1089#1080#1084#1072#1083#1100#1085#1099#1081' '#1089#1095#1105#1090
           end
           object Label_LevelOfOverload: TLabel
             Left = 24
             Top = 223
-            Width = 105
+            Width = 104
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1087#1077#1088#1077#1075#1088#1091#1079#1082#1080
           end
           object Label_QuantityOfInterval: TLabel
             Left = 197
             Top = 26
-            Width = 96
+            Width = 98
             Height = 13
             Caption = #1050#1086#1083'-'#1074#1086' '#1080#1085#1090#1077#1088#1074#1072#1083#1086#1074
           end
@@ -2036,49 +2042,49 @@ object WindowMainBd85: TWindowMainBd85
           object Label_LevelOfAlarm_1: TLabel
             Left = 197
             Top = 124
-            Width = 118
+            Width = 120
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1090#1088#1077#1074#1086#1075#1080' 1 * 10'
           end
           object Label_LevelOfAlarm_2: TLabel
             Left = 197
             Top = 174
-            Width = 118
+            Width = 120
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1090#1088#1077#1074#1086#1075#1080' 2 * 10'
           end
           object Label_LevelOfAlarm_3: TLabel
             Left = 197
             Top = 225
-            Width = 118
+            Width = 120
             Height = 13
             Caption = #1059#1088#1086#1074#1077#1085#1100' '#1090#1088#1077#1074#1086#1075#1080' 3 * 10'
           end
           object Label_Phon: TLabel
             Left = 372
             Top = 25
-            Width = 35
+            Width = 32
             Height = 13
             Caption = #1060#1086#1085', '#1089
           end
           object Label_DurationOfPhon: TLabel
             Left = 371
             Top = 74
-            Width = 152
+            Width = 153
             Height = 13
             Caption = #1044#1083#1080#1090'. '#1087#1086#1076#1080#1085#1090#1077#1088#1074#1072#1083#1072' '#1092#1086#1085#1072', '#1084#1089
           end
           object Label_DurationOfAlarm: TLabel
             Left = 373
             Top = 124
-            Width = 128
+            Width = 129
             Height = 13
             Caption = #1044#1083#1080#1090'. '#1089#1080#1075#1085#1072#1083#1072' '#1090#1088#1077#1074#1086#1075#1080', '#1089
           end
           object Label_DurationOfVideo: TLabel
             Left = 373
             Top = 176
-            Width = 118
+            Width = 119
             Height = 13
             Caption = #1044#1083#1080#1090'. '#1089#1080#1075#1085#1072#1083#1072' '#1074#1080#1076#1077#1086', '#1089
           end

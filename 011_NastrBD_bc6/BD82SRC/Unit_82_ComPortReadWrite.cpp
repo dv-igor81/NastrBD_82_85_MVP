@@ -16,7 +16,7 @@ __fastcall ComPortReadWrite_t::ComPortReadWrite_t(bool CreateSuspended)
 {
   this->Prot = Form_82_Start->Prot;
   bflag_pred_err = false; // при создании объекта, ошибок связи ещё не было
-  Prot->flagTCP = false;
+  //Prot->flagTCP = false;
 }
 //---------------------------------------------------------------------------
 void __fastcall ComPortReadWrite_t::Printing()

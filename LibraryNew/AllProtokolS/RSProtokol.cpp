@@ -542,14 +542,11 @@ int RSProtokol_t::RSConnect(const char * COMNum, int baud, int parity, int data_
   // Binary mode (it's the only supported on Windows anyway)
   this->forUse.lpDCB.fBinary = TRUE;
   // Don't want errors to be blocking (НЕ отключаем остановку всех операций чтения/записи при ошибке)
-  this->forUse.lpDCB.fAbortOnError = FALSE;
-
-  this->forUse.lpDCB.fNull = false;  // нулевые байты не отбрасываются
-  // ===
   this->forUse.lpDCB.fAbortOnError = /*TRUE*/FALSE;  // драйвер прекращает все операции в случае ошибки
+  this->forUse.lpDCB.fNull = FALSE;  // нулевые байты не отбрасываются
+  // ===
   // true - перестаёт работать ModBus протокол на многих ком-портах
-
-  this->forUse.lpDCB.fErrorChar = false;
+  this->forUse.lpDCB.fErrorChar = FALSE;
   //\\this->forUse.lpDCB.fDsrSensitivity = FALSE; // отключаем восприимчивость драйвера к состоянию линии DSR
   // замены символов с ошибочной чётностью на символ задаваемый ErrorChar
   this->forUse.lpDCB.ErrorChar = 0;
@@ -2148,6 +2145,30 @@ int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
     }
     Data.flagGetGrpAdr = true;
   }
+
+  // \\if ( Data.flagSecond == 5 )
+  //{
+    if ( GetTemp( &Data.Temper ) != 0 )
+    {
+      if ( FlagDebug > 0 )
+      {
+	int len = strlen( Str_err );
+	if (len != 0)
+	{
+	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetTemp)" );
+        }
+	else
+	{
+	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetTemp)" );
+        }
+      }
+      ErrorCode = 27; // Ошибка: БД (OprosBD, GetTemp)
+      bFlagWork = false;
+      return -1;
+    }
+    Data.flTemper = TConvert( Data.Temper );
+  //}  
+
   // \\if ( ( Data.flagGetIndAdr == false ) && (Data.flagSecond == 4) )
   {
     if ( GetIndAdr( &Data.IndAdr ) != 0 )
@@ -2171,28 +2192,7 @@ int RSProtokol_t::OprosBDParam( void )  // -1 - ошибка связи, 0 - звязь работает
     Data.flagGetIndAdr = true;
   }
 
-  // \\if ( Data.flagSecond == 5 )
-  {
-    if ( GetTemp( &Data.Temper ) != 0 )
-    {
-      if ( FlagDebug > 0 )
-      {
-	int len = strlen( Str_err );
-	if (len != 0)
-	{
-	  sprintf( &Str_err[len], "%s", " => Ошибка: БД (OprosBD, GetTemp)" );
-        }
-	else
-	{
-	  sprintf( Str_err, "%s", "Ошибка: БД (OprosBD, GetTemp)" );
-        }
-      }
-      ErrorCode = 27; // Ошибка: БД (OprosBD, GetTemp)
-      bFlagWork = false;
-      return -1;
-    }
-    Data.flTemper = TConvert( Data.Temper );
-  }
+
   // \\if ( (Data.flagSecond == 6) || (CheckBox_DAuto_Checked == true) )
   {
     if ( GetDNU( &Data.DNU ) != 0 )

@@ -1507,6 +1507,10 @@ int modbus_report_slave_id(modbus_t *ctx, uint8_t *dest)
     return rc;
 }
 
+//   Timeouts in microsecond (0.5 s)   //  0.05
+//  #define _RESPONSE_TIMEOUT    500000
+//  #define _BYTE_TIMEOUT        500000
+
 void _modbus_init_common(modbus_t *ctx)
 {
   // Slave and socket are initialized to -1
@@ -1517,7 +1521,7 @@ void _modbus_init_common(modbus_t *ctx)
   ctx->error_recovery = MODBUS_ERROR_RECOVERY_NONE;
 
   ctx->response_timeout.tv_sec = 0;
-  ctx->response_timeout.tv_usec = _RESPONSE_TIMEOUT;
+  ctx->response_timeout.tv_usec = /*_RESPONSE_TIMEOUT*/50000;
 
   ctx->byte_timeout.tv_sec = 0;
   ctx->byte_timeout.tv_usec = _BYTE_TIMEOUT;
