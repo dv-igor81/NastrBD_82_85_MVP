@@ -1301,16 +1301,37 @@ int RSProtokol_t::GetSIM2(unsigned int * SIM)
 int RSProtokol_t::GetLEDAmp(unsigned int * Ampl)
 {
   unsigned int data;
-  this->buf_write[0] = 0x10;
-  this->CodeRet = CommandExec(0, 2);
-  if (this->CodeRet == 0) // Нет ошибки обмена
+  if ( Data.Ver_HEX != 400 )
   {
-    data = this->buf_read[1];
-    *Ampl = data * 256 + this->buf_read[0];
+    this->buf_write[0] = 0x10;
+    this->CodeRet = CommandExec(0, 2);
+    if (this->CodeRet == 0) // Нет ошибки обмена
+    {
+      data = this->buf_read[1];
+      *Ampl = data * 256 + this->buf_read[0];
+    }
+    else // Ошибка обмена
+    {
+      *Ampl = 0;
+    }
   }
-  else // Ошибка обмена
+  else
   {
-    *Ampl = 0;
+    this->buf_write[0] = 0x33; // код функции: "GetRamData"
+    this->buf_write[1] = 0x01; // RamType.X - тип память --- "внешняя" на кристале
+    // const int ptrLedChannelDest = 0x0599;
+    this->buf_write[2] = 0x05;
+    this->buf_write[3] = 0x99;
+    this->CodeRet = CommandExec(3, 4);
+    if (this->CodeRet == 0) // Нет ошибки обмена
+    {
+      data = this->buf_read[1];
+      *Ampl = data + this->buf_read[0] * 256;
+    }
+    else // Ошибка обмена
+    {
+      *Ampl = 0;
+    }    
   }
   return this->CodeRet;
 }

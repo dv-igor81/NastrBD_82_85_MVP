@@ -197,8 +197,8 @@
 IncludeVerInfo=1
 AutoIncBuild=0
 MajorVer=4
-MinorVer=29
-Release=9
+MinorVer=30
+Release=0
 Build=0
 Debug=0
 PreRelease=0
@@ -211,13 +211,13 @@ CodePage=1251
 [Version Info Keys]
 CompanyName=VNIIA
 FileDescription=ТСРМ82, ТСРМ84, ТСРМ85
-FileVersion=4.29.9.0
+FileVersion=4.30.0.0
 InternalName=
 LegalCopyright=Дорофеев Игорь Александрович (подр. 561)
 LegalTrademarks=
 OriginalFilename=NastrBD82_85
 ProductName=
-ProductVersion=4.29
+ProductVersion=4.30
 Comments=
 
 [HistoryLists\hlIncludePath]

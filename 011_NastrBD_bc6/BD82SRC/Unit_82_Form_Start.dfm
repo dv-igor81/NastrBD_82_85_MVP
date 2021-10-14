@@ -1,6 +1,6 @@
 object Form_82_Start: TForm_82_Start
-  Left = 620
-  Top = 181
+  Left = 904
+  Top = 302
   AutoScroll = False
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1041#1044' 82 / '#1041#1044' 84 vX.XX'
   ClientHeight = 739
@@ -23,7 +23,7 @@ object Form_82_Start: TForm_82_Start
     Top = 0
     Width = 889
     Height = 720
-    ActivePage = TabSheet_SetSettings
+    ActivePage = TabSheet_Main
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -32,7 +32,7 @@ object Form_82_Start: TForm_82_Start
     Font.Style = []
     ParentFont = False
     Style = tsButtons
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 0
     OnChange = PageControl_ModBus_SettingsChange
     object TabSheet_Main: TTabSheet
