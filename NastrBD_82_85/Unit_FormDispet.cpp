@@ -52,7 +52,7 @@ __fastcall TFormDispet::TFormDispet(TComponent* Owner)
   DiaGetWinHandle( Handle );
   uiFlagApp = 0;
 
-  ProgrammVersion = " v4.30.0";
+  ProgrammVersion = " v4.30.1";
   AnsiString FormCaption = "Настройка БД: 82, 84, 85";  
 
   this->Caption = FormCaption;

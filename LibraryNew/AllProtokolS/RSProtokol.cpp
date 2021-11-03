@@ -274,6 +274,7 @@ void RSProtokol_t::FreeComPortHahdle( void )
 int RSProtokol_t::RSConnect(const char * device)
 {
   int speed;
+  Reset();
   if ( flagModbusProtokol == 0 ) // Выбран протокол: "9-ти битный"
   {
     this->ErrorCode = RSConnect(
@@ -346,6 +347,7 @@ void RSProtokol_t::Reset(void)
 {
   // ===
   this->Data.flagGetVersion = false; // Флаг используется, чтоб после соединения обратится к функции один раз
+  this->Data.Ver_HEX = 0;
   this->Data.flagSetTimeInterval = false; // Флаг используется, чтоб после соединения обратится к функции один раз
   this->Data.flagGetTimeInterval = false; // Флаг используется, чтоб после соединения обратится к функции один раз
   this->Data.flagGetIndAdr = false; // Флаг используется, чтоб после соединения обратится к функции один раз
@@ -429,7 +431,6 @@ void RSProtokol_t::Reset(void)
   I_Min0 = DRIVE0_MIN;
   I_Max0 = DRIVE0_MAX;
   //
-  this->Data.Ver_HEX = 0;
   this->Data.iSpektrZaprosCount = 0; // Количество удачных обменов спектрами
   this->Data.TimeNaboraSpectr = 0; // Время чтения спектра
   this->Data.TimeGotovSpectr = 0; // Время готовности спектра
@@ -467,7 +468,7 @@ int RSProtokol_t::RSConnect(const char * COMNum, int baud, int parity, int data_
   this->ErrorCode = 0;
   this->err = 0;
 
-  Reset();
+  //Reset();
 
   if ( this->COMPort == 0 ) // Ни один ком-порт еще не отктыт, или открытый ком-порт уже закрыт
   {
@@ -1301,7 +1302,13 @@ int RSProtokol_t::GetSIM2(unsigned int * SIM)
 int RSProtokol_t::GetLEDAmp(unsigned int * Ampl)
 {
   unsigned int data;
-  if ( Data.Ver_HEX != 400 )
+  unsigned int ver = (Data.Ver[0] - '0')*100 + (Data.Ver[2] - '0')*10 + (Data.Ver[3] - '0');
+  if ( Data.flagGetVersion == false )
+  {
+    *Ampl = 0;
+    return 0;
+  }
+  if ( Data.Ver_HEX != 400 || ver == 495 )
   {
     this->buf_write[0] = 0x10;
     this->CodeRet = CommandExec(0, 2);
@@ -3098,7 +3105,8 @@ int RSProtokol_t::OprosBD_2(void) // -1 - ошибка связи, 0 - звязь работает
       bFlagWork = false;
       return -1;
     }
-    Data.Ver_HEX = (Data.Ver[0] - '0')*100;
+    // Data.Ver_HEX = (Data.Ver[0] - '0')*100 + (Data.Ver[2] - '0')*10 + (Data.Ver[3] - '0');
+    Data.Ver_HEX = (Data.Ver[0] - '0') * 100;
     if ( Data.Ver[0] == '4' ) //
     {
       flagSpeed = false; // В каждой посылке байт адреса должен быть
