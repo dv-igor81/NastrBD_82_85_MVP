@@ -94,7 +94,7 @@
     <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
     <RELEASELIBPATH value="$(BCB)\lib\release"/>
     <LINKER value="ilink32"/>
-    <USERDEFINES value="_DIA_OBEDINENIE_"/>
+    <USERDEFINES value="_DIA_OBEDINENIE_;_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="NastrBD_82_85.cpp"/>
     <INCLUDEPATH value="&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;..\LibraryNew;..\LibraryNew\smartevents;..\LibraryNew\Task;..\LibraryNew\Utilites;..\LibraryNew\AllProtokolS;..\Library\Update_NastrBd;..\011_NastrBD_bc6;..\011_NastrBD_bc6\BD82SRC;..\NastrBD_85_MVP;$(BCB)\include;$(BCB)\include\vcl"/>
@@ -108,12 +108,13 @@
       -I..\LibraryNew\AllProtokolS -I..\Library\Update_NastrBd 
       -I..\011_NastrBD_bc6 -I..\011_NastrBD_bc6\BD82SRC -I..\NastrBD_85_MVP 
       -I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -D_DIA_OBEDINENIE_ 
-      -boa"/>
-    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -a8 -b- -k- -vi -c -tW -tWM"/>
-    <PFLAGS value="-$Y- -$L- -$D- -$A8 -v -JPHNE -M"/>
+      -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tW -tWM"/>
+    <PFLAGS value="-$Y+ -$W -$O- -$A8 -v -JPHNE -M"/>
     <RFLAGS value=""/>
-    <AFLAGS value="/mx /w2 /zn"/>
-    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn"/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x -Gn -v"/>
     <OTHERFILES value=""/>
   </OPTIONS>
   <LINKER>
@@ -255,8 +256,8 @@ Item0=$(BCB)\source\vcl
 
 [HistoryLists\hlConditionals]
 Count=3
-Item0=_DIA_OBEDINENIE_
-Item1=_DIA_OBEDINENIE_;_DEBUG
+Item0=_DIA_OBEDINENIE_;_DEBUG
+Item1=_DIA_OBEDINENIE_
 Item2=_DEBUG
 
 [Debugging]
