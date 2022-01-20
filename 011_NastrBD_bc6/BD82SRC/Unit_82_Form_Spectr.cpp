@@ -1024,7 +1024,8 @@ void __fastcall TForm_82_Spectr_BD84::Button_SpectrClick(TObject *Sender)
     this->Button_WriteTimeSpektr->Enabled = true;
     this->Button_ClearSpektr->Enabled = false;
     Form_82_Start->Prot->OprosSpectraStatus( this->SpectrExecutionStatus );
-    Form_82_Start->Prot->OprosSpectra( true, SpinEdit_TimeSpektr->Value );
+    int value = SpinEdit_TimeSpektr->Value;
+    Form_82_Start->Prot->OprosSpectra( true, value );
     // запустим заново набор спектра
     Form_82_Start->Prot->Data.bf_SpectrStart = true;
     iTime_0 = Form_82_Start->Prot->DiaGetTime();
@@ -1321,8 +1322,14 @@ void __fastcall TForm_82_Spectr_BD84::Image_GraphMouseUp(TObject *Sender,
       sprintf(chText, "%d", X_MarkerArr_ToX[1]);
       Edit_Xm1->Text = chText;
 
-      sprintf(chText, "%d", ArrSpectr[X_MarkerArr_ToX[1]]);
+      const double K84 = 4.5 / 511;
+
+      //sprintf(chText, "%d", ArrSpectr[X_MarkerArr_ToX[1]]);
+      sprintf(chText, "%0.3f", X_MarkerArr_ToX[1] * K84);
       Edit_Max_Xm1->Text = chText;
+
+      sprintf(chText, "%d", ArrSpectr[X_MarkerArr_ToX[1]]);
+      Edit_Max->Text = chText;
 
       //DrawClear(BitMapMarker1);
       

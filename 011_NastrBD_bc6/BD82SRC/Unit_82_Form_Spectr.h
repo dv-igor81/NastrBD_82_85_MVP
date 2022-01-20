@@ -59,6 +59,8 @@ __published:	// IDE-managed Components
         TLabel *Label_Xm1;
         TEdit *Edit_Max_Xm1;
         TLabel *Label_Max_Xm1;
+        TEdit *Edit_Max;
+        TLabel *Label_Max;
         void __fastcall Timer_Obnovleniya_SpectraTimer(TObject *Sender);
         void __fastcall Button_SpectrClick(TObject *Sender);
         void __fastcall Button_ClearSpektrClick(TObject *Sender);
@@ -89,7 +91,7 @@ private:	// User declarations
   
   // Данные класса
 
-  enum DIA_CONST { DVU = 511, DNU = 5, MaxLength = 50 };
+  enum DIA_CONST { DVU = 511, DNU = 2, MaxLength = 50 };
 
   int NomerMarkera; // 0 - нет, 1 - маркер1, 2 - маркер2
 

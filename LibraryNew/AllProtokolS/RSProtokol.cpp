@@ -1326,7 +1326,7 @@ int RSProtokol_t::GetLEDAmp(unsigned int * Ampl)
   {
     this->buf_write[0] = 0x33; // код функции: "GetRamData"
     this->buf_write[1] = 0x01; // RamType.X - тип память --- "внешняя" на кристале
-    // const int ptrLedChannelDest = 0x0599;
+    // const int ptrLedChannelDest = 0x0599; (1433 дес.) // 
     this->buf_write[2] = 0x05;
     this->buf_write[3] = 0x99;
     this->CodeRet = CommandExec(3, 4);
@@ -2740,6 +2740,16 @@ int RSProtokol_t::OprosBDSpektr_New(
       // Первый запуск набора спектра
       if ( this->Data.bfSetTimeSpektr == false )
       {
+        // Очистить набранный спектр внутри МК
+        ObnulenieArr(Data.ArrSpectr, 512);
+        for (int nomBlock = 0; nomBlock < 32; nomBlock++)
+        {
+          iRet = this->write_registers(AddrBD,  163 + nomBlock * 16, 16, Data.ArrSpectr) - 16;
+          if (iRet != 0)
+          {
+            return -1;
+          }
+        }
         // Запустить набор спектра
         ObnulenieArr(Data.ArrSpectr, 512);
         iRet = SpectrStart();
