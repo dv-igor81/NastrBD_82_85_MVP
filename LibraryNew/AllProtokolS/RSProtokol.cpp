@@ -1525,12 +1525,17 @@ int RSProtokol_t::GetStickyNote(char * strStickyNote)
   }
   return 0;
 }
+
+int GetDiaDebugLengthRead();
+int debugLengthRead;
+
 //---------------------------------------------------------------------------
 // Установить P3.7 (зажечь лампочку или отключить лампочку)
 int RSProtokol_t::Set_P37(void)
 {
   this->buf_write[0] = 0x30;
   this->CodeRet = CommandExec(0, 1);
+  debugLengthRead = GetDiaDebugLengthRead();
   return this->CodeRet;
 }
 //---------------------------------------------------------------------------
@@ -1539,6 +1544,7 @@ int RSProtokol_t::Reset_P37(void)
 {
   this->buf_write[0] = 0x31;
   this->CodeRet = CommandExec(0, 1);
+  debugLengthRead = GetDiaDebugLengthRead();
   return this->CodeRet;
 }
 //---------------------------------------------------------------------------
@@ -4200,6 +4206,8 @@ int RSProtokol_t::WriteToBDModBus_BD85_New( void )
   return WriteToBDModBus( this->AddrRegModBus_BD85_New );
 }
 //---------------------------------------------------------------------------
+int retValue;
+//---------------------------------------------------------------------------
 void RSProtokol_t::ReadKoef(
     float * k1,
     unsigned long * Longk1,
@@ -4229,8 +4237,8 @@ void RSProtokol_t::ReadKoef(
     buf_write[1] = 0x2C + i; // Номер банка (0x2C === 44) 44-45-46-47
     buf_write[2] = 0;
 
-
-    if ( CommandExec(2, 4) == -1 )
+    retValue = CommandExec(2, 4);
+    if ( retValue == -1 )
     {
       return;
     }

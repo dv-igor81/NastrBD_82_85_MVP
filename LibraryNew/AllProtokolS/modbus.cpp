@@ -359,6 +359,13 @@ static int compute_data_length_after_meta(
    - read() or recv() error codes
 */
 
+unsigned int msg_length;
+
+int GetDiaDebugLengthRead()
+{
+  return msg_length;
+}
+
 // DIA ===>>
 //static int receive_msg(modbus_t *ctx, uint8_t *msg, msg_type_t msg_type)
 int receive_msg(
@@ -372,7 +379,8 @@ int receive_msg(
   struct timeval tv;
   struct timeval * p_tv;
   unsigned int length_to_read;
-  int msg_length = 0;
+  //int msg_length = 0;
+  msg_length = 0;
   _step_t step;
 
   if (ctx->debug)

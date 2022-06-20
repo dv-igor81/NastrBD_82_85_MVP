@@ -1,6 +1,6 @@
 object Form_ARCH: TForm_ARCH
-  Left = 388
-  Top = 164
+  Left = 998
+  Top = 389
   AutoScroll = False
   Caption = #1047#1072#1087#1080#1089#1100' '#1074' EEPROM '#1041#1044' '#1076#1072#1085#1085#1099#1093' '#1040#1056#1063
   ClientHeight = 687

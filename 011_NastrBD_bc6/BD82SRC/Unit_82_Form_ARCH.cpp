@@ -2603,6 +2603,30 @@ void TForm_ARCH::ZapisFile(AnsiString filename)
 {
   // filename = FileNameEdit3->Text;
   // filename = FileNameEdit2->Text;
+
+  if ( FileExists( filename ) == false ) // если такой файл существует
+  {
+    return;
+  }
+  
+  int lenText;
+  AnsiString shortFilename = ExtractFileName(filename);
+
+  if (shortFilename.IsEmpty())
+  {
+    return;
+  }
+  lenText = shortFilename.Length();
+  if(lenText <= 4)
+  {
+    return;
+  }
+  AnsiString fileExt = shortFilename.SubString(lenText-3, 4);
+  if (fileExt != ".txt")
+  {
+    return;
+  }
+
   TDateTime Td( Now() );
   AnsiString stime = Td.TimeString();
   AnsiString sdate = Td.DateString();

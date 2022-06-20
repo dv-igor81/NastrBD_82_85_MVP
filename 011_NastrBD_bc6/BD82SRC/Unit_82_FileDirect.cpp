@@ -126,7 +126,27 @@ void FileDirect::WriteString(const AnsiString FileName,
   }
   strList->CaseSensitive = true; // чувствительность к регистру при сортировке
   // strList->Sorted = true; // отсортируем по алфавиту перед записью в файл
-  strList->SaveToFile(FileName);
+
+  //try
+  //{
+    strList->SaveToFile(FileName);
+  //}
+  //catch (Exception &exception)
+  //{
+  //  Application->ShowException(&exception);
+  //}
+  //catch (...)
+  //{
+  //  try
+  //  {
+  //    throw Exception("");
+  //  }
+  //  catch (Exception &exception)
+  //  {
+  //    Application->ShowException(&exception);
+  //  }
+  //}
+
   delete strList;
 }
 //---------------------------------------------------------------------------

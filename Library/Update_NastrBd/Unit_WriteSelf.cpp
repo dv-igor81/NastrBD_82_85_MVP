@@ -114,7 +114,7 @@ int TWriteSelf::ReadUpdatedProg(
     return -1;
   }
 //===========================================================================
-  int curVerPo = 29; // v4.30.3 (29)
+  int curVerPo = 30; // v4.30.4 (30)
 //===========================================================================  
   int verPo = _fileBufSelf.GetPoVersiya();
   if (verPo != curVerPo)
